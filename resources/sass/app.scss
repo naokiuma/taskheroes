@@ -1,0 +1,25 @@
+
+// Variables
+@import 'abstracts/variables';
+@import 'abstracts/space';
+
+//animations
+@import 'animations/animations';
+
+//components
+@import 'components/gauges';
+@import 'components/parameter';
+
+//layouts
+@import 'layouts/header';
+@import 'layouts/wrapper';
+
+
+
+
+
+
+
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';

@@ -1,0 +1,22 @@
+.gauges{
+    width: 60px;
+    display: block;
+    height: 4rem;
+    line-height: 4rem;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    color: white;
+    box-shadow: 0 2px 1rem rgba(0, 0, 0, 0.4);
+    background-color: yellow;
+    //animation: img-wrap 2s cubic-bezier(.4, 0, .2, 1) forwards;
+    &-bar{
+        animation:2s ease-in 1s forwards alternate expansion;
+        display: block;
+        opacity: 0;
+        background: linear-gradient(to right, $color-main, #0cebf9);
+        ;
+
+    }
+
+
+}

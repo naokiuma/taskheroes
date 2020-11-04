@@ -1,0 +1,16 @@
+.header{
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: $color-main-light;
+    display: flex;
+    &__logo-area{
+        width: 30%;
+        background-color: red;
+    }
+    &__manu-area{
+        width: 70%;
+        background-color: blue;
+    }
+}
