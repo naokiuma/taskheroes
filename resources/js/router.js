@@ -16,7 +16,11 @@ Vue.use(VueRouter)
 
 const routes = [
     { path: '/status',component: status },
-    { path: '/tasks', component: tasks }
+    { 
+      path: '/tasks', 
+      component: tasks,
+      props: true
+   }
   ]
   
   // VueRouterインスタンスを作成する

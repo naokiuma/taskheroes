@@ -10,6 +10,9 @@ import router from './router';
 // ルートコンポーネントをインポートする
 import Myinfo from './components/MyinfoComponent.vue';
 
+//storeのインポート
+import store from './store';
+
 window.Vue = require('vue');
 
 /**
@@ -42,6 +45,7 @@ new Vue({
     el: '#myinfo',
     mode: 'history',
     router,//ルーター使う定義
+    store,
     component:{ Myinfo },
     template:'<myinfo-component/>'
   })

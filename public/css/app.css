@@ -63,8 +63,8 @@ $gutter-horizontal:6rem;
 .gauges {
   width: 60px;
   display: block;
-  height: 4rem;
-  line-height: 4rem;
+  height: 2rem;
+  line-height: 2rem;
   margin-bottom: 20px;
   margin-left: 10px;
   box-shadow: 0 2px 1rem rgba(0, 0, 0, 0.4);
@@ -96,15 +96,15 @@ $gutter-horizontal:6rem;
   list-style: none;
   text-transform: capitalize;
   font-size: 2rem;
-  line-height: 4rem;
+  line-height: 2rem;
   margin-left: 10px;
 }
 
 .parameters {
   background-image: linear-gradient(to right, #96fff5, #c7eaec);
   margin-bottom: 20px;
-  height: 4rem;
-  line-height: 4rem;
+  height: 2rem;
+  line-height: 2rem;
   text-transform: uppercase;
   font-size: 12px;
 }
@@ -115,7 +115,7 @@ $gutter-horizontal:6rem;
   left: -15px;
   height: 30px;
   line-height: 30px;
-  font-size: 20px;
+  font-size: 16px;
   font-style: oblique;
   color: #000000bd;
 }
@@ -170,6 +170,16 @@ $gutter-horizontal:6rem;
   content: "xp";
 }
 
+.task-start {
+  font-weight: bold;
+  font-size: 16px;
+  color: black;
+}
+
+.task-start:hover {
+  transform: translateY(-5px);
+}
+
 .header {
   height: 60px;
   width: 100%;
@@ -184,7 +194,28 @@ $gutter-horizontal:6rem;
 }
 
 .header__manu-area {
-  width: 70%;
+  height: 100%;
+  width: 65%;
+  margin-right: 5%;
+}
+
+.header__nav {
+  height: 100%;
+  line-height: 60px;
+  display: flex;
+  justify-content: right;
+}
+
+.header__nav li {
+  margin: 0 0.5rem;
+  transition: all 0.2s;
+}
+
+.header__nav li:hover {
+  transform: translateY(-1px);
+  color: #ffe033;
+  text-shadow: 1px #f9e160;
+  cursor: pointer;
 }
 
 .wrapper {

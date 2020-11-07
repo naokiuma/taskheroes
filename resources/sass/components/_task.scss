@@ -1,0 +1,10 @@
+.task-start{
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+
+    &:hover{
+        transform: translateY(-5px);
+    }
+
+}

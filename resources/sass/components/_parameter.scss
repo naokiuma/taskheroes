@@ -11,7 +11,7 @@
         list-style: none;
         text-transform:capitalize;
         font-size: 2rem;
-        line-height: 4rem;
+        line-height: 2rem;
         margin-left: 10px;
     }
 }
@@ -21,8 +21,8 @@
 .parameters{
     background-image: linear-gradient(to right, $color-main-light, #c7eaec);
     margin-bottom: 20px;
-    height: 4rem;
-    line-height: 4rem;
+    height: 2rem;
+    line-height: 2rem;
     text-transform: uppercase;
     font-size: 12px;
     &::before{
@@ -31,7 +31,7 @@
         left: -15px;
         height: 30px;
         line-height: 30px;
-        font-size: 20px;
+        font-size: 16px;
         font-style: oblique;
         color: #000000bd;
 

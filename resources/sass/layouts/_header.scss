@@ -1,5 +1,5 @@
 .header{
-    height: 60px;
+    height: $space;
     width: 100%;
     position: fixed;
     top: 0;
@@ -9,6 +9,24 @@
         width: 30%;
     }
     &__manu-area{
-        width: 70%;
+        height: 100%;
+        width: 65%;
+        margin-right: 5%;
+    }
+    &__nav{
+        height: 100%;
+        line-height: $space;
+        display: flex;
+        justify-content: right;
+        li {
+            margin: 0 .5rem;
+            transition: all .2s;
+            &:hover{
+                transform: translateY(-1px);
+                color:#ffe033;
+                text-shadow: 1px #f9e160;
+                cursor: pointer;
+            }
+        }
     }
 }

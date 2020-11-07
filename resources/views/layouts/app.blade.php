@@ -14,11 +14,20 @@
         <header class="header">
             <div class="header__logo-area">ヘッダーアイコン</div>
 
-            <div class="header__manu-area">メニュー
+            <div class="header__manu-area">
+            <ul class="header__nav">
+                <li class="">マイページ</li>
+                <li class="">タスク一覧</li>
+                <li class="">タスク登録</li>
+                <li class="">アイテム</li>
+                <li class="task-start">タスク</li>
+            </ul>
+            <!--
             @if (Route::has('login'))
                 <div class="top-right links">
+
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -27,7 +36,9 @@
                         @endif
                     @endauth
                 </div>
-            @endif</div>
+            @endif
+            -->
+            </div>
         </header>
         @yield('content')
 
