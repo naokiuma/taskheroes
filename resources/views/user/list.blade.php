@@ -4,8 +4,11 @@
 <div class="space"></div>
 
 
-トップページ
+userペーじ
+<?php
+echo $alluser;
+?>
+
 @endsection
 
     
-   

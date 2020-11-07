@@ -2,10 +2,7 @@
 @section('content')
 
 <div class="space"></div>
-
-
-トップページ
+    <div id ="myinfo"></div>
 @endsection
 
     
-   

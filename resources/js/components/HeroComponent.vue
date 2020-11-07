@@ -2,8 +2,7 @@
     　<section class="section-status">
         <h1 class="heading-skew">ステータス</h1>
         <div class="section-parameters">
-            <h3>Level</h3>
-            {{ lv }}
+            <h3>Level：{{ lv }}</h3>
             <div class="parameters-wrapper">
                 <ul>
                     <li class="parameters parameters-hp">ヒットポイント</li>
@@ -17,17 +16,9 @@
                         <div class="gauges" v-bind:style="{ width:num.value * 5 + 'px' }"
                             v-for="(num, index) in parameters" :key="index">
                             <div class="gauges-bar">{{num.value}}</div>
-                            
+
                         </div>
                 </div>
-                <!--
-                <div class="gauges-group">
-                        <div class="gauges" v-bind:style="styleParameters"
-                            v-for="(num, index) in parameters" :key="index">
-                            {{num.value}}
-                        </div>
-                </div>
-                -->
  
             </div>
         </div>
@@ -51,8 +42,6 @@
                 lv:"7"
             }
         },
-
-
 
 
         mounted(){

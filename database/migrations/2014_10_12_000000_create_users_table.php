@@ -20,12 +20,12 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->integer('lv');
-            $table->integer('hp');
-            $table->integer('power');
-            $table->integer('magic');
-            $table->integer('wisdom');
-            $table->integer('xp');
+            $table->integer('lv')->nullable();;
+            $table->integer('hp')->nullable();;
+            $table->integer('power')->nullable();;
+            $table->integer('magic')->nullable();;
+            $table->integer('wisdom')->nullable();;
+            $table->integer('xp')->nullable();;
             $table->timestamps();
             $table->softDeletes();
         });

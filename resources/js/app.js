@@ -5,6 +5,10 @@
  */
 
 require('./bootstrap');
+//ルーティング 定義をインポート
+import router from './router';
+// ルートコンポーネントをインポートする
+import Myinfo from './components/MyinfoComponent.vue';
 
 window.Vue = require('vue');
 
@@ -20,7 +24,10 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//これをしてないとダメ
 Vue.component('hero-component', require('./components/HeroComponent.vue').default);
+Vue.component('myinfo-component', require('./components/MyinfoComponent.vue').default);
+
 
 
 /**
@@ -29,6 +36,12 @@ Vue.component('hero-component', require('./components/HeroComponent.vue').defaul
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#parameter',
-});
+
+
+new Vue({
+    el: '#myinfo',
+    mode: 'history',
+    router,//ルーター使う定義
+    component:{ Myinfo },
+    template:'<myinfo-component/>'
+  })

@@ -14,10 +14,10 @@
 Route::get('/', function () {
     return view('top');
 });
-Route::get('/test', function () {
-    return view('test'); 
-});
+
 
 
 Auth::routes();
+
+Route::get('/user', 'UserController@mypage')->name('user.mypage');
 Route::get('/home', 'HomeController@index')->name('home');
