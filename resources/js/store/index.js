@@ -1,14 +1,17 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import tasks from './modules/tasks.js';
 //import parameters from './modules/parameter.js';
-import task from './modules/task.js';
+
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
     modules:{
-        task
+        tasks
     }
 
 });
+
+export default store;

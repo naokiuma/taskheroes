@@ -16,3 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//apiについてはこの記述より下に定義します。
+//Laravel のルーティングは記述順にリクエストにマッチするか探索されるためです。
+Route::get('/api/tasks','TaskController@index');

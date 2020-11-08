@@ -21,7 +21,10 @@
                 <li class="">タスク登録</li>
                 <li class="">アイテム</li>
                 <li class="task-start">タスク</li>
+                <div id="taskform"></div>
             </ul>
+            
+            
             <!--
             @if (Route::has('login'))
                 <div class="top-right links">

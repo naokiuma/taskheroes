@@ -9,11 +9,6 @@ import tasks from './components/TaskComponent.vue'
 // これによって<RouterView />コンポーネントなどを使うことができる
 Vue.use(VueRouter)
 
-//テスト用
-//const Foo = { template: '<div>foo</div>' }
-//const Bar = { template: '<div>bar</div>' }
-
-
 const routes = [
     { path: '/status',component: status },
     { 
@@ -27,7 +22,6 @@ const routes = [
   const router = new VueRouter({
     routes
   })
-  
   // VueRouterインスタンスをエクスポートする
   // app.jsでインポートするため
   export default router

@@ -27,9 +27,10 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-//これをしてないとダメ
 Vue.component('hero-component', require('./components/HeroComponent.vue').default);
 Vue.component('myinfo-component', require('./components/MyinfoComponent.vue').default);
+
+Vue.component('taskform-component', require('./components/TaskFormComponent.vue').default);
 
 
 
@@ -49,3 +50,9 @@ new Vue({
     component:{ Myinfo },
     template:'<myinfo-component/>'
   })
+
+new Vue({
+  el:"#taskform",
+  template:'<taskform-component/>'
+
+})
