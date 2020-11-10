@@ -20,7 +20,6 @@
                 <li class="">タスク一覧</li>
                 <li class="">タスク登録</li>
                 <li class="">アイテム</li>
-                <li class="task-start">タスク</li>
                 <div id="taskform"></div>
             </ul>
             

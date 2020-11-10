@@ -174,10 +174,33 @@ $gutter-horizontal:6rem;
   font-weight: bold;
   font-size: 16px;
   color: black;
+  margin: 0 0.5rem;
 }
 
 .task-start:hover {
+  color: #ffe033;
   transform: translateY(-5px);
+  cursor: pointer;
+}
+
+.task-form {
+  line-height: 40px;
+}
+
+.task-form input[type=text] {
+  height: 30px;
+}
+
+.task-form__wrapper {
+  background-color: #EFEFEF;
+  position: fixed;
+  width: 50vw;
+  height: 50vh;
+  z-index: 10;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 }
 
 .header {
@@ -187,6 +210,7 @@ $gutter-horizontal:6rem;
   top: 0;
   background-color: #96fff5;
   display: flex;
+  justify-content: space-between;
 }
 
 .header__logo-area {
@@ -195,7 +219,6 @@ $gutter-horizontal:6rem;
 
 .header__manu-area {
   height: 100%;
-  width: 65%;
   margin-right: 5%;
 }
 

@@ -5,12 +5,12 @@
     top: 0;
     background-color: $color-main-light;
     display: flex;
+    justify-content: space-between;
     &__logo-area{
         width: 30%;
     }
     &__manu-area{
         height: 100%;
-        width: 65%;
         margin-right: 5%;
     }
     &__nav{

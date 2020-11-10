@@ -1,10 +1,40 @@
-.task-start{
-    font-weight: bold;
-    font-size: 16px;
-    color: black;
+.task{
+    &-start{
+        font-weight: bold;
+        font-size: 16px;
+        color: black;
+        margin: 0 0.5rem;
+    
+        &:hover{
+            color: #ffe033;
+            transform: translateY(-5px);
+            cursor: pointer;
+        }
+    
+    }
+    &-form{  
+        line-height: 40px;
+        input[type=text] {
+            height: 30px;
+          }
 
-    &:hover{
-        transform: translateY(-5px);
+        &__wrapper{
+        background-color: #EFEFEF;
+        position: fixed;
+        width: 50vw;
+        height: 50vh;
+        z-index: 10;
+        top: 15%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+    }
+        
+
     }
 
 }
+
+
+
+

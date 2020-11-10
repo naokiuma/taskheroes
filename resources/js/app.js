@@ -30,7 +30,7 @@ window.Vue = require('vue');
 Vue.component('hero-component', require('./components/HeroComponent.vue').default);
 Vue.component('myinfo-component', require('./components/MyinfoComponent.vue').default);
 
-Vue.component('taskform-component', require('./components/TaskFormComponent.vue').default);
+//Vue.component('taskform-component', require('./components/TaskFormComponent.vue').default);
 
 
 
@@ -51,8 +51,3 @@ new Vue({
     template:'<myinfo-component/>'
   })
 
-new Vue({
-  el:"#taskform",
-  template:'<taskform-component/>'
-
-})
