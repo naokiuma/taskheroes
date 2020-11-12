@@ -234,7 +234,12 @@ $gutter-horizontal:6rem;
   transition: all 0.2s;
 }
 
-.header__nav li:hover {
+.header__nav li a {
+  text-decoration: none;
+  color: black;
+}
+
+.header__nav li a:hover {
   transform: translateY(-1px);
   color: #ffe033;
   text-shadow: 1px #f9e160;

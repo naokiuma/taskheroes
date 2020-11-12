@@ -6,13 +6,13 @@
     <transition>
       <section class="task-form__wrapper">
         <h3 class="task-form__title">New Task</h3>
-        <form class="task-form">
+        <form class="task-form" @submit.prevent="submit">
           タスクタイトル<br>
-          <input class="" name="title" type="text"><br>
+          <input class="" v-model="title" name="title" type="text"><br>
           詳細<br>
-          <input class="" name="body" type="text"><br>
+          <input class="" v-model="body" name="body" type="text"><br>
           カテゴリー<br>
-          <input class="" name="category" type="text"><br>
+          <input class="" v-model="categories_id" name="categories_id" type="tel"><br>
           <div class="form__button">
             <button type="submit" class="button button--inverse">タスクを登録</button>
           </div>
@@ -31,7 +31,24 @@ export default{
   },
   data(){
     return{
-      loading:true
+      title:'',
+      body:'',
+      categories_id:'',
+      loading:false
+    }
+  },
+  methods:{
+    async submit(){
+      this.loading = true;
+      const formdata = {
+        'title':this.title,
+        'body':this.body,
+        'categories_id':this.categories_id
+      };
+      const response = await axios.post('/tasks/create',formdata)
+      this.loading = false;
+
+
     }
   }
 

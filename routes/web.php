@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/user', 'UserController@mypage')->name('user.mypage');
 Route::get('/tasks', 'TaskController@index')->name('tasks.index');
+Route::post('/tasks/create', 'TaskController@create')->name('tasks.create');
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');

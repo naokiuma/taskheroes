@@ -16,11 +16,28 @@
 
             <div class="header__manu-area">
             <ul class="header__nav">
+                
+                @guest
+                <li class=""><a href="{{ route('login') }}">ログイン</a></li>
+                <li class=""><a href="{{ route('login') }}">新規登録</a></li>
+                @endguest
+                @auth
                 <li class="">マイページ</li>
-                <li class="">タスク一覧</li>
-                <li class="">タスク登録</li>
+                <li class="">
+                    <a class="" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"
+                     >ログアウト
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
                 <li class="">アイテム</li>
                 <div id="taskform"></div>
+                @endauth
+
+                
             </ul>
             
             
