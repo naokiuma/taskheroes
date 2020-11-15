@@ -19,10 +19,11 @@
                 
                 @guest
                 <li class=""><a href="{{ route('login') }}">ログイン</a></li>
-                <li class=""><a href="{{ route('login') }}">新規登録</a></li>
+                <li class=""><a href="{{ route('register') }}">新規登録</a></li>
                 @endguest
                 @auth
-                <li class="">マイページ</li>
+                <li class=""><a href="{{ route('user.mypage') }}">マイページ</a></li>
+                
                 <li class="">
                     <a class="" href="{{ route('logout') }}"
                     onclick="event.preventDefault();

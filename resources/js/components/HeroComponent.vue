@@ -1,6 +1,6 @@
 <template>
     　<section class="section-status">
-        <h1 class="heading-skew">ステータス</h1>
+        <h2 class="heading-skew">ステータス</h2>
         <div class="section-parameters">
             <h3>Level：{{ lv }}</h3>
             <div class="parameters-wrapper">

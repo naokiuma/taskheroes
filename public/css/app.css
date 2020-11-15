@@ -170,6 +170,11 @@ $gutter-horizontal:6rem;
   content: "xp";
 }
 
+.tasks-wrapper {
+  width: 90%;
+  margin: auto;
+}
+
 .task-start {
   font-weight: bold;
   font-size: 16px;

@@ -8,12 +8,23 @@ use App\User;
 
 class UserController extends Controller
 {
-    //
+    //マイページ表示
     public function mypage()
     {
-        //$user = Auth::user();//ログインユーザー
-        $alluser = User::all();//usersテーブルの全レコードを取得。
-        return view ('/user/mypage',compact('alluser'));
+        $user = Auth::user();//ログインユーザー
+        //$alluser = User::all();//usersテーブルの全レコードを取得。
+        return view ('/user/mypage',compact('user'));
+    }
+
+
+    public function logincheck()//ログイン有無のチェック
+    { 
+        if (Auth::check()){
+            $user = Auth::user();
+            return $user;
+        }else{
+            return "";
+        }
     }
 
     /*

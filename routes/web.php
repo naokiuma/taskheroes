@@ -19,7 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/user', 'UserController@mypage')->name('user.mypage');
+Route::get('/user', 'UserController@mypage')->name('user.mypage');//マイページ表示
+Route::get('/user/logincheck', 'UserController@logincheck')->name('user.logincheck');
+
+
 Route::get('/tasks', 'TaskController@index')->name('tasks.index');
 Route::post('/tasks/create', 'TaskController@create')->name('tasks.create');
 

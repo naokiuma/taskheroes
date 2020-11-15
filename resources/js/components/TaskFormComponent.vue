@@ -38,17 +38,24 @@ export default{
     }
   },
   methods:{
-    async submit(){
+    submit(){
       this.loading = true;
       const formdata = {
         'title':this.title,
         'body':this.body,
         'categories_id':this.categories_id
       };
-      const response = await axios.post('/tasks/create',formdata)
-      this.loading = false;
-
-
+      self = this;
+      axios.post('/tasks/create',formdata)
+      .then(function(responce){
+        console.log("ok");
+        console.log(responce);
+        self.loading = false;
+      })
+      .catch(function(error){
+        console.log("ダメ");
+        console.log(error);
+      })
     }
   }
 

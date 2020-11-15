@@ -9,3 +9,16 @@
     </div>
       
 </template>
+
+
+<script>
+
+    export default {
+        mounted(){//apiから一覧を取得
+            console.log("ここ");
+            this.$store.dispatch('register');//storeのactionをこちらでdispatch
+        }
+ 
+    }
+</script>
+
