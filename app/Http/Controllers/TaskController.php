@@ -35,6 +35,24 @@ class TaskController extends Controller
 
     }
 
+    public function change($id){
+        //$changeTask = Task::where('id',$id)->get();//collectionがかえる
+        $changeTask = Task::where('id',$id)->first();//1オブジェクトがかエル
+        Log::debug("取得データ");
+        Log::debug($changeTask);
+
+        
+        if($changeTask->done == 0){
+            $changeTask->done = 1;
+        }else if($changeTask->done == 1){
+            $changeTask->done = 0;
+        }
+        $changeTask->save();
+        
+        return $changeTask;
+
+    }
+
     //-----------------------タスクのAPI
 
     public function tasklist($id = null)//api

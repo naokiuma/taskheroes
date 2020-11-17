@@ -49,6 +49,7 @@
                 tasks:[]
             }
         },
+        
         mounted(){//apiから一覧を取得
             console.log("mounted");
             axios
@@ -58,16 +59,18 @@
         },
         methods:{
             changed(task){
-            console.log("changed");   
-            console.log(task.done);
-            if(task.done === true){
+                console.log("changed");   
+                let target = task.id;
+                console.log(target);
                 console.log("今trueなのでfalseに変えます。")
-            }else{
-                console.log("今falseなのでtrueに変えます。")
-
-            }
-            }
+                console.log('/tasks/change/' + target);
+                axios.post('/tasks/change/' + target)
+                .then(function(responce){
+                    console.log("変更に成功しました。");
+            })
         }
+        }
+
  
     }
 </script>

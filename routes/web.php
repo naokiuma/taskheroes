@@ -25,6 +25,8 @@ Route::get('/user/logincheck', 'UserController@logincheck')->name('user.loginche
 
 Route::get('/tasks', 'TaskController@index')->name('tasks.index');
 Route::post('/tasks/create', 'TaskController@create')->name('tasks.create');
+Route::post('/tasks/change/{id}', 'TaskController@change')->name('tasks.change');
+
 
 
 

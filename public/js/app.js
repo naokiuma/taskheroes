@@ -2003,7 +2003,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    //apiから一覧を取得
     console.log("ここ");
     this.$store.dispatch('register'); //storeのactionをこちらでdispatch
   }
@@ -2081,13 +2080,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     changed: function changed(task) {
       console.log("changed");
-      console.log(task.done);
-
-      if (task.done === true) {
-        console.log("今trueなのでfalseに変えます。");
-      } else {
-        console.log("今falseなのでtrueに変えます。");
-      }
+      var target = task.id;
+      console.log(target);
+      console.log("今trueなのでfalseに変えます。");
+      console.log('/tasks/change/' + target);
+      axios.post('/tasks/change/' + target).then(function (responce) {
+        console.log("変更に成功しました。");
+      });
     }
   }
 });
@@ -56661,22 +56660,19 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log("user");
-                console.log(_this.state.user);
                 console.log("storeのregisterが実施");
-                _context.next = 5;
+                _context.next = 3;
                 return axios.get('/user/logincheck');
 
-              case 5:
+              case 3:
                 response = _context.sent;
                 context.commit('setUser', response.data);
-                console.log("変更後user");
                 console.log(_this.state.user); //.then(function(response){
                 //    console.log(response.data);
                 //    }
                 //}
 
-              case 9:
+              case 6:
               case "end":
                 return _context.stop();
             }

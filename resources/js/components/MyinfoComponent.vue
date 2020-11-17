@@ -14,7 +14,7 @@
 <script>
 
     export default {
-        mounted(){//apiから一覧を取得
+        mounted(){
             console.log("ここ");
             this.$store.dispatch('register');//storeのactionをこちらでdispatch
         }

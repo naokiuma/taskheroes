@@ -27,11 +27,4 @@ class UserController extends Controller
         }
     }
 
-    /*
-    public function list()いろんな人のデータを見れる。交流目的のサービスでは無いので2ばんめ
-    {
-        return view('/user/list');
-    }
-    */
-
 }
