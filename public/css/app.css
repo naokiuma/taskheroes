@@ -60,6 +60,21 @@ $gutter-horizontal:6rem;
   }
 }
 
+.main-button {
+  background-color: #99dfff;
+  border: 1px solid #95BBE19C;
+  border-radius: 5px;
+  margin: 5px 5px;
+  box-shadow: 3px 4px black;
+  height: 40px;
+}
+
+.main-button:hover {
+  background-color: #96fff5;
+  box-shadow: 3px 2px black;
+  transform: translateY(2px);
+}
+
 .gauges {
   width: 60px;
   display: block;
@@ -173,6 +188,18 @@ $gutter-horizontal:6rem;
 .tasks-wrapper {
   width: 90%;
   margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.tasks-wrapper li {
+  line-height: 40px;
+  height: 40px;
+  transition: all 1s;
+  margin: 5px auto;
+  display: flex;
+  width: 100%;
 }
 
 .task-start {
@@ -196,6 +223,21 @@ $gutter-horizontal:6rem;
   height: 30px;
 }
 
+.task-form input[type=radio] {
+  display: none;
+}
+
+.task-form label {
+  width: 80px;
+}
+
+.task-form .label-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin: auto;
+}
+
 .task-form__wrapper {
   background-color: #EFEFEF;
   position: fixed;
@@ -206,6 +248,62 @@ $gutter-horizontal:6rem;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+.card {
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+  position: relative;
+  height: 300px;
+  width: 200px;
+}
+
+.card__side {
+  background-color: orangered;
+  font-size: 2rem;
+  height: 300px;
+  transition: all 0.5s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+}
+
+.card__side--front {
+  background-color: #fff;
+}
+
+.card__side--back {
+  transform: rotateY(180deg);
+}
+
+.card__side--back-1 {
+  background-image: linear-gradient(to right bottom, #ffb900, #ff7730);
+}
+
+.card__side--back-2 {
+  background-image: linear-gradient(to right bottom, #7ed56f, #28b485);
+}
+
+.card__side--back-3 {
+  background-image: linear-gradient(to right bottom, #2998ff, #5643fa);
+}
+
+.card:hover .card__side--front {
+  transform: rotateY(180deg);
+}
+
+.card:hover .card__side--back {
+  transform: rotateY(0);
 }
 
 .header {

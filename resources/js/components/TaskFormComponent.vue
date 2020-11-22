@@ -5,16 +5,27 @@
     </div>
     <transition>
       <section class="task-form__wrapper">
-        <h3 class="task-form__title">New Task</h3>
+        <h3 class="task-form__title">何をやる？</h3>
         <form class="task-form" @submit.prevent="submit">
-          タスクタイトル<br>
+          やること<br>
           <input class="" v-model="title" name="title" type="text"><br>
-          詳細<br>
+          メモ<br>
           <input class="" v-model="body" name="body" type="text"><br>
-          カテゴリー<br>
-          <input class="" v-model="categories_id" name="categories_id" type="tel"><br>
+          鍛える種類<br>
+          <div class="label-wrapper">
+            <input id="power" class="" v-model="categories_id" name="categories_id" value="1" type="radio"><br>
+            <label id="power" for="apple" class="label main-button">力</label>
+            
+            <input id="magic" class="" v-model="categories_id" name="categories_id" value="2" type="radio"><br>
+            <label id="magic" for="apple" class="label main-button">魔力</label>
+            
+            <input id="wisdom" class="" v-model="categories_id" name="categories_id" value="3" type="radio"><br>
+            <label id="wisdom" for="apple" class="label main-button">知識</label>
+          </div>
+
+
           <div class="form__button">
-            <button type="submit" class="button button--inverse">タスクを登録</button>
+            <button type="submit" class="button button--inverse">やることとして登録！</button>
           </div>
         </form>
       </section>

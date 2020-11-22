@@ -1,10 +1,21 @@
 .tasks-wrapper{
     width: 90%;
     margin: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    li{
+        line-height: 40px;
+        height: 40px;
+        transition: all 1s;
+        margin: 5px auto;
+        display: flex;
+        width: 100%;
+    }
 }
 
 .task{
-
     &-start{
         font-weight: bold;
         font-size: 16px;
@@ -23,6 +34,19 @@
         input[type=text] {
             height: 30px;
           }
+        input[type=radio] {
+            display: none;
+        }
+        label{
+            width: 80px;
+        }
+        .label-wrapper{
+            display: flex;
+            justify-content: center;
+            width: 90%;
+            margin: auto;
+        }
+
 
         &__wrapper{
         background-color: #EFEFEF;
@@ -41,6 +65,11 @@
 
 }
 
+.done{
+  //background-color: gray;
+  text-decoration: line-through;
+  
+}
 
 
 

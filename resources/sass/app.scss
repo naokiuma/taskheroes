@@ -7,9 +7,11 @@
 @import 'animations/animations';
 
 //components
+@import 'components/button';
 @import 'components/gauges';
 @import 'components/parameter';
 @import 'components/task';
+@import 'components/card';
 
 //layouts
 @import 'layouts/header';
