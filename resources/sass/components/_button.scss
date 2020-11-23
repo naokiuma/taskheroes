@@ -2,9 +2,10 @@
     background-color: $color-main;
     border: 1px solid #95BBE19C;
     border-radius: 5px;
-    margin: 5px 5px;
+    margin: 20px 5px;
     box-shadow: 3px 4px  black;
     height: 40px;
+    width: 60px;
 
     &:hover{
         background-color: $color-main-light;

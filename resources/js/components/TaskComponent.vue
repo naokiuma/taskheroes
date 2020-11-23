@@ -1,16 +1,17 @@
 <template>
     <section class="section-tasks">
         <h2>タスク一覧</h2>
+        <button @click="beforeTasks()">未実施のタスク</button>
         <button @click="fetchtasks()">すべてのタスク</button>
 
-        <button @click="beforeTasks()">未実施のタスク</button>
-        <ul class="tasks-wrapper">
-            <li v-for="task in tasks" :key="task.id" v-bind:class="{done: task.done}">
+        
+        <div class="tasks-wrapper">
+            <div  class="each-task" v-for="task in tasks" :key="task.id" v-bind:class="{done: task.done}">
 
-                    <div class="task-title">{{task.title}}</div>
-                    <div class="task-body">{{task.body}}</div>
+                    <div class="each-task__title">{{task.title}}</div>
+                    <div class="each-task__body">{{task.body}}</div>
                     
-                    <div class="task-body">
+                    <div class="each-taskcategory">
                         <div v-if="task.categories_id == '1'">
                         力
                         </div>
@@ -29,18 +30,18 @@
                         <p v-else>実施済み</p>
                         -->
                         <!--両方に対応-->
-                        <button class="main-button" @click ="clicked(task)">変更</button>
+                        <button class="main-button" @click ="clicked(task)">Done!</button>
 
                     </div>
                     <div v-if="!task.done">
                         <!-- 削除ボタンのモック -->
-                        <button class="main-button">このタスクを削除する</button>
+                        <button class="main-button">削除</button>
                     </div>
 
 
 
-            </li>
-        </ul>
+            </div>
+        </div>
         <div class="card">
             <div class="card__side card__side--front">
             表

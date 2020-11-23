@@ -1,18 +1,41 @@
+.section-tasks{
+    width: 95%;
+    margin: auto;
+}
+
 .tasks-wrapper{
     width: 90%;
     margin: auto;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-
-    li{
-        line-height: 40px;
-        height: 40px;
+    .each-task{
+        height: 80px;
         transition: all 1s;
         margin: 5px auto;
         display: flex;
         width: 100%;
+        //border: 1px solid #00000091;
+        //background-color: #f2f2d6;
+        background-image: linear-gradient(to right bottom, #fff453, #ffe249a1);
+
+        border-radius: 5px;
+        box-shadow: 3px 2px 0.1rem #0000006b;
+        &__title{
+            font-size: 16px;
+            font-weight: bold;
+            margin: 5px;
+            width: 20%;
+        }
+        &__body{
+            font-size: 14px;
+            margin: 5px;
+            width: 50%;
+        }
+
     }
+
+
 }
 
 .task{
@@ -66,8 +89,8 @@
 }
 
 .done{
-  //background-color: gray;
-  text-decoration: line-through;
+  background-color: gray;
+  //text-decoration: line-through;
   
 }
 

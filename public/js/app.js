@@ -2084,6 +2084,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   //props:['id'],
   data: function data() {
@@ -39393,18 +39394,6 @@ var render = function() {
       {
         on: {
           click: function($event) {
-            return _vm.fetchtasks()
-          }
-        }
-      },
-      [_vm._v("すべてのタスク")]
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        on: {
-          click: function($event) {
             return _vm.beforeTasks()
           }
         }
@@ -39413,55 +39402,75 @@ var render = function() {
     ),
     _vm._v(" "),
     _c(
-      "ul",
+      "button",
+      {
+        on: {
+          click: function($event) {
+            return _vm.fetchtasks()
+          }
+        }
+      },
+      [_vm._v("すべてのタスク")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
       { staticClass: "tasks-wrapper" },
       _vm._l(_vm.tasks, function(task) {
-        return _c("li", { key: task.id, class: { done: task.done } }, [
-          _c("div", { staticClass: "task-title" }, [
-            _vm._v(_vm._s(task.title))
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "task-body" }, [_vm._v(_vm._s(task.body))]),
-          _vm._v(" "),
-          _c("div", { staticClass: "task-body" }, [
-            task.categories_id == "1"
+        return _c(
+          "div",
+          {
+            key: task.id,
+            staticClass: "each-task",
+            class: { done: task.done }
+          },
+          [
+            _c("div", { staticClass: "each-task__title" }, [
+              _vm._v(_vm._s(task.title))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "each-task__body" }, [
+              _vm._v(_vm._s(task.body))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "each-taskcategory" }, [
+              task.categories_id == "1"
+                ? _c("div", [
+                    _vm._v("\n                    力\n                    ")
+                  ])
+                : task.categories_id == "2"
+                ? _c("div", [
+                    _vm._v("\n                    B\n                    ")
+                  ])
+                : task.categories_id == "3"
+                ? _c("div", [
+                    _vm._v("\n                    C\n                    ")
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "task-state" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "main-button",
+                  on: {
+                    click: function($event) {
+                      return _vm.clicked(task)
+                    }
+                  }
+                },
+                [_vm._v("Done!")]
+              )
+            ]),
+            _vm._v(" "),
+            !task.done
               ? _c("div", [
-                  _vm._v("\n                    力\n                    ")
-                ])
-              : task.categories_id == "2"
-              ? _c("div", [
-                  _vm._v("\n                    B\n                    ")
-                ])
-              : task.categories_id == "3"
-              ? _c("div", [
-                  _vm._v("\n                    C\n                    ")
+                  _c("button", { staticClass: "main-button" }, [_vm._v("削除")])
                 ])
               : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "task-state" }, [
-            _c(
-              "button",
-              {
-                staticClass: "main-button",
-                on: {
-                  click: function($event) {
-                    return _vm.clicked(task)
-                  }
-                }
-              },
-              [_vm._v("変更")]
-            )
-          ]),
-          _vm._v(" "),
-          !task.done
-            ? _c("div", [
-                _c("button", { staticClass: "main-button" }, [
-                  _vm._v("このタスクを削除する")
-                ])
-              ])
-            : _vm._e()
-        ])
+          ]
+        )
       }),
       0
     ),
