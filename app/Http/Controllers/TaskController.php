@@ -41,7 +41,7 @@ class TaskController extends Controller
         Log::debug("取得データ");
         Log::debug($changeTask);
 
-        
+        //反転させる
         if($changeTask->done == 0){
             $changeTask->done = 1;
         }else if($changeTask->done == 1){

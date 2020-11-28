@@ -15,8 +15,7 @@
 
     export default {
         mounted(){
-            console.log("ここ");
-            this.$store.dispatch('register');//storeのactionをこちらでdispatch
+            this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
         }
  
     }

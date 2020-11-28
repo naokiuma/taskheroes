@@ -7,13 +7,16 @@
 @import 'animations/animations';
 
 //components
+@import 'components/about';
 @import 'components/button';
 @import 'components/gauges';
 @import 'components/parameter';
+@import 'components/section';
 @import 'components/task';
 @import 'components/card';
 
 //layouts
+@import 'layouts/billboard';
 @import 'layouts/header';
 @import 'layouts/wrapper';
 

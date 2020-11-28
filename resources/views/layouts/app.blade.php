@@ -5,14 +5,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet">
         <link href="{{ asset('css/normalize.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.js') }}">
+        
         <title>taskHeroes</title>
     </head>
     <body>
         <header class="header">
-            <div class="header__logo-area">ヘッダーアイコン</div>
+            <div class="header__logo-area">taskHeroes</div>
 
             <div class="header__manu-area">
             <ul class="header__nav">

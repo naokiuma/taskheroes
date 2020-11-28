@@ -9,7 +9,10 @@
 
     &:hover{
         background-color: $color-main-light;
-        box-shadow: 3px 2px  black;
+        //box-shadow: 3px 2px  black;
+    }
+    &:active{
+        box-shadow: 3px 4px  black;
         transform:translateY(2px);
     }
 }

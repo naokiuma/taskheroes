@@ -10,14 +10,18 @@
     justify-content: space-between;
     flex-wrap: wrap;
     .each-task{
+        perspective: 150rem;
+        -moz-perspective: 150rem;
+        position: relative;
         height: 80px;
         transition: all 1s;
         margin: 5px auto;
         display: flex;
         width: 100%;
         //border: 1px solid #00000091;
-        //background-color: #f2f2d6;
-        background-image: linear-gradient(to right bottom, #fff453, #ffe249a1);
+        background-color: $yellow;
+        transition: all .5s;
+        //background-image: linear-gradient(to right bottom, #fff453, #ffe249a1);
 
         border-radius: 5px;
         box-shadow: 3px 2px 0.1rem #0000006b;

@@ -1,0 +1,23 @@
+.section-heading{
+    font-size: 80px;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #808080a8;
+    letter-spacing: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:before,
+    &:after{
+        content: "";
+        width: 60px;
+        height: 20px;;
+        //background-color: #808080a8;
+        background-image: url(./img/heading-sword.png);
+        background-size: contain;
+    }
+    &:after{
+        transform: scale(-1, 1);
+    }
+
+}

@@ -2003,8 +2003,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log("ここ");
-    this.$store.dispatch('register'); //storeのactionをこちらでdispatch
+    this.$store.dispatch('register'); //storeのactionをこちらでdispatchしログインしているかを返す
   }
 });
 
@@ -2027,6 +2026,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -2123,6 +2124,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.tasks = filtertasks;
     },
     clicked: function clicked(task) {
+      //コントローラー側で処理
       //this.test = "test後"
       var target = task.id; //console.log(target);
 
@@ -39417,39 +39419,62 @@ var render = function() {
       "div",
       { staticClass: "tasks-wrapper" },
       _vm._l(_vm.tasks, function(task) {
-        return _c(
-          "div",
-          {
-            key: task.id,
-            staticClass: "each-task",
-            class: { done: task.done }
-          },
-          [
-            _c("div", { staticClass: "each-task__title" }, [
-              _vm._v(_vm._s(task.title))
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "each-task__body" }, [
-              _vm._v(_vm._s(task.body))
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "each-taskcategory" }, [
-              task.categories_id == "1"
-                ? _c("div", [
-                    _vm._v("\n                    力\n                    ")
-                  ])
-                : task.categories_id == "2"
-                ? _c("div", [
-                    _vm._v("\n                    B\n                    ")
-                  ])
-                : task.categories_id == "3"
-                ? _c("div", [
-                    _vm._v("\n                    C\n                    ")
-                  ])
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "task-state" }, [
+        return _c("div", { key: task.id, staticClass: "each-task card" }, [
+          _c(
+            "div",
+            {
+              staticClass: "card__side card__side--front",
+              class: { rotate: task.done }
+            },
+            [
+              _c("div", { staticClass: "each-task__title" }, [
+                _vm._v(_vm._s(task.title))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "each-task__body" }, [
+                _vm._v(_vm._s(task.body))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "each-task__category" }, [
+                task.categories_id == "1"
+                  ? _c("div", [
+                      _vm._v("\n                    力\n                    ")
+                    ])
+                  : task.categories_id == "2"
+                  ? _c("div", [
+                      _vm._v("\n                    B\n                    ")
+                    ])
+                  : task.categories_id == "3"
+                  ? _c("div", [
+                      _vm._v("\n                    C\n                    ")
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "each-task__state" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "main-button",
+                    on: {
+                      click: function($event) {
+                        return _vm.clicked(task)
+                      }
+                    }
+                  },
+                  [_vm._v("完了!")]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "card__side card__side--back",
+              class: { rotate: !task.done }
+            },
+            [
               _c(
                 "button",
                 {
@@ -39460,17 +39485,11 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Done!")]
+                [_vm._v("取り消し")]
               )
-            ]),
-            _vm._v(" "),
-            !task.done
-              ? _c("div", [
-                  _c("button", { staticClass: "main-button" }, [_vm._v("削除")])
-                ])
-              : _vm._e()
-          ]
-        )
+            ]
+          )
+        ])
       }),
       0
     ),
@@ -56785,10 +56804,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
               case 3:
                 response = _context.sent;
                 context.commit('setUser', response.data);
-                console.log(_this.state.user); //.then(function(response){
-                //    console.log(response.data);
-                //    }
-                //}
+                console.log(_this.state.user);
 
               case 6:
               case "end":

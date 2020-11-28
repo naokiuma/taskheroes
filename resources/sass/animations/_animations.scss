@@ -7,3 +7,35 @@
     opacity: 1;
   }
 }
+
+
+@keyframes animation-up{
+  0%{
+      //transform:rotate(-45deg) translate(0, 0);
+      transform:translate(0, 0);
+  }
+  20% {
+      //transform:rotate(-45deg) translate(-10px, 10px);
+      transform:translateY(-10px);
+  }
+  40% {
+      //transform:rotate(-45deg) translate(0, 0);
+      transform:translate(0, 0);
+  }
+}
+
+
+@keyframes animation-right{
+  0%{
+      //transform:rotate(-45deg) translate(0, 0);
+      transform:translate(0, 0);
+  }
+  20% {
+      //transform:rotate(-45deg) translate(-10px, 10px);
+      transform:translateX(10px);
+  }
+  40% {
+      //transform:rotate(-45deg) translate(0, 0);
+      transform:translate(0, 0);
+  }
+}

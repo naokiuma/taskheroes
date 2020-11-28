@@ -1,12 +1,45 @@
 
 $color-main:#99dfff;
 $color-main-light:#96fff5;
-
+$color-main-dark:#0058ff;
 $color-base:#EFEFEF;
 
+.radial-bg{
+    background: radial-gradient(#bcfbf4, #EFEFEF);
+}
+
 //baseColor: #DDE3F2
-//subColor: #FAD727イエロー
+$subColor: #FAD727;
 $space:60px;
+
+.fontawasome-margin{
+    margin: auto 8px;
+}
+
+.fontawasome-arrow{
+    animation:animation-up 1s infinite;
+    color: $color-main-dark;
+}
+
+.fontawasome-arror-right{
+    font-size: 20px;
+    animation:animation-right 1s infinite;
+}
+
+
+.heading-primary{
+    &--main{
+        display: block;
+        font-size: 8rem;
+        margin: .9rem auto;
+    }
+    &--sub{
+        display: block;
+        font-size: 1.5rem;
+        text-align: center;
+
+    }
+}
 
 
 // Body
@@ -29,6 +62,7 @@ $yellow:#FAD727;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
 
 
 /*

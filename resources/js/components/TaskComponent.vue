@@ -6,12 +6,14 @@
 
         
         <div class="tasks-wrapper">
-            <div  class="each-task" v-for="task in tasks" :key="task.id" v-bind:class="{done: task.done}">
+
+            <div  class="each-task card" v-for="task in tasks" :key="task.id">
+                <div class="card__side card__side--front" v-bind:class="{ rotate: task.done }">
 
                     <div class="each-task__title">{{task.title}}</div>
                     <div class="each-task__body">{{task.body}}</div>
                     
-                    <div class="each-taskcategory">
+                    <div class="each-task__category">
                         <div v-if="task.categories_id == '1'">
                         力
                         </div>
@@ -22,26 +24,24 @@
                         C
                         </div>
                     </div>
-                    
-                    <div class="task-state">
+                    <div class="each-task__state">
                         <!--実施変更時のみ対応-->
                         <!--
                         <button v-if="!task.done" class="main-button" @click ="clicked(task)">完了！</button>
-                        <p v-else>実施済み</p>
                         -->
                         <!--両方に対応-->
-                        <button class="main-button" @click ="clicked(task)">Done!</button>
-
+                        <button class="main-button" @click ="clicked(task)">完了!</button>
                     </div>
-                    <div v-if="!task.done">
-                        <!-- 削除ボタンのモック -->
-                        <button class="main-button">削除</button>
-                    </div>
+                </div>
 
 
-
+                <div class="card__side card__side--back" v-bind:class="{ rotate: !task.done }">
+                    <button class="main-button" @click ="clicked(task)">取り消し</button>
+                </div>
             </div>
         </div>
+
+
         <div class="card">
             <div class="card__side card__side--front">
             表
@@ -50,6 +50,8 @@
             裏
             </div>
         </div>
+
+        
     </section>
 </template>
 
@@ -89,6 +91,7 @@
                 this.tasks = filtertasks;
             },
             clicked(task){
+                //コントローラー側で処理
                 //this.test = "test後"
                 let target = task.id;
                 //console.log(target);
@@ -100,7 +103,6 @@
                     console.log("変更に成功しました。");
                     self.fetchtasks();
                 })
-                
             }
         },
         watch:{

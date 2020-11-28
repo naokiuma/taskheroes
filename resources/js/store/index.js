@@ -21,16 +21,10 @@ const store = new Vuex.Store({
     },
     actions:{
             async register(context){
-
-            console.log("storeのregisterが実施");
-            const response = await axios.get('/user/logincheck')
-            context.commit('setUser',response.data);
-            console.log(this.state.user);
-
-            //.then(function(response){
-            //    console.log(response.data);
-            //    }
-            //}
+                console.log("storeのregisterが実施");
+                const response = await axios.get('/user/logincheck')
+                context.commit('setUser',response.data);
+                console.log(this.state.user);
         }
     }
             
