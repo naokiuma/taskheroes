@@ -8,6 +8,24 @@
   }
 }
 
+@keyframes up-move{//パラメータアップ時の動き
+  0%{
+      //transform:rotate(-45deg) translate(0, 0);
+      transform:translate(0, 0);
+      opacity: 0.1;
+  }
+  50% {
+      //transform:rotate(-45deg) translate(-10px, 10px);
+      transform:translateY(-10px);
+      opacity: 1;
+  }
+  100% {
+      //transform:rotate(-45deg) translate(0, 0);
+      transform:translate(0, 0);
+      opacity: 0.3;
+  }
+}
+
 
 @keyframes animation-up{
   0%{

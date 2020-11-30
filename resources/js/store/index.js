@@ -12,39 +12,29 @@ const store = new Vuex.Store({
     //https://kntmr.hatenablog.com/entry/2018/02/28/200112
     namespaced:true,
     state:{
-        user:""
+        user:[],
+        test:"テストですよ"
     },
     mutations:{
         setUser(state,user){
             this.state.user = user
         }
     },
+    getters:{
+        username:state => state.user ? state.user.name : ''
+
+    },
     actions:{
             async register(context){
                 console.log("storeのregisterが実施");
                 const response = await axios.get('/user/logincheck')
+                console.log(response.data);
                 context.commit('setUser',response.data);
-                console.log(this.state.user);
+                //console.log(this.state.user);
         }
     }
-            
-            
-        
-
-        //.then(response => (this.state.user = response.data))
-        /*
-        mounted(){//apiから一覧を取得
-            console.log("mounted");
-            axios
-            .get('/api/tasklist')
-            .then(response => (this.tasks = response.data))
-            //console.log(this.tasks);
-        },
-        */
-    
 
 });
-console.log(store.state.user);
 
 
 export default store;

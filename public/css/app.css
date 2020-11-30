@@ -20,6 +20,17 @@
           animation: animation-right 1s infinite;
 }
 
+.upmovearrow {
+  -webkit-animation: up-move 1s;
+          animation: up-move 1s;
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+
+.arrowopacity {
+  opacity: 0;
+}
+
 .heading-primary--main {
   display: block;
   font-size: 8rem;
@@ -89,6 +100,40 @@ $gutter-horizontal:6rem;
   100% {
     width: 100%;
     opacity: 1;
+  }
+}
+
+@-webkit-keyframes up-move {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0.1;
+  }
+
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.3;
+  }
+}
+
+@keyframes up-move {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0.1;
+  }
+
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.3;
   }
 }
 
@@ -392,7 +437,6 @@ $gutter-horizontal:6rem;
   height: 80px;
   transition: all 1s;
   margin: 5px auto;
-  display: flex;
   width: 100%;
   background-color: #FAD727;
   transition: all 0.5s;
@@ -401,16 +445,43 @@ $gutter-horizontal:6rem;
 }
 
 .tasks-wrapper .each-task__title {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 5px;
+  margin: auto 10px;
   width: 20%;
 }
 
 .tasks-wrapper .each-task__body {
-  font-size: 14px;
-  margin: 5px;
+  margin: auto 10px;
   width: 50%;
+}
+
+.tasks-wrapper .each-task__category {
+  margin: auto 50px auto 10px;
+}
+
+.categoryDone {
+  position: relative;
+}
+
+.categoryDone:before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -65%;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #78c6ec;
+  border-radius: 20px;
+  padding: 15px 15px;
+}
+
+.donetext {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: gray;
+  text-shadow: 5px 5px 0px cornsilk;
 }
 
 .task-start {
@@ -432,10 +503,6 @@ $gutter-horizontal:6rem;
 
 .task-form input[type=text] {
   height: 30px;
-}
-
-.task-form input[type=radio] {
-  display: none;
 }
 
 .task-form label {
@@ -461,14 +528,17 @@ $gutter-horizontal:6rem;
   text-align: center;
 }
 
-.done {
-  background-color: gray;
-}
-
 .card {
   perspective: 150rem;
   -moz-perspective: 150rem;
   position: relative;
+}
+
+.done-card {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  width: 100%;
 }
 
 .card__side {
@@ -477,52 +547,30 @@ $gutter-horizontal:6rem;
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   border-radius: 3px;
   overflow: hidden;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
   display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  width: 100%;
 }
 
 .card__side--front {
   background-color: #fff;
-  transition: all 0.5s;
 }
 
 .card__side--back {
-  background-image: linear-gradient(to right bottom, #ffb900, #ff7730);
-  transition: all 0.5s;
+  background-image: linear-gradient(to right bottom, #ffe140, #fcff90);
 }
-
-.card__side--back-1 {
-  background-image: linear-gradient(to right bottom, #ffb900, #ff7730);
-}
-
-.card__side--back-2 {
-  background-image: linear-gradient(to right bottom, #7ed56f, #28b485);
-}
-
-.card__side--back-3 {
-  background-image: linear-gradient(to right bottom, #2998ff, #5643fa);
-}
-
-/*
-.js-card:active .each-task {
-    transform: rotateY(180deg); 
-}
-*/
 
 .rotate {
   transform: rotateY(180deg);
   transition: all 0.5s;
 }
-
-/*
-.js-card:active .card__side--back {
-    transform: rotateY(360deg); 
-}
-*/
 
 .billboard {
   position: relative;

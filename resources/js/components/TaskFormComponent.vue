@@ -13,6 +13,11 @@
           <input class="" v-model="body" name="body" type="text"><br>
           鍛える種類<br>
           <div class="label-wrapper">
+            <label><input type="radio" v-model="categories_id" value="1">力</label>
+            <label><input type="radio" v-model="categories_id" value="2">魔力</label>
+            <label><input type="radio" v-model="categories_id" value="3">知識</label>
+            <!--
+
             <input id="power" class="" v-model="categories_id" name="categories_id" value="1" type="radio"><br>
             <label id="power" for="apple" class="label main-button">力</label>
             
@@ -21,11 +26,12 @@
             
             <input id="wisdom" class="" v-model="categories_id" name="categories_id" value="3" type="radio"><br>
             <label id="wisdom" for="apple" class="label main-button">知識</label>
+            -->
           </div>
 
 
           <div class="form__button">
-            <button type="submit" class="button button--inverse">やることとして登録！</button>
+            <button type="submit" class="button button--inverse">登録！</button>
           </div>
         </form>
       </section>

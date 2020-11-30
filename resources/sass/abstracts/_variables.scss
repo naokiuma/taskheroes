@@ -26,6 +26,15 @@ $space:60px;
     animation:animation-right 1s infinite;
 }
 
+.upmovearrow{
+    animation:up-move 1s;
+    animation-delay: .3s;
+}
+
+.arrowopacity{
+    opacity: 0;
+}
+
 
 .heading-primary{
     &--main{

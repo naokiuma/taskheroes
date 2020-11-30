@@ -8,49 +8,55 @@
         <div class="tasks-wrapper">
 
             <div  class="each-task card" v-for="task in tasks" :key="task.id">
+                <!--表-->
                 <div class="card__side card__side--front" v-bind:class="{ rotate: task.done }">
 
                     <div class="each-task__title">{{task.title}}</div>
                     <div class="each-task__body">{{task.body}}</div>
+                    
                     
                     <div class="each-task__category">
                         <div v-if="task.categories_id == '1'">
                         力
                         </div>
                         <div v-else-if="task.categories_id == '2'">
-                        B
+                        魔力
                         </div>
                         <div v-else-if="task.categories_id == '3'">
-                        C
+                        知力
                         </div>
                     </div>
                     <div class="each-task__state">
-                        <!--実施変更時のみ対応-->
-                        <!--
-                        <button v-if="!task.done" class="main-button" @click ="clicked(task)">完了！</button>
-                        -->
-                        <!--両方に対応-->
                         <button class="main-button" @click ="clicked(task)">完了!</button>
                     </div>
                 </div>
 
-
+                <!--裏-->
                 <div class="card__side card__side--back" v-bind:class="{ rotate: !task.done }">
-                    <button class="main-button" @click ="clicked(task)">取り消し</button>
+                        
+                        <div class="each-task__title">{{task.title}}</div>
+                        <div class="each-task__body">{{task.body}}</div>
+                        
+                        <p class="donetext">実施済み</p>
+                        
+                        <div class="each-task__category" v-bind:class="{ categoryDone: task.done }" >
+                            <div v-if="task.categories_id == '1'">
+                            力<i class="fas fa-arrow-up arrowopacity" v-bind:class="{ upmovearrow : task.done }"></i>
+                            </div>
+                            <div v-else-if="task.categories_id == '2'">
+                            魔力<i class="fas fa-arrow-up arrowopacity" v-bind:class="{ upmovearrow : task.done }"></i>
+                            </div>
+                            <div v-else-if="task.categories_id == '3'">
+                            知力<i class="fas fa-arrow-up arrowopacity" v-bind:class="{ upmovearrow : task.done }"></i>
+                            </div>
+                        </div>
+
+                        <div class="each-task__state">
+                            <button class="main-button" @click ="clicked(task)">戻す</button>
+                        </div>
                 </div>
             </div>
         </div>
-
-
-        <div class="card">
-            <div class="card__side card__side--front">
-            表
-            </div>
-            <div class="card__side card__side--back card__side--back-1">
-            裏
-            </div>
-        </div>
-
         
     </section>
 </template>
@@ -71,13 +77,15 @@
         
         mounted(){//apiから一覧を取得
             console.log("mounted");
-            //this.fetchtasks();
             this.fetchtasks();
         },
         methods:{
             fetchtasks(){//すべてのtasks
+            console.log("テスト");
+            console.log(this.$store.state.user);
+            //console.log(this.$store.state[name]);//ユーザー情報
                 axios
-                .get('/api/tasklist')
+                .get('/api/tasklist/')
                 .then(response => (this.tasks = response.data))
             },
             beforeTasks(){//未実施のtasks
@@ -88,6 +96,7 @@
                             filtertasks.push(task);
                         }
                     }
+
                 this.tasks = filtertasks;
             },
             clicked(task){

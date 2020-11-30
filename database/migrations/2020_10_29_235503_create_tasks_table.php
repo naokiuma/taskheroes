@@ -17,6 +17,7 @@ class CreateTasksTable extends Migration
             $table->bigIncrements('id');
             $table->string('title',50);
             $table->text('body')->nullable();
+            $table->text('body')->nullable();
             $table->bigInteger('categories_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
 

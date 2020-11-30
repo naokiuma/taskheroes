@@ -2086,6 +2086,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   //props:['id'],
   data: function data() {
@@ -2096,8 +2102,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     //apiから一覧を取得
-    console.log("mounted"); //this.fetchtasks();
-
+    console.log("mounted");
     this.fetchtasks();
   },
   methods: {
@@ -2105,7 +2110,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       //すべてのtasks
-      axios.get('/api/tasklist').then(function (response) {
+      console.log("テスト");
+      console.log(this.$store.state.user); //console.log(this.$store.state[name]);//ユーザー情報
+
+      axios.get('/api/tasklist/').then(function (response) {
         return _this.tasks = response.data;
       });
     },
@@ -2175,6 +2183,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Loader.vue */ "./resources/js/components/Loader.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -39442,11 +39456,11 @@ var render = function() {
                     ])
                   : task.categories_id == "2"
                   ? _c("div", [
-                      _vm._v("\n                    B\n                    ")
+                      _vm._v("\n                    魔力\n                    ")
                     ])
                   : task.categories_id == "3"
                   ? _c("div", [
-                      _vm._v("\n                    C\n                    ")
+                      _vm._v("\n                    知力\n                    ")
                     ])
                   : _vm._e()
               ]),
@@ -39475,46 +39489,74 @@ var render = function() {
               class: { rotate: !task.done }
             },
             [
+              _c("div", { staticClass: "each-task__title" }, [
+                _vm._v(_vm._s(task.title))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "each-task__body" }, [
+                _vm._v(_vm._s(task.body))
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "donetext" }, [_vm._v("実施済み")]),
+              _vm._v(" "),
               _c(
-                "button",
+                "div",
                 {
-                  staticClass: "main-button",
-                  on: {
-                    click: function($event) {
-                      return _vm.clicked(task)
-                    }
-                  }
+                  staticClass: "each-task__category",
+                  class: { categoryDone: task.done }
                 },
-                [_vm._v("取り消し")]
-              )
+                [
+                  task.categories_id == "1"
+                    ? _c("div", [
+                        _vm._v("\n                        力"),
+                        _c("i", {
+                          staticClass: "fas fa-arrow-up arrowopacity",
+                          class: { upmovearrow: task.done }
+                        })
+                      ])
+                    : task.categories_id == "2"
+                    ? _c("div", [
+                        _vm._v("\n                        魔力"),
+                        _c("i", {
+                          staticClass: "fas fa-arrow-up arrowopacity",
+                          class: { upmovearrow: task.done }
+                        })
+                      ])
+                    : task.categories_id == "3"
+                    ? _c("div", [
+                        _vm._v("\n                        知力"),
+                        _c("i", {
+                          staticClass: "fas fa-arrow-up arrowopacity",
+                          class: { upmovearrow: task.done }
+                        })
+                      ])
+                    : _vm._e()
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "each-task__state" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "main-button",
+                    on: {
+                      click: function($event) {
+                        return _vm.clicked(task)
+                      }
+                    }
+                  },
+                  [_vm._v("戻す")]
+                )
+              ])
             ]
           )
         ])
       }),
       0
-    ),
-    _vm._v(" "),
-    _vm._m(0)
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card__side card__side--front" }, [
-        _vm._v("\n        表\n        ")
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "card__side card__side--back card__side--back-1" },
-        [_vm._v("\n        裏\n        ")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39623,104 +39665,68 @@ var render = function() {
               _c("br"),
               _vm._v(" "),
               _c("div", { staticClass: "label-wrapper" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.categories_id,
-                      expression: "categories_id"
+                _c("label", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.categories_id,
+                        expression: "categories_id"
+                      }
+                    ],
+                    attrs: { type: "radio", value: "1" },
+                    domProps: { checked: _vm._q(_vm.categories_id, "1") },
+                    on: {
+                      change: function($event) {
+                        _vm.categories_id = "1"
+                      }
                     }
-                  ],
-                  attrs: {
-                    id: "power",
-                    name: "categories_id",
-                    value: "1",
-                    type: "radio"
-                  },
-                  domProps: { checked: _vm._q(_vm.categories_id, "1") },
-                  on: {
-                    change: function($event) {
-                      _vm.categories_id = "1"
-                    }
-                  }
-                }),
-                _c("br"),
+                  }),
+                  _vm._v("力")
+                ]),
                 _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "label main-button",
-                    attrs: { id: "power", for: "apple" }
-                  },
-                  [_vm._v("力")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.categories_id,
-                      expression: "categories_id"
+                _c("label", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.categories_id,
+                        expression: "categories_id"
+                      }
+                    ],
+                    attrs: { type: "radio", value: "2" },
+                    domProps: { checked: _vm._q(_vm.categories_id, "2") },
+                    on: {
+                      change: function($event) {
+                        _vm.categories_id = "2"
+                      }
                     }
-                  ],
-                  attrs: {
-                    id: "magic",
-                    name: "categories_id",
-                    value: "2",
-                    type: "radio"
-                  },
-                  domProps: { checked: _vm._q(_vm.categories_id, "2") },
-                  on: {
-                    change: function($event) {
-                      _vm.categories_id = "2"
-                    }
-                  }
-                }),
-                _c("br"),
+                  }),
+                  _vm._v("魔力")
+                ]),
                 _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "label main-button",
-                    attrs: { id: "magic", for: "apple" }
-                  },
-                  [_vm._v("魔力")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.categories_id,
-                      expression: "categories_id"
+                _c("label", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.categories_id,
+                        expression: "categories_id"
+                      }
+                    ],
+                    attrs: { type: "radio", value: "3" },
+                    domProps: { checked: _vm._q(_vm.categories_id, "3") },
+                    on: {
+                      change: function($event) {
+                        _vm.categories_id = "3"
+                      }
                     }
-                  ],
-                  attrs: {
-                    id: "wisdom",
-                    name: "categories_id",
-                    value: "3",
-                    type: "radio"
-                  },
-                  domProps: { checked: _vm._q(_vm.categories_id, "3") },
-                  on: {
-                    change: function($event) {
-                      _vm.categories_id = "3"
-                    }
-                  }
-                }),
-                _c("br"),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "label main-button",
-                    attrs: { id: "wisdom", for: "apple" }
-                  },
-                  [_vm._v("知識")]
-                )
+                  }),
+                  _vm._v("知識")
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form__button" }, [
@@ -39730,7 +39736,7 @@ var render = function() {
                     staticClass: "button button--inverse",
                     attrs: { type: "submit" }
                   },
-                  [_vm._v("やることとして登録！")]
+                  [_vm._v("登録！")]
                 )
               ])
             ]
@@ -56780,17 +56786,21 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
   //https://kntmr.hatenablog.com/entry/2018/02/28/200112
   namespaced: true,
   state: {
-    user: ""
+    user: [],
+    test: "テストですよ"
   },
   mutations: {
     setUser: function setUser(state, user) {
       this.state.user = user;
     }
   },
+  getters: {
+    username: function username(state) {
+      return state.user ? state.user.name : '';
+    }
+  },
   actions: {
     register: function register(context) {
-      var _this = this;
-
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -56803,8 +56813,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
 
               case 3:
                 response = _context.sent;
-                context.commit('setUser', response.data);
-                console.log(_this.state.user);
+                console.log(response.data);
+                context.commit('setUser', response.data); //console.log(this.state.user);
 
               case 6:
               case "end":
@@ -56814,20 +56824,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
         }, _callee);
       }))();
     }
-  } //.then(response => (this.state.user = response.data))
-
-  /*
-  mounted(){//apiから一覧を取得
-      console.log("mounted");
-      axios
-      .get('/api/tasklist')
-      .then(response => (this.tasks = response.data))
-      //console.log(this.tasks);
-  },
-  */
-
+  }
 });
-console.log(store.state.user);
 /* harmony default export */ __webpack_exports__["default"] = (store);
 
 /***/ }),

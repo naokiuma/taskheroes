@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log; //ログ
 use Illuminate\Support\Facades\DB; // DB ファサードを use する
 use App\Task;
+use App\User;
 
 class TaskController extends Controller
 {
@@ -35,36 +36,54 @@ class TaskController extends Controller
 
     }
 
+//-----------------------実施未実施切り替えpost
+
     public function change($id){
         //$changeTask = Task::where('id',$id)->get();//collectionがかえる
         $changeTask = Task::where('id',$id)->first();//1オブジェクトがかエル
         Log::debug("取得データ");
-        Log::debug($changeTask);
+        //↓"categories_id":1,"user_id":1,この中にはこう言うデータが入っている;
+        //Log::debug($changeTask);
+        //↓lv":null,"hp":null,"power":null,"magic":null,"wisdom":null,"xp":null,が入っている
+        //Log::debug(Auth::user());
+        //ここでuserのそのカテゴリを処理する
 
-        //反転させる
+        //反転させる。デフォルトは0。
         if($changeTask->done == 0){
-            $changeTask->done = 1;
+            $changeTask->done = 1;//実施済みに変更
+            //これでカテゴリーの数字が取れる。1など
+            Log::debug(($changeTask)->categories_id);
+            Auth::user()->power++;
+            Auth::user()->save();
+
         }else if($changeTask->done == 1){
             $changeTask->done = 0;
+            Auth::user()->power--;
+            Auth::user()->save();
         }
         $changeTask->save();
         
         return $changeTask;
-
     }
 
-    //-----------------------タスクのAPI
+
+
+//-----------------------タスクのAPI
 
     public function tasklist($id = null)//api
     {   //ユーザー情報
         //$tasks = Task::All();
         //$result = $tasks->select('user_id',$id)->get();
         if($id == null){
+            Log::debug("tasklist.未ログインルート");
             $tasks = Task::All();
         }else{
-            $tasks = Task::where('user_id', $id)->get();
+            Log::debug("tasklist.ログインルート");
+            $tasks = Task::where('user_id', $id)
+                                ->orderBy('created_at','desc')
+                                ->get();
         }
-        //Log::debug($tasks);
+        Log::debug($tasks);
         return $tasks;
     }
 
