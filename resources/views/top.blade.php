@@ -6,7 +6,7 @@
 <div class="billboard">
     <div class="billboard-title">
         <h1>
-            <span class="heading-primary--main">Task Heroes</span>
+            <span class="heading-primary--main startoRight">Task Heroes</span>
             <span class="heading-primary--sub">日々の生活、遊び、トレーニングをちょっと楽しく。</span>
         </h1>
     </div>
@@ -18,10 +18,6 @@
         <h2 class="section-heading">About</h2>
         <p><span>「TaskHeroes」</span>はやりたいこと、やるべきこと、、<br>
         あなたの日常の「task」を勇者の力に変換するサービスです。<br><br>
-        taskの実施をすることで、<br>
-        勇者のあなたも一緒に育ちます。
-        <br>
-        例えば・・・
         </p>
 
         <div class="about-examples radial-bg">
@@ -58,6 +54,8 @@
 <section class="howto">
     <h2 class="section-heading">Howto</h2>
 </section>
+
+
 
 @endsection
 

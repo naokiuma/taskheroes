@@ -29,11 +29,11 @@
 
 <script>
     export default {
-        data:function(){
+        data(){
             return{
                 parameters:[
                     {id:"hp", value:"50"},
-                    {id:"power",value:"4"},
+                    {id:"power",value:this.$store.state.user.power},
                     {id:"magic",value:"8"},
                     {id:"wisdom",value:"3"},
                     {id:"xp",value:"2"}
@@ -45,10 +45,18 @@
 
 
         mounted(){
+        //beforeCreate () {
             console.log("hero mounted");
-            console.log(this.parameters);
-            
+            //console.log(this.parameters);
+            //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
+            this.fetchusers();
         },
+        methods:{
+            fetchusers(){
+                console.log("ユーザーの能力");
+                console.log(this.$store.state.user.power);
+            }
+        }
 
     }
 </script>

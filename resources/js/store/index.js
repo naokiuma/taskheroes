@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import message from './message';
+
 
 //import tasks from './modules/tasks.js';
 //import parameters from './modules/parameter.js';
@@ -13,9 +15,11 @@ const store = new Vuex.Store({
     namespaced:true,
     state:{
         user:[],
+        message:"storeのメッセージです",
         test:"テストですよ"
     },
     mutations:{
+        //ユーザー情報をset
         setUser(state,user){
             this.state.user = user
         }
@@ -28,10 +32,13 @@ const store = new Vuex.Store({
             async register(context){
                 console.log("storeのregisterが実施");
                 const response = await axios.get('/user/logincheck')
-                console.log(response.data);
+                //console.log(response.data);
                 context.commit('setUser',response.data);
-                //console.log(this.state.user);
+                //console.log(this.state.user.power);
         }
+    },
+    modules:{
+        message
     }
 
 });

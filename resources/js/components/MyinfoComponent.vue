@@ -6,15 +6,22 @@
         <router-link to="/taskform">タスクを登録する</router-link>
 
         <RouterView /> 
+        <Message />
     </div>
-      
 </template>
 
 
 <script>
 
+    import Message from './Message.vue';//ok
+
+
     export default {
-        mounted(){
+        components:{
+            Message
+        },
+        beforeCreate () {
+        //mounted(){
             this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
         }
  

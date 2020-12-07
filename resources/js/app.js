@@ -9,10 +9,11 @@ require('./bootstrap');
 import router from './router';
 // ルートコンポーネントをインポートする
 import Myinfo from './components/MyinfoComponent.vue';
+//import Message from './components/Message.vue';
+
 
 //storeのインポート
 import store from './store';
-
 window.Vue = require('vue');
 
 /**
@@ -48,6 +49,7 @@ new Vue({
     router,//ルーター使う定義
     store,
     component:{ Myinfo },
+    //component:{ Myinfo,Message },
     template:'<myinfo-component/>'
   })
 

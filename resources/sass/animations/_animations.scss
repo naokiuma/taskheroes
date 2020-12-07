@@ -1,4 +1,4 @@
-@keyframes expansion{
+@keyframes expansion{//パラメータ一覧の画面でゲージを動かしている
   0%{
     width:0%;
   }
@@ -25,6 +25,41 @@
       opacity: 0.3;
   }
 }
+
+/*
+@keyframes startoRight{//煌めき
+  0%{
+    background-image: linear-gradient(120deg,#FAD727,white 50%);
+  }
+  20%{
+    background-image: linear-gradient(120deg,#FAD727,white 60%);
+  }
+  40%{
+    background-image: linear-gradient(120deg,#FAD727,white 70%);
+  }
+  60%{
+    background-image: linear-gradient(120deg,#FAD727,white 80%);
+  }
+  80%{
+    background-image: linear-gradient(120deg,#FAD727,white 90%);
+  }
+  100%{
+    background-image: linear-gradient(120deg,#FAD727,white 100%);
+  }
+}
+*/
+
+
+.startoRight{
+    animation-name: startoRight;
+    animation-duration: 2s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;//アニメーションの最後の動きで止める
+    animation-timing-function: ease-in-out;
+}
+
+
+
 
 
 @keyframes animation-up{

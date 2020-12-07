@@ -1,7 +1,16 @@
 const state = {
-    content:''
+    content:'message.jsのcontentですよよ！。',
+    messageShow:true
 }
 
 const mutations = {
-    setContent(state,{content})
+    setContent(state,{content}){
+        state.content = content
+    }
 }
+
+export default{
+    namespaced:true,
+    state,
+    mutations
+}   

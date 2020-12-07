@@ -65,30 +65,31 @@
 
 
 <script>
-
     export default {
-        //props:['id'],
         data(){
             return{
-                //test:"test前",
                 tasks:[]
             }
         },
-        
         mounted(){//apiから一覧を取得
+            this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
+
             console.log("mounted");
             this.fetchtasks();
         },
         methods:{
-            fetchtasks(){//すべてのtasks
-            console.log("テスト");
-            console.log(this.$store.state.user);
-            //console.log(this.$store.state[name]);//ユーザー情報
+            fetchtasks(){//すべてのtasksを取得
+            //console.log(this.$store.state.user);
+            let url = '/api/tasklist/';
+            if(this.$store.state.user.id){
+                url = url + this.$store.state.user.id;
+            }
+            //console.log(url);//ユーザー情報ある場合は数字が末尾に入る
                 axios
-                .get('/api/tasklist/')
+                .get(url)
                 .then(response => (this.tasks = response.data))
             },
-            beforeTasks(){//未実施のtasks
+            beforeTasks(){//未実施のtasksを取得
                 let filtertasks = [];
                     for(var i in this.tasks){
                         let task = this.tasks[i];
@@ -96,23 +97,40 @@
                             filtertasks.push(task);
                         }
                     }
-
                 this.tasks = filtertasks;
             },
             clicked(task){
                 //コントローラー側で処理
-                //this.test = "test後"
                 let target = task.id;
-                //console.log(target);
                 let self = this;
-                console.log("今trueなのでfalseに変えます。")
                 console.log('/tasks/change/' + target);
                 axios.post('/tasks/change/' + target)
                 .then(function(responce){
-                    console.log("変更に成功しました。");
+                    //console.log("変更に成功しました。");
                     self.fetchtasks();
+                    //console.log(task.done);
+                    //console.log(task.title);
+                    let tempmsg;
+                    let tempcategory;
+                    if(task.categories_id == "1"){
+                        tempcategory = "力";
+                    }else if(task.categories_id == "2"){
+                        tempcategory = "魔力";
+                    }else{
+                        tempcategory = "知力";
+                    }
+                    if(task.done == 1){
+                        tempmsg = task.title + ' をキャンセルしました。' + tempcategory + 'が下がります。';
+                    }else{
+                        tempmsg = task.title + ' を実施しました。' + tempcategory + 'が上がりました。';
+                        //console.log(tempmsg);
+                    }                    
+                    self.$store.commit('message/setContent',{
+                        content: tempmsg
+                    })
                 })
             }
+
         },
         watch:{
             tasks:{

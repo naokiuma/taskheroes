@@ -14,7 +14,7 @@
     </head>
     <body>
         <header class="header">
-            <div class="header__logo-area">taskHeroes</div>
+            <div class="header__logo-area">TaskHeroes</div>
 
             <div class="header__manu-area">
             <ul class="header__nav">

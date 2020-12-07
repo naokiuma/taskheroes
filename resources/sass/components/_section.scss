@@ -7,6 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.5s;
     &:before,
     &:after{
         content: "";
@@ -15,9 +16,21 @@
         //background-color: #808080a8;
         background-image: url(./img/heading-sword.png);
         background-size: contain;
+        transition: all 0.5s;
     }
     &:after{
         transform: scale(-1, 1);
+        
     }
+
+    &:hover::before{
+        margin-right: 10px;
+        transition: all 0.5s;
+    }
+    &:hover::after{
+        margin-left: 10px;
+        transition: all 0.5s;
+    }
+
 
 }

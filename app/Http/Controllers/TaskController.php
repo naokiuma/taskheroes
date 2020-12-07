@@ -76,7 +76,8 @@ class TaskController extends Controller
         //$result = $tasks->select('user_id',$id)->get();
         if($id == null){
             Log::debug("tasklist.未ログインルート");
-            $tasks = Task::All();
+            //$tasks = Task::All()->sortByDesc('created_at');
+            $tasks = Task::orderByDesc('created_at')->get();
         }else{
             Log::debug("tasklist.ログインルート");
             $tasks = Task::where('user_id', $id)

@@ -1957,7 +1957,7 @@ __webpack_require__.r(__webpack_exports__);
         value: "50"
       }, {
         id: "power",
-        value: "4"
+        value: this.$store.state.user.power
       }, {
         id: "magic",
         value: "8"
@@ -1972,8 +1972,57 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    console.log("hero mounted");
-    console.log(this.parameters);
+    //beforeCreate () {
+    console.log("hero mounted"); //console.log(this.parameters);
+    //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
+
+    this.fetchusers();
+  },
+  methods: {
+    fetchusers: function fetchusers() {
+      console.log("ユーザーの能力");
+      console.log(this.$store.state.user.power);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Message.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Message.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /*
+  data(){
+      return{
+          messageShow:true
+      }
+  },
+  */
+  mounted: function mounted() {
+    //apiから一覧を取得
+    this.$store.dispatch('register'); //storeのactionをこちらでdispatchしログインしているかを返す
+
+    console.log(this.$store.state.message);
+    console.log("messageのcomputeedでした");
   }
 });
 
@@ -1988,6 +2037,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Message_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Message.vue */ "./resources/js/components/Message.vue");
 //
 //
 //
@@ -2001,8 +2051,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+ //ok
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
+  components: {
+    Message: _Message_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  beforeCreate: function beforeCreate() {
+    //mounted(){
     this.$store.dispatch('register'); //storeのactionをこちらでdispatchしログインしているかを返す
   }
 });
@@ -2093,15 +2149,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  //props:['id'],
   data: function data() {
     return {
-      //test:"test前",
       tasks: []
     };
   },
   mounted: function mounted() {
     //apiから一覧を取得
+    this.$store.dispatch('register'); //storeのactionをこちらでdispatchしログインしているかを返す
+
     console.log("mounted");
     this.fetchtasks();
   },
@@ -2109,16 +2165,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     fetchtasks: function fetchtasks() {
       var _this = this;
 
-      //すべてのtasks
-      console.log("テスト");
-      console.log(this.$store.state.user); //console.log(this.$store.state[name]);//ユーザー情報
+      //すべてのtasksを取得
+      //console.log(this.$store.state.user);
+      var url = '/api/tasklist/';
 
-      axios.get('/api/tasklist/').then(function (response) {
+      if (this.$store.state.user.id) {
+        url = url + this.$store.state.user.id;
+      } //console.log(url);//ユーザー情報ある場合は数字が末尾に入る
+
+
+      axios.get(url).then(function (response) {
         return _this.tasks = response.data;
       });
     },
     beforeTasks: function beforeTasks() {
-      //未実施のtasks
+      //未実施のtasksを取得
       var filtertasks = [];
 
       for (var i in this.tasks) {
@@ -2133,15 +2194,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     clicked: function clicked(task) {
       //コントローラー側で処理
-      //this.test = "test後"
-      var target = task.id; //console.log(target);
-
+      var target = task.id;
       var self = this;
-      console.log("今trueなのでfalseに変えます。");
       console.log('/tasks/change/' + target);
       axios.post('/tasks/change/' + target).then(function (responce) {
-        console.log("変更に成功しました。");
-        self.fetchtasks();
+        //console.log("変更に成功しました。");
+        self.fetchtasks(); //console.log(task.done);
+        //console.log(task.title);
+
+        var tempmsg;
+        var tempcategory;
+
+        if (task.categories_id == "1") {
+          tempcategory = "力";
+        } else if (task.categories_id == "2") {
+          tempcategory = "魔力";
+        } else {
+          tempcategory = "知力";
+        }
+
+        if (task.done == 1) {
+          tempmsg = task.title + ' をキャンセルしました。' + tempcategory + 'が下がります。';
+        } else {
+          tempmsg = task.title + ' を実施しました。' + tempcategory + 'が上がりました。'; //console.log(tempmsg);
+        }
+
+        self.$store.commit('message/setContent', {
+          content: tempmsg
+        });
       });
     }
   },
@@ -39348,6 +39428,47 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Message.vue?vue&type=template&id=b91a6428&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Message.vue?vue&type=template&id=b91a6428& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: this.$store.state.message.messageShow,
+          expression: "this.$store.state.message.messageShow"
+        }
+      ],
+      staticClass: "messages"
+    },
+    [
+      _vm._v("\n    " + _vm._s(this.$store.state.message.content) + "\n"),
+      _c("div", { staticClass: "messages-space" })
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MyinfoComponent.vue?vue&type=template&id=7e3938a8&":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MyinfoComponent.vue?vue&type=template&id=7e3938a8& ***!
@@ -39375,7 +39496,9 @@ var render = function() {
         _vm._v("タスクを登録する")
       ]),
       _vm._v(" "),
-      _c("RouterView")
+      _c("RouterView"),
+      _vm._v(" "),
+      _c("Message")
     ],
     1
   )
@@ -56278,7 +56401,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //ルー�
 
  // ルートコンポーネントをインポートする
 
- //storeのインポート
+ //import Message from './components/Message.vue';
+//storeのインポート
 
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -56311,6 +56435,7 @@ new Vue({
   component: {
     Myinfo: _components_MyinfoComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  //component:{ Myinfo,Message },
   template: '<myinfo-component/>'
 });
 
@@ -56478,6 +56603,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Loader_vue_vue_type_template_id_e79ec684___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Loader_vue_vue_type_template_id_e79ec684___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Message.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/Message.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Message_vue_vue_type_template_id_b91a6428___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Message.vue?vue&type=template&id=b91a6428& */ "./resources/js/components/Message.vue?vue&type=template&id=b91a6428&");
+/* harmony import */ var _Message_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Message.vue?vue&type=script&lang=js& */ "./resources/js/components/Message.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Message_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Message_vue_vue_type_template_id_b91a6428___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Message_vue_vue_type_template_id_b91a6428___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Message.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Message.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/Message.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Message.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Message.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Message.vue?vue&type=template&id=b91a6428&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Message.vue?vue&type=template&id=b91a6428& ***!
+  \****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_template_id_b91a6428___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Message.vue?vue&type=template&id=b91a6428& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Message.vue?vue&type=template&id=b91a6428&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_template_id_b91a6428___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_template_id_b91a6428___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -56770,11 +56964,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _message__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./message */ "./resources/js/store/message.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
  //import tasks from './modules/tasks.js';
@@ -56787,9 +56983,11 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
   namespaced: true,
   state: {
     user: [],
+    message: "storeのメッセージです",
     test: "テストですよ"
   },
   mutations: {
+    //ユーザー情報をset
     setUser: function setUser(state, user) {
       this.state.user = user;
     }
@@ -56813,10 +57011,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
 
               case 3:
                 response = _context.sent;
-                console.log(response.data);
-                context.commit('setUser', response.data); //console.log(this.state.user);
+                //console.log(response.data);
+                context.commit('setUser', response.data); //console.log(this.state.user.power);
 
-              case 6:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -56824,9 +57022,39 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
         }, _callee);
       }))();
     }
+  },
+  modules: {
+    message: _message__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);
+
+/***/ }),
+
+/***/ "./resources/js/store/message.js":
+/*!***************************************!*\
+  !*** ./resources/js/store/message.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {
+  content: 'message.jsのcontentですよよ！。',
+  messageShow: true
+};
+var mutations = {
+  setContent: function setContent(state, _ref) {
+    var content = _ref.content;
+    state.content = content;
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  mutations: mutations
+});
 
 /***/ }),
 
