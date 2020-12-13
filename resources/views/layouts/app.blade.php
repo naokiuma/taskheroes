@@ -9,12 +9,13 @@
         <link href="{{ asset('css/normalize.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.js') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
         
         <title>taskHeroes</title>
     </head>
     <body>
         <header class="header">
-            <div class="header__logo-area">TaskHeroes</div>
+            <div class="header__logo-area animate__animated animate__bounceInLeft hovermoveLeft">TaskHeroes</div>
 
             <div class="header__manu-area">
             <ul class="header__nav">

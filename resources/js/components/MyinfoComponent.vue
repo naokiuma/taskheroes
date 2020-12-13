@@ -10,21 +10,17 @@
     </div>
 </template>
 
-
 <script>
-
     import Message from './Message.vue';//ok
-
-
     export default {
         components:{
             Message
         },
-        beforeCreate () {
-        //mounted(){
-            this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
+        mounted(){
+            console.log("myinfo.vueのmouted");
+            //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
+  
         }
- 
     }
 </script>
 

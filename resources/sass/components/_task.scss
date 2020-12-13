@@ -103,20 +103,31 @@
 
 
         &__wrapper{
-        background-color: #EFEFEF;
+        background-color: #E1F7F1;
         position: fixed;
         width: 50vw;
-        height: 50vh;
         z-index: 10;
         top: 15%;
         left: 50%;
         transform: translateX(-50%);
         text-align: center;
+        h3{
+            margin-top: 50px;
+        }
     }
     }
+}
 
-
-
+.taskupParameters{
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    z-index: 5;
+    width: 20%;
+    height: 70%;
+    background-color: white;
+    box-shadow: 2px 2px 2px black;
+    border-radius: 5px;
 }
 
 

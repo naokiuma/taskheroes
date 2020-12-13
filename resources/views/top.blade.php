@@ -4,11 +4,14 @@
 <div class="space"></div>
 
 <div class="billboard">
+    
+    <img class="billboard-img1"src="../img/fighter.png" alt="">
     <div class="billboard-title">
         <h1>
-            <span class="heading-primary--main startoRight">Task Heroes</span>
+            <span class="heading-primary--main animate__animated animate__bounceInLeft hovermoveLeft">Task Heroes</span>
             <span class="heading-primary--sub">日々の生活、遊び、トレーニングをちょっと楽しく。</span>
         </h1>
+        
     </div>
 
 </div>
@@ -16,7 +19,8 @@
 <section class="about-wrapper">
     <div class="about-description">
         <h2 class="section-heading">About</h2>
-        <p><span>「TaskHeroes」</span>はやりたいこと、やるべきこと、、<br>
+        <p><span class="hovermoveLeft underLine">「TaskHeroes」とは</span></p>
+        <p>やりたいこと、やるべきこと、、<br>
         あなたの日常の「task」を勇者の力に変換するサービスです。<br><br>
         </p>
 
@@ -43,7 +47,7 @@
                 <img class="about-image2"src="../img/fighter.png" alt="">
             </div>
         </div>
-        <span class="heading-primary--sub">タスクをこなして勇者を育てよう。</span>
+        <span class="heading-primary--sub">自分を育て、勇者も育てよう。</span>
 
 
     </div>
@@ -51,8 +55,42 @@
 
 </section>
 
-<section class="howto">
+<section class="howto-wrapper">
+    <div class="howto-description">
     <h2 class="section-heading">Howto</h2>
+        <p><span class="hovermoveLeft underLine">使い方</span></p>
+        <div class="howto-steps">
+            <div class="howto-step">
+                <h4>Step1<br>taskを登録</h4>
+                <p>
+                    勉強、筋トレ、仕事、家事、遊び。
+                    毎日やることやチャレンジしたいことを登録しよう。
+                    
+                </p>
+                
+            </div>
+            <div class="howto-step">
+                <h4>Step2<br>taskを実施</h4>
+                <p>
+                    実施したら完了しよう。
+                </p>
+                
+                
+            </div>
+            <div class="howto-step">
+                <h4>Step3<br>能力値アップ</h4>
+                <p>
+                    登録したカテゴリーの能力が実施時に伸びます
+                </p>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
 </section>
 
 

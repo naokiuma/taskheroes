@@ -42,14 +42,21 @@ Vue.component('myinfo-component', require('./components/MyinfoComponent.vue').de
  */
 
 
+const createApp = async () => {
+  await store.dispatch('register')
 
-new Vue({
+  new Vue({
     el: '#myinfo',
     mode: 'history',
     router,//ルーター使う定義
     store,
     component:{ Myinfo },
-    //component:{ Myinfo,Message },
     template:'<myinfo-component/>'
   })
+
+
+}
+
+createApp();
+
 

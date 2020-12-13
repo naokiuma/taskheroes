@@ -1972,7 +1972,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    //beforeCreate () {
     console.log("hero mounted"); //console.log(this.parameters);
     //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
 
@@ -1980,7 +1979,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     fetchusers: function fetchusers() {
-      console.log("ユーザーの能力");
+      console.log("ユーザーの能力"); //console.log(this.parameters[1]["power"]);//これで取得できる
+      //this.parameters[1]["power"] = this.$store.state.user.power;
+
       console.log(this.$store.state.user.power);
     }
   }
@@ -2050,16 +2051,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
  //ok
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Message: _Message_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  beforeCreate: function beforeCreate() {
-    //mounted(){
-    this.$store.dispatch('register'); //storeのactionをこちらでdispatchしログインしているかを返す
+  mounted: function mounted() {
+    console.log("myinfo.vueのmouted"); //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
   }
 });
 
@@ -2148,17 +2147,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      tasks: []
+      tasks: [],
+      up: true
     };
+  },
+  beforeMount: function beforeMount() {
+    this.$store.dispatch('register'); //storeのactionをこちらでdispatchしログインしているかを返す
+
+    console.log("taskcompoのbeforecmouted");
+    console.log(this.$store.state.user);
   },
   mounted: function mounted() {
     //apiから一覧を取得
-    this.$store.dispatch('register'); //storeのactionをこちらでdispatchしログインしているかを返す
-
-    console.log("mounted");
+    console.log("taskcompoのmounted");
+    console.log(this.$store.state.user);
     this.fetchtasks();
   },
   methods: {
@@ -2217,6 +2227,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           tempmsg = task.title + ' をキャンセルしました。' + tempcategory + 'が下がります。';
         } else {
           tempmsg = task.title + ' を実施しました。' + tempcategory + 'が上がりました。'; //console.log(tempmsg);
+
+          this.up = true;
         }
 
         self.$store.commit('message/setContent', {
@@ -2246,7 +2258,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }, _callee);
         }))();
       },
-      imeediate: true
+      immediate: true
     }
   }
 });
@@ -39555,80 +39567,95 @@ var render = function() {
     _c(
       "div",
       { staticClass: "tasks-wrapper" },
-      _vm._l(_vm.tasks, function(task) {
-        return _c("div", { key: task.id, staticClass: "each-task card" }, [
-          _c(
-            "div",
-            {
-              staticClass: "card__side card__side--front",
-              class: { rotate: task.done }
-            },
-            [
-              _c("div", { staticClass: "each-task__title" }, [
-                _vm._v(_vm._s(task.title))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "each-task__body" }, [
-                _vm._v(_vm._s(task.body))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "each-task__category" }, [
-                task.categories_id == "1"
-                  ? _c("div", [
-                      _vm._v("\n                    力\n                    ")
-                    ])
-                  : task.categories_id == "2"
-                  ? _c("div", [
-                      _vm._v("\n                    魔力\n                    ")
-                    ])
-                  : task.categories_id == "3"
-                  ? _c("div", [
-                      _vm._v("\n                    知力\n                    ")
-                    ])
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "each-task__state" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "main-button",
-                    on: {
-                      click: function($event) {
-                        return _vm.clicked(task)
+      [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.up,
+                expression: "up"
+              }
+            ],
+            staticClass: "taskupParameters"
+          },
+          [_vm._v("アップ！")]
+        ),
+        _vm._v(" "),
+        _vm._l(_vm.tasks, function(task) {
+          return _c("div", { key: task.id, staticClass: "each-task card" }, [
+            _c(
+              "div",
+              {
+                staticClass: "card__side card__side--front",
+                class: { rotate: task.done }
+              },
+              [
+                _c("div", { staticClass: "each-task__title" }, [
+                  _vm._v(_vm._s(task.title))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "each-task__body" }, [
+                  _vm._v(_vm._s(task.body))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "each-task__category" }, [
+                  task.categories_id == "1"
+                    ? _c("div", [
+                        _vm._v("\n                    力\n                    ")
+                      ])
+                    : task.categories_id == "2"
+                    ? _c("div", [
+                        _vm._v(
+                          "\n                    魔力\n                    "
+                        )
+                      ])
+                    : task.categories_id == "3"
+                    ? _c("div", [
+                        _vm._v(
+                          "\n                    知力\n                    "
+                        )
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "each-task__state" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "main-button",
+                      on: {
+                        click: function($event) {
+                          return _vm.clicked(task)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("完了!")]
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "card__side card__side--back",
-              class: { rotate: !task.done }
-            },
-            [
-              _c("div", { staticClass: "each-task__title" }, [
-                _vm._v(_vm._s(task.title))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "each-task__body" }, [
-                _vm._v(_vm._s(task.body))
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "donetext" }, [_vm._v("実施済み")]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "each-task__category",
-                  class: { categoryDone: task.done }
-                },
-                [
+                    },
+                    [_vm._v("完了!")]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "card__side card__side--back",
+                class: { rotate: !task.done }
+              },
+              [
+                _c("div", { staticClass: "each-task__title" }, [
+                  _vm._v(_vm._s(task.title))
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "each-task__body" }, [
+                  _vm._v(_vm._s(task.body))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "donetext" }, [_vm._v("実施済み")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "each-task__category" }, [
                   task.categories_id == "1"
                     ? _c("div", [
                         _vm._v("\n                        力"),
@@ -39654,29 +39681,31 @@ var render = function() {
                         })
                       ])
                     : _vm._e()
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "each-task__state" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "main-button",
-                    on: {
-                      click: function($event) {
-                        return _vm.clicked(task)
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "each-task__state" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "main-button",
+                      on: {
+                        click: function($event) {
+                          return _vm.clicked(task)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("戻す")]
-                )
-              ])
-            ]
-          )
-        ])
-      }),
-      0
-    )
+                    },
+                    [_vm._v("戻す")]
+                  )
+                ])
+              ]
+            )
+          ])
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("section", {})
   ])
 }
 var staticRenderFns = []
@@ -56388,9 +56417,17 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
-/* harmony import */ var _components_MyinfoComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/MyinfoComponent.vue */ "./resources/js/components/MyinfoComponent.vue");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+/* harmony import */ var _components_MyinfoComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/MyinfoComponent.vue */ "./resources/js/components/MyinfoComponent.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -56426,18 +56463,42 @@ Vue.component('myinfo-component', __webpack_require__(/*! ./components/MyinfoCom
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-new Vue({
-  el: '#myinfo',
-  mode: 'history',
-  router: _router__WEBPACK_IMPORTED_MODULE_0__["default"],
-  //ルーター使う定義
-  store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
-  component: {
-    Myinfo: _components_MyinfoComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
-  //component:{ Myinfo,Message },
-  template: '<myinfo-component/>'
-});
+var createApp = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return _store__WEBPACK_IMPORTED_MODULE_3__["default"].dispatch('register');
+
+          case 2:
+            new Vue({
+              el: '#myinfo',
+              mode: 'history',
+              router: _router__WEBPACK_IMPORTED_MODULE_1__["default"],
+              //ルーター使う定義
+              store: _store__WEBPACK_IMPORTED_MODULE_3__["default"],
+              component: {
+                Myinfo: _components_MyinfoComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+              },
+              template: '<myinfo-component/>'
+            });
+
+          case 3:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function createApp() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+createApp();
 
 /***/ }),
 
@@ -56930,6 +56991,9 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var routes = [{
+  path: '',
+  component: _components_HeroComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+}, {
   path: '/status',
   component: _components_HeroComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
@@ -56973,8 +57037,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
- //import tasks from './modules/tasks.js';
-//import parameters from './modules/parameter.js';
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
@@ -57011,10 +57073,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
 
               case 3:
                 response = _context.sent;
-                //console.log(response.data);
+                console.log("ユーザー情報の取得完了。" + response.data);
                 context.commit('setUser', response.data); //console.log(this.state.user.power);
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }

@@ -1,8 +1,9 @@
 .about{
     &-wrapper{
-       
         width: 95%;
         margin: 100px auto 100px auto;
+        position: relative;
+
     }
     &-description{
         width: 100%;
@@ -13,13 +14,19 @@
             font-size: 20px;
             letter-spacing: 2px;
         }
+        &:after{ 
+            content: "";
+            position: absolute;
+            right: 200px;
+            top: -100px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: $color-main-light;
+            z-index: -1;
+        }
     }
-    &-heading{
-      //  font-size: 80px; //section-headingに移動
-      //  margin-bottom: 40px;
-      //  text-align: center;
-      //  color: #808080a8;
-    }
+
     &-example{
         font-size: 16px;
         width: 80%;

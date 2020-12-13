@@ -4,10 +4,12 @@
         <button @click="beforeTasks()">未実施のタスク</button>
         <button @click="fetchtasks()">すべてのタスク</button>
 
-        
         <div class="tasks-wrapper">
+            <div v-show="up" class="taskupParameters">アップ！</div>
+           
 
             <div  class="each-task card" v-for="task in tasks" :key="task.id">
+                
                 <!--表-->
                 <div class="card__side card__side--front" v-bind:class="{ rotate: task.done }">
 
@@ -39,7 +41,8 @@
                         
                         <p class="donetext">実施済み</p>
                         
-                        <div class="each-task__category" v-bind:class="{ categoryDone: task.done }" >
+                        <!--<div class="each-task__category" v-bind:class="{ categoryDone: task.done }" >-->
+                        <div class="each-task__category">
                             <div v-if="task.categories_id == '1'">
                             力<i class="fas fa-arrow-up arrowopacity" v-bind:class="{ upmovearrow : task.done }"></i>
                             </div>
@@ -57,6 +60,8 @@
                 </div>
             </div>
         </div>
+
+        <section class=""></section>
         
     </section>
 </template>
@@ -68,13 +73,18 @@
     export default {
         data(){
             return{
-                tasks:[]
+                tasks:[],
+                up:true
             }
         },
-        mounted(){//apiから一覧を取得
+        beforeMount(){
             this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
-
-            console.log("mounted");
+            console.log("taskcompoのbeforecmouted");
+            console.log(this.$store.state.user);
+        },
+        mounted(){//apiから一覧を取得
+            console.log("taskcompoのmounted");
+            console.log(this.$store.state.user);
             this.fetchtasks();
         },
         methods:{
@@ -124,6 +134,7 @@
                     }else{
                         tempmsg = task.title + ' を実施しました。' + tempcategory + 'が上がりました。';
                         //console.log(tempmsg);
+                        this.up = true;
                     }                    
                     self.$store.commit('message/setContent',{
                         content: tempmsg
@@ -137,7 +148,7 @@
                 async handler (){
                     await this.mounted;
                 },
-                imeediate:true
+                immediate:true
             }
         }
 

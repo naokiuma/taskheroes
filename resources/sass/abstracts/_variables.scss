@@ -3,15 +3,59 @@ $color-main:#99dfff;
 $color-main-light:#96fff5;
 $color-main-dark:#0058ff;
 $color-base:#EFEFEF;
-
-.radial-bg{
-    background: radial-gradient(#bcfbf4, #EFEFEF);
-}
-
-//baseColor: #DDE3F2
 $subColor: #FAD727;
+
 $space:60px;
 
+
+.radial-bg{
+    background: radial-gradient(#ebfffd, #FFF);
+}
+
+
+//------------見出し系
+
+.heading-primary{
+    &--main{
+        display: inline-block;
+        font-size: 8rem;
+        margin: .9rem auto;
+        /*
+        background-image: linear-gradient(120deg,transparent 0%,transparent 50%,#FAD727 50%);
+        background-size: 0%;
+        transition: all .4s;
+        background-repeat: no-repeat;
+        */
+    }
+    &--sub{
+        display: block;
+        font-size: 1.5rem;
+        text-align: center;
+
+    }
+}
+
+.hovermoveLeft{
+    background-image: linear-gradient(120deg,transparent 0%,transparent 50%,#FAD727 50%);
+    background-size: 0%;
+    transition: all .4s;
+    background-repeat: no-repeat;
+    &:hover{
+        background-size: 100%;
+        background-image: #FAD727;
+    }
+}
+
+.underLine{
+    border-bottom: 2px solid #96fff5;
+    width: 50%;
+    height: 100%;
+    padding-bottom: 5px;
+      
+}
+
+
+//------------フォントawasome系
 .fontawasome-margin{
     margin: auto 8px;
 }
@@ -36,32 +80,9 @@ $space:60px;
 }
 
 
-.heading-primary{
-    &--main{
-        display: inline-block;
-        font-size: 8rem;
-        margin: .9rem auto;
-        background-image: linear-gradient(120deg,transparent 0%,transparent 50%,#FAD727 50%);
-        background-size: 0%;
-        transition: all .4s;
-        background-repeat: no-repeat;
 
-        //background-image: linear-gradient(120deg,#FAD727,white 50%);
-        &:hover{
-            //background-image: linear-gradient(120deg,#FAD727,white 100%);
-            background-size: 100%;
-            //background-position: 100%;
-            background-image: #FAD727;
-        }
 
-    }
-    &--sub{
-        display: block;
-        font-size: 1.5rem;
-        text-align: center;
 
-    }
-}
 
 
 
@@ -86,37 +107,3 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
-
-
-/*
-//color
-$color-primary:#55c57a;
-$color-primary-light:#7ed56f;
-$color-primary-dark:#28b485;
-
-$color-secondary-light:#ffb900;
-$color-secondary-dark:#ff7730;
-
-$color-tertiary-light:#2998ff;
-$color-tertiary-dark:#5643fa;
-
-
-
-$color-gray-light-1:#f7f7f7;
-$color-gray-light-2:#eee;
-$color-grey-dark:#777;
-$color-white:#fff;
-$color-black:#000;
-
-//font
-$default-font-size:1.8rem;
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
-
-//grid
-$grid-width:114rem;
-$gutter-vertical:8rem;
-$gutter-horizontal:6rem;
-*/

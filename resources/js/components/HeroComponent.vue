@@ -45,18 +45,19 @@
 
 
         mounted(){
-        //beforeCreate () {
             console.log("hero mounted");
             //console.log(this.parameters);
             //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
             this.fetchusers();
         },
         methods:{
-            fetchusers(){
+            fetchusers(){                
                 console.log("ユーザーの能力");
+                //console.log(this.parameters[1]["power"]);//これで取得できる
+                //this.parameters[1]["power"] = this.$store.state.user.power;
                 console.log(this.$store.state.user.power);
+                
             }
         }
-
     }
 </script>

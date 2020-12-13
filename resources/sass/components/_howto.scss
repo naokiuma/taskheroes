@@ -1,0 +1,55 @@
+.howto{
+    &-wrapper{
+       
+        width: 95%;
+        margin: 100px auto 100px auto;
+    }
+    &-description{
+        width: 100%;
+        position: relative;
+        p{
+            text-align: center;
+        }
+        span{
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+        &:before{ 
+            content: "";
+            position: absolute;
+            left: 200px;
+            top: -100px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: $color-main-light;
+            z-index: -1;
+        }
+    }
+
+    //steps
+    &-steps{
+        width: 100%;
+        display:flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        margin: auto;
+        text-align: center;
+    }
+    &-step{
+        width: 30%;
+        //background-color: gray;
+        border: 5px solid $color-main-light;
+        border-radius: 25px;
+        margin: 0 5px;
+        h4{
+            font-size: 18px;
+        }
+        h4,p{
+            letter-spacing: 1px;
+            margin: 10% 10px;
+            line-height: 150%;
+        }
+            
+    }
+}

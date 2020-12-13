@@ -11,6 +11,7 @@ import tasks from './components/TaskComponent.vue'//タスク一覧
 Vue.use(VueRouter)
 
 const routes = [
+    { path: '',component:status},
     { path: '/status',component: status },
     { path: '/taskform',component: taskform },
     { 
