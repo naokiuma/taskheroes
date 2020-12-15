@@ -15,7 +15,9 @@
     </head>
     <body>
         <header class="header">
-            <div class="header__logo-area animate__animated animate__bounceInLeft hovermoveLeft">TaskHeroes</div>
+            <div class="header__logo-area animate__animated animate__bounceInLeft hovermoveLeft">
+            <a href="{{ route('top') }}">TaskHeroes</a>
+            </div>
 
             <div class="header__manu-area">
             <ul class="header__nav">

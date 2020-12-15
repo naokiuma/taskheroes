@@ -1,9 +1,14 @@
 .section-parameters{
     text-align: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-top: 50px;
 
     h3{
+        width: 60%;
         font-weight: 500;
-        font-size: 2.5rem;
+        font-size: 24px;
         line-height: 5rem;
     }
 
@@ -25,6 +30,7 @@
     line-height: 2rem;
     text-transform: uppercase;
     font-size: 12px;
+
     &::before{
         position: absolute;
         top: -15px;
@@ -37,11 +43,26 @@
 
     }
     &-wrapper{
-        width: 90%;
-        margin: auto;
+        width: 50%;
+        margin: auto 15px;
         display: flex;
+
         ul{
             width: 150px;
+        }
+    }
+    &-hero{
+        width: 40%;
+        margin: auto 50px;
+        img{
+            width: 300px;
+        }
+    }
+    &-lv{
+        position: relative;
+        &::before{
+            content:"Level";
+
         }
     }
 

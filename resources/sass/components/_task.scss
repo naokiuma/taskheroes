@@ -26,7 +26,7 @@
         border-radius: 5px;
         box-shadow: 3px 2px 0.1rem #0000006b;
         &__title{
-            margin: auto 10px;
+            margin: auto 0px;
             width: 20%;
         }
         &__body{
@@ -120,14 +120,17 @@
 
 .taskupParameters{
     position: absolute;
-    left: -10px;
-    top: -10px;
+    left: 10px;
+    top: 100px;
     z-index: 5;
     width: 20%;
-    height: 70%;
+    height: 70px;
+    line-height: 70px;
     background-color: white;
     box-shadow: 2px 2px 2px black;
     border-radius: 5px;
+    translate: all .4s;
+    text-align: center;
 }
 
 

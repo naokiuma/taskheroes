@@ -5,7 +5,10 @@
         <button @click="fetchtasks()">すべてのタスク</button>
 
         <div class="tasks-wrapper">
-            <div v-show="up" class="taskupParameters">アップ！</div>
+            <transition name="bounce">
+                <div v-show="up" class="taskupParameters">{{ upcategory }} がアップ！</div>
+                <!--<div v-show="up" class="taskupParameters animate__animated animate__bounceInLeft">アップ！</div>-->
+            </transition>
            
 
             <div  class="each-task card" v-for="task in tasks" :key="task.id">
@@ -61,12 +64,32 @@
             </div>
         </div>
 
-        <section class=""></section>
         
     </section>
 </template>
 
+<style>
 
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}
+.bounce-leave-active {
+  animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+</style>
 
 
 <script>
@@ -74,7 +97,8 @@
         data(){
             return{
                 tasks:[],
-                up:true
+                up:false,
+                upcategory:""
             }
         },
         beforeMount(){
@@ -134,13 +158,22 @@
                     }else{
                         tempmsg = task.title + ' を実施しました。' + tempcategory + 'が上がりました。';
                         //console.log(tempmsg);
-                        this.up = true;
+                        self.upcategory = "";
+                        self.up = true;
+                        self.upcategory = tempcategory;
+                        setTimeout(self.fadeout, 1000);
                     }                    
                     self.$store.commit('message/setContent',{
                         content: tempmsg
                     })
+                    self.$store.dispatch('register');//更新しておく
+
                 })
-            }
+            },
+            fadeout:function() {
+                this.up = false;
+                
+            },
 
         },
         watch:{

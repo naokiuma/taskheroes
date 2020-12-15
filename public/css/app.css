@@ -129,39 +129,6 @@
   }
 }
 
-/*
-@keyframes startoRight{//煌めき
-  0%{
-    background-image: linear-gradient(120deg,#FAD727,white 50%);
-  }
-  20%{
-    background-image: linear-gradient(120deg,#FAD727,white 60%);
-  }
-  40%{
-    background-image: linear-gradient(120deg,#FAD727,white 70%);
-  }
-  60%{
-    background-image: linear-gradient(120deg,#FAD727,white 80%);
-  }
-  80%{
-    background-image: linear-gradient(120deg,#FAD727,white 90%);
-  }
-  100%{
-    background-image: linear-gradient(120deg,#FAD727,white 100%);
-  }
-}
-*/
-
-/*
-.startoRight{
-    animation-name: startoRight;
-    animation-duration: 2s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;//アニメーションの最後の動きで止める
-    animation-timing-function: ease-in-out;
-}
-*/
-
 @-webkit-keyframes animation-up {
   0% {
     transform: translate(0, 0);
@@ -401,6 +368,10 @@
   line-height: 150%;
 }
 
+.messages-wrapper {
+  position: relative;
+}
+
 .messages {
   width: 100%;
   height: 15vh;
@@ -414,17 +385,36 @@
   padding: 10px 0 0 10px;
 }
 
+.messages-toggle {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100px;
+  border: solid 2px #73b1ea;
+  z-index: 2;
+  text-align: center;
+  height: 40px;
+  line-height: 35px;
+  background: #262323;
+  color: white;
+}
+
 .messages-space {
   height: 20vh;
 }
 
 .section-parameters {
   text-align: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-top: 50px;
 }
 
 .section-parameters h3 {
+  width: 60%;
   font-weight: 500;
-  font-size: 2.5rem;
+  font-size: 24px;
   line-height: 5rem;
 }
 
@@ -457,13 +447,30 @@
 }
 
 .parameters-wrapper {
-  width: 90%;
-  margin: auto;
+  width: 50%;
+  margin: auto 15px;
   display: flex;
 }
 
 .parameters-wrapper ul {
   width: 150px;
+}
+
+.parameters-hero {
+  width: 40%;
+  margin: auto 50px;
+}
+
+.parameters-hero img {
+  width: 300px;
+}
+
+.parameters-lv {
+  position: relative;
+}
+
+.parameters-lv::before {
+  content: "Level";
 }
 
 .parameters-hp {
@@ -542,6 +549,12 @@
   transition: all 0.5s;
 }
 
+.section-status {
+  width: 90%;
+  margin: 50px auto auto auto;
+  text-align: center;
+}
+
 .section-tasks {
   width: 95%;
   margin: auto;
@@ -570,7 +583,7 @@
 }
 
 .tasks-wrapper .each-task__title {
-  margin: auto 10px;
+  margin: auto 0px;
   width: 20%;
 }
 
@@ -658,14 +671,17 @@
 
 .taskupParameters {
   position: absolute;
-  left: -10px;
-  top: -10px;
+  left: 10px;
+  top: 100px;
   z-index: 5;
   width: 20%;
-  height: 70%;
+  height: 70px;
+  line-height: 70px;
   background-color: white;
   box-shadow: 2px 2px 2px black;
   border-radius: 5px;
+  translate: all 0.4s;
+  text-align: center;
 }
 
 .rolateings {
@@ -723,7 +739,7 @@
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .card__side--front {
@@ -805,6 +821,11 @@
       background-image: #FAD727;
   }
   */
+}
+
+.header__logo-area a {
+  color: black;
+  text-decoration: none;
 }
 
 .header__manu-area {

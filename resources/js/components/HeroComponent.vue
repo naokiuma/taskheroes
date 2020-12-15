@@ -1,15 +1,18 @@
 <template>
     　<section class="section-status">
-        <h2 class="heading-skew">ステータス</h2>
+        <h2>ステータス</h2>
+        <h3>{{this.$store.state.user.name}}</h3>
         <div class="section-parameters">
-            <h3>Level：{{ lv }}</h3>
+            
             <div class="parameters-wrapper">
+                
                 <ul>
+                    <li class="parameters parameters-lv">レベル</li>
                     <li class="parameters parameters-hp">ヒットポイント</li>
                     <li class="parameters parameters-power">力</li>
                     <li class="parameters parameters-magic">魔力</li>
                     <li class="parameters parameters-wisdom">知識</li>
-                    <li class="parameters parameters-xp">経験値</li>
+                    <!--<li class="parameters parameters-xp">経験値</li>-->
                 </ul>
                 
                 <div class="gauges-group">
@@ -20,6 +23,10 @@
                         </div>
                 </div>
  
+            </div>
+
+            <div class="parameters-hero">
+                <img src="/img/fighter.png" alt="">
             </div>
         </div>
     　</section>
@@ -32,14 +39,14 @@
         data(){
             return{
                 parameters:[
-                    {id:"hp", value:"50"},
+                    {id:"lv",value:this.$store.state.user.lv},
+                    {id:"hp", value:this.$store.state.user.hp},
                     {id:"power",value:this.$store.state.user.power},
-                    {id:"magic",value:"8"},
-                    {id:"wisdom",value:"3"},
-                    {id:"xp",value:"2"}
+                    {id:"magic",value:this.$store.state.user.magic},
+                    {id:"wisdom",value:this.$store.state.user.wisdom}
+                    //{id:"xp",value:this.$store.state.user.xp}
                     
                 ],
-                lv:"7"
             }
         },
 
@@ -47,17 +54,30 @@
         mounted(){
             console.log("hero mounted");
             //console.log(this.parameters);
-            //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
+            this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
             this.fetchusers();
+            this.$store.commit('message/setContent',{
+                        content: "ステータス画面を開きました。"
+                    })
         },
         methods:{
             fetchusers(){                
                 console.log("ユーザーの能力");
                 //console.log(this.parameters[1]["power"]);//これで取得できる
-                //this.parameters[1]["power"] = this.$store.state.user.power;
                 console.log(this.$store.state.user.power);
                 
             }
+        },
+        watch:{
+            parameters:{
+                async handler(){
+                    await this.mounted;
+                },
+                immediate:true
+            }
+
         }
     }
 </script>
+
+

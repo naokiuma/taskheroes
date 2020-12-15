@@ -9,7 +9,6 @@ const store = new Vuex.Store({
     namespaced:true,
     state:{
         user:[],
-        message:"storeのメッセージです",
         test:"テストですよ"
     },
     mutations:{
