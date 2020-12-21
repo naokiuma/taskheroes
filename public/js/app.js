@@ -2127,6 +2127,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _TaskFormComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaskFormComponent.vue */ "./resources/js/components/TaskFormComponent.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2227,17 +2228,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+ //ok
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       tasks: [],
+      //fetchtaskで取得する全て
       up: false,
-      upcategory: ""
+      //task実施時の表示
+      upcategory: "",
+      newTask: true
     };
+  },
+  components: {
+    Taskform: _TaskFormComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   beforeMount: function beforeMount() {
     this.$store.dispatch('register'); //storeのactionをこちらでdispatchしログインしているかを返す
 
+    this.fetchtasks();
     console.log("taskcompoのbeforecmouted");
     console.log(this.$store.state.user);
   },
@@ -2245,7 +2264,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     //apiから一覧を取得
     console.log("taskcompoのmounted");
     console.log(this.$store.state.user);
-    this.fetchtasks();
+    this.beforeTasks();
   },
   methods: {
     fetchtasks: function fetchtasks() {
@@ -2278,16 +2297,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       this.tasks = filtertasks;
     },
+    addTask: function addTask() {
+      this.newTask = !this.newTask;
+    },
     clicked: function clicked(task) {
       //コントローラー側で処理
       var target = task.id;
       var self = this;
       console.log('/tasks/change/' + target);
       axios.post('/tasks/change/' + target).then(function (responce) {
-        //console.log("変更に成功しました。");
-        self.fetchtasks(); //console.log(task.done);
-        //console.log(task.title);
-
+        self.fetchtasks();
         var tempmsg;
         var tempcategory;
 
@@ -2311,10 +2330,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
 
         self.$store.commit('message/setContent', {
+          //メッセージを入れ
           content: tempmsg
         });
         self.$store.dispatch('register'); //更新しておく
       });
+    },
+    deletetask: function deletetask(task) {
+      //コントローラー側で処理
+      var target = task.id;
+      var self = this;
+
+      if (confirm("削除してもよろしいでしょうか？")) {
+        var tempmsg = task.title + "を削除しました。";
+        console.log('/tasks/delete/' + target);
+        axios.post('/tasks/delete/' + target).then(function (responce) {
+          self.fetchtasks();
+          self.$store.commit('message/setContent', {
+            content: tempmsg
+          });
+        });
+      } else {
+        alert("削除をやめました。");
+      }
     },
     fadeout: function fadeout() {
       this.up = false;
@@ -2390,17 +2428,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Taskform',
+  // ← これが記入されているか
   components: {
     Loader: _Loader_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -6875,7 +6906,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bounce-enter-active {\n  -webkit-animation: bounce-in .5s;\n          animation: bounce-in .5s;\n}\n.bounce-leave-active {\n  animation: bounce-in .5s reverse;\n}\n@-webkit-keyframes bounce-in {\n0% {\n    transform: scale(0);\n}\n50% {\n    transform: scale(1.2);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes bounce-in {\n0% {\n    transform: scale(0);\n}\n50% {\n    transform: scale(1.2);\n}\n100% {\n    transform: scale(1);\n}\n}\n\n\n", ""]);
+exports.push([module.i, "\n.bounce-enter-active {\n  -webkit-animation: bounce-in .5s;\n          animation: bounce-in .5s;\n}\n.bounce-leave-active {\n  animation: bounce-in .5s reverse;\n}\n@-webkit-keyframes bounce-in {\n0% {\n    transform: scale(0);\n}\n50% {\n    transform: scale(1.1);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes bounce-in {\n0% {\n    transform: scale(0);\n}\n50% {\n    transform: scale(1.1);\n}\n100% {\n    transform: scale(1);\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -39661,10 +39692,6 @@ var render = function() {
       _vm._v(" "),
       _c("router-link", { attrs: { to: "/tasks" } }, [_vm._v("タスク一覧")]),
       _vm._v(" "),
-      _c("router-link", { attrs: { to: "/taskform" } }, [
-        _vm._v("タスクを登録する")
-      ]),
-      _vm._v(" "),
       _c("RouterView"),
       _vm._v(" "),
       _c("Message")
@@ -39706,7 +39733,7 @@ var render = function() {
           }
         }
       },
-      [_vm._v("未実施のタスク")]
+      [_vm._v("未完了")]
     ),
     _vm._v(" "),
     _c(
@@ -39718,13 +39745,42 @@ var render = function() {
           }
         }
       },
-      [_vm._v("すべてのタスク")]
+      [_vm._v("すべて")]
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        on: {
+          click: function($event) {
+            return _vm.addTask()
+          }
+        }
+      },
+      [_vm._v("+")]
     ),
     _vm._v(" "),
     _c(
       "div",
       { staticClass: "tasks-wrapper" },
       [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.newTask,
+                expression: "newTask"
+              }
+            ],
+            staticClass: "newTask"
+          },
+          [_c("Taskform")],
+          1
+        ),
+        _vm._v(" "),
         _c("transition", { attrs: { name: "bounce" } }, [
           _c(
             "div",
@@ -39763,19 +39819,24 @@ var render = function() {
                 _c("div", { staticClass: "each-task__category" }, [
                   task.categories_id == "1"
                     ? _c("div", [
-                        _vm._v("\n                    力\n                    ")
+                        _vm._v("\n                    力"),
+                        _c("img", {
+                          attrs: { src: "/../img/ken.png", alt: "" }
+                        })
                       ])
                     : task.categories_id == "2"
                     ? _c("div", [
-                        _vm._v(
-                          "\n                    魔力\n                    "
-                        )
+                        _vm._v("\n                    魔力"),
+                        _c("img", {
+                          attrs: { src: "/../img/mahou.png", alt: "" }
+                        })
                       ])
                     : task.categories_id == "3"
                     ? _c("div", [
-                        _vm._v(
-                          "\n                    知力\n                    "
-                        )
+                        _vm._v("\n                    知力"),
+                        _c("img", {
+                          attrs: { src: "/../img/know.png", alt: "" }
+                        })
                       ])
                     : _vm._e()
                 ]),
@@ -39792,6 +39853,19 @@ var render = function() {
                       }
                     },
                     [_vm._v("完了!")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "dark-button",
+                      on: {
+                        click: function($event) {
+                          return _vm.deleate(task)
+                        }
+                      }
+                    },
+                    [_vm._v("削除")]
                   )
                 ])
               ]
@@ -39812,31 +39886,28 @@ var render = function() {
                   _vm._v(_vm._s(task.body))
                 ]),
                 _vm._v(" "),
-                _c("p", { staticClass: "donetext" }, [_vm._v("実施済み")]),
+                _c("p", { staticClass: "donetext" }, [_vm._v("実施済み！")]),
                 _vm._v(" "),
                 _c("div", { staticClass: "each-task__category" }, [
                   task.categories_id == "1"
                     ? _c("div", [
-                        _vm._v("\n                        力"),
-                        _c("i", {
-                          staticClass: "fas fa-arrow-up arrowopacity",
-                          class: { upmovearrow: task.done }
+                        _vm._v("\n                    力"),
+                        _c("img", {
+                          attrs: { src: "/../img/ken.png", alt: "" }
                         })
                       ])
                     : task.categories_id == "2"
                     ? _c("div", [
-                        _vm._v("\n                        魔力"),
-                        _c("i", {
-                          staticClass: "fas fa-arrow-up arrowopacity",
-                          class: { upmovearrow: task.done }
+                        _vm._v("\n                    魔力"),
+                        _c("img", {
+                          attrs: { src: "/../img/mahou.png", alt: "" }
                         })
                       ])
                     : task.categories_id == "3"
                     ? _c("div", [
-                        _vm._v("\n                        知力"),
-                        _c("i", {
-                          staticClass: "fas fa-arrow-up arrowopacity",
-                          class: { upmovearrow: task.done }
+                        _vm._v("\n                    知力"),
+                        _c("img", {
+                          attrs: { src: "/../img/know.png", alt: "" }
                         })
                       ])
                     : _vm._e()
@@ -39854,7 +39925,24 @@ var render = function() {
                       }
                     },
                     [_vm._v("戻す")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "dark-button",
+                      on: {
+                        click: function($event) {
+                          return _vm.deletetask(task)
+                        }
+                      }
+                    },
+                    [_vm._v("削除")]
                   )
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "each-task__time" }, [
+                  _vm._v("投稿日時：" + _vm._s(task.created_at))
                 ])
               ]
             )
@@ -39908,8 +39996,6 @@ var render = function() {
       _vm._v(" "),
       _c("transition", [
         _c("section", { staticClass: "task-form__wrapper" }, [
-          _c("h3", { staticClass: "task-form__title" }, [_vm._v("何をやる？")]),
-          _vm._v(" "),
           _c(
             "form",
             {
@@ -39922,31 +40008,36 @@ var render = function() {
               }
             },
             [
-              _vm._v("\n          やること"),
-              _c("br"),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.title,
-                    expression: "title"
-                  }
-                ],
-                attrs: { name: "title", type: "text" },
-                domProps: { value: _vm.title },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              _c("div", { staticClass: "task-title-wrapper" }, [
+                _vm._v(" \n            タスク名"),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.title,
+                      expression: "title"
                     }
-                    _vm.title = $event.target.value
+                  ],
+                  attrs: {
+                    name: "title",
+                    type: "text",
+                    placeholder: "例：ウォーキング/勉強/ゲーム"
+                  },
+                  domProps: { value: _vm.title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.title = $event.target.value
+                    }
                   }
-                }
-              }),
-              _c("br"),
-              _vm._v("\n          メモ"),
+                })
+              ]),
+              _vm._v("\n          補足"),
               _c("br"),
               _vm._v(" "),
               _c("input", {
@@ -39958,7 +40049,11 @@ var render = function() {
                     expression: "body"
                   }
                 ],
-                attrs: { name: "body", type: "text" },
+                attrs: {
+                  name: "body",
+                  type: "text",
+                  placeholder: "例：朝昼晩とやる"
+                },
                 domProps: { value: _vm.body },
                 on: {
                   input: function($event) {
@@ -39970,8 +40065,9 @@ var render = function() {
                 }
               }),
               _c("br"),
-              _vm._v("\n          鍛える種類"),
+              _vm._v("\n          タスクカテゴリー"),
               _c("br"),
+              _c("span", [_vm._v("イメージが近いものを選んでください。")]),
               _vm._v(" "),
               _c("div", { staticClass: "label-wrapper" }, [
                 _c("label", [

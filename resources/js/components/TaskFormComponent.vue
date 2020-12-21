@@ -5,28 +5,19 @@
     </div>
     <transition>
       <section class="task-form__wrapper">
-        <h3 class="task-form__title">何をやる？</h3>
+        <!--<h3 class="task-form__title">新規タスク登録</h3>-->
         <form class="task-form" @submit.prevent="submit">
-          やること<br>
-          <input class="" v-model="title" name="title" type="text"><br>
-          メモ<br>
-          <input class="" v-model="body" name="body" type="text"><br>
-          鍛える種類<br>
+          <div class="task-title-wrapper"> 
+            タスク名<br>
+            <input class="" v-model="title" name="title" type="text" placeholder="例：ウォーキング/勉強/ゲーム">
+          </div>
+          補足<br>
+          <input class="" v-model="body" name="body" type="text" placeholder="例：朝昼晩とやる"><br>
+          タスクカテゴリー<br><span>イメージが近いものを選んでください。</span>
           <div class="label-wrapper">
             <label><input type="radio" v-model="categories_id" value="1">力</label>
             <label><input type="radio" v-model="categories_id" value="2">魔力</label>
             <label><input type="radio" v-model="categories_id" value="3">知識</label>
-            <!--
-
-            <input id="power" class="" v-model="categories_id" name="categories_id" value="1" type="radio"><br>
-            <label id="power" for="apple" class="label main-button">力</label>
-            
-            <input id="magic" class="" v-model="categories_id" name="categories_id" value="2" type="radio"><br>
-            <label id="magic" for="apple" class="label main-button">魔力</label>
-            
-            <input id="wisdom" class="" v-model="categories_id" name="categories_id" value="3" type="radio"><br>
-            <label id="wisdom" for="apple" class="label main-button">知識</label>
-            -->
           </div>
 
 
@@ -43,9 +34,10 @@
 import Loader from './Loader.vue';
 
 export default{
+  name: 'Taskform', // ← これが記入されているか
   components:{
     Loader
-  },
+    },
   data(){
     return{
       title:'',

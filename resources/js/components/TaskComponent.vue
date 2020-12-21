@@ -1,16 +1,18 @@
 <template>
     <section class="section-tasks">
         <h2>タスク一覧</h2>
-        <button @click="beforeTasks()">未実施のタスク</button>
-        <button @click="fetchtasks()">すべてのタスク</button>
+        <button @click="beforeTasks()">未完了</button>
+        <button @click="fetchtasks()">すべて</button>
+        <button @click="addTask()">+</button>
+        
 
         <div class="tasks-wrapper">
+            <div class="newTask" v-show="newTask"><Taskform /></div>
+            
             <transition name="bounce">
                 <div v-show="up" class="taskupParameters">{{ upcategory }} がアップ！</div>
                 <!--<div v-show="up" class="taskupParameters animate__animated animate__bounceInLeft">アップ！</div>-->
-            </transition>
-           
-
+            </transition> 
             <div  class="each-task card" v-for="task in tasks" :key="task.id">
                 
                 <!--表-->
@@ -22,44 +24,51 @@
                     
                     <div class="each-task__category">
                         <div v-if="task.categories_id == '1'">
-                        力
+                        力<img src="/../img/ken.png" alt="">
                         </div>
                         <div v-else-if="task.categories_id == '2'">
-                        魔力
+                        魔力<img src="/../img/mahou.png" alt="">
                         </div>
                         <div v-else-if="task.categories_id == '3'">
-                        知力
+                        知力<img src="/../img/know.png" alt="">
                         </div>
                     </div>
                     <div class="each-task__state">
                         <button class="main-button" @click ="clicked(task)">完了!</button>
+                        <button class="dark-button" @click ="deleate(task)">削除</button>
+
                     </div>
                 </div>
 
                 <!--裏-->
                 <div class="card__side card__side--back" v-bind:class="{ rotate: !task.done }">
                         
-                        <div class="each-task__title">{{task.title}}</div>
-                        <div class="each-task__body">{{task.body}}</div>
-                        
-                        <p class="donetext">実施済み</p>
-                        
-                        <!--<div class="each-task__category" v-bind:class="{ categoryDone: task.done }" >-->
-                        <div class="each-task__category">
-                            <div v-if="task.categories_id == '1'">
-                            力<i class="fas fa-arrow-up arrowopacity" v-bind:class="{ upmovearrow : task.done }"></i>
-                            </div>
-                            <div v-else-if="task.categories_id == '2'">
-                            魔力<i class="fas fa-arrow-up arrowopacity" v-bind:class="{ upmovearrow : task.done }"></i>
-                            </div>
-                            <div v-else-if="task.categories_id == '3'">
-                            知力<i class="fas fa-arrow-up arrowopacity" v-bind:class="{ upmovearrow : task.done }"></i>
-                            </div>
+                    <div class="each-task__title">{{task.title}}</div>
+                    <div class="each-task__body">{{task.body}}</div>
+                    
+                    <p class="donetext">実施済み！</p>
+                    
+                    <!--<div class="each-task__category" v-bind:class="{ categoryDone: task.done }" >-->
+                    <div class="each-task__category">
+                        <div v-if="task.categories_id == '1'">
+                        力<img src="/../img/ken.png" alt="">
                         </div>
+                        <div v-else-if="task.categories_id == '2'">
+                        魔力<img src="/../img/mahou.png" alt="">
+                        </div>
+                        <div v-else-if="task.categories_id == '3'">
+                        知力<img src="/../img/know.png" alt="">
+                        <!--知力<i class="fas fa-arrow-up arrowopacity" v-bind:class="{ upmovearrow : task.done }"></i>-->
 
-                        <div class="each-task__state">
-                            <button class="main-button" @click ="clicked(task)">戻す</button>
                         </div>
+                    </div>
+
+                    <div class="each-task__state">
+                        <button class="main-button" @click ="clicked(task)">戻す</button>
+                        <button class="dark-button" @click ="deletetask(task)">削除</button>
+                    </div>
+                    <span class="each-task__time">投稿日時：{{task.created_at}}</span>
+
                 </div>
             </div>
         </div>
@@ -81,7 +90,7 @@
     transform: scale(0);
   }
   50% {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
   100% {
     transform: scale(1);
@@ -93,23 +102,32 @@
 
 
 <script>
+    import Taskform from './TaskFormComponent.vue';//ok
+
     export default {
         data(){
             return{
-                tasks:[],
-                up:false,
-                upcategory:""
+                tasks:[],//fetchtaskで取得する全て
+                up:false,//task実施時の表示
+                upcategory:"",
+                newTask:true
+                
             }
+        },
+        components:{
+            Taskform
         },
         beforeMount(){
             this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
+            this.fetchtasks();
             console.log("taskcompoのbeforecmouted");
             console.log(this.$store.state.user);
         },
         mounted(){//apiから一覧を取得
             console.log("taskcompoのmounted");
             console.log(this.$store.state.user);
-            this.fetchtasks();
+            
+            this.beforeTasks();
         },
         methods:{
             fetchtasks(){//すべてのtasksを取得
@@ -133,6 +151,10 @@
                     }
                 this.tasks = filtertasks;
             },
+            addTask(){
+                this.newTask = !this.newTask;
+
+            },
             clicked(task){
                 //コントローラー側で処理
                 let target = task.id;
@@ -140,10 +162,7 @@
                 console.log('/tasks/change/' + target);
                 axios.post('/tasks/change/' + target)
                 .then(function(responce){
-                    //console.log("変更に成功しました。");
                     self.fetchtasks();
-                    //console.log(task.done);
-                    //console.log(task.title);
                     let tempmsg;
                     let tempcategory;
                     if(task.categories_id == "1"){
@@ -162,18 +181,37 @@
                         self.up = true;
                         self.upcategory = tempcategory;
                         setTimeout(self.fadeout, 1000);
-                    }                    
-                    self.$store.commit('message/setContent',{
+                    }
+                    self.$store.commit('message/setContent',{//メッセージを入れ
                         content: tempmsg
                     })
                     self.$store.dispatch('register');//更新しておく
 
                 })
             },
+            deletetask(task){
+                //コントローラー側で処理
+                let target = task.id;
+                let self = this;
+                if( confirm("削除してもよろしいでしょうか？") ) {
+                    let tempmsg = task.title + "を削除しました。";
+    
+                    console.log('/tasks/delete/' + target);
+                    axios.post('/tasks/delete/' + target)
+                    .then(function(responce){
+                        self.fetchtasks();
+                        self.$store.commit('message/setContent',{
+                            content: tempmsg })
+                    })
+                } else {
+                    alert("削除をやめました。");
+                }
+            },
             fadeout:function() {
                 this.up = false;
                 
-            },
+            }
+            
 
         },
         watch:{

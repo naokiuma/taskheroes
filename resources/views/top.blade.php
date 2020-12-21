@@ -5,10 +5,10 @@
 
 <div class="billboard">
     
-    <img class="billboard-img1"src="../img/fighter.png" alt="">
+    <img class="billboard-img1"src="../img/bottomup.png" alt="">
     <div class="billboard-title">
         <h1>
-            <span class="heading-primary--main animate__animated animate__bounceInLeft hovermoveLeft">Task Heroes</span>
+            <span class="heading-primary--main animate__animated animate__bounceInLeft">Task Heroes</span>
             <span class="heading-primary--sub">日々の生活、遊び、トレーニングをちょっと楽しく。</span>
         </h1>
         

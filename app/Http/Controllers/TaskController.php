@@ -36,12 +36,23 @@ class TaskController extends Controller
 
     }
 
+//-----------------------削除post
+    public function delete($id){
+        $deleateTask = Task::where('id',$id)->first();
+        Log::debug("taskコントローラー：deleate");
+        $deleateTask->delete();
+
+        return "${id}を削除しました";
+
+    }
+
+
 //-----------------------実施未実施切り替えpost
 
     public function change($id){
         //$changeTask = Task::where('id',$id)->get();//collectionがかえる
         $changeTask = Task::where('id',$id)->first();//1オブジェクトがかエル
-        Log::debug("取得データ");
+        Log::debug("taskコントローラー：change");
         //↓"categories_id":1,"user_id":1,この中にはこう言うデータが入っている;
         //Log::debug($changeTask);
         //↓lv":null,"hp":null,"power":null,"magic":null,"wisdom":null,"xp":null,が入っている
@@ -72,19 +83,16 @@ class TaskController extends Controller
 
     public function tasklist($id = null)//api
     {   //ユーザー情報
-        //$tasks = Task::All();
-        //$result = $tasks->select('user_id',$id)->get();
         if($id == null){
-            Log::debug("tasklist.未ログインルート");
-            //$tasks = Task::All()->sortByDesc('created_at');
+            //Log::debug("tasklist.未ログインルート");
             $tasks = Task::orderByDesc('created_at')->get();
         }else{
-            Log::debug("tasklist.ログインルート");
+            //Log::debug("tasklist.ログインルート");
             $tasks = Task::where('user_id', $id)
                                 ->orderBy('created_at','desc')
                                 ->get();
         }
-        Log::debug($tasks);
+        //Log::debug($tasks);
         return $tasks;
     }
 
