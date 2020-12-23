@@ -7,21 +7,23 @@
         
 
         <div class="tasks-wrapper">
-            <div class="newTask" v-show="newTask"><Taskform /></div>
+            <transition name="fade">
+                <div class="newTask" v-show="newTask"><Taskform /></div>
+            </transition> 
             
             <transition name="bounce">
                 <div v-show="up" class="taskupParameters">{{ upcategory }} がアップ！</div>
-                <!--<div v-show="up" class="taskupParameters animate__animated animate__bounceInLeft">アップ！</div>-->
             </transition> 
             <div  class="each-task card" v-for="task in tasks" :key="task.id">
                 
                 <!--表-->
                 <div class="card__side card__side--front" v-bind:class="{ rotate: task.done }">
 
+
                     <div class="each-task__title">{{task.title}}</div>
-                    <div class="each-task__body">{{task.body}}</div>
+                    <div class="each-task__body" v-bind:class="{'is-active':activeItem === task}" >{{task.body}}</div>
                     
-                    
+
                     <div class="each-task__category">
                         <div v-if="task.categories_id == '1'">
                         力<img src="/../img/ken.png" alt="">
@@ -34,8 +36,9 @@
                         </div>
                     </div>
                     <div class="each-task__state">
-                        <button class="main-button" @click ="clicked(task)">完了!</button>
-                        <button class="dark-button" @click ="deleate(task)">削除</button>
+                        <button class="main-button" @click ="clicked(task)">実行</button>
+                        <button class="main-button" v-on:click="onActive(task)">メモをみる</button>
+                        <button class="sub-button" @click ="deleate(task)">削除</button>
 
                     </div>
                 </div>
@@ -65,7 +68,8 @@
 
                     <div class="each-task__state">
                         <button class="main-button" @click ="clicked(task)">戻す</button>
-                        <button class="dark-button" @click ="deletetask(task)">削除</button>
+                        <button class="main-button" v-on:click="onActive(task)">メモをみる</button>
+                        <button class="sub-button" @click ="deletetask(task)">削除</button>
                     </div>
                     <span class="each-task__time">投稿日時：{{task.created_at}}</span>
 
@@ -78,6 +82,14 @@
 </template>
 
 <style>
+
+.fade-enter-active{
+    animation:fade-in .5s;
+}
+
+.fade-leave-active{
+    animation:fade-in .5s reverse;
+}
 
 .bounce-enter-active {
   animation: bounce-in .5s;
@@ -97,6 +109,20 @@
   }
 }
 
+@keyframes fade-in{
+  0% {
+    transform: translateY(-120px);
+    opacity: 0;
+  }
+  50%{
+      opacity: 0.3;
+  }
+  100% {
+    transform: translateY(0px);
+  }
+
+}
+
 
 </style>
 
@@ -110,7 +136,8 @@
                 tasks:[],//fetchtaskで取得する全て
                 up:false,//task実施時の表示
                 upcategory:"",
-                newTask:true
+                newTask:false,
+                activeItem:null
                 
             }
         },
@@ -210,6 +237,14 @@
             fadeout:function() {
                 this.up = false;
                 
+            },
+            onActive(task){
+                if(this.activeItem === task){
+                    this.activeItem = null;
+                }else{
+                    console.log("ここだ");
+                    this.activeItem = task;
+                }
             }
             
 

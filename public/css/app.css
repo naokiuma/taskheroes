@@ -272,9 +272,9 @@
 .main-button {
   background-color: #99dfff;
   border-radius: 5px;
-  box-shadow: 1px 2px black;
-  height: 40px;
-  width: 60px;
+  height: 25px;
+  width: 80%;
+  margin-bottom: 1%;
 }
 
 .main-button:hover {
@@ -286,19 +286,18 @@
   transform: translateY(2px);
 }
 
-.dark-button {
+.sub-button {
   background-color: white;
   border-radius: 5px;
-  box-shadow: 1px 2px black;
-  height: 40px;
-  width: 60px;
+  height: 25px;
+  width: 80%;
 }
 
-.dark-button:hover {
+.sub-button:hover {
   background-color: #d7d5d5;
 }
 
-.dark-button:active {
+.sub-button:active {
   box-shadow: 3px 4px black;
   transform: translateY(2px);
 }
@@ -607,24 +606,29 @@
 
 .tasks-wrapper .each-task__state {
   margin: auto;
+  font-size: 12px;
+  text-align: center;
 }
 
 .tasks-wrapper .each-task__title {
-  margin: auto 10px;
+  margin: auto 10px auto 20px;
   width: 20%;
 }
 
 .tasks-wrapper .each-task__body {
   margin: auto 10px;
   width: 50%;
+  transform: translateY(70px);
+  transition: all 0.5s;
 }
 
 .tasks-wrapper .each-task__category {
   margin: auto 10px;
+  text-align: center;
 }
 
 .tasks-wrapper .each-task__time {
-  font-size: 12px;
+  font-size: 10px;
   letter-spacing: 1px;
   position: absolute;
   bottom: 0;
@@ -634,6 +638,11 @@
 .tasks-wrapper .each-task img {
   width: 30px;
   height: 30px;
+}
+
+.is-active {
+  transform: translateY(0px) !important;
+  transition: all 0.5s;
 }
 
 .categoryDone {
@@ -676,10 +685,19 @@
 .task-form {
   display: flex;
   flex-wrap: nowrap;
+  height: 100%;
 }
 
 .task-form input[type=text] {
-  height: 30px;
+  height: 30%;
+  margin: auto 10px;
+  padding: 5px;
+}
+
+.task-form input[type=textarea] {
+  height: 60%;
+  margin: auto 10px;
+  padding: 5px;
 }
 
 .task-form label {
@@ -695,7 +713,7 @@
 
 .task-form__wrapper {
   background-color: #E1F7F1;
-  height: 150px;
+  height: 120px;
   text-align: center;
 }
 
@@ -704,6 +722,7 @@
 }
 
 .taskupParameters {
+  background-color: white;
   position: fixed;
   left: 10px;
   top: 100px;
@@ -711,7 +730,6 @@
   width: 20%;
   height: 70px;
   line-height: 70px;
-  background-color: #ffe140;
   box-shadow: 2px 2px 2px black;
   border-radius: 5px;
   translate: all 0.4s;
@@ -782,6 +800,18 @@
 
 .card__side--back {
   background-image: linear-gradient(to right bottom, #fffef9, #c3e4f4);
+  position: relative;
+}
+
+.card__side--back:before {
+  content: "";
+  position: absolute;
+  left: -54px;
+  top: 0;
+  width: 70px;
+  height: 50%;
+  background-color: #0b9fe8;
+  transform: skewX(-45deg);
 }
 
 .rotate {

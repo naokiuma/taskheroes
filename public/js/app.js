@@ -2237,6 +2237,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //ok
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2247,7 +2273,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       up: false,
       //task実施時の表示
       upcategory: "",
-      newTask: true
+      newTask: false,
+      activeItem: null
     };
   },
   components: {
@@ -2356,6 +2383,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     fadeout: function fadeout() {
       this.up = false;
+    },
+    onActive: function onActive(task) {
+      if (this.activeItem === task) {
+        this.activeItem = null;
+      } else {
+        console.log("ここだ");
+        this.activeItem = task;
+      }
     }
   },
   watch: {
@@ -2396,14 +2431,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Loader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Loader.vue */ "./resources/js/components/Loader.vue");
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6906,7 +6933,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bounce-enter-active {\n  -webkit-animation: bounce-in .5s;\n          animation: bounce-in .5s;\n}\n.bounce-leave-active {\n  animation: bounce-in .5s reverse;\n}\n@-webkit-keyframes bounce-in {\n0% {\n    transform: scale(0);\n}\n50% {\n    transform: scale(1.1);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes bounce-in {\n0% {\n    transform: scale(0);\n}\n50% {\n    transform: scale(1.1);\n}\n100% {\n    transform: scale(1);\n}\n}\n\n\n", ""]);
+exports.push([module.i, "\n.fade-enter-active{\n    -webkit-animation:fade-in .5s;\n            animation:fade-in .5s;\n}\n.fade-leave-active{\n    animation:fade-in .5s reverse;\n}\n.bounce-enter-active {\n  -webkit-animation: bounce-in .5s;\n          animation: bounce-in .5s;\n}\n.bounce-leave-active {\n  animation: bounce-in .5s reverse;\n}\n@-webkit-keyframes bounce-in {\n0% {\n    transform: scale(0);\n}\n50% {\n    transform: scale(1.1);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes bounce-in {\n0% {\n    transform: scale(0);\n}\n50% {\n    transform: scale(1.1);\n}\n100% {\n    transform: scale(1);\n}\n}\n@-webkit-keyframes fade-in{\n0% {\n    transform: translateY(-120px);\n    opacity: 0;\n}\n50%{\n      opacity: 0.3;\n}\n100% {\n    transform: translateY(0px);\n}\n}\n@keyframes fade-in{\n0% {\n    transform: translateY(-120px);\n    opacity: 0;\n}\n50%{\n      opacity: 0.3;\n}\n100% {\n    transform: translateY(0px);\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -39764,22 +39791,24 @@ var render = function() {
       "div",
       { staticClass: "tasks-wrapper" },
       [
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.newTask,
-                expression: "newTask"
-              }
-            ],
-            staticClass: "newTask"
-          },
-          [_c("Taskform")],
-          1
-        ),
+        _c("transition", { attrs: { name: "fade" } }, [
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.newTask,
+                  expression: "newTask"
+                }
+              ],
+              staticClass: "newTask"
+            },
+            [_c("Taskform")],
+            1
+          )
+        ]),
         _vm._v(" "),
         _c("transition", { attrs: { name: "bounce" } }, [
           _c(
@@ -39812,9 +39841,14 @@ var render = function() {
                   _vm._v(_vm._s(task.title))
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "each-task__body" }, [
-                  _vm._v(_vm._s(task.body))
-                ]),
+                _c(
+                  "div",
+                  {
+                    staticClass: "each-task__body",
+                    class: { "is-active": _vm.activeItem === task }
+                  },
+                  [_vm._v(_vm._s(task.body))]
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "each-task__category" }, [
                   task.categories_id == "1"
@@ -39852,13 +39886,26 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("完了!")]
+                    [_vm._v("実行")]
                   ),
                   _vm._v(" "),
                   _c(
                     "button",
                     {
-                      staticClass: "dark-button",
+                      staticClass: "main-button",
+                      on: {
+                        click: function($event) {
+                          return _vm.onActive(task)
+                        }
+                      }
+                    },
+                    [_vm._v("メモをみる")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "sub-button",
                       on: {
                         click: function($event) {
                           return _vm.deleate(task)
@@ -39930,7 +39977,20 @@ var render = function() {
                   _c(
                     "button",
                     {
-                      staticClass: "dark-button",
+                      staticClass: "main-button",
+                      on: {
+                        click: function($event) {
+                          return _vm.onActive(task)
+                        }
+                      }
+                    },
+                    [_vm._v("メモをみる")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "sub-button",
                       on: {
                         click: function($event) {
                           return _vm.deletetask(task)
@@ -40008,37 +40068,26 @@ var render = function() {
               }
             },
             [
-              _c("div", { staticClass: "task-title-wrapper" }, [
-                _vm._v(" \n            タスク名"),
-                _c("br"),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.title,
-                      expression: "title"
-                    }
-                  ],
-                  attrs: {
-                    name: "title",
-                    type: "text",
-                    placeholder: "例：ウォーキング/勉強/ゲーム"
-                  },
-                  domProps: { value: _vm.title },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.title = $event.target.value
-                    }
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.title,
+                    expression: "title"
                   }
-                })
-              ]),
-              _vm._v("\n          補足"),
-              _c("br"),
+                ],
+                attrs: { name: "title", type: "text", placeholder: "タスク名" },
+                domProps: { value: _vm.title },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.title = $event.target.value
+                  }
+                }
+              }),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -40049,11 +40098,7 @@ var render = function() {
                     expression: "body"
                   }
                 ],
-                attrs: {
-                  name: "body",
-                  type: "text",
-                  placeholder: "例：朝昼晩とやる"
-                },
+                attrs: { name: "body", type: "textarea", placeholder: "メモ" },
                 domProps: { value: _vm.body },
                 on: {
                   input: function($event) {
@@ -40065,9 +40110,6 @@ var render = function() {
                 }
               }),
               _c("br"),
-              _vm._v("\n          タスクカテゴリー"),
-              _c("br"),
-              _c("span", [_vm._v("イメージが近いものを選んでください。")]),
               _vm._v(" "),
               _c("div", { staticClass: "label-wrapper" }, [
                 _c("label", [
@@ -40141,7 +40183,7 @@ var render = function() {
                     staticClass: "button button--inverse",
                     attrs: { type: "submit" }
                   },
-                  [_vm._v("登録！")]
+                  [_vm._v("登録")]
                 )
               ])
             ]

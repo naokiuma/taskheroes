@@ -5,24 +5,16 @@
     </div>
     <transition>
       <section class="task-form__wrapper">
-        <!--<h3 class="task-form__title">新規タスク登録</h3>-->
         <form class="task-form" @submit.prevent="submit">
-          <div class="task-title-wrapper"> 
-            タスク名<br>
-            <input class="" v-model="title" name="title" type="text" placeholder="例：ウォーキング/勉強/ゲーム">
-          </div>
-          補足<br>
-          <input class="" v-model="body" name="body" type="text" placeholder="例：朝昼晩とやる"><br>
-          タスクカテゴリー<br><span>イメージが近いものを選んでください。</span>
+          <input class="" v-model="title" name="title" type="text" placeholder="タスク名">
+          <input class="" v-model="body" name="body" type="textarea" placeholder="メモ"><br>
           <div class="label-wrapper">
             <label><input type="radio" v-model="categories_id" value="1">力</label>
             <label><input type="radio" v-model="categories_id" value="2">魔力</label>
             <label><input type="radio" v-model="categories_id" value="3">知識</label>
           </div>
-
-
           <div class="form__button">
-            <button type="submit" class="button button--inverse">登録！</button>
+            <button type="submit" class="button button--inverse">登録</button>
           </div>
         </form>
       </section>

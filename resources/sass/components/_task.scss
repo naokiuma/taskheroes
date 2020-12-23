@@ -28,20 +28,26 @@
         box-shadow: 3px 2px 0.1rem #0000006b;
         &__state{
             margin: auto;
+            font-size: 12px;
+            text-align: center;
         }
         &__title{
-            margin: auto 10px;
+            margin: auto 10px auto 20px;
             width: 20%;
         }
         &__body{
             margin: auto 10px;
             width: 50%;
+            transform: translateY(70px);
+            transition: all .5s;
+
         }
         &__category{
             margin: auto 10px;
+            text-align: center;
         }
         &__time{
-            font-size: 12px;
+            font-size: 10px;
             letter-spacing: 1px;
             position: absolute;
             bottom: 0;
@@ -53,6 +59,12 @@
         }
     }
 }
+
+.is-active{
+    transform: translateY(0px) !important;
+    transition: all .5s;
+}
+
 
 
 .categoryDone{
@@ -77,8 +89,6 @@
     left: 50%;
     transform: translateY(-50%);
     font-size: 18px;
-    //color: gray;
-
 }
 
 .task{
@@ -98,10 +108,18 @@
     &-form{  
         display: flex;
         flex-wrap: nowrap;
+        height: 100%;
 
         input[type=text] {
-            height: 30px;
+            height: 30%;
+            margin: auto 10px;
+            padding: 5px;
           }
+        input[type=textarea]{
+            height: 60%;
+            margin: auto 10px;
+            padding: 5px;
+        }
         input[type=radio] {
             //display: none;
         }
@@ -118,7 +136,7 @@
 
         &__wrapper{
         background-color: #E1F7F1;
-        height: 150px;
+        height: 120px;
         text-align: center;
         h3{
             margin-top: 50px;
@@ -128,6 +146,7 @@
 }
 
 .taskupParameters{
+    background-color: white;
     position: fixed;
     left: 10px;
     top: 100px;
@@ -135,7 +154,6 @@
     width: 20%;
     height: 70px;
     line-height: 70px;
-    background-color: #ffe140;
     box-shadow: 2px 2px 2px black;
     border-radius: 5px;
     translate: all .4s;

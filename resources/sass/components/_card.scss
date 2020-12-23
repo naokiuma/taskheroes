@@ -63,8 +63,19 @@
 }
 
 .card__side--back {
-        //background-image: linear-gradient(to right bottom, #ffe140, #fcff90);
         background-image: linear-gradient(to right bottom, #fffef9, #c3e4f4);
+        position: relative;
+        &:before{
+                content: "";
+                position: absolute;
+                left: -54px;
+                top: 0;
+                width: 70px;
+                height: 50%;
+                background-color: #0b9fe8;
+                transform: skewX(-45deg);
+
+        }
 }
 
 
