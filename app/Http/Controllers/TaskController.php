@@ -50,20 +50,23 @@ class TaskController extends Controller
 //-----------------------実施未実施切り替えpost
 
     public function change($id){
-        //$changeTask = Task::where('id',$id)->get();//collectionがかえる
-        $changeTask = Task::where('id',$id)->first();//1オブジェクトがかエル
+        //$changeTask = Task::where('id',$id)->get();//getだとcollectionがかえる
+        $changeTask = Task::where('id',$id)->first();//1オブジェクトが変える
         Log::debug("taskコントローラー：change");
-        //↓"categories_id":1,"user_id":1,この中にはこう言うデータが入っている;
-        //Log::debug($changeTask);
-        //↓lv":null,"hp":null,"power":null,"magic":null,"wisdom":null,"xp":null,が入っている
-        //Log::debug(Auth::user());
+        Log::debug($changeTask);//　→"categories_id":1,"user_id":1,;
+        //Log::debug(Auth::user());　　//lv":null,"hp":null,"power":null,"magic":null,"wisdom":null,"xp":null,が入っている
         //ここでuserのそのカテゴリを処理する
+        $point = $changeTask->difficult;
+        $category = $changeTask->categories_id;
+        Log::debug("変更point：" . $point);
+        Log::debug("対象category：" . $category);//1は力2は魔力3は知恵
+        //$status = 
 
-        //反転させる。デフォルトは0。
+        //反転させる。デフォルトは0。実施済みは1
         if($changeTask->done == 0){
-            $changeTask->done = 1;//実施済みに変更
+            $changeTask->done = 1;
             //これでカテゴリーの数字が取れる。1など
-            Log::debug(($changeTask)->categories_id);
+            //Log::debug(($changeTask)->categories_id);
             Auth::user()->power++;
             Auth::user()->save();
 

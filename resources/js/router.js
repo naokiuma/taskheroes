@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import status from './components/HeroComponent.vue'//自分のステータス
 import taskform from './components/TaskFormComponent.vue'//新規タスク
 import tasks from './components/TaskComponent.vue'//タスク一覧
+import items from './components/ItemsComponent.vue'//アイテム一覧
 
 // VueRouterプラグインを使用する
 // これによって<RouterView />コンポーネントなどを使うことができる
@@ -14,6 +15,7 @@ const routes = [
     { path: '',component:status},
     { path: '/status',component: status },
     { path: '/taskform',component: taskform },
+    { path: '/items',component: items},
     { 
       path: '/tasks', 
       component: tasks,

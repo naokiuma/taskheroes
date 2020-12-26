@@ -3,22 +3,31 @@
     <div v-show="loading">
       <Loader></Loader>
     </div>
-    <transition>
       <section class="task-form__wrapper">
         <form class="task-form" @submit.prevent="submit">
-          <input class="" v-model="title" name="title" type="text" placeholder="タスク名">
-          <input class="" v-model="body" name="body" type="textarea" placeholder="メモ"><br>
+          
+          <transition name="fade">
+          <input v-show="!inputBody" class="" maxlength="20" name="title" type="text" placeholder="タスク名" required>
+          </transition>
+          
+
+          <transition name="fade">
+          <input v-show="inputBody" class="" maxlength="50"  name="body" type="textarea" placeholder="メモ"><br>
+          </transition>
+          
           <div class="label-wrapper">
             <label><input type="radio" v-model="categories_id" value="1">力</label>
             <label><input type="radio" v-model="categories_id" value="2">魔力</label>
             <label><input type="radio" v-model="categories_id" value="3">知識</label>
           </div>
-          <div class="form__button">
-            <button type="submit" class="button button--inverse">登録</button>
+          <div class="form-button-area">
+            <button v-show="!inputBody" class="main-button" v-on:click = change()>メモを追加</button>
+            <button v-show="inputBody" class="main-button" v-on:click = change()>名前に戻る</button>
+
+            <button type="button" class="main-button">登録</button>
           </div>
         </form>
       </section>
-    </transition>
 </div>
 </template>
 
@@ -35,7 +44,8 @@ export default{
       title:'',
       body:'',
       categories_id:'',
-      loading:false
+      loading:false,
+      inputBody:false
     }
   },
   methods:{
@@ -57,6 +67,9 @@ export default{
         console.log("ダメ");
         console.log(error);
       })
+    },
+    change(){
+      this.inputBody = !this.inputBody;
     }
   }
 

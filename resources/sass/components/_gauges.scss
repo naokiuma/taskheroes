@@ -12,6 +12,7 @@
     border-top-right-radius : 8px;
     //animation: img-wrap 2s cubic-bezier(.4, 0, .2, 1) forwards;
     &-bar{
+        
         animation:2s ease-in 1s forwards alternate expansion;
         display: block;
         opacity: 0;

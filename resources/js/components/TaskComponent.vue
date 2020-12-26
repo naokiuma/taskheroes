@@ -2,8 +2,10 @@
     <section class="section-tasks">
         <h2>タスク一覧</h2>
         <button @click="beforeTasks()">未完了</button>
+        <button @click="afterTasks()">完了</button>
         <button @click="fetchtasks()">すべて</button>
         <button @click="addTask()">+</button>
+        <p>タスク数：</p>
         
 
         <div class="tasks-wrapper">
@@ -14,16 +16,13 @@
             <transition name="bounce">
                 <div v-show="up" class="taskupParameters">{{ upcategory }} がアップ！</div>
             </transition> 
-            <div  class="each-task card" v-for="task in tasks" :key="task.id">
-                
+            
+            <div class="each-task card" v-for="task in tasks" :key="task.id">
                 <!--表-->
                 <div class="card__side card__side--front" v-bind:class="{ rotate: task.done }">
-
-
                     <div class="each-task__title">{{task.title}}</div>
                     <div class="each-task__body" v-bind:class="{'is-active':activeItem === task}" >{{task.body}}</div>
                     
-
                     <div class="each-task__category">
                         <div v-if="task.categories_id == '1'">
                         力<img src="/../img/ken.png" alt="">
@@ -41,15 +40,16 @@
                         <button class="sub-button" @click ="deleate(task)">削除</button>
 
                     </div>
+                    <div class="each-task__difficult" v-html="forDifficult(task.difficult)"></div>
+                    <span class="each-task__time">投稿日時：{{task.created_at}}</span>
                 </div>
 
                 <!--裏-->
                 <div class="card__side card__side--back" v-bind:class="{ rotate: !task.done }">
                         
                     <div class="each-task__title">{{task.title}}</div>
-                    <div class="each-task__body">{{task.body}}</div>
-                    
-                    <p class="donetext">実施済み！</p>
+                    <div class="each-task__body" v-bind:class="{'is-active':activeItem === task}" >{{task.body}}</div>                    
+                    <p class="donetext">実施済み</p>
                     
                     <!--<div class="each-task__category" v-bind:class="{ categoryDone: task.done }" >-->
                     <div class="each-task__category">
@@ -61,8 +61,6 @@
                         </div>
                         <div v-else-if="task.categories_id == '3'">
                         知力<img src="/../img/know.png" alt="">
-                        <!--知力<i class="fas fa-arrow-up arrowopacity" v-bind:class="{ upmovearrow : task.done }"></i>-->
-
                         </div>
                     </div>
 
@@ -71,8 +69,8 @@
                         <button class="main-button" v-on:click="onActive(task)">メモをみる</button>
                         <button class="sub-button" @click ="deletetask(task)">削除</button>
                     </div>
+                    <div class="each-task__difficult" v-html="forDifficult(task.difficult)"></div>
                     <span class="each-task__time">投稿日時：{{task.created_at}}</span>
-
                 </div>
             </div>
         </div>
@@ -97,31 +95,6 @@
 .bounce-leave-active {
   animation: bounce-in .5s reverse;
 }
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes fade-in{
-  0% {
-    transform: translateY(-120px);
-    opacity: 0;
-  }
-  50%{
-      opacity: 0.3;
-  }
-  100% {
-    transform: translateY(0px);
-  }
-
-}
 
 
 </style>
@@ -133,30 +106,44 @@
     export default {
         data(){
             return{
-                tasks:[],//fetchtaskで取得する全て
+                defaultTasks:[],//fetchtaskで取得する全て。ここは変更しない
+                tasks:[],//これが毎回出てくる情報
+                filterFlg:false,
                 up:false,//task実施時の表示
                 upcategory:"",
                 newTask:false,
-                activeItem:null
-                
+                activeItem:null,
+                tasknum:0
             }
         },
         components:{
             Taskform
         },
-        beforeMount(){
-            this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
-            this.fetchtasks();
-            console.log("taskcompoのbeforecmouted");
-            console.log(this.$store.state.user);
+        created(){
+            this.firsttasks();
+            //this.firsttasks(this.defaultTasks);
         },
         mounted(){//apiから一覧を取得
-            console.log("taskcompoのmounted");
-            console.log(this.$store.state.user);
-            
-            this.beforeTasks();
+            //console.log(this.$store.state.user);
+            //console.log("moutedです");
+            this.fetchtasks();
+        },
+        updated(){
+            //console.log("updated");
+            //console.log(this.defaultTasks);
+            //console.log(this.tasks);
         },
         methods:{
+            firsttasks(){//すべてのtasksを取得
+            let url = '/api/tasklist/';
+            if(this.$store.state.user.id){
+                url = url + this.$store.state.user.id;
+            }
+            //console.log(url);//ユーザー情報ある場合は数字が末尾に入る
+                axios
+                .get(url)
+                .then(response => (this.defaultTasks = response.data))
+            },
             fetchtasks(){//すべてのtasksを取得
             //console.log(this.$store.state.user);
             let url = '/api/tasklist/';
@@ -169,24 +156,32 @@
                 .then(response => (this.tasks = response.data))
             },
             beforeTasks(){//未実施のtasksを取得
-                let filtertasks = [];
-                    for(var i in this.tasks){
-                        let task = this.tasks[i];
-                        if(task.done == 0){
-                            filtertasks.push(task);
+                console.log(this.defaultTasks);
+                this.tasks = [];
+                console.log("beforeTasks");
+                    for(var i in this.defaultTasks){
+                        if(this.defaultTasks[i].done == 0){
+                            this.tasks.push(this.defaultTasks[i]);
                         }
                     }
-                this.tasks = filtertasks;
             },
-            addTask(){
+            afterTasks(){//実施済のtasksを取得
+                this.tasks = [];
+                console.log("afterTasks");
+                    for(var i in this.defaultTasks){
+                        if(this.defaultTasks[i].done == 1){
+                            this.tasks.push(this.defaultTasks[i]);
+                        }
+                    }
+            },
+            addTask(){//task追加の表示
                 this.newTask = !this.newTask;
-
             },
             clicked(task){
                 //コントローラー側で処理
                 let target = task.id;
                 let self = this;
-                console.log('/tasks/change/' + target);
+                console.log('/tasks/change/' + target);//コントローラー側でtaskの難しさをみて変更
                 axios.post('/tasks/change/' + target)
                 .then(function(responce){
                     self.fetchtasks();
@@ -238,13 +233,19 @@
                 this.up = false;
                 
             },
-            onActive(task){
+            onActive(task){//メモを見る処理
                 if(this.activeItem === task){
                     this.activeItem = null;
                 }else{
-                    console.log("ここだ");
                     this.activeItem = task;
                 }
+            },
+            forDifficult(e){//難易度表示
+                let star = "";
+                for(let i = 1; i <= e; i++){
+                    star = star + "<i class='fas fa-star fontawasome-star'></i>";
+                }
+                return star;
             }
             
 

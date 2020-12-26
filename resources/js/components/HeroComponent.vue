@@ -5,7 +5,6 @@
         <div class="section-parameters">
             
             <div class="parameters-wrapper">
-                
                 <ul>
                     <li class="parameters parameters-lv">レベル</li>
                     <li class="parameters parameters-hp">ヒットポイント</li>
@@ -14,9 +13,8 @@
                     <li class="parameters parameters-wisdom">知識</li>
                     <!--<li class="parameters parameters-xp">経験値</li>-->
                 </ul>
-                
                 <div class="gauges-group">
-                        <div class="gauges" v-bind:style="{ width:num.value * 5 + 'px' }"
+                        <div class="gauges" v-bind:style="{ width:num.value * 6 + 'px' }"
                             v-for="(num, index) in parameters" :key="index">
                             <div class="gauges-bar">{{num.value}}</div>
 
@@ -24,11 +22,11 @@
                 </div>
  
             </div>
-
             <div class="parameters-hero">
                 <img src="/img/fighter.png" alt="">
             </div>
         </div>
+        <Taskform />
     　</section>
 </template>
 
@@ -64,7 +62,7 @@
             fetchusers(){                
                 console.log("ユーザーの能力");
                 //console.log(this.parameters[1]["power"]);//これで取得できる
-                console.log(this.$store.state.user.power);
+                //console.log(this.$store.state.user.power);
                 
             }
         },

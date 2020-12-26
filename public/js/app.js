@@ -1962,8 +1962,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1999,8 +1997,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     fetchusers: function fetchusers() {
       console.log("ユーザーの能力"); //console.log(this.parameters[1]["power"]);//これで取得できる
-
-      console.log(this.$store.state.user.power);
+      //console.log(this.$store.state.user.power);
     }
   },
   watch: {
@@ -2091,6 +2088,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Message_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Message.vue */ "./resources/js/components/Message.vue");
+//
 //
 //
 //
@@ -2236,66 +2234,58 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
  //ok
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      defaultTasks: [],
+      //fetchtaskで取得する全て。ここは変更しない
       tasks: [],
-      //fetchtaskで取得する全て
+      //これが毎回出てくる情報
+      filterFlg: false,
       up: false,
       //task実施時の表示
       upcategory: "",
       newTask: false,
-      activeItem: null
+      activeItem: null,
+      tasknum: 0
     };
   },
   components: {
     Taskform: _TaskFormComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  beforeMount: function beforeMount() {
-    this.$store.dispatch('register'); //storeのactionをこちらでdispatchしログインしているかを返す
-
-    this.fetchtasks();
-    console.log("taskcompoのbeforecmouted");
-    console.log(this.$store.state.user);
+  created: function created() {
+    this.firsttasks(); //this.firsttasks(this.defaultTasks);
   },
   mounted: function mounted() {
     //apiから一覧を取得
-    console.log("taskcompoのmounted");
-    console.log(this.$store.state.user);
-    this.beforeTasks();
+    //console.log(this.$store.state.user);
+    //console.log("moutedです");
+    this.fetchtasks();
+  },
+  updated: function updated() {//console.log("updated");
+    //console.log(this.defaultTasks);
+    //console.log(this.tasks);
   },
   methods: {
-    fetchtasks: function fetchtasks() {
+    firsttasks: function firsttasks() {
       var _this = this;
+
+      //すべてのtasksを取得
+      var url = '/api/tasklist/';
+
+      if (this.$store.state.user.id) {
+        url = url + this.$store.state.user.id;
+      } //console.log(url);//ユーザー情報ある場合は数字が末尾に入る
+
+
+      axios.get(url).then(function (response) {
+        return _this.defaultTasks = response.data;
+      });
+    },
+    fetchtasks: function fetchtasks() {
+      var _this2 = this;
 
       //すべてのtasksを取得
       //console.log(this.$store.state.user);
@@ -2307,31 +2297,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
       axios.get(url).then(function (response) {
-        return _this.tasks = response.data;
+        return _this2.tasks = response.data;
       });
     },
     beforeTasks: function beforeTasks() {
       //未実施のtasksを取得
-      var filtertasks = [];
+      console.log(this.defaultTasks);
+      this.tasks = [];
+      console.log("beforeTasks");
 
-      for (var i in this.tasks) {
-        var task = this.tasks[i];
-
-        if (task.done == 0) {
-          filtertasks.push(task);
+      for (var i in this.defaultTasks) {
+        if (this.defaultTasks[i].done == 0) {
+          this.tasks.push(this.defaultTasks[i]);
         }
       }
+    },
+    afterTasks: function afterTasks() {
+      //実施済のtasksを取得
+      this.tasks = [];
+      console.log("afterTasks");
 
-      this.tasks = filtertasks;
+      for (var i in this.defaultTasks) {
+        if (this.defaultTasks[i].done == 1) {
+          this.tasks.push(this.defaultTasks[i]);
+        }
+      }
     },
     addTask: function addTask() {
+      //task追加の表示
       this.newTask = !this.newTask;
     },
     clicked: function clicked(task) {
       //コントローラー側で処理
       var target = task.id;
       var self = this;
-      console.log('/tasks/change/' + target);
+      console.log('/tasks/change/' + target); //コントローラー側でtaskの難しさをみて変更
+
       axios.post('/tasks/change/' + target).then(function (responce) {
         self.fetchtasks();
         var tempmsg;
@@ -2385,18 +2386,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.up = false;
     },
     onActive: function onActive(task) {
+      //メモを見る処理
       if (this.activeItem === task) {
         this.activeItem = null;
       } else {
-        console.log("ここだ");
         this.activeItem = task;
       }
+    },
+    forDifficult: function forDifficult(e) {
+      //難易度表示
+      var star = "";
+
+      for (var i = 1; i <= e; i++) {
+        star = star + "<i class='fas fa-star fontawasome-star'></i>";
+      }
+
+      return star;
     }
   },
   watch: {
     tasks: {
       handler: function handler() {
-        var _this2 = this;
+        var _this3 = this;
 
         return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
           return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -2404,7 +2415,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               switch (_context.prev = _context.next) {
                 case 0:
                   _context.next = 2;
-                  return _this2.mounted;
+                  return _this3.mounted;
 
                 case 2:
                 case "end":
@@ -2455,6 +2466,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Taskform',
@@ -2467,7 +2487,8 @@ __webpack_require__.r(__webpack_exports__);
       title: '',
       body: '',
       categories_id: '',
-      loading: false
+      loading: false,
+      inputBody: false
     };
   },
   methods: {
@@ -2487,6 +2508,9 @@ __webpack_require__.r(__webpack_exports__);
         console.log("ダメ");
         console.log(error);
       });
+    },
+    change: function change() {
+      this.inputBody = !this.inputBody;
     }
   }
 });
@@ -6933,7 +6957,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.fade-enter-active{\n    -webkit-animation:fade-in .5s;\n            animation:fade-in .5s;\n}\n.fade-leave-active{\n    animation:fade-in .5s reverse;\n}\n.bounce-enter-active {\n  -webkit-animation: bounce-in .5s;\n          animation: bounce-in .5s;\n}\n.bounce-leave-active {\n  animation: bounce-in .5s reverse;\n}\n@-webkit-keyframes bounce-in {\n0% {\n    transform: scale(0);\n}\n50% {\n    transform: scale(1.1);\n}\n100% {\n    transform: scale(1);\n}\n}\n@keyframes bounce-in {\n0% {\n    transform: scale(0);\n}\n50% {\n    transform: scale(1.1);\n}\n100% {\n    transform: scale(1);\n}\n}\n@-webkit-keyframes fade-in{\n0% {\n    transform: translateY(-120px);\n    opacity: 0;\n}\n50%{\n      opacity: 0.3;\n}\n100% {\n    transform: translateY(0px);\n}\n}\n@keyframes fade-in{\n0% {\n    transform: translateY(-120px);\n    opacity: 0;\n}\n50%{\n      opacity: 0.3;\n}\n100% {\n    transform: translateY(0px);\n}\n}\n\n\n", ""]);
+exports.push([module.i, "\n.fade-enter-active{\n    -webkit-animation:fade-in .5s;\n            animation:fade-in .5s;\n}\n.fade-leave-active{\n    animation:fade-in .5s reverse;\n}\n.bounce-enter-active {\n  -webkit-animation: bounce-in .5s;\n          animation: bounce-in .5s;\n}\n.bounce-leave-active {\n  animation: bounce-in .5s reverse;\n}\n\n\n", ""]);
 
 // exports
 
@@ -39536,40 +39560,47 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "section-status" }, [
-    _c("h2", [_vm._v("ステータス")]),
-    _vm._v(" "),
-    _c("h3", [_vm._v(_vm._s(this.$store.state.user.name))]),
-    _vm._v(" "),
-    _c("div", { staticClass: "section-parameters" }, [
-      _c("div", { staticClass: "parameters-wrapper" }, [
-        _vm._m(0),
+  return _c(
+    "section",
+    { staticClass: "section-status" },
+    [
+      _c("h2", [_vm._v("ステータス")]),
+      _vm._v(" "),
+      _c("h3", [_vm._v(_vm._s(this.$store.state.user.name))]),
+      _vm._v(" "),
+      _c("div", { staticClass: "section-parameters" }, [
+        _c("div", { staticClass: "parameters-wrapper" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "gauges-group" },
+            _vm._l(_vm.parameters, function(num, index) {
+              return _c(
+                "div",
+                {
+                  key: index,
+                  staticClass: "gauges",
+                  style: { width: num.value * 6 + "px" }
+                },
+                [
+                  _c("div", { staticClass: "gauges-bar" }, [
+                    _vm._v(_vm._s(num.value))
+                  ])
+                ]
+              )
+            }),
+            0
+          )
+        ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "gauges-group" },
-          _vm._l(_vm.parameters, function(num, index) {
-            return _c(
-              "div",
-              {
-                key: index,
-                staticClass: "gauges",
-                style: { width: num.value * 5 + "px" }
-              },
-              [
-                _c("div", { staticClass: "gauges-bar" }, [
-                  _vm._v(_vm._s(num.value))
-                ])
-              ]
-            )
-          }),
-          0
-        )
+        _vm._m(1)
       ]),
       _vm._v(" "),
-      _vm._m(1)
-    ])
-  ])
+      _c("Taskform")
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -39603,6 +39634,30 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ItemsComponent.vue?vue&type=template&id=bf42bc70&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ItemsComponent.vue?vue&type=template&id=bf42bc70& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_vm._v("\n    アイテムズです。\n")])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -39719,9 +39774,9 @@ var render = function() {
       _vm._v(" "),
       _c("router-link", { attrs: { to: "/tasks" } }, [_vm._v("タスク一覧")]),
       _vm._v(" "),
-      _c("RouterView"),
+      _c("router-link", { attrs: { to: "/items" } }, [_vm._v("アイテム一覧")]),
       _vm._v(" "),
-      _c("Message")
+      _c("RouterView")
     ],
     1
   )
@@ -39768,6 +39823,18 @@ var render = function() {
       {
         on: {
           click: function($event) {
+            return _vm.afterTasks()
+          }
+        }
+      },
+      [_vm._v("完了")]
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        on: {
+          click: function($event) {
             return _vm.fetchtasks()
           }
         }
@@ -39786,6 +39853,8 @@ var render = function() {
       },
       [_vm._v("+")]
     ),
+    _vm._v(" "),
+    _c("p", [_vm._v("タスク数：")]),
     _vm._v(" "),
     _c(
       "div",
@@ -39914,6 +39983,17 @@ var render = function() {
                     },
                     [_vm._v("削除")]
                   )
+                ]),
+                _vm._v(" "),
+                _c("div", {
+                  staticClass: "each-task__difficult",
+                  domProps: {
+                    innerHTML: _vm._s(_vm.forDifficult(task.difficult))
+                  }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "each-task__time" }, [
+                  _vm._v("投稿日時：" + _vm._s(task.created_at))
                 ])
               ]
             ),
@@ -39929,11 +40009,16 @@ var render = function() {
                   _vm._v(_vm._s(task.title))
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "each-task__body" }, [
-                  _vm._v(_vm._s(task.body))
-                ]),
+                _c(
+                  "div",
+                  {
+                    staticClass: "each-task__body",
+                    class: { "is-active": _vm.activeItem === task }
+                  },
+                  [_vm._v(_vm._s(task.body))]
+                ),
                 _vm._v(" "),
-                _c("p", { staticClass: "donetext" }, [_vm._v("実施済み！")]),
+                _c("p", { staticClass: "donetext" }, [_vm._v("実施済み")]),
                 _vm._v(" "),
                 _c("div", { staticClass: "each-task__category" }, [
                   task.categories_id == "1"
@@ -40001,6 +40086,13 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
+                _c("div", {
+                  staticClass: "each-task__difficult",
+                  domProps: {
+                    innerHTML: _vm._s(_vm.forDifficult(task.difficult))
+                  }
+                }),
+                _vm._v(" "),
                 _c("span", { staticClass: "each-task__time" }, [
                   _vm._v("投稿日時：" + _vm._s(task.created_at))
                 ])
@@ -40035,164 +40127,195 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
+  return _c("div", [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.loading,
+            expression: "loading"
+          }
+        ]
+      },
+      [_c("Loader")],
+      1
+    ),
+    _vm._v(" "),
+    _c("section", { staticClass: "task-form__wrapper" }, [
       _c(
-        "div",
+        "form",
         {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.loading,
-              expression: "loading"
+          staticClass: "task-form",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.submit($event)
             }
-          ]
+          }
         },
-        [_c("Loader")],
-        1
-      ),
-      _vm._v(" "),
-      _c("transition", [
-        _c("section", { staticClass: "task-form__wrapper" }, [
-          _c(
-            "form",
-            {
-              staticClass: "task-form",
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.submit($event)
+        [
+          _c("transition", { attrs: { name: "fade" } }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.inputBody,
+                  expression: "!inputBody"
                 }
+              ],
+              attrs: {
+                maxlength: "20",
+                name: "title",
+                type: "text",
+                placeholder: "タスク名",
+                required: ""
               }
-            },
-            [
+            })
+          ]),
+          _vm._v(" "),
+          _c("transition", { attrs: { name: "fade" } }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.inputBody,
+                  expression: "inputBody"
+                }
+              ],
+              attrs: {
+                maxlength: "50",
+                name: "body",
+                type: "textarea",
+                placeholder: "メモ"
+              }
+            }),
+            _c("br")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "label-wrapper" }, [
+            _c("label", [
               _c("input", {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.title,
-                    expression: "title"
+                    value: _vm.categories_id,
+                    expression: "categories_id"
                   }
                 ],
-                attrs: { name: "title", type: "text", placeholder: "タスク名" },
-                domProps: { value: _vm.title },
+                attrs: { type: "radio", value: "1" },
+                domProps: { checked: _vm._q(_vm.categories_id, "1") },
                 on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.title = $event.target.value
+                  change: function($event) {
+                    _vm.categories_id = "1"
                   }
                 }
               }),
-              _vm._v(" "),
+              _vm._v("力")
+            ]),
+            _vm._v(" "),
+            _c("label", [
               _c("input", {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.body,
-                    expression: "body"
+                    value: _vm.categories_id,
+                    expression: "categories_id"
                   }
                 ],
-                attrs: { name: "body", type: "textarea", placeholder: "メモ" },
-                domProps: { value: _vm.body },
+                attrs: { type: "radio", value: "2" },
+                domProps: { checked: _vm._q(_vm.categories_id, "2") },
                 on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.body = $event.target.value
+                  change: function($event) {
+                    _vm.categories_id = "2"
                   }
                 }
               }),
-              _c("br"),
-              _vm._v(" "),
-              _c("div", { staticClass: "label-wrapper" }, [
-                _c("label", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.categories_id,
-                        expression: "categories_id"
-                      }
-                    ],
-                    attrs: { type: "radio", value: "1" },
-                    domProps: { checked: _vm._q(_vm.categories_id, "1") },
-                    on: {
-                      change: function($event) {
-                        _vm.categories_id = "1"
-                      }
-                    }
-                  }),
-                  _vm._v("力")
-                ]),
-                _vm._v(" "),
-                _c("label", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.categories_id,
-                        expression: "categories_id"
-                      }
-                    ],
-                    attrs: { type: "radio", value: "2" },
-                    domProps: { checked: _vm._q(_vm.categories_id, "2") },
-                    on: {
-                      change: function($event) {
-                        _vm.categories_id = "2"
-                      }
-                    }
-                  }),
-                  _vm._v("魔力")
-                ]),
-                _vm._v(" "),
-                _c("label", [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.categories_id,
-                        expression: "categories_id"
-                      }
-                    ],
-                    attrs: { type: "radio", value: "3" },
-                    domProps: { checked: _vm._q(_vm.categories_id, "3") },
-                    on: {
-                      change: function($event) {
-                        _vm.categories_id = "3"
-                      }
-                    }
-                  }),
-                  _vm._v("知識")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form__button" }, [
-                _c(
-                  "button",
+              _vm._v("魔力")
+            ]),
+            _vm._v(" "),
+            _c("label", [
+              _c("input", {
+                directives: [
                   {
-                    staticClass: "button button--inverse",
-                    attrs: { type: "submit" }
-                  },
-                  [_vm._v("登録")]
-                )
-              ])
-            ]
-          )
-        ])
-      ])
-    ],
-    1
-  )
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.categories_id,
+                    expression: "categories_id"
+                  }
+                ],
+                attrs: { type: "radio", value: "3" },
+                domProps: { checked: _vm._q(_vm.categories_id, "3") },
+                on: {
+                  change: function($event) {
+                    _vm.categories_id = "3"
+                  }
+                }
+              }),
+              _vm._v("知識")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-button-area" }, [
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.inputBody,
+                    expression: "!inputBody"
+                  }
+                ],
+                staticClass: "main-button",
+                on: {
+                  click: function($event) {
+                    return _vm.change()
+                  }
+                }
+              },
+              [_vm._v("メモを追加")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.inputBody,
+                    expression: "inputBody"
+                  }
+                ],
+                staticClass: "main-button",
+                on: {
+                  click: function($event) {
+                    return _vm.change()
+                  }
+                }
+              },
+              [_vm._v("名前に戻る")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "main-button", attrs: { type: "button" } },
+              [_vm._v("登録")]
+            )
+          ])
+        ],
+        1
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -56911,6 +57034,59 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/ItemsComponent.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/ItemsComponent.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ItemsComponent_vue_vue_type_template_id_bf42bc70___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ItemsComponent.vue?vue&type=template&id=bf42bc70& */ "./resources/js/components/ItemsComponent.vue?vue&type=template&id=bf42bc70&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _ItemsComponent_vue_vue_type_template_id_bf42bc70___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ItemsComponent_vue_vue_type_template_id_bf42bc70___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ItemsComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ItemsComponent.vue?vue&type=template&id=bf42bc70&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/ItemsComponent.vue?vue&type=template&id=bf42bc70& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemsComponent_vue_vue_type_template_id_bf42bc70___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ItemsComponent.vue?vue&type=template&id=bf42bc70& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ItemsComponent.vue?vue&type=template&id=bf42bc70&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemsComponent_vue_vue_type_template_id_bf42bc70___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ItemsComponent_vue_vue_type_template_id_bf42bc70___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Loader.vue":
 /*!********************************************!*\
   !*** ./resources/js/components/Loader.vue ***!
@@ -57291,6 +57467,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_HeroComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/HeroComponent.vue */ "./resources/js/components/HeroComponent.vue");
 /* harmony import */ var _components_TaskFormComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/TaskFormComponent.vue */ "./resources/js/components/TaskFormComponent.vue");
 /* harmony import */ var _components_TaskComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/TaskComponent.vue */ "./resources/js/components/TaskComponent.vue");
+/* harmony import */ var _components_ItemsComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/ItemsComponent.vue */ "./resources/js/components/ItemsComponent.vue");
 
  // ページコンポーネントをインポートする
 
@@ -57299,6 +57476,8 @@ __webpack_require__.r(__webpack_exports__);
  //新規タスク
 
  //タスク一覧
+
+ //アイテム一覧
 // VueRouterプラグインを使用する
 // これによって<RouterView />コンポーネントなどを使うことができる
 
@@ -57312,6 +57491,9 @@ var routes = [{
 }, {
   path: '/taskform',
   component: _components_TaskFormComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+}, {
+  path: '/items',
+  component: _components_ItemsComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, {
   path: '/tasks',
   component: _components_TaskComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],

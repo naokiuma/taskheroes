@@ -57,6 +57,10 @@
           animation: animation-right 1s infinite;
 }
 
+.fontawasome-star {
+  color: #FAD727;
+}
+
 .upmovearrow {
   -webkit-animation: up-move 1s;
           animation: up-move 1s;
@@ -185,6 +189,64 @@
   }
 }
 
+@-webkit-keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    transform: translateY(-120px);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    transform: translateY(-120px);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 .about-wrapper {
   width: 95%;
   margin: 100px auto 100px auto;
@@ -229,17 +291,17 @@
   position: relative;
   display: block;
   padding: 2em 2em;
-  border-top: solid 2px black;
-  border-bottom: solid 2px black;
+  border-top: solid 4px #d26c11;
+  border-bottom: solid 4px #d26c11;
 }
 
 .about-examples:before {
   content: "";
   position: absolute;
   top: -10px;
-  width: 2px;
+  width: 4px;
   height: calc(100% + 20px);
-  background-color: black;
+  background-color: #d26c11;
   left: 10px;
 }
 
@@ -247,9 +309,9 @@
   content: "";
   position: absolute;
   top: -10px;
-  width: 2px;
+  width: 4px;
   height: calc(100% + 20px);
-  background-color: black;
+  background-color: #d26c11;
   right: 10px;
 }
 
@@ -284,6 +346,28 @@
 .main-button:active {
   box-shadow: 3px 4px black;
   transform: translateY(2px);
+}
+
+.change-button {
+  background-color: #99dfff;
+  border-radius: 5px;
+  height: 50px;
+  width: 15%;
+  margin: auto;
+}
+
+.change-button:hover {
+  background-color: #96fff5;
+}
+
+.change-button:active {
+  box-shadow: 3px 4px black;
+  transform: translateY(2px);
+}
+
+.form-button-area {
+  width: 20%;
+  margin: auto;
 }
 
 .sub-button {
@@ -358,7 +442,7 @@
 .howto-steps {
   width: 100%;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: center;
   margin: auto;
   text-align: center;
@@ -368,7 +452,7 @@
   width: 30%;
   border: 5px solid #96fff5;
   border-radius: 25px;
-  margin: 0 5px;
+  margin: 10px;
 }
 
 .howto-step h4 {
@@ -598,7 +682,7 @@
   position: relative;
   height: 120px;
   margin: 5px auto;
-  width: 100%;
+  width: 80%;
   transition: all 0.5s;
   border-radius: 5px;
   box-shadow: 3px 2px 0.1rem #0000006b;
@@ -633,6 +717,12 @@
   position: absolute;
   bottom: 0;
   right: 10px;
+}
+
+.tasks-wrapper .each-task__difficult {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
 }
 
 .tasks-wrapper .each-task img {
@@ -690,25 +780,25 @@
 
 .task-form input[type=text] {
   height: 30%;
+  width: 50%;
   margin: auto 10px;
   padding: 5px;
 }
 
 .task-form input[type=textarea] {
-  height: 60%;
+  height: 30%;
+  width: 50%;
   margin: auto 10px;
   padding: 5px;
 }
 
-.task-form label {
-  width: 80px;
+.task-form .label-wrapper {
+  width: 20%;
+  margin: auto;
 }
 
-.task-form .label-wrapper {
-  display: flex;
-  justify-content: center;
-  width: 90%;
-  margin: auto;
+.task-form label {
+  width: 100%;
 }
 
 .task-form__wrapper {
