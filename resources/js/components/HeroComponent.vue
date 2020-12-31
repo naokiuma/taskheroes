@@ -1,7 +1,7 @@
 <template>
     　<section class="section-status">
-        <h2>ステータス</h2>
-        <h3>{{this.$store.state.user.name}}</h3>
+        <h3 class="mypage-heading">ステータス</h3>
+        <h4>{{this.$store.state.user.name}}</h4>
         <div class="section-parameters">
             
             <div class="parameters-wrapper">
@@ -11,7 +11,7 @@
                     <li class="parameters parameters-power">力</li>
                     <li class="parameters parameters-magic">魔力</li>
                     <li class="parameters parameters-wisdom">知識</li>
-                    <!--<li class="parameters parameters-xp">経験値</li>-->
+                    <li class="parameters parameters-xp">経験値</li>
                 </ul>
                 <div class="gauges-group">
                         <div class="gauges" v-bind:style="{ width:num.value * 6 + 'px' }"
@@ -61,9 +61,7 @@
         methods:{
             fetchusers(){                
                 console.log("ユーザーの能力");
-                //console.log(this.parameters[1]["power"]);//これで取得できる
                 //console.log(this.$store.state.user.power);
-                
             }
         },
         watch:{

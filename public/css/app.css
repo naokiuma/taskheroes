@@ -466,6 +466,23 @@
   line-height: 150%;
 }
 
+.items-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 95%;
+  margin: auto;
+}
+
+.each-item {
+  width: 30%;
+  margin: auto;
+}
+
+.each-item h4 {
+  text-align: center;
+}
+
 .messages-wrapper {
   position: relative;
 }
@@ -499,6 +516,46 @@
 
 .messages-space {
   height: 20vh;
+}
+
+.mypage-heading {
+  font-size: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #808080a8;
+  letter-spacing: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s;
+}
+
+.mypage-heading:hover {
+  color: black;
+}
+
+.mypage-heading:before,
+.mypage-heading:after {
+  content: "";
+  width: 60px;
+  height: 20px;
+  background-image: url(/images/heading-sword.png?162c7a33dbee401fd74a69ecec929c55);
+  background-size: contain;
+  transition: all 0.5s;
+}
+
+.mypage-heading:after {
+  transform: scale(-1, 1);
+}
+
+.mypage-heading:hover::before {
+  margin-right: 10px;
+  transition: all 0.5s;
+}
+
+.mypage-heading:hover::after {
+  margin-left: 10px;
+  transition: all 0.5s;
 }
 
 .section-parameters {
@@ -623,6 +680,10 @@
   align-items: center;
   justify-content: center;
   transition: all 0.5s;
+}
+
+.section-heading:hover {
+  color: black;
 }
 
 .section-heading:before,
@@ -809,6 +870,27 @@
 
 .task-form__wrapper h3 {
   margin-top: 50px;
+}
+
+.tasks-filter-btns {
+  height: 60px;
+  width: 90%;
+}
+
+.tasks-filter-btn {
+  height: 50px;
+  margin: auto;
+  border-radius: 5%;
+  background-color: white;
+}
+
+.tasks-filter-btn:hover {
+  background-color: #96fff5;
+}
+
+.tasks-filter-btn:active {
+  box-shadow: 3px 4px black;
+  transform: translateY(2px);
 }
 
 .taskupParameters {

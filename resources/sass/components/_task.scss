@@ -152,7 +152,28 @@
     }
 }
 
-.taskupParameters{
+
+.tasks-filter-btns{//filterボタンを包んでいるもの
+    height: 60px;
+    width: 90%;
+
+}
+.tasks-filter-btn{
+    height: 50px;
+    margin: auto;
+    border-radius: 5%;
+    background-color: white;
+    &:hover{
+        background-color: $color-main-light;
+        //box-shadow: 3px 2px  black;
+    }
+    &:active{
+        box-shadow: 3px 4px  black;
+        transform:translateY(2px);
+    }
+}
+
+.taskupParameters{//能力アップ時の動き
     background-color: white;
     position: fixed;
     left: 10px;

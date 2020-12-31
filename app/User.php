@@ -37,7 +37,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    /**
+     * userのtasksを取得。1対多
+     */
+
     public function tasks(){
         return $this->hasMany('App\Task');
       }
+
+    /**
+     * userのitemsを取得。多対多
+     */
+
+    public function items()
+    {
+        return $this->belongsToMany('App\Item');
+    }
 }

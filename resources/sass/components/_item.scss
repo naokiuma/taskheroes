@@ -1,0 +1,16 @@
+.items-wrapper{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 95%;
+    margin: auto;
+}
+
+.each-item{
+    width: 30%;
+    margin: auto;
+    h4{
+        text-align: center;
+    }
+
+}

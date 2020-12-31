@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log; //ログ
 use Illuminate\Support\Facades\DB; // DB ファサードを use する
 use App\Task;
 use App\User;
+use App\Library\ParameterCheck;
+
 
 class TaskController extends Controller
 {
@@ -30,8 +33,6 @@ class TaskController extends Controller
         $task->body = $request->body; 
         $task->categories_id = $request->categories_id;
         Auth::user()->tasks()->save($task);//リレーション
-
-        //return redirect("/user");
         return "登録しました";
 
     }
@@ -41,7 +42,6 @@ class TaskController extends Controller
         $deleateTask = Task::where('id',$id)->first();
         Log::debug("taskコントローラー：deleate");
         $deleateTask->delete();
-
         return "${id}を削除しました";
 
     }
@@ -54,31 +54,54 @@ class TaskController extends Controller
         $changeTask = Task::where('id',$id)->first();//1オブジェクトが変える
         Log::debug("taskコントローラー：change");
         Log::debug($changeTask);//　→"categories_id":1,"user_id":1,;
-        //Log::debug(Auth::user());　　//lv":null,"hp":null,"power":null,"magic":null,"wisdom":null,"xp":null,が入っている
-        //ここでuserのそのカテゴリを処理する
         $point = $changeTask->difficult;
         $category = $changeTask->categories_id;
         Log::debug("変更point：" . $point);
         Log::debug("対象category：" . $category);//1は力2は魔力3は知恵
-        //$status = 
+        $now = "";
 
         //反転させる。デフォルトは0。実施済みは1
         if($changeTask->done == 0){
             $changeTask->done = 1;
-            //これでカテゴリーの数字が取れる。1など
-            //Log::debug(($changeTask)->categories_id);
-            Auth::user()->power++;
-            Auth::user()->save();
-
+            //$this->parameter("up",$point,$category);//次の関数
+            ParameterCheck::changeParameter("up",$point,$category);
         }else if($changeTask->done == 1){
             $changeTask->done = 0;
-            Auth::user()->power--;
-            Auth::user()->save();
+            //$this->parameter("down",$point,$category);
+            ParameterCheck::changeParameter("down",$point,$category);
         }
         $changeTask->save();
-        
+
         return $changeTask;
     }
+
+
+    
+    //上がるかどうか?とポイント、カテゴリーを受け処理する
+    /*
+    public function parameter($which,$point,$category){//whichは上がるか下がるか
+        if($which == "up"){
+            if($category === 1){
+                Auth::user()->power += $point;
+            }else if ($category === 2){
+                Auth::user()->magic += $point;
+            }else if($category === 3){
+                Auth::user()->wisdom += $point;
+            }
+            Auth::user()->save();
+
+        }elseif($which = "down"){
+            if($category === 1){
+                Auth::user()->power -= $point;
+            }else if ($category === 2){
+                Auth::user()->magic -= $point;
+            }else if($category === 3){
+                Auth::user()->wisdom -= $point;
+            }
+            Auth::user()->save();
+        }
+    }
+    */
 
 
 
@@ -92,8 +115,8 @@ class TaskController extends Controller
         }else{
             //Log::debug("tasklist.ログインルート");
             $tasks = Task::where('user_id', $id)
-                                ->orderBy('created_at','desc')
-                                ->get();
+            ->orderBy('created_at','desc')
+            ->get();
         }
         //Log::debug($tasks);
         return $tasks;

@@ -1,10 +1,12 @@
 <template>
     <section class="section-tasks">
-        <h2>タスク一覧</h2>
-        <button @click="beforeTasks()">未完了</button>
-        <button @click="afterTasks()">完了</button>
-        <button @click="fetchtasks()">すべて</button>
-        <button @click="addTask()">+</button>
+        <h3 class="mypage-heading">ステータス</h3>
+        <div class="tasks-filter-btns">
+            <button class="tasks-filter-btn" @click="beforeTasks()">未完了タスク</button>
+            <button class="tasks-filter-btn" @click="afterTasks()">実施済みタスク</button>
+            <button class="tasks-filter-btn" @click="fetchtasks()">すべてのタスク（※）</button>
+            <button class="tasks-filter-btn" @click="addTask()">新規タスク+</button>
+        </div>
         <p>タスク数：</p>
         
 
@@ -128,11 +130,6 @@
             //console.log("moutedです");
             this.fetchtasks();
         },
-        updated(){
-            //console.log("updated");
-            //console.log(this.defaultTasks);
-            //console.log(this.tasks);
-        },
         methods:{
             firsttasks(){//すべてのtasksを取得
             let url = '/api/tasklist/';
@@ -145,15 +142,12 @@
                 .then(response => (this.defaultTasks = response.data))
             },
             fetchtasks(){//すべてのtasksを取得
-            //console.log(this.$store.state.user);
-            let url = '/api/tasklist/';
-            if(this.$store.state.user.id){
-                url = url + this.$store.state.user.id;
-            }
-            //console.log(url);//ユーザー情報ある場合は数字が末尾に入る
-                axios
-                .get(url)
-                .then(response => (this.tasks = response.data))
+                //console.log(this.$store.state.user);
+                let url = '/api/tasklist/';
+                if(this.$store.state.user.id){
+                    url = url + this.$store.state.user.id;
+                }
+                axios.get(url).then(response => (this.tasks = response.data))
             },
             beforeTasks(){//未実施のtasksを取得
                 console.log(this.defaultTasks);
@@ -207,7 +201,7 @@
                     self.$store.commit('message/setContent',{//メッセージを入れ
                         content: tempmsg
                     })
-                    self.$store.dispatch('register');//更新しておく
+                    self.$store.dispatch('register');//パラメータの更新
 
                 })
             },

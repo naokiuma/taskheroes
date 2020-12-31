@@ -8,9 +8,8 @@ const store = new Vuex.Store({
     //https://kntmr.hatenablog.com/entry/2018/02/28/200112
     namespaced:true,
     state:{
-        user:[],
-        test:"テストですよ"
-    },
+        user:[]
+        },
     mutations:{
         //ユーザー情報をset
         setUser(state,user){
