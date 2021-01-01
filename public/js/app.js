@@ -2059,36 +2059,90 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      items: []
+      items: [],
+      //元々
+      myitems: [],
+      //元々
+      have: [] //ハッシュ
+
+      /*
+      Items[
+          {name:'all',items:[]},
+          {name:'myitems',items:[]}
+      ]
+      */
+
     };
+  },
+  created: function created() {
+    this.fetchItems();
+    this.fetchMyItems();
   },
   mounted: function mounted() {
     //apiから一覧を取得
-    this.fetchitems();
+    console.log("mounted"); //console.log(this.items);
+    //this.have = this.items;
+    //console.log(this.have);
+
+    /*for(let i = 0; i < this.myitems.length; i++){
+        if(this.have[this.myitems[i].name] == undefined){
+            this.have[this.myitems[i].name] = 1;
+        }
+    }
+    */
   },
   methods: {
-    fetchitems: function fetchitems() {
+    fetchItems: function fetchItems() {
       var _this = this;
 
+      axios.get('/api/itemlist/').then(function (response) {
+        return _this.items = response.data;
+      });
+    },
+    fetchMyItems: function fetchMyItems() {
+      var _this2 = this;
+
+      //並列処理！！！
       var url = '/api/itemlist/';
+      var self = this;
 
       if (this.$store.state.user.id) {
         url = url + this.$store.state.user.id;
-      } //console.log(url);//ユーザー情報ある場合は数字が末尾に入る
-
+      }
 
       axios.get(url).then(function (response) {
-        return _this.items = response.data;
+        return _this2.myitems = response.data;
+      }) //myitemsに情報を入れる。
+      .then(function () {
+        //myitemsの情報をhashに入れる
+        for (var i = 0; i < self.myitems.length; i++) {
+          if (self.have[self.myitems[i].name] == undefined) {
+            self.have[self.myitems[i].name] = 1;
+          }
+        }
       });
+    },
+    check: function check() {
+      console.log(this.items);
+      console.log(this.myitems);
+      console.log(this.have);
     }
   },
   watch: {
-    items: {
+    myitems: {
       handler: function handler() {
-        var _this2 = this;
+        var _this3 = this;
 
         return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
           return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -2096,7 +2150,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               switch (_context.prev = _context.next) {
                 case 0:
                   _context.next = 2;
-                  return _this2.mounted;
+                  return _this3.mounted;
 
                 case 2:
                 case "end":
@@ -2359,9 +2413,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var url = '/api/tasklist/';
 
       if (this.$store.state.user.id) {
-        url = url + this.$store.state.user.id;
-      } //console.log(url);//ユーザー情報ある場合は数字が末尾に入る
-
+        url = url + this.$store.state.user.id; //ユーザー情報ある場合は数字が末尾に入る
+      }
 
       axios.get(url).then(function (response) {
         return _this.defaultTasks = response.data;
@@ -39754,7 +39807,33 @@ var render = function() {
       }),
       0
     ),
-    _vm._v("\n    \n    " + _vm._s(_vm.items) + "\n")
+    _vm._v(" "),
+    _c("h3", { staticClass: "mypage-heading" }, [_vm._v("アイテム一覧")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "items-wrapper" },
+      _vm._l(_vm.myitems, function(myitem) {
+        return _c("div", { key: myitem.index, staticClass: "each-item" }, [
+          _c("h4", [_vm._v(_vm._s(myitem.name))]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(myitem.description))])
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        on: {
+          click: function($event) {
+            return _vm.check()
+          }
+        }
+      },
+      [_vm._v("ボタン")]
+    )
   ])
 }
 var staticRenderFns = []
@@ -57144,15 +57223,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/js/components/ItemsComponent.vue ***!
   \****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ItemsComponent_vue_vue_type_template_id_bf42bc70___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ItemsComponent.vue?vue&type=template&id=bf42bc70& */ "./resources/js/components/ItemsComponent.vue?vue&type=template&id=bf42bc70&");
 /* harmony import */ var _ItemsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ItemsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ItemsComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ItemsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ItemsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -57182,7 +57260,7 @@ component.options.__file = "resources/js/components/ItemsComponent.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/ItemsComponent.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

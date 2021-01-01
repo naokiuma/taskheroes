@@ -134,12 +134,9 @@
             firsttasks(){//すべてのtasksを取得
             let url = '/api/tasklist/';
             if(this.$store.state.user.id){
-                url = url + this.$store.state.user.id;
-            }
-            //console.log(url);//ユーザー情報ある場合は数字が末尾に入る
-                axios
-                .get(url)
-                .then(response => (this.defaultTasks = response.data))
+                url = url + this.$store.state.user.id;//ユーザー情報ある場合は数字が末尾に入る
+                }
+                axios.get(url).then(response => (this.defaultTasks = response.data))
             },
             fetchtasks(){//すべてのtasksを取得
                 //console.log(this.$store.state.user);

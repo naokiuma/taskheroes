@@ -21,6 +21,7 @@ class ItemController extends Controller
     {   //ユーザー情報
         if($id == null){
             $items = Item::orderBy('id')->get();
+            Log::debug("すべて：".$items);
             return $items;
             
         }else{
@@ -33,6 +34,8 @@ class ItemController extends Controller
             //$temp = User::where('id', $id)->get()->items;//getではCollectionクラス。foreachで回せばmodel。
             $items = User::find($id)->items; //findではモデルオブジェクトがかえる
             //ちなみにfirst()はモデルをかえす。
+            
+            Log::debug("自分の：".$items);
             return $items;
             } 
         }
