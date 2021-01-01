@@ -2036,17 +2036,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
 //
 //
 //
@@ -2076,13 +2065,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       //元々
       have: [] //ハッシュ
 
-      /*
-      Items[
-          {name:'all',items:[]},
-          {name:'myitems',items:[]}
-      ]
-      */
-
     };
   },
   created: function created() {
@@ -2091,17 +2073,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     //apiから一覧を取得
-    console.log("mounted"); //console.log(this.items);
-    //this.have = this.items;
+    console.log("mounted");
+    this.fetchItems();
+    this.fetchMyItems(); //console.log(this.items);
     //console.log(this.have);
-
-    /*for(let i = 0; i < this.myitems.length; i++){
-        if(this.have[this.myitems[i].name] == undefined){
-            this.have[this.myitems[i].name] = 1;
-        }
-    }
-    */
   },
+
+  /*
+  filters:{//どうもフィルターからデータにはアクセスできない様子
+    haveItem:function(val){
+        //hashの中に含まれているならtrueを返す
+        let have = this.have;
+        
+        console.log("haveItemです");
+        console.log(have);
+        console.log(val);
+        console.log("-------");
+    }
+  },*/
   methods: {
     fetchItems: function fetchItems() {
       var _this = this;
@@ -2113,7 +2102,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     fetchMyItems: function fetchMyItems() {
       var _this2 = this;
 
-      //並列処理！！！
+      //並列処理でhashも作成
       var url = '/api/itemlist/';
       var self = this;
 
@@ -2121,7 +2110,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         url = url + this.$store.state.user.id;
       }
 
-      axios.get(url).then(function (response) {
+      axios.get(url) //並列処理でhashも作成
+      .then(function (response) {
         return _this2.myitems = response.data;
       }) //myitemsに情報を入れる。
       .then(function () {
@@ -2133,36 +2123,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       });
     },
+    haveItem: function haveItem(val) {
+      //hashの中に含まれているならtrueを返す
+      console.log("haveItemです");
+      console.log(this.have);
+      console.log(val);
+      console.log(this.have[val]);
+      console.log("-------");
+
+      if (this.have[val] !== undefined) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     check: function check() {
       console.log(this.items);
       console.log(this.myitems);
       console.log(this.have);
     }
-  },
-  watch: {
-    myitems: {
-      handler: function handler() {
-        var _this3 = this;
-
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  _context.next = 2;
-                  return _this3.mounted;
-
-                case 2:
-                case "end":
-                  return _context.stop();
-              }
-            }
-          }, _callee);
-        }))();
-      },
-      immediate: true
-    }
   }
+  /*
+  watch:{
+      myitems:{
+          async handler (){
+              await this.mounted;
+          },
+          immediate:true
+      }
+  }
+  */
+
 });
 
 /***/ }),
@@ -2390,7 +2381,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       upcategory: "",
       newTask: false,
       activeItem: null,
-      tasknum: 0
+      tasknum: 0,
+      nowChoice: ""
     };
   },
   components: {
@@ -2403,7 +2395,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     //apiから一覧を取得
     //console.log(this.$store.state.user);
     //console.log("moutedです");
-    this.fetchtasks();
+    //this.fetchtasks();
+    switch (this.nowChoice) {
+      case 'after':
+        //console.log("afterを選んでる");
+        this.afterTasks();
+        break;
+
+      case 'before':
+        //console.log("beforeを選んでる");
+        this.beforeTasks();
+        break;
+
+      default:
+        //console.log("allを選んでる");
+        this.fetchtasks();
+    }
   },
   methods: {
     firsttasks: function firsttasks() {
@@ -2424,8 +2431,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       //すべてのtasksを取得
+      //firsttasksですべて取ってきてるんだから、ここではapi通信はせず、単にtasksに入れ込むべきでは？
       //console.log(this.$store.state.user);
-      var url = '/api/tasklist/';
+      var url = '/api/tasklist/'; //this.nowChoice = "all";
+
+      var self = this;
 
       if (this.$store.state.user.id) {
         url = url + this.$store.state.user.id;
@@ -2437,8 +2447,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     beforeTasks: function beforeTasks() {
       //未実施のtasksを取得
-      console.log(this.defaultTasks);
       this.tasks = [];
+      this.nowChoice = "before";
       console.log("beforeTasks");
 
       for (var i in this.defaultTasks) {
@@ -2450,6 +2460,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     afterTasks: function afterTasks() {
       //実施済のtasksを取得
       this.tasks = [];
+      this.nowChoice = "after";
       console.log("afterTasks");
 
       for (var i in this.defaultTasks) {
@@ -2469,7 +2480,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       console.log('/tasks/change/' + target); //コントローラー側でtaskの難しさをみて変更
 
       axios.post('/tasks/change/' + target).then(function (responce) {
-        self.fetchtasks();
+        self.fetchtasks(); //ここ！
+
         var tempmsg;
         var tempcategory;
 
@@ -2564,6 +2576,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   }
 });
+/*
+    switch(this.nowChoice){
+                    case 'after':
+                    //console.log("afterを選んでる");
+                    this.afterTasks();
+                    break;
+                    case 'before':
+                    //console.log("beforeを選んでる");
+                    this.beforeTasks();
+                    break;
+                    default:
+                    //console.log("allを選んでる");
+                    this.fetchtasks();
+                },
+
+    */
 
 /***/ }),
 
@@ -39802,22 +39830,25 @@ var render = function() {
         return _c("div", { key: item.index, staticClass: "each-item" }, [
           _c("h4", [_vm._v(_vm._s(item.name))]),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(item.description))])
-        ])
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _c("h3", { staticClass: "mypage-heading" }, [_vm._v("アイテム一覧")]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "items-wrapper" },
-      _vm._l(_vm.myitems, function(myitem) {
-        return _c("div", { key: myitem.index, staticClass: "each-item" }, [
-          _c("h4", [_vm._v(_vm._s(myitem.name))]),
+          _c("p", [_vm._v(_vm._s(item.description))]),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(myitem.description))])
+          _vm.haveItem(item.name) == 1
+            ? _c("img", {
+                attrs: { src: "/img/items/firstsowrd.png", alt: "" }
+              })
+            : _c("img", { attrs: { src: "/img/items/what.png" } }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              on: {
+                click: function($event) {
+                  return _vm.haveItem(item.name)
+                }
+              }
+            },
+            [_vm._v("アイテムあるか")]
+          )
         ])
       }),
       0
@@ -40022,7 +40053,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("すべてのタスク（※）")]
+        [_vm._v("すべてのタスク")]
       ),
       _vm._v(" "),
       _c(
@@ -40140,7 +40171,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("実行")]
+                    [_vm._v("実行する！")]
                   ),
                   _vm._v(" "),
                   _c(

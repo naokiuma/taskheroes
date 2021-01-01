@@ -4,12 +4,11 @@
         <div class="tasks-filter-btns">
             <button class="tasks-filter-btn" @click="beforeTasks()">未完了タスク</button>
             <button class="tasks-filter-btn" @click="afterTasks()">実施済みタスク</button>
-            <button class="tasks-filter-btn" @click="fetchtasks()">すべてのタスク（※）</button>
+            <button class="tasks-filter-btn" @click="fetchtasks()">すべてのタスク</button>
             <button class="tasks-filter-btn" @click="addTask()">新規タスク+</button>
         </div>
         <p>タスク数：</p>
         
-
         <div class="tasks-wrapper">
             <transition name="fade">
                 <div class="newTask" v-show="newTask"><Taskform /></div>
@@ -19,6 +18,7 @@
                 <div v-show="up" class="taskupParameters">{{ upcategory }} がアップ！</div>
             </transition> 
             
+            <!--<div class="each-task card animate__animated animate__flipInX" v-for="task in tasks" :key="task.id">-->
             <div class="each-task card" v-for="task in tasks" :key="task.id">
                 <!--表-->
                 <div class="card__side card__side--front" v-bind:class="{ rotate: task.done }">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="each-task__state">
-                        <button class="main-button" @click ="clicked(task)">実行</button>
+                        <button class="main-button" @click ="clicked(task)">実行する！</button>
                         <button class="main-button" v-on:click="onActive(task)">メモをみる</button>
                         <button class="sub-button" @click ="deleate(task)">削除</button>
 
@@ -115,7 +115,8 @@
                 upcategory:"",
                 newTask:false,
                 activeItem:null,
-                tasknum:0
+                tasknum:0,
+                nowChoice:""
             }
         },
         components:{
@@ -128,7 +129,20 @@
         mounted(){//apiから一覧を取得
             //console.log(this.$store.state.user);
             //console.log("moutedです");
-            this.fetchtasks();
+            //this.fetchtasks();
+            switch(this.nowChoice){
+                    case 'after':
+                    //console.log("afterを選んでる");
+                    this.afterTasks();
+                    break;
+                    case 'before':
+                    //console.log("beforeを選んでる");
+                    this.beforeTasks();
+                    break;
+                    default:
+                    //console.log("allを選んでる");
+                    this.fetchtasks();
+                }
         },
         methods:{
             firsttasks(){//すべてのtasksを取得
@@ -139,16 +153,19 @@
                 axios.get(url).then(response => (this.defaultTasks = response.data))
             },
             fetchtasks(){//すべてのtasksを取得
+            //firsttasksですべて取ってきてるんだから、ここではapi通信はせず、単にtasksに入れ込むべきでは？
                 //console.log(this.$store.state.user);
                 let url = '/api/tasklist/';
+                //this.nowChoice = "all";
+                let self = this;
                 if(this.$store.state.user.id){
                     url = url + this.$store.state.user.id;
                 }
                 axios.get(url).then(response => (this.tasks = response.data))
             },
             beforeTasks(){//未実施のtasksを取得
-                console.log(this.defaultTasks);
                 this.tasks = [];
+                this.nowChoice = "before";
                 console.log("beforeTasks");
                     for(var i in this.defaultTasks){
                         if(this.defaultTasks[i].done == 0){
@@ -158,6 +175,7 @@
             },
             afterTasks(){//実施済のtasksを取得
                 this.tasks = [];
+                this.nowChoice = "after";
                 console.log("afterTasks");
                     for(var i in this.defaultTasks){
                         if(this.defaultTasks[i].done == 1){
@@ -175,31 +193,30 @@
                 console.log('/tasks/change/' + target);//コントローラー側でtaskの難しさをみて変更
                 axios.post('/tasks/change/' + target)
                 .then(function(responce){
-                    self.fetchtasks();
+                    self.fetchtasks();//ここ！
                     let tempmsg;
                     let tempcategory;
                     if(task.categories_id == "1"){
-                        tempcategory = "力";
-                    }else if(task.categories_id == "2"){
-                        tempcategory = "魔力";
-                    }else{
-                        tempcategory = "知力";
-                    }
-                    if(task.done == 1){
-                        tempmsg = task.title + ' をキャンセルしました。' + tempcategory + 'が下がります。';
-                    }else{
-                        tempmsg = task.title + ' を実施しました。' + tempcategory + 'が上がりました。';
-                        //console.log(tempmsg);
-                        self.upcategory = "";
-                        self.up = true;
-                        self.upcategory = tempcategory;
-                        setTimeout(self.fadeout, 1000);
+                            tempcategory = "力";
+                        }else if(task.categories_id == "2"){
+                            tempcategory = "魔力";
+                        }else{
+                            tempcategory = "知力";
+                        }
+                        if(task.done == 1){
+                            tempmsg = task.title + ' をキャンセルしました。' + tempcategory + 'が下がります。';
+                        }else{
+                            tempmsg = task.title + ' を実施しました。' + tempcategory + 'が上がりました。';
+                            //console.log(tempmsg);
+                            self.upcategory = "";
+                            self.up = true;
+                            self.upcategory = tempcategory;
+                            setTimeout(self.fadeout, 1000);
                     }
                     self.$store.commit('message/setContent',{//メッセージを入れ
                         content: tempmsg
                     })
                     self.$store.dispatch('register');//パラメータの更新
-
                 })
             },
             deletetask(task){
@@ -249,7 +266,24 @@
                 immediate:true
             }
         }
-
- 
+    
     }
+    
+        
+/*
+    switch(this.nowChoice){
+                    case 'after':
+                    //console.log("afterを選んでる");
+                    this.afterTasks();
+                    break;
+                    case 'before':
+                    //console.log("beforeを選んでる");
+                    this.beforeTasks();
+                    break;
+                    default:
+                    //console.log("allを選んでる");
+                    this.fetchtasks();
+                },
+
+    */
 </script>

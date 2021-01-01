@@ -5,21 +5,18 @@
             <div class="each-item" v-for ="item in items" :key="item.index">
                 <h4>{{item.name}}</h4>
                 <p>{{item.description}}</p>
+                <!--<p v-if="haveItem(item.name) == 1">{{item.description}}</p>-->
+                <img v-if="haveItem(item.name) == 1" src="/img/items/firstsowrd.png" alt="">
+                <img v-else src="/img/items/what.png">
+                <button @click="haveItem(item.name)">アイテムあるか</button>
             </div>
 
         </div>
 
-        <h3 class="mypage-heading">アイテム一覧</h3>
-        <div class="items-wrapper">
-            <div class="each-item" v-for ="myitem in myitems" :key="myitem.index">
-                <h4>{{myitem.name}}</h4>
-                <p>{{myitem.description}}</p>
-            </div>
-
-        </div>
         <button @click="check()">ボタン</button>
     </section>
 </template>
+
 
 <script>
 
@@ -29,12 +26,6 @@
                 items:[],//元々
                 myitems:[],//元々
                 have:[]//ハッシュ
-                /*
-                Items[
-                    {name:'all',items:[]},
-                    {name:'myitems',items:[]}
-                ]
-                */
             }
         },
         created(){
@@ -45,17 +36,23 @@
         },
         mounted(){//apiから一覧を取得
             console.log("mounted");
+            this.fetchItems();
+            this.fetchMyItems();
+            
             //console.log(this.items);
-            //this.have = this.items;
             //console.log(this.have);
-            /*for(let i = 0; i < this.myitems.length; i++){
-                if(this.have[this.myitems[i].name] == undefined){
-                    this.have[this.myitems[i].name] = 1;
-                }
-            }
-            */
+        },/*
+        filters:{//どうもフィルターからデータにはアクセスできない様子
+            haveItem:function(val){
+                //hashの中に含まれているならtrueを返す
+                let have = this.have;
                 
-        },
+                console.log("haveItemです");
+                console.log(have);
+                console.log(val);
+                console.log("-------");
+            }
+        },*/
         methods:{
             fetchItems(){
                 axios
@@ -64,14 +61,14 @@
                     this.items = response.data
                     ))
             },
-            fetchMyItems(){//並列処理！！！
+            fetchMyItems(){//並列処理でhashも作成
                 let url = '/api/itemlist/';
                 let self = this;
                 if(this.$store.state.user.id){
                     url = url + this.$store.state.user.id;
                 }
                 axios
-                .get(url)
+                .get(url)//並列処理でhashも作成
                 .then(response => (this.myitems = response.data))//myitemsに情報を入れる。
                 .then(function() {//myitemsの情報をhashに入れる
                      for(let i = 0; i < self.myitems.length; i++){
@@ -81,6 +78,21 @@
                     }
                 })
             },
+            haveItem(val){
+                //hashの中に含まれているならtrueを返す
+                console.log("haveItemです");
+                console.log(this.have);
+                console.log(val);
+                console.log(this.have[val]);
+                console.log("-------");
+                
+                if(this.have[val] !== undefined){
+                    return true;
+                }else{
+                    return false;
+                }
+
+            },
             check(){
 
                 console.log(this.items);
@@ -88,7 +100,8 @@
                 console.log(this.have);
             }
             
-        },
+        }
+        /*
         watch:{
             myitems:{
                 async handler (){
@@ -97,6 +110,7 @@
                 immediate:true
             }
         }
+        */
     }
 
 
