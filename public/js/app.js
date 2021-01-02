@@ -2056,6 +2056,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2063,8 +2071,9 @@ __webpack_require__.r(__webpack_exports__);
       //元々
       myitems: [],
       //元々
-      have: [] //ハッシュ
-
+      have: [],
+      //ハッシュ
+      itemShow: null
     };
   },
   created: function created() {
@@ -2078,19 +2087,6 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchMyItems(); //console.log(this.items);
     //console.log(this.have);
   },
-
-  /*
-  filters:{//どうもフィルターからデータにはアクセスできない様子
-    haveItem:function(val){
-        //hashの中に含まれているならtrueを返す
-        let have = this.have;
-        
-        console.log("haveItemです");
-        console.log(have);
-        console.log(val);
-        console.log("-------");
-    }
-  },*/
   methods: {
     fetchItems: function fetchItems() {
       var _this = this;
@@ -2136,6 +2132,19 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return false;
       }
+    },
+    showItemDetail: function showItemDetail(item) {
+      console.log("ここが見える");
+      console.log(item.id);
+
+      if (this.itemShow == item.id) {
+        this.itemShow = null;
+      } else {
+        console.log("通る？");
+        this.itemShow = item.id;
+      }
+
+      console.log(this.itemShow);
     },
     check: function check() {
       console.log(this.items);
@@ -2374,7 +2383,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       defaultTasks: [],
       //fetchtaskで取得する全て。ここは変更しない
       tasks: [],
-      //これが毎回出てくる情報
+      //実際に表示するtasks。これをソートする
       filterFlg: false,
       up: false,
       //task実施時の表示
@@ -2389,31 +2398,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     Taskform: _TaskFormComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   created: function created() {
-    this.firsttasks(); //this.firsttasks(this.defaultTasks);
+    this.firstTasks(); //this.firsttasks(this.defaultTasks);
   },
   mounted: function mounted() {
     //apiから一覧を取得
     //console.log(this.$store.state.user);
     //console.log("moutedです");
-    //this.fetchtasks();
-    switch (this.nowChoice) {
-      case 'after':
-        //console.log("afterを選んでる");
-        this.afterTasks();
-        break;
+    this.fetchtasks();
+  },
+  computed: {
+    sortedTasks: function sortedTasks() {
+      console.log(this.nowChoice); //console.log(this.tasks);
 
-      case 'before':
-        //console.log("beforeを選んでる");
-        this.beforeTasks();
-        break;
-
-      default:
-        //console.log("allを選んでる");
-        this.fetchtasks();
+      return this.sortedTasks;
     }
   },
   methods: {
-    firsttasks: function firsttasks() {
+    firstTasks: function firstTasks() {
       var _this = this;
 
       //すべてのtasksを取得
@@ -2431,14 +2432,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       //すべてのtasksを取得
-      //firsttasksですべて取ってきてるんだから、ここではapi通信はせず、単にtasksに入れ込むべきでは？
-      //console.log(this.$store.state.user);
-      var url = '/api/tasklist/'; //this.nowChoice = "all";
-
-      var self = this;
+      this.firstTasks();
+      this.nowChoice = "all";
+      console.log("fetchTasks");
+      this.tasks = [];
+      this.tasks = this.defaultTasks;
+      var url = '/api/tasklist/';
 
       if (this.$store.state.user.id) {
-        url = url + this.$store.state.user.id;
+        url = url + this.$store.state.user.id; //ユーザー情報ある場合は数字が末尾に入る
       }
 
       axios.get(url).then(function (response) {
@@ -2446,28 +2448,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     beforeTasks: function beforeTasks() {
-      //未実施のtasksを取得
-      this.tasks = [];
+      //未実施のtasksを取得ここを改造
       this.nowChoice = "before";
       console.log("beforeTasks");
+      this.firstTasks(); //一旦すべて取得
+
+      this.tasks = [];
+      var temp = [];
 
       for (var i in this.defaultTasks) {
         if (this.defaultTasks[i].done == 0) {
-          this.tasks.push(this.defaultTasks[i]);
+          temp.push(this.defaultTasks[i]);
         }
       }
+
+      this.tasks = temp;
+      console.log(this.tasks); //this.sortedTasks();
     },
     afterTasks: function afterTasks() {
       //実施済のtasksを取得
-      this.tasks = [];
       this.nowChoice = "after";
       console.log("afterTasks");
+      this.firstTasks();
+      this.tasks = [];
 
       for (var i in this.defaultTasks) {
         if (this.defaultTasks[i].done == 1) {
           this.tasks.push(this.defaultTasks[i]);
         }
       }
+
+      console.log(this.tasks);
     },
     addTask: function addTask() {
       //task追加の表示
@@ -2475,13 +2486,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     clicked: function clicked(task) {
       //コントローラー側で処理
+      console.log("今のnowChoiceは" + this.nowChoice);
       var target = task.id;
       var self = this;
       console.log('/tasks/change/' + target); //コントローラー側でtaskの難しさをみて変更
 
       axios.post('/tasks/change/' + target).then(function (responce) {
-        self.fetchtasks(); //ここ！
-
         var tempmsg;
         var tempcategory;
 
@@ -2496,8 +2506,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         if (task.done == 1) {
           tempmsg = task.title + ' をキャンセルしました。' + tempcategory + 'が下がります。';
         } else {
-          tempmsg = task.title + ' を実施しました。' + tempcategory + 'が上がりました。'; //console.log(tempmsg);
-
+          tempmsg = task.title + ' を実施しました。' + tempcategory + 'が上がりました。';
           self.upcategory = "";
           self.up = true;
           self.upcategory = tempcategory;
@@ -2509,6 +2518,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           content: tempmsg
         });
         self.$store.dispatch('register'); //パラメータの更新
+        //console.log(self.tasks)
+      }).then(function () {
+        //myitemsの情報をhashに入れる
+        self.fetchtasks(); //ここ！最後にした。
       });
     },
     deletetask: function deletetask(task) {
@@ -2562,7 +2575,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               switch (_context.prev = _context.next) {
                 case 0:
                   _context.next = 2;
-                  return _this3.mounted;
+                  return _this3.fetchtasks;
 
                 case 2:
                 case "end":
@@ -39828,26 +39841,43 @@ var render = function() {
       { staticClass: "items-wrapper" },
       _vm._l(_vm.items, function(item) {
         return _c("div", { key: item.index, staticClass: "each-item" }, [
-          _c("h4", [_vm._v(_vm._s(item.name))]),
-          _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(item.description))]),
-          _vm._v(" "),
-          _vm.haveItem(item.name) == 1
-            ? _c("img", {
-                attrs: { src: "/img/items/firstsowrd.png", alt: "" }
-              })
-            : _c("img", { attrs: { src: "/img/items/what.png" } }),
-          _vm._v(" "),
           _c(
-            "button",
+            "div",
             {
               on: {
                 click: function($event) {
-                  return _vm.haveItem(item.name)
+                  return _vm.showItemDetail(item)
                 }
               }
             },
-            [_vm._v("アイテムあるか")]
+            [
+              _vm.haveItem(item.name) == 1
+                ? _c("img", { attrs: { src: item.image, alt: "" } })
+                : _c("img", { attrs: { src: "/img/items/what.png" } })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.itemShow == item.id,
+                  expression: "itemShow == item.id"
+                }
+              ]
+            },
+            [
+              _c("h4", [_vm._v(_vm._s(item.name))]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(item.description))]),
+              _vm._v(" "),
+              _vm.haveItem(item.name) == 1
+                ? _c("p", [_vm._v("取得条件：" + _vm._s(item.requirement))])
+                : _c("p", [_vm._v("取得条件：不明")])
+            ]
           )
         ])
       }),

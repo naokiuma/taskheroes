@@ -3,12 +3,20 @@
         <h3 class="mypage-heading">アイテム一覧</h3>
         <div class="items-wrapper">
             <div class="each-item" v-for ="item in items" :key="item.index">
-                <h4>{{item.name}}</h4>
-                <p>{{item.description}}</p>
-                <!--<p v-if="haveItem(item.name) == 1">{{item.description}}</p>-->
-                <img v-if="haveItem(item.name) == 1" src="/img/items/firstsowrd.png" alt="">
-                <img v-else src="/img/items/what.png">
-                <button @click="haveItem(item.name)">アイテムあるか</button>
+                <div v-on:click="showItemDetail(item)">
+                
+                    <img v-if="haveItem(item.name) == 1" v-bind:src="item.image" alt="">
+                    <img v-else src="/img/items/what.png">
+                
+                </div>
+
+                <div v-show="itemShow == item.id">
+                    <h4>{{item.name}}</h4>
+                    <p>{{item.description}}</p>
+                    <p v-if="haveItem(item.name) == 1">取得条件：{{item.requirement}}</p>
+                    <p v-else>取得条件：不明</p>
+                </div>
+                <!--<button @click="haveItem(item.name)">アイテムあるか</button>-->
             </div>
 
         </div>
@@ -25,7 +33,8 @@
             return{
                 items:[],//元々
                 myitems:[],//元々
-                have:[]//ハッシュ
+                have:[],//ハッシュ
+                itemShow:null
             }
         },
         created(){
@@ -41,18 +50,7 @@
             
             //console.log(this.items);
             //console.log(this.have);
-        },/*
-        filters:{//どうもフィルターからデータにはアクセスできない様子
-            haveItem:function(val){
-                //hashの中に含まれているならtrueを返す
-                let have = this.have;
-                
-                console.log("haveItemです");
-                console.log(have);
-                console.log(val);
-                console.log("-------");
-            }
-        },*/
+        },
         methods:{
             fetchItems(){
                 axios
@@ -93,8 +91,19 @@
                 }
 
             },
+            showItemDetail(item){
+                console.log("ここが見える");
+                console.log(item.id);
+                if(this.itemShow == item.id){
+                    this.itemShow = null;
+                }else{
+                    console.log("通る？");
+                    this.itemShow = item.id;
+                }
+                console.log(this.itemShow);
+                
+            },
             check(){
-
                 console.log(this.items);
                 console.log(this.myitems);
                 console.log(this.have);

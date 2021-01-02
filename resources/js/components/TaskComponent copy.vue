@@ -109,41 +109,63 @@
         data(){
             return{
                 defaultTasks:[],//fetchtaskで取得する全て。ここは変更しない
-                tasks:[],//実際に表示するtasks。これをソートする
+                tasks:[],//これが毎回出てくる情報
                 filterFlg:false,
                 up:false,//task実施時の表示
                 upcategory:"",
                 newTask:false,
                 activeItem:null,
                 tasknum:0,
-                nowChoice:"",
-                
+                nowChoice:""
             }
         },
         components:{
             Taskform
         },
         created(){
-            this.firstTasks();
+            this.firsttasks();
             //this.firsttasks(this.defaultTasks);
-        
         },
         mounted(){//apiから一覧を取得
             //console.log(this.$store.state.user);
             //console.log("moutedです");
-           this.fetchtasks();
-            
+            this.fetchtasks();
+            /*
+            switch(this.nowChoice){
+                    case 'after':
+                    console.log("afterを選んでる");
+                    this.afterTasks();
+                    break;
+                    case 'before':
+                    console.log("beforeを選んでる");
+                    this.beforeTasks();
+                    break;
+                    default:
+                    console.log("allを選んでる");
+                    this.fetchtasks();
+                }
+                */
         },
         computed:{
-            sortedTasks:function(){
-                console.log(this.nowChoice);
-               //console.log(this.tasks);
-                return this.sortedTasks;
+            checkTasks:function(){
+                switch(this.nowChoice){
+                    case 'after':
+                    console.log("afterを選んでる");
+                    this.afterTasks();
+                    break;
+                    case 'before':
+                    console.log("beforeを選んでる");
+                    this.beforeTasks();
+                    break;
+                    default:
+                    console.log("allを選んでる");
+                    this.fetchtasks();
+                }
             }
 
         },
         methods:{
-            firstTasks(){//すべてのtasksを取得
+            firsttasks(){//すべてのtasksを取得
                 let url = '/api/tasklist/';
                 if(this.$store.state.user.id){
                     url = url + this.$store.state.user.id;//ユーザー情報ある場合は数字が末尾に入る
@@ -151,55 +173,44 @@
                     axios.get(url).then(response => (this.defaultTasks = response.data))
             },
             fetchtasks(){//すべてのtasksを取得
-                this.firstTasks();
-                this.nowChoice =  "all";
-                console.log("fetchTasks");
-                this.tasks = [];
-                this.tasks = this.defaultTasks;
-
-                
+                //this.tasks = this.defaultTasks;
+                //console.log(this.$store.state.user);
                 let url = '/api/tasklist/';
+                //this.nowChoice = "all";
+                let self = this;
                 if(this.$store.state.user.id){
-                    url = url + this.$store.state.user.id;//ユーザー情報ある場合は数字が末尾に入る
+                    url = url + this.$store.state.user.id;
+                }
+                axios.get(url).then(response => {
+                        (this.tasks = response.data)
                     }
-                    axios.get(url).then(response => (this.tasks = response.data))
-                
-
+                )                
             },
             beforeTasks(){//未実施のtasksを取得ここを改造
+                this.tasks = [];
                 this.nowChoice = "before";
                 console.log("beforeTasks");
-                this.firstTasks();//一旦すべて取得
-                this.tasks = [];
-                let temp = []
                     for(var i in this.defaultTasks){
                         if(this.defaultTasks[i].done == 0){
-                            temp.push(this.defaultTasks[i]);
+                            this.tasks.push(this.defaultTasks[i]);
                         }
                     }
-                    this.tasks = temp;
-                    console.log(this.tasks);
-                    //this.sortedTasks();
             },
             afterTasks(){//実施済のtasksを取得
+                this.tasks = [];
                 this.nowChoice = "after";
                 console.log("afterTasks");
-                this.firstTasks();
-                this.tasks = [];
                     for(var i in this.defaultTasks){
                         if(this.defaultTasks[i].done == 1){
                             this.tasks.push(this.defaultTasks[i]);
                         }
                     }
-                    console.log(this.tasks);
             },
             addTask(){//task追加の表示
                 this.newTask = !this.newTask;
             },
             clicked(task){
                 //コントローラー側で処理
-                console.log("今のnowChoiceは" + this.nowChoice);
-
                 let target = task.id;
                 let self = this;
                 console.log('/tasks/change/' + target);//コントローラー側でtaskの難しさをみて変更
@@ -214,10 +225,12 @@
                         }else{
                             tempcategory = "知力";
                     }
+
                     if(task.done == 1){
-                        tempmsg = task.title + ' をキャンセルしました。' + tempcategory + 'が下がります。'; 
+                            tempmsg = task.title + ' をキャンセルしました。' + tempcategory + 'が下がります。';
                         }else{
                             tempmsg = task.title + ' を実施しました。' + tempcategory + 'が上がりました。';
+                            //console.log(tempmsg);
                             self.upcategory = "";
                             self.up = true;
                             self.upcategory = tempcategory;
@@ -227,13 +240,9 @@
                         content: tempmsg
                     })
                     self.$store.dispatch('register');//パラメータの更新
-                    //console.log(self.tasks)
+                    self.fetchtasks();//ここ！最後にした。
 
                 })
-                .then(function() {//myitemsの情報をhashに入れる
-                      self.fetchtasks();//ここ！最後にした。
-                })
-               
             },
             deletetask(task){
                 //コントローラー側で処理
@@ -271,16 +280,17 @@
                 }
                 return star;
             }
+            
+
         },
         watch:{
             tasks:{
                 async handler (){
-                    await this.fetchtasks;
+                    await this.mounted;
                 },
                 immediate:true
             }
         }
-        
     
     }
     
