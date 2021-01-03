@@ -5,13 +5,21 @@ $color-main-dark:#0058ff;
 $color-base:#EFEFEF;
 $subColor: #FAD727;
 
-$space:60px;
+$space:50px;
 
 
 .radial-bg{
     background: radial-gradient(#ebfffd, #FFF);
 }
 
+body{
+    font-family: "Helvetica Neue",
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    sans-serif;
+}
 
 //------------見出し系
 
@@ -58,6 +66,30 @@ $space:60px;
 //------------フォントawasome系
 .fontawasome-margin{
     margin: auto 8px;
+}
+
+.billboard-arrow1{
+    font-size: 80px;
+    position: absolute;
+    color: #0000ff4a;
+    right: 40%;
+    bottom: 20%;
+}
+
+.billboard-arrow2{
+    font-size: 160px;
+    position: absolute;
+    color: #96fff573;
+    right: 30%;
+    bottom: 20%;
+}
+
+.billboard-arrow3{
+    font-size: 240px;
+    position: absolute;
+    color: #FAD72782;
+    right: 15%;
+    bottom: 20%;
 }
 
 .fontawasome-arrow{

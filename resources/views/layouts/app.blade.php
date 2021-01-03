@@ -15,11 +15,11 @@
     </head>
     <body>
         <header class="header">
-            <div class="header__logo-area animate__animated animate__bounceInLeft hovermoveLeft">
+            <div class="header__logo-area animate__animated animate__bounceInLeft">
             <a href="{{ route('top') }}">TaskHeroes</a>
             </div>
 
-            <div class="header__manu-area">
+            <nav class="header__manu-area">
             <ul class="header__nav">
                 
                 @guest
@@ -45,8 +45,6 @@
 
                 
             </ul>
-            
-            
             <!--
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -63,7 +61,7 @@
                 </div>
             @endif
             -->
-            </div>
+        </nav>
         </header>
         @yield('content')
 

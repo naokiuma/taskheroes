@@ -2063,7 +2063,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2077,14 +2076,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.fetchItems();
     this.fetchMyItems();
   },
   mounted: function mounted() {
     //apiから一覧を取得
     console.log("mounted");
-    this.fetchItems();
-    this.fetchMyItems(); //console.log(this.items);
+    this.fetchItems(); //this.fetchMyItems();
+    //console.log(this.items);
     //console.log(this.have);
   },
   methods: {
@@ -2240,9 +2238,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
  //ok
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      isActive: null
+    };
+  },
   components: {
     Message: _Message_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -2262,16 +2268,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _TaskFormComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaskFormComponent.vue */ "./resources/js/components/TaskFormComponent.vue");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
+/* harmony import */ var _TaskFormComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaskFormComponent.vue */ "./resources/js/components/TaskFormComponent.vue");
 //
 //
 //
@@ -2395,7 +2392,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   components: {
-    Taskform: _TaskFormComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Taskform: _TaskFormComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   created: function created() {
     this.firstTasks(); //this.firsttasks(this.defaultTasks);
@@ -2415,28 +2412,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     firstTasks: function firstTasks() {
+      //すべてのtasksを取得
+      var url = '/api/tasklist/';
+
+      if (this.$store.state.user.id) {
+        url = url + this.$store.state.user.id; //ユーザー情報ある場合は数字が末尾に入る
+      }
+
+      var self = this;
+      axios.get(url).then(function (response) {
+        console.log("うまくいったfirstTasks");
+        console.log(response.data);
+        self.defaultTasks = response.data;
+      });
+      return self.defaultTasks;
+    },
+    fetchtasks: function fetchtasks() {
       var _this = this;
 
       //すべてのtasksを取得
-      var url = '/api/tasklist/';
-
-      if (this.$store.state.user.id) {
-        url = url + this.$store.state.user.id; //ユーザー情報ある場合は数字が末尾に入る
-      }
-
-      axios.get(url).then(function (response) {
-        return _this.defaultTasks = response.data;
-      });
-    },
-    fetchtasks: function fetchtasks() {
-      var _this2 = this;
-
-      //すべてのtasksを取得
-      this.firstTasks();
       this.nowChoice = "all";
-      console.log("fetchTasks");
-      this.tasks = [];
-      this.tasks = this.defaultTasks;
+      console.log("fetchTasks"); //Vue.set(this.tasks,this.defaultTasks);
+
       var url = '/api/tasklist/';
 
       if (this.$store.state.user.id) {
@@ -2444,14 +2441,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       axios.get(url).then(function (response) {
-        return _this2.tasks = response.data;
+        return _this.tasks = response.data;
       });
+      return this.tasks;
     },
     beforeTasks: function beforeTasks() {
       //未実施のtasksを取得ここを改造
       this.nowChoice = "before";
-      console.log("beforeTasks");
-      this.firstTasks(); //一旦すべて取得
+      console.log("beforeTasks"); //this.firstTasks();//一旦すべて取得
 
       this.tasks = [];
       var temp = [];
@@ -2468,8 +2465,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     afterTasks: function afterTasks() {
       //実施済のtasksを取得
       this.nowChoice = "after";
-      console.log("afterTasks");
-      this.firstTasks();
+      console.log("afterTasks"); //this.firstTasks();
+
       this.tasks = [];
 
       for (var i in this.defaultTasks) {
@@ -2492,6 +2489,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       console.log('/tasks/change/' + target); //コントローラー側でtaskの難しさをみて変更
 
       axios.post('/tasks/change/' + target).then(function (responce) {
+        console.log(responce.data);
         var tempmsg;
         var tempcategory;
 
@@ -2517,11 +2515,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           //メッセージを入れ
           content: tempmsg
         });
-        self.$store.dispatch('register'); //パラメータの更新
-        //console.log(self.tasks)
-      }).then(function () {
-        //myitemsの情報をhashに入れる
-        self.fetchtasks(); //ここ！最後にした。
+        self.$store.dispatch('register'); //ユーザーパラメータの更新
+
+        self.firstTasks();
+        Vue.set(task, "done", responce.data.done); //対応taskのdoneに、帰ってきた値を入れる。
+
+        return task;
       });
     },
     deletetask: function deletetask(task) {
@@ -2563,48 +2562,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return star;
     }
-  },
-  watch: {
-    tasks: {
-      handler: function handler() {
-        var _this3 = this;
-
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  _context.next = 2;
-                  return _this3.fetchtasks;
-
-                case 2:
-                case "end":
-                  return _context.stop();
-              }
-            }
-          }, _callee);
-        }))();
-      },
-      immediate: true
-    }
   }
-});
-/*
-    switch(this.nowChoice){
-                    case 'after':
-                    //console.log("afterを選んでる");
-                    this.afterTasks();
-                    break;
-                    case 'before':
-                    //console.log("beforeを選んでる");
-                    this.beforeTasks();
-                    break;
-                    default:
-                    //console.log("allを選んでる");
-                    this.fetchtasks();
-                },
+  /*,
+  
+  watch:{
+      tasks:{
+          async handler (){
+              await this.fetchtasks;
+          },
+          immediate:true
+      }
+  }
+  */
 
-    */
+});
 
 /***/ }),
 
@@ -39738,7 +39709,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "section",
-    { staticClass: "section-status" },
+    { staticClass: "section-status animate__animated animate__bounceInRight" },
     [
       _c("h3", { staticClass: "mypage-heading" }, [_vm._v("ステータス")]),
       _vm._v(" "),
@@ -39833,69 +39804,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [
-    _c("h3", { staticClass: "mypage-heading" }, [_vm._v("アイテム一覧")]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "items-wrapper" },
-      _vm._l(_vm.items, function(item) {
-        return _c("div", { key: item.index, staticClass: "each-item" }, [
+  return _c(
+    "div",
+    { staticClass: "section-items animate__animated animate__bounceInRight" },
+    [
+      _c("h3", { staticClass: "mypage-heading" }, [_vm._v("アイテム一覧")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "items-wrapper" },
+        [
+          _vm._l(_vm.items, function(item) {
+            return _c("div", { key: item.index, staticClass: "each-item" }, [
+              _c(
+                "div",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.showItemDetail(item)
+                    }
+                  }
+                },
+                [
+                  _vm.haveItem(item.name) == 1
+                    ? _c("img", { attrs: { src: item.image, alt: "" } })
+                    : _c("img", { attrs: { src: "/img/items/what.png" } })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "aside",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.itemShow == item.id,
+                      expression: "itemShow == item.id"
+                    }
+                  ],
+                  staticClass: "each-item__detail"
+                },
+                [
+                  _c("h4", [_vm._v(_vm._s(item.name))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(item.description))]),
+                  _vm._v(" "),
+                  _vm.haveItem(item.name) == 1
+                    ? _c("p", [_vm._v("取得条件：" + _vm._s(item.requirement))])
+                    : _c("p", [_vm._v("取得条件：不明")])
+                ]
+              )
+            ])
+          }),
+          _vm._v(" "),
           _c(
-            "div",
+            "button",
             {
               on: {
                 click: function($event) {
-                  return _vm.showItemDetail(item)
+                  return _vm.check()
                 }
               }
             },
-            [
-              _vm.haveItem(item.name) == 1
-                ? _c("img", { attrs: { src: item.image, alt: "" } })
-                : _c("img", { attrs: { src: "/img/items/what.png" } })
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.itemShow == item.id,
-                  expression: "itemShow == item.id"
-                }
-              ]
-            },
-            [
-              _c("h4", [_vm._v(_vm._s(item.name))]),
-              _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(item.description))]),
-              _vm._v(" "),
-              _vm.haveItem(item.name) == 1
-                ? _c("p", [_vm._v("取得条件：" + _vm._s(item.requirement))])
-                : _c("p", [_vm._v("取得条件：不明")])
-            ]
+            [_vm._v("ボタン")]
           )
-        ])
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        on: {
-          click: function($event) {
-            return _vm.check()
-          }
-        }
-      },
-      [_vm._v("ボタン")]
-    )
-  ])
+        ],
+        2
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -40008,13 +39986,35 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "myinfo" } },
+    { staticClass: "myinfo" },
     [
-      _c("router-link", { attrs: { to: "/status" } }, [_vm._v("ステータス")]),
-      _vm._v(" "),
-      _c("router-link", { attrs: { to: "/tasks" } }, [_vm._v("タスク一覧")]),
-      _vm._v(" "),
-      _c("router-link", { attrs: { to: "/items" } }, [_vm._v("アイテム一覧")]),
+      _c(
+        "section",
+        { staticClass: "sidebar" },
+        [
+          _c(
+            "router-link",
+            { class: { sideIsClicked: _vm.isActive }, attrs: { to: "/tasks" } },
+            [_vm._v("タスク")]
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            {
+              class: { sideIsClicked: _vm.isActive },
+              attrs: { to: "/status" }
+            },
+            [_vm._v("ステータス")]
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { class: { sideIsClicked: _vm.isActive }, attrs: { to: "/items" } },
+            [_vm._v("アイテム")]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("RouterView")
     ],
@@ -40043,313 +40043,318 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "section-tasks" }, [
-    _c("h3", { staticClass: "mypage-heading" }, [_vm._v("ステータス")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "tasks-filter-btns" }, [
-      _c(
-        "button",
-        {
-          staticClass: "tasks-filter-btn",
-          on: {
-            click: function($event) {
-              return _vm.beforeTasks()
-            }
-          }
-        },
-        [_vm._v("未完了タスク")]
-      ),
+  return _c(
+    "section",
+    { staticClass: "section-tasks animate__animated animate__bounceInRight" },
+    [
+      _c("h3", { staticClass: "mypage-heading" }, [_vm._v("タスク一覧")]),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "tasks-filter-btn",
-          on: {
-            click: function($event) {
-              return _vm.afterTasks()
+      _c("div", { staticClass: "tasks-filter-btns" }, [
+        _c(
+          "button",
+          {
+            staticClass: "tasks-filter-btn",
+            on: {
+              click: function($event) {
+                return _vm.beforeTasks()
+              }
             }
-          }
-        },
-        [_vm._v("実施済みタスク")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "tasks-filter-btn",
-          on: {
-            click: function($event) {
-              return _vm.fetchtasks()
-            }
-          }
-        },
-        [_vm._v("すべてのタスク")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "tasks-filter-btn",
-          on: {
-            click: function($event) {
-              return _vm.addTask()
-            }
-          }
-        },
-        [_vm._v("新規タスク+")]
-      )
-    ]),
-    _vm._v(" "),
-    _c("p", [_vm._v("タスク数：")]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "tasks-wrapper" },
-      [
-        _c("transition", { attrs: { name: "fade" } }, [
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.newTask,
-                  expression: "newTask"
-                }
-              ],
-              staticClass: "newTask"
-            },
-            [_c("Taskform")],
-            1
-          )
-        ]),
+          },
+          [_vm._v("未完了タスク")]
+        ),
         _vm._v(" "),
-        _c("transition", { attrs: { name: "bounce" } }, [
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.up,
-                  expression: "up"
-                }
-              ],
-              staticClass: "taskupParameters"
-            },
-            [_vm._v(_vm._s(_vm.upcategory) + " がアップ！")]
-          )
-        ]),
+        _c(
+          "button",
+          {
+            staticClass: "tasks-filter-btn",
+            on: {
+              click: function($event) {
+                return _vm.afterTasks()
+              }
+            }
+          },
+          [_vm._v("実施済みタスク")]
+        ),
         _vm._v(" "),
-        _vm._l(_vm.tasks, function(task) {
-          return _c("div", { key: task.id, staticClass: "each-task card" }, [
+        _c(
+          "button",
+          {
+            staticClass: "tasks-filter-btn",
+            on: {
+              click: function($event) {
+                return _vm.fetchtasks()
+              }
+            }
+          },
+          [_vm._v("すべてのタスク")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "tasks-filter-btn",
+            on: {
+              click: function($event) {
+                return _vm.addTask()
+              }
+            }
+          },
+          [_vm._v("新規タスク+")]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "tasks-wrapper" },
+        [
+          _c("transition", { attrs: { name: "fade" } }, [
             _c(
               "div",
               {
-                staticClass: "card__side card__side--front",
-                class: { rotate: task.done }
-              },
-              [
-                _c("div", { staticClass: "each-task__title" }, [
-                  _vm._v(_vm._s(task.title))
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
+                directives: [
                   {
-                    staticClass: "each-task__body",
-                    class: { "is-active": _vm.activeItem === task }
-                  },
-                  [_vm._v(_vm._s(task.body))]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "each-task__category" }, [
-                  task.categories_id == "1"
-                    ? _c("div", [
-                        _vm._v("\n                    力"),
-                        _c("img", {
-                          attrs: { src: "/../img/ken.png", alt: "" }
-                        })
-                      ])
-                    : task.categories_id == "2"
-                    ? _c("div", [
-                        _vm._v("\n                    魔力"),
-                        _c("img", {
-                          attrs: { src: "/../img/mahou.png", alt: "" }
-                        })
-                      ])
-                    : task.categories_id == "3"
-                    ? _c("div", [
-                        _vm._v("\n                    知力"),
-                        _c("img", {
-                          attrs: { src: "/../img/know.png", alt: "" }
-                        })
-                      ])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "each-task__state" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "main-button",
-                      on: {
-                        click: function($event) {
-                          return _vm.clicked(task)
-                        }
-                      }
-                    },
-                    [_vm._v("実行する！")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "main-button",
-                      on: {
-                        click: function($event) {
-                          return _vm.onActive(task)
-                        }
-                      }
-                    },
-                    [_vm._v("メモをみる")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "sub-button",
-                      on: {
-                        click: function($event) {
-                          return _vm.deleate(task)
-                        }
-                      }
-                    },
-                    [_vm._v("削除")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", {
-                  staticClass: "each-task__difficult",
-                  domProps: {
-                    innerHTML: _vm._s(_vm.forDifficult(task.difficult))
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.newTask,
+                    expression: "newTask"
                   }
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "each-task__time" }, [
-                  _vm._v("投稿日時：" + _vm._s(task.created_at))
-                ])
-              ]
-            ),
-            _vm._v(" "),
+                ],
+                staticClass: "newTask"
+              },
+              [_c("Taskform")],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("transition", { attrs: { name: "bounce" } }, [
             _c(
               "div",
               {
-                staticClass: "card__side card__side--back",
-                class: { rotate: !task.done }
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.up,
+                    expression: "up"
+                  }
+                ],
+                staticClass: "taskupParameters"
               },
               [
-                _c("div", { staticClass: "each-task__title" }, [
-                  _vm._v(_vm._s(task.title))
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "each-task__body",
-                    class: { "is-active": _vm.activeItem === task }
-                  },
-                  [_vm._v(_vm._s(task.body))]
-                ),
-                _vm._v(" "),
-                _c("p", { staticClass: "donetext" }, [_vm._v("実施済み")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "each-task__category" }, [
-                  task.categories_id == "1"
-                    ? _c("div", [
-                        _vm._v("\n                    力"),
-                        _c("img", {
-                          attrs: { src: "/../img/ken.png", alt: "" }
-                        })
-                      ])
-                    : task.categories_id == "2"
-                    ? _c("div", [
-                        _vm._v("\n                    魔力"),
-                        _c("img", {
-                          attrs: { src: "/../img/mahou.png", alt: "" }
-                        })
-                      ])
-                    : task.categories_id == "3"
-                    ? _c("div", [
-                        _vm._v("\n                    知力"),
-                        _c("img", {
-                          attrs: { src: "/../img/know.png", alt: "" }
-                        })
-                      ])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "each-task__state" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "main-button",
-                      on: {
-                        click: function($event) {
-                          return _vm.clicked(task)
-                        }
-                      }
-                    },
-                    [_vm._v("戻す")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "main-button",
-                      on: {
-                        click: function($event) {
-                          return _vm.onActive(task)
-                        }
-                      }
-                    },
-                    [_vm._v("メモをみる")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "sub-button",
-                      on: {
-                        click: function($event) {
-                          return _vm.deletetask(task)
-                        }
-                      }
-                    },
-                    [_vm._v("削除")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", {
-                  staticClass: "each-task__difficult",
-                  domProps: {
-                    innerHTML: _vm._s(_vm.forDifficult(task.difficult))
-                  }
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "each-task__time" }, [
-                  _vm._v("投稿日時：" + _vm._s(task.created_at))
-                ])
+                _vm._v(_vm._s(_vm.upcategory) + " がアップ！"),
+                _c("i", { staticClass: "fas fa-arrow-up fontawasome-arrow " })
               ]
             )
-          ])
-        })
-      ],
-      2
-    )
-  ])
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.tasks, function(task) {
+            return _c("div", { key: task.id, staticClass: "each-task card" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "card__side card__side--front",
+                  class: { rotate: task.done }
+                },
+                [
+                  _c("div", { staticClass: "each-task__title" }, [
+                    _vm._v(_vm._s(task.title))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "each-task__body",
+                      class: { "is-active": _vm.activeItem === task }
+                    },
+                    [_vm._v(_vm._s(task.body))]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "each-task__category" }, [
+                    task.categories_id == "1"
+                      ? _c("div", [
+                          _vm._v("\n                    力"),
+                          _c("img", {
+                            attrs: { src: "/../img/ken.png", alt: "" }
+                          })
+                        ])
+                      : task.categories_id == "2"
+                      ? _c("div", [
+                          _vm._v("\n                    魔力"),
+                          _c("img", {
+                            attrs: { src: "/../img/mahou.png", alt: "" }
+                          })
+                        ])
+                      : task.categories_id == "3"
+                      ? _c("div", [
+                          _vm._v("\n                    知力"),
+                          _c("img", {
+                            attrs: { src: "/../img/know.png", alt: "" }
+                          })
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "each-task__state" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "main-button",
+                        on: {
+                          click: function($event) {
+                            return _vm.clicked(task)
+                          }
+                        }
+                      },
+                      [_vm._v("実行する！")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "main-button",
+                        on: {
+                          click: function($event) {
+                            return _vm.onActive(task)
+                          }
+                        }
+                      },
+                      [_vm._v("メモをみる")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "sub-button",
+                        on: {
+                          click: function($event) {
+                            return _vm.deleate(task)
+                          }
+                        }
+                      },
+                      [_vm._v("削除")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass: "each-task__difficult",
+                    domProps: {
+                      innerHTML: _vm._s(_vm.forDifficult(task.difficult))
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "each-task__time" }, [
+                    _vm._v("投稿日時：" + _vm._s(task.created_at))
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "card__side card__side--back",
+                  class: { rotate: !task.done }
+                },
+                [
+                  _c("div", { staticClass: "each-task__title" }, [
+                    _vm._v(_vm._s(task.title))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "each-task__body",
+                      class: { "is-active": _vm.activeItem === task }
+                    },
+                    [_vm._v(_vm._s(task.body))]
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "donetext" }, [_vm._v("実施済み")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "each-task__category" }, [
+                    task.categories_id == "1"
+                      ? _c("div", [
+                          _vm._v("\n                    力"),
+                          _c("img", {
+                            attrs: { src: "/../img/ken.png", alt: "" }
+                          })
+                        ])
+                      : task.categories_id == "2"
+                      ? _c("div", [
+                          _vm._v("\n                    魔力"),
+                          _c("img", {
+                            attrs: { src: "/../img/mahou.png", alt: "" }
+                          })
+                        ])
+                      : task.categories_id == "3"
+                      ? _c("div", [
+                          _vm._v("\n                    知力"),
+                          _c("img", {
+                            attrs: { src: "/../img/know.png", alt: "" }
+                          })
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "each-task__state" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "main-button",
+                        on: {
+                          click: function($event) {
+                            return _vm.clicked(task)
+                          }
+                        }
+                      },
+                      [_vm._v("戻す")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "main-button",
+                        on: {
+                          click: function($event) {
+                            return _vm.onActive(task)
+                          }
+                        }
+                      },
+                      [_vm._v("メモをみる")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "sub-button",
+                        on: {
+                          click: function($event) {
+                            return _vm.deletetask(task)
+                          }
+                        }
+                      },
+                      [_vm._v("削除")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass: "each-task__difficult",
+                    domProps: {
+                      innerHTML: _vm._s(_vm.forDifficult(task.difficult))
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "each-task__time" }, [
+                    _vm._v("投稿日時：" + _vm._s(task.created_at))
+                  ])
+                ]
+              )
+            ])
+          })
+        ],
+        2
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

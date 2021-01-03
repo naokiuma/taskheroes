@@ -5,7 +5,10 @@
 
 <div class="billboard">
     
-    <img class="billboard-img1"src="../img/bottomup.png" alt="">
+    <!--<img class="billboard-img1"src="../img/bottomup.png" alt="">-->
+    <i class="fas fa-arrow-up billboard-arrow1"></i>
+    <i class="fas fa-arrow-up billboard-arrow2"></i>
+    <i class="fas fa-arrow-up billboard-arrow3"></i>
     <div class="billboard-title">
         <h1>
             <span class="heading-primary--main animate__animated animate__bounceInLeft">Task Heroes</span>

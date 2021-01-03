@@ -1,0 +1,31 @@
+.myinfo{
+    display: flex;
+}
+
+.sidebar{
+    width: 160px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background-color: #1a1818c9;
+    a{
+        color: #fefefe;
+        display: block;
+        text-align: center;
+        margin: 5px auto 5px auto;
+        &:hover{
+            text-decoration: none;
+            color: #fefefe;
+        }
+        &:first-child{
+            padding-top: 40px;
+        
+        }
+    }
+    
+}
+
+.sideIsClicked{
+    background: #fafafa;
+    color: black;
+}

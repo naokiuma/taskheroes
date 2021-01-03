@@ -1,5 +1,5 @@
 <template>
-    　<section class="section-status">
+    　<section class="section-status animate__animated animate__bounceInRight">
         <h3 class="mypage-heading">ステータス</h3>
         <h4>{{this.$store.state.user.name}}</h4>
         <div class="section-parameters">

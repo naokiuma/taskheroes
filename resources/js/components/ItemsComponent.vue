@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <div class="section-items animate__animated animate__bounceInRight">
         <h3 class="mypage-heading">アイテム一覧</h3>
         <div class="items-wrapper">
             <div class="each-item" v-for ="item in items" :key="item.index">
@@ -10,19 +10,18 @@
                 
                 </div>
 
-                <div v-show="itemShow == item.id">
+                <aside class="each-item__detail" v-show="itemShow == item.id">
                     <h4>{{item.name}}</h4>
                     <p>{{item.description}}</p>
                     <p v-if="haveItem(item.name) == 1">取得条件：{{item.requirement}}</p>
                     <p v-else>取得条件：不明</p>
-                </div>
+                </aside>
                 <!--<button @click="haveItem(item.name)">アイテムあるか</button>-->
             </div>
 
+            <button @click="check()">ボタン</button>
         </div>
-
-        <button @click="check()">ボタン</button>
-    </section>
+    </div>
 </template>
 
 
@@ -38,16 +37,12 @@
             }
         },
         created(){
-            this.fetchItems();
-            this.fetchMyItems();
-
-            
+            this.fetchMyItems();  
         },
         mounted(){//apiから一覧を取得
             console.log("mounted");
             this.fetchItems();
-            this.fetchMyItems();
-            
+            //this.fetchMyItems();
             //console.log(this.items);
             //console.log(this.have);
         },

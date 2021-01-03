@@ -1,10 +1,13 @@
 
 <template>
-    <div id="myinfo">
-        <router-link to="/status">ステータス</router-link>
-        <router-link to="/tasks">タスク一覧</router-link>
-        <router-link to="/items">アイテム一覧</router-link>
-        <!--<router-link to="/taskform">タスクを登録する</router-link>-->
+    <div class="myinfo">
+        <section class="sidebar">
+            <router-link to="/tasks" v-bind:class="{sideIsClicked: isActive}" >タスク</router-link>
+            <router-link to="/status" v-bind:class="{sideIsClicked: isActive}">ステータス</router-link>
+            <router-link to="/items" v-bind:class="{sideIsClicked: isActive}">アイテム</router-link>
+            <!--<router-link to="/taskform">タスクを登録する</router-link>-->
+        </section>
+        
 
         <RouterView /> 
         <!--<Message />-->
@@ -14,6 +17,11 @@
 <script>
     import Message from './Message.vue';//ok
     export default {
+        data(){
+            return {
+                isActive:null
+            }
+        },
         components:{
             Message
         },

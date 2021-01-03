@@ -1,13 +1,12 @@
 <template>
-    <section class="section-tasks">
-        <h3 class="mypage-heading">ステータス</h3>
+    <section class="section-tasks animate__animated animate__bounceInRight">
+        <h3 class="mypage-heading">タスク一覧</h3>
         <div class="tasks-filter-btns">
             <button class="tasks-filter-btn" @click="beforeTasks()">未完了タスク</button>
             <button class="tasks-filter-btn" @click="afterTasks()">実施済みタスク</button>
             <button class="tasks-filter-btn" @click="fetchtasks()">すべてのタスク</button>
             <button class="tasks-filter-btn" @click="addTask()">新規タスク+</button>
         </div>
-        <p>タスク数：</p>
         
         <div class="tasks-wrapper">
             <transition name="fade">
@@ -15,7 +14,7 @@
             </transition> 
             
             <transition name="bounce">
-                <div v-show="up" class="taskupParameters">{{ upcategory }} がアップ！</div>
+                <div v-show="up" class="taskupParameters">{{ upcategory }} がアップ！<i class="fas fa-arrow-up fontawasome-arrow "></i></div>
             </transition> 
             
             <!--<div class="each-task card animate__animated animate__flipInX" v-for="task in tasks" :key="task.id">-->
@@ -148,28 +147,32 @@
                 if(this.$store.state.user.id){
                     url = url + this.$store.state.user.id;//ユーザー情報ある場合は数字が末尾に入る
                     }
-                    axios.get(url).then(response => (this.defaultTasks = response.data))
+                let self = this;
+                axios.get(url).then(function(response){
+                    console.log("うまくいったfirstTasks");
+                    console.log(response.data);
+                    self.defaultTasks = response.data
+
+                 })
+                 return self.defaultTasks;
             },
             fetchtasks(){//すべてのtasksを取得
-                this.firstTasks();
                 this.nowChoice =  "all";
-                console.log("fetchTasks");
-                this.tasks = [];
-                this.tasks = this.defaultTasks;
-
-                
+                console.log("fetchTasks"); 
+                //Vue.set(this.tasks,this.defaultTasks);
                 let url = '/api/tasklist/';
                 if(this.$store.state.user.id){
                     url = url + this.$store.state.user.id;//ユーザー情報ある場合は数字が末尾に入る
                     }
-                    axios.get(url).then(response => (this.tasks = response.data))
-                
-
+                axios.get(url).then(response => (
+                    this.tasks = response.data
+                ))
+               return this.tasks;
             },
             beforeTasks(){//未実施のtasksを取得ここを改造
                 this.nowChoice = "before";
                 console.log("beforeTasks");
-                this.firstTasks();//一旦すべて取得
+                //this.firstTasks();//一旦すべて取得
                 this.tasks = [];
                 let temp = []
                     for(var i in this.defaultTasks){
@@ -184,7 +187,7 @@
             afterTasks(){//実施済のtasksを取得
                 this.nowChoice = "after";
                 console.log("afterTasks");
-                this.firstTasks();
+                //this.firstTasks();
                 this.tasks = [];
                     for(var i in this.defaultTasks){
                         if(this.defaultTasks[i].done == 1){
@@ -199,12 +202,12 @@
             clicked(task){
                 //コントローラー側で処理
                 console.log("今のnowChoiceは" + this.nowChoice);
-
                 let target = task.id;
                 let self = this;
                 console.log('/tasks/change/' + target);//コントローラー側でtaskの難しさをみて変更
                 axios.post('/tasks/change/' + target)
                 .then(function(responce){
+                    console.log(responce.data);
                     let tempmsg;
                     let tempcategory;
                     if(task.categories_id == "1"){
@@ -226,12 +229,11 @@
                     self.$store.commit('message/setContent',{//メッセージを入れ
                         content: tempmsg
                     })
-                    self.$store.dispatch('register');//パラメータの更新
-                    //console.log(self.tasks)
+                    self.$store.dispatch('register');//ユーザーパラメータの更新
+                    self.firstTasks();
+                    Vue.set(task,"done",responce.data.done);//対応taskのdoneに、帰ってきた値を入れる。
+                    return task;
 
-                })
-                .then(function() {//myitemsの情報をhashに入れる
-                      self.fetchtasks();//ここ！最後にした。
                 })
                
             },
@@ -271,7 +273,9 @@
                 }
                 return star;
             }
-        },
+        }
+        /*,
+        
         watch:{
             tasks:{
                 async handler (){
@@ -280,25 +284,11 @@
                 immediate:true
             }
         }
+        */
+        
         
     
     }
     
-        
-/*
-    switch(this.nowChoice){
-                    case 'after':
-                    //console.log("afterを選んでる");
-                    this.afterTasks();
-                    break;
-                    case 'before':
-                    //console.log("beforeを選んでる");
-                    this.beforeTasks();
-                    break;
-                    default:
-                    //console.log("allを選んでる");
-                    this.fetchtasks();
-                },
 
-    */
 </script>
