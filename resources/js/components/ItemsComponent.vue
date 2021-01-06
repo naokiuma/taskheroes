@@ -4,10 +4,9 @@
         <div class="items-wrapper">
             <div class="each-item" v-for ="item in items" :key="item.index">
                 <div v-on:click="showItemDetail(item)">
-                
                     <img v-if="haveItem(item.name) == 1" v-bind:src="item.image" alt="">
                     <img v-else src="/img/items/what.png">
-                
+                    
                 </div>
 
                 <aside class="each-item__detail" v-show="itemShow == item.id">
@@ -20,7 +19,9 @@
             </div>
 
             <button @click="check()">ボタン</button>
+            
         </div>
+        
     </div>
 </template>
 
@@ -30,8 +31,8 @@
     export default {
         data(){
             return{
-                items:[],//元々
-                myitems:[],//元々
+                items:[],
+                myitems:[],
                 have:[],//ハッシュ
                 itemShow:null
             }
@@ -42,9 +43,6 @@
         mounted(){//apiから一覧を取得
             console.log("mounted");
             this.fetchItems();
-            //this.fetchMyItems();
-            //console.log(this.items);
-            //console.log(this.have);
         },
         methods:{
             fetchItems(){

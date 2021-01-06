@@ -2,10 +2,19 @@
 @section('content')
 
 <div class="space"></div>
+<section class="bg-top-fadein">
+        <div class="fadein-wrapper">
+            <div class="image-wrapper">
+                
+            </div>
+            
+        </div>
+        <img src="/img/title.svg"> 
+</section>
 
 <div class="billboard">
     
-    <!--<img class="billboard-img1"src="../img/bottomup.png" alt="">-->
+    <img class="billboard-img1"src="../img/heroofhero.png" alt="">
     <i class="fas fa-arrow-up billboard-arrow1"></i>
     <i class="fas fa-arrow-up billboard-arrow2"></i>
     <i class="fas fa-arrow-up billboard-arrow3"></i>
@@ -24,7 +33,7 @@
         <h2 class="section-heading">About</h2>
         <p><span class="hovermoveLeft underLine">「TaskHeroes」とは</span></p>
         <p>やりたいこと、やるべきこと、、<br>
-        あなたの日常の「task」を勇者の力に変換するサービスです。<br><br>
+        あなたの日常の「task」を実行とともに勇者が育ち、タスク管理を促進するサービスです。<br><br>
         </p>
 
         <div class="about-examples radial-bg">
@@ -50,9 +59,7 @@
                 <img class="about-image2"src="../img/fighter.png" alt="">
             </div>
         </div>
-        <span class="heading-primary--sub">自分を育て、勇者も育てよう。</span>
-
-
+        <span class="heading-primary--sub">・・などなど。自分を育て、勇者も育てよう。</span>
     </div>
 
 
@@ -64,31 +71,41 @@
         <p><span class="hovermoveLeft underLine">使い方</span></p>
         <div class="howto-steps">
             <div class="howto-step">
-                <h4>Step1<br>taskを登録</h4>
-                <p>
-                    勉強、筋トレ、家事、遊び。
-                    毎日やることやチャレンジしたいことを登録しよう。
-                    日課としても登録できます。
-                </p>
-                
+                <div class="step-textgroup">
+                    <h4>Step1<br>taskを登録</h4>
+                    <p>
+                        勉強、筋トレ、家事、遊び。
+                        毎日やることやチャレンジしたいことを登録しよう。
+                    </p>
+                </div>
+                <img src="../img/steps/step1.png" alt="">
             </div>
             <div class="howto-step">
-                <h4>Step2<br>taskを実施</h4>
-                <p>
-                    実施したら完了！しよう。
-                </p>
+                <div class="step-textgroup">
+                    <h4>Step2<br>taskを実施</h4>
+                    <p>
+                        決めたことをやろう！
+                    </p>
+                </div>
+                <img src="../img/steps/step2.png" alt="">
             </div>
             <div class="howto-step">
-                <h4>Step3<br>経験値取得</h4>
-                <p>
-                    経験値を取得。難易度が高いと能力値が上がる可能性も上がる！
-                </p>
+                <div class="step-textgroup">
+                    <h4>Step3<br>能力値と経験値を取得</h4>
+                    <p>
+                        1タスクで経験値1を取得。難易度分だけパラメータもアップします。
+                    </p>
+                </div>
+                <img src="../img/steps/step3.png" alt="">
             </div>
             <div class="howto-step">
-                <h4>Step4<br>レベルアップ！</h4>
-                <p>
-                    経験値が貯まればレベルアップ。HPや能力がランダムで上がります。
-                </p>
+                <div class="step-textgroup">
+                    <h4>Step4<br>レベルアップ！</h4>
+                    <p>
+                        経験値が貯まればレベルアップ。HPや能力がランダムで上がります。
+                    </p>
+                </div>
+                <img src="../img/steps/step4.png" alt="">
             </div>
             <div class="howto-step">
                 <h4>Step5<br>アイテムゲット！</h4>
@@ -100,9 +117,23 @@
 
     </div>
 
+    <div class="test">
+    <i class="fas fa-book-reader"></i>
+    <i class="fas fa-running"></i>
+    <i class="fas fa-shopping-cart"></i>
+    </div>
     
 
 </section>
+<script>
+    /*fadeoutロゴ*/
+$(function() {
+	setTimeout(function(){
+		$('.bg-top-fadein').fadeOut(4000);
+    },400); //2.5秒後にロゴ含め真っ白背景をフェードアウト！
+});
+      
+</script>
 
 
 

@@ -2,12 +2,30 @@
     display: flex;
 }
 
+//ルーターリンクで選んでいるリンク
+.router-link-active{
+    background-color: #fefefe;
+    color: #1a1818c9 !important;
+    transition: .6s;
+
+}
+
 .sidebar{
     width: 160px;
     height: 100vh;
     position: sticky;
     top: 0;
     background-color: #1a1818c9;
+    p{
+        color: #fefefe;
+        height: 40px;
+        line-height: 40px;
+        margin-top: 10px;
+        font-size: 18px;
+        letter-spacing: 2px;
+        text-align: center;
+
+    }
     a{
         color: #fefefe;
         display: block;
@@ -18,9 +36,17 @@
             color: #fefefe;
         }
         &:first-child{
-            padding-top: 40px;
+            //margin-top: 40px;
         
         }
+    }
+    span{
+        text-align: center;
+        display: block;
+        color: #fafafa;
+        border-top: 4px dotted;
+        margin: 10px;
+        padding-top: 20px;
     }
     
 }

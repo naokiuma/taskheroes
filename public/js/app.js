@@ -1962,6 +1962,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1980,8 +2006,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, {
         id: "wisdom",
         value: this.$store.state.user.wisdom
-      } //{id:"xp",value:this.$store.state.user.xp}
-      ]
+      }, {
+        id: "xp",
+        value: this.$store.state.user.xp
+      }]
     };
   },
   mounted: function mounted() {
@@ -2063,13 +2091,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       items: [],
-      //元々
       myitems: [],
-      //元々
       have: [],
       //ハッシュ
       itemShow: null
@@ -2081,9 +2108,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     //apiから一覧を取得
     console.log("mounted");
-    this.fetchItems(); //this.fetchMyItems();
-    //console.log(this.items);
-    //console.log(this.have);
+    this.fetchItems();
   },
   methods: {
     fetchItems: function fetchItems() {
@@ -2241,16 +2266,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//import func from '../../../vue-temp/vue-editor-bridge';
  //ok
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      isActive: null
+      isActive: null,
+      description: ""
     };
   },
   components: {
     Message: _Message_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    taskChoised: function taskChoised() {
+      this.description = "\u30BF\u30B9\u30AF\u306E\u8FFD\u52A0\u3001\n                \u78BA\u8A8D\u3084\u5B9F\u65BD\u3092\u884C\u3044\u307E\u3059\u3002";
+    },
+    statusChoised: function statusChoised() {
+      this.description = "\u5404\u7A2E\u30B9\u30C6\u30FC\u30BF\u30B9\u3001\n                \u30EC\u30D9\u30EB\u306A\u3069\u3092\u78BA\u8A8D\u3067\u304D\u307E\u3059\u3002";
+    },
+    itemChoised: function itemChoised() {
+      this.description = "\u53D6\u5F97\u6E08\u307F\u30A2\u30A4\u30C6\u30E0\u4E00\u89A7\u3092\u78BA\u8A8D\u3067\u304D\u307E\u3059\u3002\n                \u672A\u53D6\u5F97\u306E\u30A2\u30A4\u30C6\u30E0\u306B\u306F\u30D2\u30F3\u30C8\u304C\u898B\u3064\u304B\u308B\u3053\u3068\u3082\u3042\u308B\u3002";
+    }
   },
   mounted: function mounted() {
     console.log("myinfo.vueのmouted"); //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
@@ -2269,6 +2310,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TaskFormComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaskFormComponent.vue */ "./resources/js/components/TaskFormComponent.vue");
+//
+//
+//
 //
 //
 //
@@ -39722,22 +39766,29 @@ var render = function() {
           _c(
             "div",
             { staticClass: "gauges-group" },
-            _vm._l(_vm.parameters, function(num, index) {
-              return _c(
-                "div",
-                {
-                  key: index,
-                  staticClass: "gauges",
-                  style: { width: num.value * 6 + "px" }
-                },
-                [
-                  _c("div", { staticClass: "gauges-bar" }, [
-                    _vm._v(_vm._s(num.value))
-                  ])
-                ]
+            [
+              _vm._l(_vm.parameters, function(num, index) {
+                return _c(
+                  "div",
+                  {
+                    key: index,
+                    staticClass: "gauges",
+                    style: { width: num.value * 6 + "px" }
+                  },
+                  [
+                    _c("div", { staticClass: "gauges-bar" }, [
+                      _vm._v(_vm._s(num.value))
+                    ])
+                  ]
+                )
+              }),
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.xp) +
+                  "/10\n                \n            "
               )
-            }),
-            0
+            ],
+            2
           )
         ]),
         _vm._v(" "),
@@ -39992,26 +40043,57 @@ var render = function() {
         "section",
         { staticClass: "sidebar" },
         [
+          _c("p", [_vm._v("メニュー")]),
+          _vm._v(" "),
           _c(
             "router-link",
-            { class: { sideIsClicked: _vm.isActive }, attrs: { to: "/tasks" } },
-            [_vm._v("タスク")]
+            {
+              attrs: { to: "/tasks" },
+              nativeOn: {
+                click: function($event) {
+                  return _vm.taskChoised()
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "fas fa-th-list fontawasome-list" }),
+              _vm._v("タスク")
+            ]
           ),
           _vm._v(" "),
           _c(
             "router-link",
             {
-              class: { sideIsClicked: _vm.isActive },
-              attrs: { to: "/status" }
+              attrs: { to: "/status" },
+              nativeOn: {
+                click: function($event) {
+                  return _vm.statusChoised()
+                }
+              }
             },
-            [_vm._v("ステータス")]
+            [
+              _c("i", { staticClass: "fas fa-user fontawasome-status" }),
+              _vm._v("ステータス")
+            ]
           ),
           _vm._v(" "),
           _c(
             "router-link",
-            { class: { sideIsClicked: _vm.isActive }, attrs: { to: "/items" } },
-            [_vm._v("アイテム")]
-          )
+            {
+              attrs: { to: "/items" },
+              nativeOn: {
+                click: function($event) {
+                  return _vm.itemChoised()
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "fas fa-gift fontawasome-item" }),
+              _vm._v("アイテム")
+            ]
+          ),
+          _vm._v(" "),
+          _c("span", [_vm._v(_vm._s(_vm.description))])
         ],
         1
       ),
@@ -40352,7 +40434,9 @@ var render = function() {
           })
         ],
         2
-      )
+      ),
+      _vm._v(" "),
+      _c("img", { attrs: { src: "/img/levelup.svg" } })
     ]
   )
 }

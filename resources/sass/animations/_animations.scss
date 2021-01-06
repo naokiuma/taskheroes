@@ -1,3 +1,16 @@
+@keyframes top-Titleanimation{
+  0%{
+    transform: scale(1.0);
+    //opacity: 0;
+  }
+
+  100%{
+    transform: scale(7.0);
+    //opacity: 1;
+  }
+}
+
+
 @keyframes expansion{//パラメータ一覧の画面でゲージを動かしている
   0%{
     width:0%;

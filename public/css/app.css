@@ -10,7 +10,7 @@ body {
 
 .heading-primary--main {
   display: inline-block;
-  font-size: 8rem;
+  font-size: 7rem;
   margin: 0.9rem auto;
   /*
   background-image: linear-gradient(120deg,transparent 0%,transparent 50%,#FAD727 50%);
@@ -54,14 +54,14 @@ body {
   position: absolute;
   color: #0000ff4a;
   right: 40%;
-  bottom: 20%;
+  top: 20%;
 }
 
 .billboard-arrow2 {
   font-size: 160px;
   position: absolute;
   color: #96fff573;
-  right: 30%;
+  right: 14%;
   bottom: 20%;
 }
 
@@ -69,8 +69,8 @@ body {
   font-size: 240px;
   position: absolute;
   color: #FAD72782;
-  right: 15%;
-  bottom: 20%;
+  right: 61%;
+  bottom: 48%;
 }
 
 .fontawasome-arrow {
@@ -89,6 +89,27 @@ body {
   color: #FAD727;
 }
 
+.fontawasome-list {
+  margin: auto 5px;
+  color: orange;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.fontawasome-status {
+  margin: auto 5px;
+  color: skyblue;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.fontawasome-item {
+  margin: auto 5px;
+  color: rgba(118, 238, 108, 0.9);
+  font-size: 16px;
+  line-height: 16px;
+}
+
 .upmovearrow {
   -webkit-animation: up-move 1s;
           animation: up-move 1s;
@@ -103,6 +124,26 @@ body {
 .space {
   height: 50px;
   display: block;
+}
+
+@-webkit-keyframes top-Titleanimation {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(7);
+  }
+}
+
+@keyframes top-Titleanimation {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(7);
+  }
 }
 
 @-webkit-keyframes expansion {
@@ -491,8 +532,19 @@ body {
 .howto-step h4,
 .howto-step p {
   letter-spacing: 1px;
-  margin: 10% 10px;
+  margin: 10% 15px;
   line-height: 150%;
+}
+
+.howto-step img {
+  width: 235px;
+  height: 160px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.step-textgroup {
+  height: 40%;
 }
 
 .section-items {
@@ -599,20 +651,6 @@ body {
 
 .mypage-heading:hover {
   color: black;
-}
-
-.mypage-heading:before,
-.mypage-heading:after {
-  content: "";
-  width: 60px;
-  height: 20px;
-  background-image: url(/images/heading-sword.png?162c7a33dbee401fd74a69ecec929c55);
-  background-size: contain;
-  transition: all 0.5s;
-}
-
-.mypage-heading:after {
-  transform: scale(-1, 1);
 }
 
 .mypage-heading:hover::before {
@@ -731,10 +769,15 @@ body {
 
 .parameters-xp {
   position: relative;
+  font-size: 16px;
 }
 
 .parameters-xp::before {
   content: "xp";
+}
+
+.parameters-experience {
+  font-size: 16px;
 }
 
 .section-heading {
@@ -1096,9 +1139,14 @@ body {
 
 .billboard-img1 {
   position: absolute;
-  right: 10%;
-  top: 20%;
-  width: 300px;
+  right: 13%;
+  top: 16%;
+  width: 500px;
+}
+
+.footer {
+  height: 100px;
+  background-color: #1a1818c9;
 }
 
 .header {
@@ -1163,6 +1211,12 @@ body {
   display: flex;
 }
 
+.router-link-active {
+  background-color: #fefefe;
+  color: #1a1818c9 !important;
+  transition: 0.6s;
+}
+
 .sidebar {
   width: 160px;
   height: 100vh;
@@ -1170,6 +1224,16 @@ body {
   position: sticky;
   top: 0;
   background-color: #1a1818c9;
+}
+
+.sidebar p {
+  color: #fefefe;
+  height: 40px;
+  line-height: 40px;
+  margin-top: 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-align: center;
 }
 
 .sidebar a {
@@ -1184,8 +1248,13 @@ body {
   color: #fefefe;
 }
 
-.sidebar a:first-child {
-  padding-top: 40px;
+.sidebar span {
+  text-align: center;
+  display: block;
+  color: #fafafa;
+  border-top: 4px dotted;
+  margin: 10px;
+  padding-top: 20px;
 }
 
 .sideIsClicked {
@@ -1196,6 +1265,55 @@ body {
 .wrapper {
   display: flex;
   justify-content: flex-start;
+}
+
+.top-all {
+  display: none;
+}
+
+.bg-top-fadein {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background: #fafafa;
+}
+
+.bg-top-fadein .fadein-wrapper {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.bg-top-fadein .image-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+  background-color: #96fff5;
+  -webkit-animation-name: top-Titleanimation;
+          animation-name: top-Titleanimation;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  -webkit-animation-timing-function: ease;
+          animation-timing-function: ease;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.bg-top-fadein img {
+  position: absolute;
+  top: 40%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  width: 30%;
 }
 
 /*!

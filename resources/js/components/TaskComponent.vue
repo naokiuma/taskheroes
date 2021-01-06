@@ -75,9 +75,12 @@
                 </div>
             </div>
         </div>
-
+        <img src="/img/levelup.svg">
         
     </section>
+
+    
+
 </template>
 
 <style>

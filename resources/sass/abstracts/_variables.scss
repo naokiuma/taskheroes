@@ -26,7 +26,7 @@ body{
 .heading-primary{
     &--main{
         display: inline-block;
-        font-size: 8rem;
+        font-size: 7rem;
         margin: .9rem auto;
         /*
         background-image: linear-gradient(120deg,transparent 0%,transparent 50%,#FAD727 50%);
@@ -73,14 +73,14 @@ body{
     position: absolute;
     color: #0000ff4a;
     right: 40%;
-    bottom: 20%;
+    top: 20%;
 }
 
 .billboard-arrow2{
     font-size: 160px;
     position: absolute;
     color: #96fff573;
-    right: 30%;
+    right: 14%;
     bottom: 20%;
 }
 
@@ -88,8 +88,8 @@ body{
     font-size: 240px;
     position: absolute;
     color: #FAD72782;
-    right: 15%;
-    bottom: 20%;
+    right: 61%;
+    bottom: 48%;
 }
 
 .fontawasome-arrow{
@@ -105,6 +105,29 @@ body{
 .fontawasome-star{
     color:$subColor;
 }
+
+.fontawasome-list{
+    margin: auto 5px;
+    color: orange;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.fontawasome-status{
+    margin: auto 5px;
+    color: skyblue;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.fontawasome-item{
+    margin: auto 5px;
+    color: rgba(118, 238, 108, 0.9);
+    font-size: 16px;
+    line-height: 16px;
+}
+
+
 
 .upmovearrow{
     animation:up-move 1s;

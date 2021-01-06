@@ -53,12 +53,20 @@ class TaskController extends Controller
         //$changeTask = Task::where('id',$id)->get();//getだとcollectionがかえる
         $changeTask = Task::where('id',$id)->first();//1オブジェクトが変える
         Log::debug("taskコントローラー：change");
-        Log::debug($changeTask);//　→"categories_id":1,"user_id":1,;
+        //Log::debug($changeTask);//　→"categories_id":1,"user_id":1,;
         $point = $changeTask->difficult;
         $category = $changeTask->categories_id;
         Log::debug("変更point：" . $point);
         Log::debug("対象category：" . $category);//1は力2は魔力3は知恵
         $now = "";
+
+        if($changeTask->given == 0){//一度だけ経験値アップの処理。戻すことはない
+            $changeTask->given = 1;
+            Auth::user()->xp++;
+            Auth::user()->save();
+
+        }
+
 
         //反転させる。デフォルトは0。実施済みは1
         if($changeTask->done == 0){

@@ -10,6 +10,11 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.js') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <!--jquary-->
+        <script
+			  src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
         
         <title>taskHeroes</title>
     </head>
@@ -65,12 +70,11 @@
         </header>
         @yield('content')
 
-        <footer>
+        <footer class="footer">
             <p>フッター</p>
         </footer>
     </body>
-
-    <!--これも読み込む必要がある-->
+    
     <script src="{{mix('js/app.js')}}"></script>
 
 </html>

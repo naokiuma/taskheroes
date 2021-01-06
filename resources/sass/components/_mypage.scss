@@ -1,5 +1,4 @@
 //マイページ全体で使えるモジュール
-
 .mypage-heading{
     font-size: 40px;
     margin-bottom: 20px;
@@ -13,21 +12,6 @@
     &:hover{
         color: black;
     }
-    &:before,
-    &:after{
-        content: "";
-        width: 60px;
-        height: 20px;;
-        //background-color: #808080a8;
-        background-image: url(./img/heading-sword.png);
-        background-size: contain;
-        transition: all 0.5s;
-    }
-    &:after{
-        transform: scale(-1, 1);
-        
-    }
-
     &:hover::before{
         margin-right: 10px;
         transition: all 0.5s;

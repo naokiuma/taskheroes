@@ -12,14 +12,40 @@
                     <li class="parameters parameters-magic">魔力</li>
                     <li class="parameters parameters-wisdom">知識</li>
                     <li class="parameters parameters-xp">経験値</li>
+                    
                 </ul>
                 <div class="gauges-group">
-                        <div class="gauges" v-bind:style="{ width:num.value * 6 + 'px' }"
-                            v-for="(num, index) in parameters" :key="index">
-                            <div class="gauges-bar">{{num.value}}</div>
-
-                        </div>
+                    <div class="gauges" v-bind:style="{ width:num.value * 6 + 'px' }"
+                        v-for="(num, index) in parameters" :key="index">
+                        <div class="gauges-bar">{{num.value}}</div>
+                        
+                    </div>
+                    {{xp}}/10
+                    
                 </div>
+
+            <!--アイテムコンポーネント
+            <div class="each-item" v-for ="item in items" :key="item.index">
+                <div v-on:click="showItemDetail(item)">
+                    //ハッシュを満たしていればアイテム表示
+                    <img v-if="haveItem(item.name) == 1" v-bind:src="item.image" alt="">
+                    <img v-else src="/img/items/what.png">
+                    
+                </div>
+
+                <aside class="each-item__detail" v-show="itemShow == item.id">
+                    <h4>{{item.name}}</h4>
+                    <p>{{item.description}}</p>
+                    <p v-if="haveItem(item.name) == 1">取得条件：{{item.requirement}}</p>
+                    <p v-else>取得条件：不明</p>
+                </aside>
+            </div>
+
+            -->
+                    
+
+                
+
  
             </div>
             <div class="parameters-hero">
@@ -41,8 +67,8 @@
                     {id:"hp", value:this.$store.state.user.hp},
                     {id:"power",value:this.$store.state.user.power},
                     {id:"magic",value:this.$store.state.user.magic},
-                    {id:"wisdom",value:this.$store.state.user.wisdom}
-                    //{id:"xp",value:this.$store.state.user.xp}
+                    {id:"wisdom",value:this.$store.state.user.wisdom},
+                    {id:"xp",value:this.$store.state.user.xp}
                     
                 ],
             }

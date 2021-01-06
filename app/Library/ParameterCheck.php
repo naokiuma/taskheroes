@@ -10,6 +10,7 @@ class ParameterCheck extends Model
 {
     static public function changeParameter($which,$point,$category){//whichは上がるか下がるか
         if($which == "up"){
+            
             if($category === 1){
                 Auth::user()->power += $point;
             }else if ($category === 2){
