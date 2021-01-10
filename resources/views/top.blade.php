@@ -2,6 +2,7 @@
 @section('content')
 
 <div class="space"></div>
+<!--svgでの起動時の演出。wrapper.scss内-->
 <section class="bg-top-fadein">
         <div class="fadein-wrapper">
             <div class="image-wrapper">
@@ -14,7 +15,7 @@
 
 <div class="billboard">
     
-    <img class="billboard-img1"src="../img/heroofhero.png" alt="">
+    <img class="billboard-img1"src="../img/heroofhero.gif" alt="">
     <i class="fas fa-arrow-up billboard-arrow1"></i>
     <i class="fas fa-arrow-up billboard-arrow2"></i>
     <i class="fas fa-arrow-up billboard-arrow3"></i>
@@ -84,7 +85,7 @@
                 <div class="step-textgroup">
                     <h4>Step2<br>taskを実施</h4>
                     <p>
-                        決めたことをやろう！
+                        Let's Do it!
                     </p>
                 </div>
                 <img src="../img/steps/step2.png" alt="">
@@ -130,7 +131,7 @@
 $(function() {
 	setTimeout(function(){
 		$('.bg-top-fadein').fadeOut(4000);
-    },400); //2.5秒後にロゴ含め真っ白背景をフェードアウト！
+    },600); //2.5秒後にロゴ含め真っ白背景をフェードアウト！
 });
       
 </script>

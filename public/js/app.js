@@ -1966,28 +1966,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2006,10 +1984,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, {
         id: "wisdom",
         value: this.$store.state.user.wisdom
-      }, {
-        id: "xp",
-        value: this.$store.state.user.xp
-      }]
+      }],
+      myxp: this.$store.state.user.xp
     };
   },
   mounted: function mounted() {
@@ -2091,12 +2067,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       items: [],
+      //すべてのアイテム
       myitems: [],
+      //自身の持つアイテム
       have: [],
       //ハッシュ
       itemShow: null
@@ -2104,18 +2081,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.fetchMyItems();
+    this.fetchItems();
   },
   mounted: function mounted() {
     //apiから一覧を取得
-    console.log("mounted");
-    this.fetchItems();
+    console.log("mounted"); //this.fetchItems();
   },
   methods: {
     fetchItems: function fetchItems() {
       var _this = this;
 
       axios.get('/api/itemlist/').then(function (response) {
-        return _this.items = response.data;
+        return _this.items = response.data //すべてのアイテムを取得
+        ;
       });
     },
     fetchMyItems: function fetchMyItems() {
@@ -2132,7 +2110,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(url) //並列処理でhashも作成
       .then(function (response) {
         return _this2.myitems = response.data;
-      }) //myitemsに情報を入れる。
+      }) //myitemsに自身のアイテムの情報を入れる。
       .then(function () {
         //myitemsの情報をhashに入れる
         for (var i = 0; i < self.myitems.length; i++) {
@@ -2157,13 +2135,12 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     showItemDetail: function showItemDetail(item) {
-      console.log("ここが見える");
       console.log(item.id);
 
       if (this.itemShow == item.id) {
         this.itemShow = null;
       } else {
-        console.log("通る？");
+        //console.log("通るかtest");
         this.itemShow = item.id;
       }
 
@@ -2214,17 +2191,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  /*
-  data(){
-      return{
-          messageShow:true
-      }
+  data: function data() {
+    return {
+      messageShow: true
+    };
   },
-  */
   mounted: function mounted() {
     //apiから一覧を取得
     //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
@@ -2233,7 +2206,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     toggleMsgwindow: function toggleMsgwindow() {
+      console.log("動いている");
       this.$store.state.message.messageShow = !this.$store.state.message.messageShow;
+      this.messageShow = !this.messageShow;
     }
   }
 });
@@ -2416,6 +2391,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //ok
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2431,26 +2436,26 @@ __webpack_require__.r(__webpack_exports__);
       upcategory: "",
       newTask: false,
       activeItem: null,
+      detailShow: false,
       tasknum: 0,
-      nowChoice: ""
+      nowChoice: "",
+      levelup: false,
+      taskDetailShow: null
     };
   },
   components: {
     Taskform: _TaskFormComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   created: function created() {
-    this.firstTasks(); //this.firsttasks(this.defaultTasks);
+    this.firstTasks();
   },
   mounted: function mounted() {
     //apiから一覧を取得
-    //console.log(this.$store.state.user);
     //console.log("moutedです");
     this.fetchtasks();
   },
   computed: {
     sortedTasks: function sortedTasks() {
-      console.log(this.nowChoice); //console.log(this.tasks);
-
       return this.sortedTasks;
     }
   },
@@ -2475,7 +2480,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       //すべてのtasksを取得
-      this.nowChoice = "all";
+      //this.nowChoice =  "all";
       console.log("fetchTasks"); //Vue.set(this.tasks,this.defaultTasks);
 
       var url = '/api/tasklist/';
@@ -2491,7 +2496,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     beforeTasks: function beforeTasks() {
       //未実施のtasksを取得ここを改造
-      this.nowChoice = "before";
+      //this.nowChoice = "before";
       console.log("beforeTasks"); //this.firstTasks();//一旦すべて取得
 
       this.tasks = [];
@@ -2508,7 +2513,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     afterTasks: function afterTasks() {
       //実施済のtasksを取得
-      this.nowChoice = "after";
+      //this.nowChoice = "after";
       console.log("afterTasks"); //this.firstTasks();
 
       this.tasks = [];
@@ -2527,13 +2532,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     clicked: function clicked(task) {
       //コントローラー側で処理
-      console.log("今のnowChoiceは" + this.nowChoice);
+      //console.log("今のnowChoiceは" + this.nowChoice);
       var target = task.id;
-      var self = this;
-      console.log('/tasks/change/' + target); //コントローラー側でtaskの難しさをみて変更
+      var self = this; //console.log('/tasks/change/' + target);//コントローラー側でtaskの難しさをみて変更
 
       axios.post('/tasks/change/' + target).then(function (responce) {
-        console.log(responce.data);
+        console.log(responce.data[0].title + "がかえってきました");
+        console.log(responce.data[1] + "がかえってきました");
         var tempmsg;
         var tempcategory;
 
@@ -2562,7 +2567,7 @@ __webpack_require__.r(__webpack_exports__);
         self.$store.dispatch('register'); //ユーザーパラメータの更新
 
         self.firstTasks();
-        Vue.set(task, "done", responce.data.done); //対応taskのdoneに、帰ってきた値を入れる。
+        Vue.set(task, "done", responce.data[0].done); //対応taskのdoneに、帰ってきた値を入れる。
 
         return task;
       });
@@ -2590,11 +2595,50 @@ __webpack_require__.r(__webpack_exports__);
     },
     onActive: function onActive(task) {
       //メモを見る処理
-      if (this.activeItem === task) {
-        this.activeItem = null;
+      //メッセージ側でやる場合
+
+      /*
+      this.$store.commit('message/setItemDetail',{//item情報を入れる
+          itemInfomation: { id: task.id,
+          title:task.title,
+          body:task.body,
+          difficult:task.difficult
+           }
+      })
+      */
+      //別パターン
+      if (this.taskDetailShow == task.id) {
+        this.taskDetailShow = null;
       } else {
-        this.activeItem = task;
-      }
+        //console.log("通るかtest");
+        this.taskDetailShow = task.id;
+      } //また別でやる場合
+
+      /*
+          this.detailShow = true;
+          if(this.activeItem === task){
+              
+              this.detailShow = false;
+              this.activeItem = null;
+          }else{
+              this.detailShow = true;
+              this.activeItem = task;
+          }
+          */
+
+    },
+    modalResize: function modalResize() {
+      var w = $(window).width();
+      console.log("w" + w);
+      var h = $(window).height();
+      var cw = $(".task-detail").outerWidth();
+      console.log("cw" + cw);
+      var ch = $(".task-detail").outerHeight(); //取得した値をcssに追加する
+
+      $(".task-detail").css({
+        "left": (w - cw) / 2 + "px",
+        "top": (h - ch) / 2 + "px"
+      });
     },
     forDifficult: function forDifficult(e) {
       //難易度表示
@@ -2607,18 +2651,6 @@ __webpack_require__.r(__webpack_exports__);
       return star;
     }
   }
-  /*,
-  
-  watch:{
-      tasks:{
-          async handler (){
-              await this.fetchtasks;
-          },
-          immediate:true
-      }
-  }
-  */
-
 });
 
 /***/ }),
@@ -7148,7 +7180,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.fade-enter-active{\n    -webkit-animation:fade-in .5s;\n            animation:fade-in .5s;\n}\n.fade-leave-active{\n    animation:fade-in .5s reverse;\n}\n.bounce-enter-active {\n  -webkit-animation: bounce-in .5s;\n          animation: bounce-in .5s;\n}\n.bounce-leave-active {\n  animation: bounce-in .5s reverse;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.fade-enter-active{\n    -webkit-animation:fade-in .5s;\n            animation:fade-in .5s;\n}\n.fade-leave-active{\n    animation:fade-in .5s reverse;\n}\n.bounce-enter-active {\n  -webkit-animation: bounce-in .5s;\n          animation: bounce-in .5s;\n}\n.bounce-leave-active {\n  animation: bounce-in .5s reverse;\n}\n\n", ""]);
 
 // exports
 
@@ -39773,7 +39805,7 @@ var render = function() {
                   {
                     key: index,
                     staticClass: "gauges",
-                    style: { width: num.value * 6 + "px" }
+                    style: { width: num.value * 7 + "px" }
                   },
                   [
                     _c("div", { staticClass: "gauges-bar" }, [
@@ -39782,11 +39814,15 @@ var render = function() {
                   ]
                 )
               }),
-              _vm._v(
-                "\n                " +
-                  _vm._s(_vm.xp) +
-                  "/10\n                \n            "
-              )
+              _vm._v(" "),
+              _c("div", { staticClass: "gauges-xp" }, [
+                _c("div", {
+                  staticClass: "gauges-xp-bar",
+                  style: { width: _vm.myxp * 20 + "px" }
+                }),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(_vm.myxp) + "/10")])
+              ])
             ],
             2
           )
@@ -39822,7 +39858,7 @@ var staticRenderFns = [
         _vm._v("知識")
       ]),
       _vm._v(" "),
-      _c("li", { staticClass: "parameters parameters-xp" }, [_vm._v("経験値")])
+      _c("li", { staticClass: "parameters-xp" }, [_vm._v("経験値")])
     ])
   },
   function() {
@@ -40000,14 +40036,14 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: this.$store.state.message.messageShow,
-            expression: "this.$store.state.message.messageShow"
+            value: this.$store.state.message.messageShow == true,
+            expression: "this.$store.state.message.messageShow == true"
           }
         ],
         staticClass: "messages"
       },
       [
-        _vm._v("\n    " + _vm._s(this.$store.state.message.content) + "\n"),
+        _vm._v("\n    " + _vm._s(this.$store.state.message.content) + "ここ\n"),
         _c("div", { staticClass: "messages-space" })
       ]
     )
@@ -40072,7 +40108,7 @@ var render = function() {
               }
             },
             [
-              _c("i", { staticClass: "fas fa-user fontawasome-status" }),
+              _c("i", { staticClass: "fas fa-user blink fontawasome-status" }),
               _vm._v("ステータス")
             ]
           ),
@@ -40098,7 +40134,9 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("RouterView")
+      _c("RouterView"),
+      _vm._v(" "),
+      _c("Message")
     ],
     1
   )
@@ -40129,6 +40167,26 @@ var render = function() {
     "section",
     { staticClass: "section-tasks animate__animated animate__bounceInRight" },
     [
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.levelup,
+              expression: "levelup"
+            }
+          ],
+          staticClass: "bg-task-fadein"
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("img", { attrs: { src: "/img/levelup.svg" } })
+        ]
+      ),
+      _vm._v(" "),
       _c("h3", { staticClass: "mypage-heading" }, [_vm._v("タスク一覧")]),
       _vm._v(" "),
       _c("div", { staticClass: "tasks-filter-btns" }, [
@@ -40238,8 +40296,65 @@ var render = function() {
                   class: { rotate: task.done }
                 },
                 [
-                  _c("div", { staticClass: "each-task__title" }, [
-                    _vm._v(_vm._s(task.title))
+                  _c("div", { staticClass: "each-task__category" }, [
+                    task.categories_id == "1"
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "each-task-Done-icon",
+                            on: {
+                              click: function($event) {
+                                return _vm.clicked(task)
+                              }
+                            }
+                          },
+                          [
+                            _c("img", {
+                              attrs: { src: "/../img/ken.png", alt: "" }
+                            })
+                          ]
+                        )
+                      : task.categories_id == "2"
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "each-task-Done-icon",
+                            on: {
+                              click: function($event) {
+                                return _vm.clicked(task)
+                              }
+                            }
+                          },
+                          [
+                            _c("img", {
+                              attrs: { src: "/../img/mahou.png", alt: "" }
+                            })
+                          ]
+                        )
+                      : task.categories_id == "3"
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "each-task-Done-icon",
+                            on: {
+                              click: function($event) {
+                                return _vm.clicked(task)
+                              }
+                            }
+                          },
+                          [
+                            _c("img", {
+                              attrs: { src: "/../img/know.png", alt: "" }
+                            })
+                          ]
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "each-task__title_outer" }, [
+                    _c("div", { staticClass: "each-task__title_inner" }, [
+                      _vm._v(_vm._s(task.title))
+                    ])
                   ]),
                   _vm._v(" "),
                   _c(
@@ -40251,45 +40366,7 @@ var render = function() {
                     [_vm._v(_vm._s(task.body))]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "each-task__category" }, [
-                    task.categories_id == "1"
-                      ? _c("div", [
-                          _vm._v("\n                    力"),
-                          _c("img", {
-                            attrs: { src: "/../img/ken.png", alt: "" }
-                          })
-                        ])
-                      : task.categories_id == "2"
-                      ? _c("div", [
-                          _vm._v("\n                    魔力"),
-                          _c("img", {
-                            attrs: { src: "/../img/mahou.png", alt: "" }
-                          })
-                        ])
-                      : task.categories_id == "3"
-                      ? _c("div", [
-                          _vm._v("\n                    知力"),
-                          _c("img", {
-                            attrs: { src: "/../img/know.png", alt: "" }
-                          })
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
                   _c("div", { staticClass: "each-task__state" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "main-button",
-                        on: {
-                          click: function($event) {
-                            return _vm.clicked(task)
-                          }
-                        }
-                      },
-                      [_vm._v("実行する！")]
-                    ),
-                    _vm._v(" "),
                     _c(
                       "button",
                       {
@@ -40300,7 +40377,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("メモをみる")]
+                      [_vm._v("詳細")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -40326,7 +40403,23 @@ var render = function() {
                   _vm._v(" "),
                   _c("span", { staticClass: "each-task__time" }, [
                     _vm._v("投稿日時：" + _vm._s(task.created_at))
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "aside",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.taskDetailShow == task.id,
+                          expression: "taskDetailShow == task.id"
+                        }
+                      ],
+                      staticClass: "each-task__detail"
+                    },
+                    [_c("p", [_vm._v(_vm._s(task.body))])]
+                  )
                 ]
               ),
               _vm._v(" "),
@@ -40337,60 +40430,70 @@ var render = function() {
                   class: { rotate: !task.done }
                 },
                 [
-                  _c("div", { staticClass: "each-task__title" }, [
-                    _vm._v(_vm._s(task.title))
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "each-task__body",
-                      class: { "is-active": _vm.activeItem === task }
-                    },
-                    [_vm._v(_vm._s(task.body))]
-                  ),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "donetext" }, [_vm._v("実施済み")]),
-                  _vm._v(" "),
                   _c("div", { staticClass: "each-task__category" }, [
                     task.categories_id == "1"
-                      ? _c("div", [
-                          _vm._v("\n                    力"),
-                          _c("img", {
-                            attrs: { src: "/../img/ken.png", alt: "" }
-                          })
-                        ])
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "each-task-Doned-icon",
+                            on: {
+                              click: function($event) {
+                                return _vm.clicked(task)
+                              }
+                            }
+                          },
+                          [
+                            _c("img", {
+                              attrs: { src: "/../img/ken.png", alt: "" }
+                            })
+                          ]
+                        )
                       : task.categories_id == "2"
-                      ? _c("div", [
-                          _vm._v("\n                    魔力"),
-                          _c("img", {
-                            attrs: { src: "/../img/mahou.png", alt: "" }
-                          })
-                        ])
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "each-task-Doned-icon",
+                            on: {
+                              click: function($event) {
+                                return _vm.clicked(task)
+                              }
+                            }
+                          },
+                          [
+                            _c("img", {
+                              attrs: { src: "/../img/mahou.png", alt: "" }
+                            })
+                          ]
+                        )
                       : task.categories_id == "3"
-                      ? _c("div", [
-                          _vm._v("\n                    知力"),
-                          _c("img", {
-                            attrs: { src: "/../img/know.png", alt: "" }
-                          })
-                        ])
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "each-task-Doned-icon",
+                            on: {
+                              click: function($event) {
+                                return _vm.clicked(task)
+                              }
+                            }
+                          },
+                          [
+                            _c("img", {
+                              attrs: { src: "/../img/know.png", alt: "" }
+                            })
+                          ]
+                        )
                       : _vm._e()
                   ]),
                   _vm._v(" "),
+                  _c("div", { staticClass: "each-task__title_outer" }, [
+                    _c("div", { staticClass: "each-task__title_inner" }, [
+                      _vm._v(_vm._s(task.title))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "donetext" }, [_vm._v("DONE!")]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "each-task__state" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "main-button",
-                        on: {
-                          click: function($event) {
-                            return _vm.clicked(task)
-                          }
-                        }
-                      },
-                      [_vm._v("戻す")]
-                    ),
-                    _vm._v(" "),
                     _c(
                       "button",
                       {
@@ -40401,7 +40504,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("メモをみる")]
+                      [_vm._v("詳細")]
                     ),
                     _vm._v(" "),
                     _c(
@@ -40434,13 +40537,20 @@ var render = function() {
           })
         ],
         2
-      ),
-      _vm._v(" "),
-      _c("img", { attrs: { src: "/img/levelup.svg" } })
+      )
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "fadein-wrapper" }, [
+      _c("div", { staticClass: "image-wrapper" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -57948,13 +58058,24 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
 __webpack_require__.r(__webpack_exports__);
 var state = {
   content: 'message.jsのcontentですよよ！。',
-  messageShow: true
+  messageShow: true //    itemDetailShow:false,
+  //    itemInfomation:{}
+
 };
 var mutations = {
   setContent: function setContent(state, _ref) {
     var content = _ref.content;
     state.content = content;
   }
+  /*
+  setItemDetail(state,{itemInfomation}){
+      state.itemInfomation = {};
+      state.itemDetailShow != state.itemDetailShow;
+      console.log(itemInfomation);
+      
+  }
+  */
+
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,

@@ -3,14 +3,12 @@
     <!--<section class="messages" v-show="this.$store.state.message.messageShow">-->
     <div class="messages-wrapper">
     <div class="messages-toggle" v-on:click="toggleMsgwindow()">開閉</div>
-    <section class="messages" v-show="this.$store.state.message.messageShow">
-        {{ this.$store.state.message.content }}
+    <section class="messages" v-show="this.$store.state.message.messageShow == true">
+        {{ this.$store.state.message.content }}ここ
     <div class="messages-space"></div>
     </section>
 
     </div>
-
-      
 </template>
 
 
@@ -19,13 +17,13 @@
     import { mapState } from 'vuex'
 
     export default {
-        /*
+        
         data(){
             return{
                 messageShow:true
             }
         },
-        */
+        
         mounted(){//apiから一覧を取得
             //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
             console.log(this.$store.state.message.content);
@@ -35,7 +33,9 @@
 
         methods:{
             toggleMsgwindow(){
+                console.log( "動いている");
                 this.$store.state.message.messageShow = !this.$store.state.message.messageShow;
+                this.messageShow = !this.messageShow;
 
         }
         }

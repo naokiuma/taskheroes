@@ -15,9 +15,6 @@ class UserController extends Controller
         $user = Auth::user();//ログインユーザー 
         Log::debug("userコントローラー：mypage");
         //Log::debug(print_r($user->items, true));//全部でる。
-        //foreach($user->skills as $skill) {
-        //    var_dump($skill->name); //string(10) "JavaScript" string(15) "Webデザイン" string(4) "HTML" string(3) "CSS"
-        //}
         
         //$alluser = User::all();//usersテーブルの全レコードを取得。
         return view ('/user/mypage',compact('user'));

@@ -9,8 +9,8 @@
     background-color: #4db7c824;
     position: relative;
     overflow: hidden;
-    border-top-right-radius : 8px;
-    //animation: img-wrap 2s cubic-bezier(.4, 0, .2, 1) forwards;
+    border-top-right-radius : 25px;
+    border-bottom-right-radius: 25px;
     &-bar{
         
         animation:2s ease-in 1s forwards alternate expansion;
@@ -19,6 +19,35 @@
         background: linear-gradient(to right, #0cebf9,$color-main);
     }
 
+}
 
+.gauges-xp{
+    width: 200px;
+    display: block;
+    height: 2rem;
+    line-height: 2rem;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    box-shadow: 0 2px 1rem rgba(0, 0, 0, 0.4);
+    background-color: #4db7c824;
+    position: relative;
+    overflow: hidden;
+    border-top-right-radius : 25px;
+    border-bottom-right-radius: 25px;
+    &-bar{
+        //animation:2s ease-in 1s forwards alternate expansion;
+        height: 100%;
+        position: absolute;
+        display: block;
+        background-image: linear-gradient(to right, #f1f47e, #f2e362);
+        z-index: 2;
+    }
+    span{
+        position: absolute;
+        z-index: 3;
+        left: 40%;
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
 
 }

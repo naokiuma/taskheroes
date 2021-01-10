@@ -126,6 +126,28 @@ body {
   display: block;
 }
 
+@-webkit-keyframes blink_effect {
+  0% {
+    color: #fafafa;
+  }
+
+  100% {
+    color: #FAD727;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes blink_effect {
+  0% {
+    color: #fafafa;
+  }
+
+  100% {
+    color: #FAD727;
+    transform: scale(1.2);
+  }
+}
+
 @-webkit-keyframes top-Titleanimation {
   0% {
     transform: scale(1);
@@ -467,7 +489,8 @@ body {
   background-color: #4db7c824;
   position: relative;
   overflow: hidden;
-  border-top-right-radius: 8px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 .gauges-bar {
@@ -476,6 +499,37 @@ body {
   display: block;
   opacity: 0;
   background: linear-gradient(to right, #0cebf9, #99dfff);
+}
+
+.gauges-xp {
+  width: 200px;
+  display: block;
+  height: 2rem;
+  line-height: 2rem;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  box-shadow: 0 2px 1rem rgba(0, 0, 0, 0.4);
+  background-color: #4db7c824;
+  position: relative;
+  overflow: hidden;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.gauges-xp-bar {
+  height: 100%;
+  position: absolute;
+  display: block;
+  background-image: linear-gradient(to right, #f1f47e, #f2e362);
+  z-index: 2;
+}
+
+.gauges-xp span {
+  position: absolute;
+  z-index: 3;
+  left: 40%;
+  font-size: 12px;
+  letter-spacing: 2px;
 }
 
 .howto-wrapper {
@@ -537,7 +591,7 @@ body {
 }
 
 .howto-step img {
-  width: 235px;
+  width: 220px;
   height: 160px;
   -o-object-fit: cover;
      object-fit: cover;
@@ -604,6 +658,7 @@ body {
 
 .messages-wrapper {
   position: relative;
+  width: 80%;
 }
 
 .messages {
@@ -695,6 +750,8 @@ body {
   line-height: 2rem;
   text-transform: uppercase;
   font-size: 12px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 .parameters::before {
@@ -769,11 +826,26 @@ body {
 
 .parameters-xp {
   position: relative;
-  font-size: 16px;
+  font-size: 13px;
+  background-color: #FAD727;
+  margin-bottom: 20px;
+  height: 2rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 .parameters-xp::before {
   content: "xp";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  font-style: oblique;
+  color: #000000bd;
 }
 
 .parameters-experience {
@@ -832,6 +904,8 @@ body {
 }
 
 .tasks-wrapper {
+  max-width: 100vh;
+  position: relative;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -865,9 +939,16 @@ body {
   text-align: center;
 }
 
-.tasks-wrapper .each-task__title {
-  margin: auto 10px auto 20px;
-  width: 20%;
+.tasks-wrapper .each-task__title_outer {
+  margin: auto 10px auto 10px;
+  width: 75%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+}
+
+.tasks-wrapper .each-task__title_inner {
+  font-size: 16px;
 }
 
 .tasks-wrapper .each-task__body {
@@ -896,10 +977,81 @@ body {
   left: 5px;
 }
 
-.tasks-wrapper .each-task img {
-  width: 30px;
-  height: 30px;
+.tasks-wrapper .each-task__detail {
+  position: absolute;
+  display: flex;
+  width: 80%;
+  height: 100%;
+  left: 0;
+  background-image: linear-gradient(to right bottom, #fffef9, #c3e4f4);
 }
+
+.tasks-wrapper .each-task__detail p {
+  margin: auto 10px;
+  font-size: 14px;
+}
+
+.tasks-wrapper .each-task-Done-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  line-height: 40px;
+  background: #5a659d17;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.tasks-wrapper .each-task-Done-icon:hover {
+  background-color: #96fff5;
+  transition: 0.4s;
+}
+
+.tasks-wrapper .each-task-Doned-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  line-height: 40px;
+  background: #0be89582;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.tasks-wrapper .each-task-Doned-icon:hover {
+  background-color: #5d5f6a17;
+  transition: 0.4s;
+}
+
+.tasks-wrapper .each-task img {
+  width: 35px;
+  height: 35px;
+}
+
+/*
+.task-detail{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    height: 500px;
+    display: block;
+    background-color: blue;
+    z-index: 10;
+}
+*/
+
+/*
+.task-modal-bg{  
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.5);
+    position:fixed;
+    top:0;
+    left:0;
+    z-index: 1;
+}
+*/
 
 .is-active {
   transform: translateY(0px) !important;
@@ -927,7 +1079,15 @@ body {
   top: 50%;
   left: 50%;
   transform: translateY(-50%);
-  font-size: 18px;
+  font-size: 14px;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  color: #ff0000a3;
+  border: 2px solid #ff0000a3;
+  text-align: center;
+  border-radius: 50%;
+  font-style: italic;
 }
 
 .task-start {
@@ -984,7 +1144,7 @@ body {
 
 .tasks-filter-btns {
   height: 60px;
-  width: 70%;
+  width: 80%;
   margin: auto;
 }
 
@@ -1017,6 +1177,109 @@ body {
   border-radius: 5px;
   translate: all 0.4s;
   text-align: center;
+}
+
+.loading span {
+  display: inline-block;
+  margin: 0 -0.075em;
+  -webkit-animation: loading 0.7s infinite alternate;
+          animation: loading 0.7s infinite alternate;
+}
+
+.loading span:nth-child(2) {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s;
+}
+
+.loading span:nth-child(3) {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+}
+
+.loading span:nth-child(4) {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+
+.loading span:nth-child(5) {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+}
+
+.loading span:nth-child(6) {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+
+.loading span:nth-child(7) {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+
+@-webkit-keyframes loading {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.8);
+  }
+}
+
+@keyframes loading {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.8);
+  }
+}
+
+.bg-task-fadein {
+  position: fixed;
+  width: 80%;
+  height: 75vh;
+  z-index: 100;
+  background: #fafafa;
+  margin: auto;
+}
+
+.bg-task-fadein .fadein-wrapper {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.bg-task-fadein .image-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+  background-color: #96fff5;
+  -webkit-animation-name: top-Titleanimation;
+          animation-name: top-Titleanimation;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+  -webkit-animation-timing-function: ease;
+          animation-timing-function: ease;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.bg-task-fadein img {
+  position: absolute;
+  top: 40%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  width: 50%;
 }
 
 .rolateings {
@@ -1110,7 +1373,7 @@ body {
 
 .billboard-title {
   position: absolute;
-  top: 40%;
+  bottom: 0%;
   left: 5%;
   padding: 20px;
   border-radius: 50px;
@@ -1139,14 +1402,14 @@ body {
 
 .billboard-img1 {
   position: absolute;
-  right: 13%;
+  right: 9%;
   top: 16%;
   width: 500px;
 }
 
 .footer {
   height: 100px;
-  background-color: #1a1818c9;
+  background-color: #acacacc9;
 }
 
 .header {
@@ -1209,6 +1472,12 @@ body {
 
 .myinfo {
   display: flex;
+  flex-wrap: wrap;
+}
+
+.blink {
+  -webkit-animation: blink_effect 3s infinite;
+          animation: blink_effect 3s infinite;
 }
 
 .router-link-active {
@@ -1298,10 +1567,10 @@ body {
   background-color: #96fff5;
   -webkit-animation-name: top-Titleanimation;
           animation-name: top-Titleanimation;
-  -webkit-animation-duration: 2s;
-          animation-duration: 2s;
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
   -webkit-animation-timing-function: ease;
           animation-timing-function: ease;
   -webkit-animation-fill-mode: forwards;
@@ -1313,7 +1582,7 @@ body {
   top: 40%;
   left: 52%;
   transform: translate(-50%, -50%);
-  width: 30%;
+  width: 50%;
 }
 
 /*!

@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log; //ログ
 use Illuminate\Support\Facades\DB; // DB ファサードを use する
+use App\Library\itemCheck;
+
 use App\Task;
 use App\User;
 use App\Library\ParameterCheck;
@@ -62,9 +64,18 @@ class TaskController extends Controller
 
         if($changeTask->given == 0){//一度だけ経験値アップの処理。戻すことはない
             $changeTask->given = 1;
-            Auth::user()->xp++;
-            Auth::user()->save();
+            $nowXp = Auth::user()->xp;
+            $nowXp++;
+            if($nowXp == 10){
+                Auth::user()->lv++;
+                Auth::user()->xp = 0;
+                Log::debug("レベルアップしました");
 
+            }else{
+                Auth::user()->xp++;
+
+            }
+            Auth::user()->save();
         }
 
 
@@ -80,7 +91,15 @@ class TaskController extends Controller
         }
         $changeTask->save();
 
-        return $changeTask;
+        /*ここでアイテムげっとの判定を行う場合、getitemに設定する*/
+        //$Auth::user()->lv//レベル取得
+
+        itemCheck::test();
+
+        return [$changeTask,"getitem"];
+
+        //return array("result" => $changeTask,"gotItem" => "剣");
+      
     }
 
 

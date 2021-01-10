@@ -25,31 +25,30 @@
     </div>
 </template>
 
-
 <script>
-
     export default {
         data(){
             return{
-                items:[],
-                myitems:[],
+                items:[],//すべてのアイテム
+                myitems:[],//自身の持つアイテム
                 have:[],//ハッシュ
                 itemShow:null
             }
         },
         created(){
-            this.fetchMyItems();  
+            this.fetchMyItems();
+            this.fetchItems();
         },
         mounted(){//apiから一覧を取得
             console.log("mounted");
-            this.fetchItems();
+            //this.fetchItems();
         },
         methods:{
             fetchItems(){
                 axios
                 .get('/api/itemlist/')
                 .then(response => (
-                    this.items = response.data
+                    this.items = response.data//すべてのアイテムを取得
                     ))
             },
             fetchMyItems(){//並列処理でhashも作成
@@ -60,7 +59,7 @@
                 }
                 axios
                 .get(url)//並列処理でhashも作成
-                .then(response => (this.myitems = response.data))//myitemsに情報を入れる。
+                .then(response => (this.myitems = response.data))//myitemsに自身のアイテムの情報を入れる。
                 .then(function() {//myitemsの情報をhashに入れる
                      for(let i = 0; i < self.myitems.length; i++){
                         if(self.have[self.myitems[i].name] == undefined){
@@ -85,12 +84,11 @@
 
             },
             showItemDetail(item){
-                console.log("ここが見える");
                 console.log(item.id);
                 if(this.itemShow == item.id){
                     this.itemShow = null;
                 }else{
-                    console.log("通る？");
+                    //console.log("通るかtest");
                     this.itemShow = item.id;
                 }
                 console.log(this.itemShow);

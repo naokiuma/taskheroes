@@ -1,45 +1,54 @@
 <template>
-    <section class="section-tasks">
-        <h3 class="mypage-heading">ステータス</h3>
+    <section class="section-tasks animate__animated animate__bounceInRight">
+        <!--レベルアップ演出-->
+        <section v-show="levelup" class="bg-task-fadein">
+            <div class="fadein-wrapper">
+                <div class="image-wrapper">
+                    
+                </div>
+            </div>
+            <img src="/img/levelup.svg"> 
+        </section>
+
+
+
+        <h3 class="mypage-heading">タスク一覧</h3>
         <div class="tasks-filter-btns">
             <button class="tasks-filter-btn" @click="beforeTasks()">未完了タスク</button>
             <button class="tasks-filter-btn" @click="afterTasks()">実施済みタスク</button>
             <button class="tasks-filter-btn" @click="fetchtasks()">すべてのタスク</button>
             <button class="tasks-filter-btn" @click="addTask()">新規タスク+</button>
         </div>
-        <p>タスク数：</p>
         
         <div class="tasks-wrapper">
+
             <transition name="fade">
                 <div class="newTask" v-show="newTask"><Taskform /></div>
             </transition> 
             
             <transition name="bounce">
-                <div v-show="up" class="taskupParameters">{{ upcategory }} がアップ！</div>
+                <div v-show="up" class="taskupParameters">{{ upcategory }} がアップ！<i class="fas fa-arrow-up fontawasome-arrow "></i></div>
             </transition> 
             
-            <!--<div class="each-task card animate__animated animate__flipInX" v-for="task in tasks" :key="task.id">-->
             <div class="each-task card" v-for="task in tasks" :key="task.id">
                 <!--表-->
                 <div class="card__side card__side--front" v-bind:class="{ rotate: task.done }">
-                    <div class="each-task__title">{{task.title}}</div>
-                    <div class="each-task__body" v-bind:class="{'is-active':activeItem === task}" >{{task.body}}</div>
-                    
                     <div class="each-task__category">
-                        <div v-if="task.categories_id == '1'">
-                        力<img src="/../img/ken.png" alt="">
+                        <div class="each-task-Done-icon" @click ="clicked(task)" v-if="task.categories_id == '1'">
+                            <img src="/../img/ken.png" alt="">
                         </div>
-                        <div v-else-if="task.categories_id == '2'">
-                        魔力<img src="/../img/mahou.png" alt="">
+                        <div class="each-task-Done-icon" @click ="clicked(task)" v-else-if="task.categories_id == '2'">
+                            <img src="/../img/mahou.png" alt="">
                         </div>
-                        <div v-else-if="task.categories_id == '3'">
-                        知力<img src="/../img/know.png" alt="">
+                        <div class="each-task-Done-icon" @click ="clicked(task)" v-else-if="task.categories_id == '3'">
+                            <img src="/../img/know.png" alt="">
                         </div>
                     </div>
+                    <div class="each-task__title_outer">
+                        <div class="each-task__title_inner" v-on:click="changeInfo(task)" >{{task.title}}</div> 
+                    </div>                    
                     <div class="each-task__state">
-                        <button class="main-button" @click ="clicked(task)">実行する！</button>
-                        <button class="main-button" v-on:click="onActive(task)">メモをみる</button>
-                        <button class="sub-button" @click ="deleate(task)">削除</button>
+                        <button class="sub-button" @click ="deletetask(task)"><i class="fas fa-times"></i></button>
 
                     </div>
                     <div class="each-task__difficult" v-html="forDifficult(task.difficult)"></div>
@@ -48,28 +57,26 @@
 
                 <!--裏-->
                 <div class="card__side card__side--back" v-bind:class="{ rotate: !task.done }">
-                        
-                    <div class="each-task__title">{{task.title}}</div>
-                    <div class="each-task__body" v-bind:class="{'is-active':activeItem === task}" >{{task.body}}</div>                    
-                    <p class="donetext">実施済み</p>
-                    
-                    <!--<div class="each-task__category" v-bind:class="{ categoryDone: task.done }" >-->
                     <div class="each-task__category">
-                        <div v-if="task.categories_id == '1'">
-                        力<img src="/../img/ken.png" alt="">
+                        <div class="each-task-Doned-icon" @click ="clicked(task)" v-if="task.categories_id == '1'">
+                            <img src="/../img/ken.png" alt="">
                         </div>
-                        <div v-else-if="task.categories_id == '2'">
-                        魔力<img src="/../img/mahou.png" alt="">
+                        <div class="each-task-Doned-icon" @click ="clicked(task)" v-else-if="task.categories_id == '2'">
+                            <img src="/../img/mahou.png" alt="">
                         </div>
-                        <div v-else-if="task.categories_id == '3'">
-                        知力<img src="/../img/know.png" alt="">
+                        <div class="each-task-Doned-icon" @click ="clicked(task)" v-else-if="task.categories_id == '3'">
+                            <img src="/../img/know.png" alt="">
                         </div>
                     </div>
+                        
+                    <div class="each-task__title_outer">
+                        <div class="each-task__title_inner">{{task.title}}</div> 
+                    </div>
+                    <p class="donetext">DONE!</p>
 
                     <div class="each-task__state">
-                        <button class="main-button" @click ="clicked(task)">戻す</button>
-                        <button class="main-button" v-on:click="onActive(task)">メモをみる</button>
-                        <button class="sub-button" @click ="deletetask(task)">削除</button>
+                        <!--<button class="main-button" v-on:click="onActive(task)">詳細</button>-->
+                        <button class="sub-button" @click ="deletetask(task)"><i class="fas fa-times"></i></button>
                     </div>
                     <div class="each-task__difficult" v-html="forDifficult(task.difficult)"></div>
                     <span class="each-task__time">投稿日時：{{task.created_at}}</span>
@@ -77,12 +84,32 @@
             </div>
         </div>
 
-        
-    </section>
+
+        <img src="/img/levelup.svg">
+        <div class="loading">
+            <span>L</span>
+            <span>e</span>
+            <span>v</span>
+            <span>e</span>
+            <span>l</span>
+            <span>U</span>
+            <span>p</span>
+        </div>
+
+<!--    <div v-show="detailShow" class="task-modal-bg">
+
+    </div>
+-->
+
+
+
+</section>
+
+    
+
 </template>
 
 <style>
-
 .fade-enter-active{
     animation:fade-in .5s;
 }
@@ -109,113 +136,101 @@
         data(){
             return{
                 defaultTasks:[],//fetchtaskで取得する全て。ここは変更しない
-                tasks:[],//これが毎回出てくる情報
+                tasks:[],//実際に表示するtasks。これをソートする
                 filterFlg:false,
                 up:false,//task実施時の表示
                 upcategory:"",
                 newTask:false,
-                activeItem:null,
+                detailShow:false,
                 tasknum:0,
                 nowChoice:""
+                
             }
         },
         components:{
             Taskform
         },
         created(){
-            this.firsttasks();
-            //this.firsttasks(this.defaultTasks);
+            this.firstTasks();        
         },
         mounted(){//apiから一覧を取得
-            //console.log(this.$store.state.user);
             //console.log("moutedです");
-            this.fetchtasks();
-            /*
-            switch(this.nowChoice){
-                    case 'after':
-                    console.log("afterを選んでる");
-                    this.afterTasks();
-                    break;
-                    case 'before':
-                    console.log("beforeを選んでる");
-                    this.beforeTasks();
-                    break;
-                    default:
-                    console.log("allを選んでる");
-                    this.fetchtasks();
-                }
-                */
+           this.fetchtasks();
         },
         computed:{
-            checkTasks:function(){
-                switch(this.nowChoice){
-                    case 'after':
-                    console.log("afterを選んでる");
-                    this.afterTasks();
-                    break;
-                    case 'before':
-                    console.log("beforeを選んでる");
-                    this.beforeTasks();
-                    break;
-                    default:
-                    console.log("allを選んでる");
-                    this.fetchtasks();
-                }
+            sortedTasks:function(){
+                return this.sortedTasks;
             }
-
         },
         methods:{
-            firsttasks(){//すべてのtasksを取得
+            firstTasks(){//すべてのtasksを取得
                 let url = '/api/tasklist/';
                 if(this.$store.state.user.id){
                     url = url + this.$store.state.user.id;//ユーザー情報ある場合は数字が末尾に入る
                     }
-                    axios.get(url).then(response => (this.defaultTasks = response.data))
+                let self = this;
+                axios.get(url).then(function(response){
+                    console.log("うまくいったfirstTasks");
+                    console.log(response.data);
+                    self.defaultTasks = response.data
+
+                 })
+                 return self.defaultTasks;
             },
             fetchtasks(){//すべてのtasksを取得
-                //this.tasks = this.defaultTasks;
-                //console.log(this.$store.state.user);
+                //this.nowChoice =  "all";
+                console.log("fetchTasks"); 
+                //Vue.set(this.tasks,this.defaultTasks);
                 let url = '/api/tasklist/';
-                //this.nowChoice = "all";
-                let self = this;
                 if(this.$store.state.user.id){
-                    url = url + this.$store.state.user.id;
-                }
-                axios.get(url).then(response => {
-                        (this.tasks = response.data)
+                    url = url + this.$store.state.user.id;//ユーザー情報ある場合は数字が末尾に入る
                     }
-                )                
+                axios.get(url).then(response => (
+                    this.tasks = response.data
+                ))
+               return this.tasks;
             },
             beforeTasks(){//未実施のtasksを取得ここを改造
-                this.tasks = [];
-                this.nowChoice = "before";
+                //this.nowChoice = "before";
                 console.log("beforeTasks");
+                //this.firstTasks();//一旦すべて取得
+                this.tasks = [];
+                let temp = []
                     for(var i in this.defaultTasks){
                         if(this.defaultTasks[i].done == 0){
-                            this.tasks.push(this.defaultTasks[i]);
+                            temp.push(this.defaultTasks[i]);
                         }
                     }
+                    this.tasks = temp;
+                    console.log(this.tasks);
+                    //this.sortedTasks();
             },
             afterTasks(){//実施済のtasksを取得
-                this.tasks = [];
-                this.nowChoice = "after";
+                //this.nowChoice = "after";
                 console.log("afterTasks");
+                //this.firstTasks();
+                this.tasks = [];
                     for(var i in this.defaultTasks){
                         if(this.defaultTasks[i].done == 1){
                             this.tasks.push(this.defaultTasks[i]);
                         }
                     }
+                    console.log(this.tasks);
             },
             addTask(){//task追加の表示
                 this.newTask = !this.newTask;
             },
             clicked(task){
                 //コントローラー側で処理
+                //console.log("今のnowChoiceは" + this.nowChoice);
                 let target = task.id;
                 let self = this;
-                console.log('/tasks/change/' + target);//コントローラー側でtaskの難しさをみて変更
+                //console.log('/tasks/change/' + target);//コントローラー側でtaskの難しさをみて変更
                 axios.post('/tasks/change/' + target)
                 .then(function(responce){
+                    console.log(responce.data[0].title + "がかえってきました");
+                    console.log(responce.data[1] + "がかえってきました");
+
                     let tempmsg;
                     let tempcategory;
                     if(task.categories_id == "1"){
@@ -225,12 +240,10 @@
                         }else{
                             tempcategory = "知力";
                     }
-
                     if(task.done == 1){
-                            tempmsg = task.title + ' をキャンセルしました。' + tempcategory + 'が下がります。';
+                        tempmsg = task.title + ' をキャンセルしました。' + tempcategory + 'が下がります。'; 
                         }else{
                             tempmsg = task.title + ' を実施しました。' + tempcategory + 'が上がりました。';
-                            //console.log(tempmsg);
                             self.upcategory = "";
                             self.up = true;
                             self.upcategory = tempcategory;
@@ -239,10 +252,13 @@
                     self.$store.commit('message/setContent',{//メッセージを入れ
                         content: tempmsg
                     })
-                    self.$store.dispatch('register');//パラメータの更新
-                    self.fetchtasks();//ここ！最後にした。
+                    self.$store.dispatch('register');//ユーザーパラメータの更新
+                    self.firstTasks();
+                    Vue.set(task,"done",responce.data[0].done);//対応taskのdoneに、帰ってきた値を入れる。
+                    return task;
 
                 })
+               
             },
             deletetask(task){
                 //コントローラー側で処理
@@ -266,13 +282,6 @@
                 this.up = false;
                 
             },
-            onActive(task){//メモを見る処理
-                if(this.activeItem === task){
-                    this.activeItem = null;
-                }else{
-                    this.activeItem = task;
-                }
-            },
             forDifficult(e){//難易度表示
                 let star = "";
                 for(let i = 1; i <= e; i++){
@@ -280,35 +289,10 @@
                 }
                 return star;
             }
-            
-
-        },
-        watch:{
-            tasks:{
-                async handler (){
-                    await this.mounted;
-                },
-                immediate:true
-            }
         }
+        
     
     }
     
-        
-/*
-    switch(this.nowChoice){
-                    case 'after':
-                    //console.log("afterを選んでる");
-                    this.afterTasks();
-                    break;
-                    case 'before':
-                    //console.log("beforeを選んでる");
-                    this.beforeTasks();
-                    break;
-                    default:
-                    //console.log("allを選んでる");
-                    this.fetchtasks();
-                },
 
-    */
 </script>

@@ -4,7 +4,7 @@
         <section class="sidebar">
             <p>メニュー</p>
             <router-link to="/tasks" @click.native="taskChoised()"><i class="fas fa-th-list fontawasome-list"></i>タスク</router-link>
-            <router-link to="/status" @click.native="statusChoised()"><i class="fas fa-user fontawasome-status"></i>ステータス</router-link>
+            <router-link to="/status" @click.native="statusChoised()"><i class="fas fa-user blink fontawasome-status"></i>ステータス</router-link>
             <router-link to="/items" @click.native="itemChoised()"><i class="fas fa-gift fontawasome-item"></i>アイテム</router-link>
             <!--<router-link to="/taskform">タスクを登録する</router-link>-->
             <!--sideIsClickedをふよ-->
@@ -13,7 +13,7 @@
         
 
         <RouterView /> 
-        <!--<Message />-->
+        <Message />
     </div>
 </template>
 

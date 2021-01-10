@@ -1,5 +1,11 @@
 .myinfo{
     display: flex;
+    flex-wrap: wrap;
+}
+
+.blink{
+    animation: blink_effect 3s infinite;
+
 }
 
 //ルーターリンクで選んでいるリンク

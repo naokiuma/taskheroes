@@ -38,9 +38,7 @@ class ItemController extends Controller
             Log::debug("自分の：".$items);
             return $items;
             } 
-        }
-        //Log::debug($items);
-        
+        }        
         
 }
 

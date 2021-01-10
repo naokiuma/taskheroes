@@ -1,5 +1,14 @@
 <template>
     <section class="section-tasks animate__animated animate__bounceInRight">
+        <!--レベルアップ演出。数秒で消える-->
+        <section v-show="levelup" class="bg-task-fadein">
+            <div class="fadein-wrapper">
+                <div class="image-wrapper">
+                </div>
+            </div>
+            <img src="/img/levelup.svg"> 
+        </section>
+
         <h3 class="mypage-heading">タスク一覧</h3>
         <div class="tasks-filter-btns">
             <button class="tasks-filter-btn" @click="beforeTasks()">未完了タスク</button>
@@ -7,8 +16,16 @@
             <button class="tasks-filter-btn" @click="fetchtasks()">すべてのタスク</button>
             <button class="tasks-filter-btn" @click="addTask()">新規タスク+</button>
         </div>
-        
         <div class="tasks-wrapper">
+            
+        <!--各種タスクの詳細を表示する-->
+        <!--
+        <div v-show="detailShow" class="task-detail">
+            {{activeItem}}だ
+        </div>
+        -->
+
+        
             <transition name="fade">
                 <div class="newTask" v-show="newTask"><Taskform /></div>
             </transition> 
@@ -17,57 +34,64 @@
                 <div v-show="up" class="taskupParameters">{{ upcategory }} がアップ！<i class="fas fa-arrow-up fontawasome-arrow "></i></div>
             </transition> 
             
-            <!--<div class="each-task card animate__animated animate__flipInX" v-for="task in tasks" :key="task.id">-->
             <div class="each-task card" v-for="task in tasks" :key="task.id">
+        
                 <!--表-->
                 <div class="card__side card__side--front" v-bind:class="{ rotate: task.done }">
-                    <div class="each-task__title">{{task.title}}</div>
-                    <div class="each-task__body" v-bind:class="{'is-active':activeItem === task}" >{{task.body}}</div>
-                    
                     <div class="each-task__category">
-                        <div v-if="task.categories_id == '1'">
-                        力<img src="/../img/ken.png" alt="">
+                        <div class="each-task-Done-icon" @click ="clicked(task)" v-if="task.categories_id == '1'">
+                            <img src="/../img/ken.png" alt="">
                         </div>
-                        <div v-else-if="task.categories_id == '2'">
-                        魔力<img src="/../img/mahou.png" alt="">
+                        <div class="each-task-Done-icon" @click ="clicked(task)" v-else-if="task.categories_id == '2'">
+                            <img src="/../img/mahou.png" alt="">
                         </div>
-                        <div v-else-if="task.categories_id == '3'">
-                        知力<img src="/../img/know.png" alt="">
+                        <div class="each-task-Done-icon" @click ="clicked(task)" v-else-if="task.categories_id == '3'">
+                            <img src="/../img/know.png" alt="">
                         </div>
                     </div>
+                    <div class="each-task__title_outer">
+                        <div class="each-task__title_inner">{{task.title}}</div> 
+                    </div>
+                    
+                    
+                    <div class="each-task__body" v-bind:class="{'is-active':activeItem === task}" >{{task.body}}</div>
+
+                    
                     <div class="each-task__state">
-                        <button class="main-button" @click ="clicked(task)">実行する！</button>
-                        <button class="main-button" v-on:click="onActive(task)">メモをみる</button>
+                        <button class="main-button" v-on:click="onActive(task)">詳細</button>
                         <button class="sub-button" @click ="deleate(task)">削除</button>
 
                     </div>
                     <div class="each-task__difficult" v-html="forDifficult(task.difficult)"></div>
                     <span class="each-task__time">投稿日時：{{task.created_at}}</span>
+                    
+                    <aside class="each-task__detail" v-show="taskDetailShow == task.id">
+                        <p>{{task.body}}</p>
+                    </aside>
                 </div>
 
                 <!--裏-->
                 <div class="card__side card__side--back" v-bind:class="{ rotate: !task.done }">
-                        
-                    <div class="each-task__title">{{task.title}}</div>
-                    <div class="each-task__body" v-bind:class="{'is-active':activeItem === task}" >{{task.body}}</div>                    
-                    <p class="donetext">実施済み</p>
-                    
-                    <!--<div class="each-task__category" v-bind:class="{ categoryDone: task.done }" >-->
                     <div class="each-task__category">
-                        <div v-if="task.categories_id == '1'">
-                        力<img src="/../img/ken.png" alt="">
+                        <div class="each-task-Doned-icon" @click ="clicked(task)" v-if="task.categories_id == '1'">
+                            <img src="/../img/ken.png" alt="">
                         </div>
-                        <div v-else-if="task.categories_id == '2'">
-                        魔力<img src="/../img/mahou.png" alt="">
+                        <div class="each-task-Doned-icon" @click ="clicked(task)" v-else-if="task.categories_id == '2'">
+                            <img src="/../img/mahou.png" alt="">
                         </div>
-                        <div v-else-if="task.categories_id == '3'">
-                        知力<img src="/../img/know.png" alt="">
+                        <div class="each-task-Doned-icon" @click ="clicked(task)" v-else-if="task.categories_id == '3'">
+                            <img src="/../img/know.png" alt="">
                         </div>
                     </div>
+                        
+                    <div class="each-task__title_outer">
+                        <div class="each-task__title_inner">{{task.title}}</div> 
+                    </div>
+                    <!--<div class="each-task__body" v-bind:class="{'is-active':activeItem === task}" >{{task.body}}</div>-->
+                    <p class="donetext">DONE!</p>
 
                     <div class="each-task__state">
-                        <button class="main-button" @click ="clicked(task)">戻す</button>
-                        <button class="main-button" v-on:click="onActive(task)">メモをみる</button>
+                        <button class="main-button" v-on:click="onActive(task)">詳細</button>
                         <button class="sub-button" @click ="deletetask(task)">削除</button>
                     </div>
                     <div class="each-task__difficult" v-html="forDifficult(task.difficult)"></div>
@@ -75,16 +99,23 @@
                 </div>
             </div>
         </div>
+
+<!--
         <img src="/img/levelup.svg">
-        
-    </section>
-
-    
-
+        <div class="loading">
+            <span>L</span>
+            <span>e</span>
+            <span>v</span>
+            <span>e</span>
+            <span>l</span>
+            <span>U</span>
+            <span>p</span>
+        </div>
+-->
+</section>
 </template>
 
 <style>
-
 .fade-enter-active{
     animation:fade-in .5s;
 }
@@ -100,12 +131,12 @@
   animation: bounce-in .5s reverse;
 }
 
-
 </style>
 
 
 <script>
     import Taskform from './TaskFormComponent.vue';//ok
+    
 
     export default {
         data(){
@@ -117,8 +148,11 @@
                 upcategory:"",
                 newTask:false,
                 activeItem:null,
+                detailShow:false,
                 tasknum:0,
                 nowChoice:"",
+                levelup:false,
+                taskDetailShow:null
                 
             }
         },
@@ -126,23 +160,16 @@
             Taskform
         },
         created(){
-            this.firstTasks();
-            //this.firsttasks(this.defaultTasks);
-        
+            this.firstTasks();        
         },
         mounted(){//apiから一覧を取得
-            //console.log(this.$store.state.user);
             //console.log("moutedです");
            this.fetchtasks();
-            
         },
         computed:{
             sortedTasks:function(){
-                console.log(this.nowChoice);
-               //console.log(this.tasks);
                 return this.sortedTasks;
             }
-
         },
         methods:{
             firstTasks(){//すべてのtasksを取得
@@ -160,7 +187,7 @@
                  return self.defaultTasks;
             },
             fetchtasks(){//すべてのtasksを取得
-                this.nowChoice =  "all";
+                //this.nowChoice =  "all";
                 console.log("fetchTasks"); 
                 //Vue.set(this.tasks,this.defaultTasks);
                 let url = '/api/tasklist/';
@@ -173,7 +200,7 @@
                return this.tasks;
             },
             beforeTasks(){//未実施のtasksを取得ここを改造
-                this.nowChoice = "before";
+                //this.nowChoice = "before";
                 console.log("beforeTasks");
                 //this.firstTasks();//一旦すべて取得
                 this.tasks = [];
@@ -188,7 +215,7 @@
                     //this.sortedTasks();
             },
             afterTasks(){//実施済のtasksを取得
-                this.nowChoice = "after";
+                //this.nowChoice = "after";
                 console.log("afterTasks");
                 //this.firstTasks();
                 this.tasks = [];
@@ -204,13 +231,15 @@
             },
             clicked(task){
                 //コントローラー側で処理
-                console.log("今のnowChoiceは" + this.nowChoice);
+                //console.log("今のnowChoiceは" + this.nowChoice);
                 let target = task.id;
                 let self = this;
-                console.log('/tasks/change/' + target);//コントローラー側でtaskの難しさをみて変更
+                //console.log('/tasks/change/' + target);//コントローラー側でtaskの難しさをみて変更
                 axios.post('/tasks/change/' + target)
                 .then(function(responce){
-                    console.log(responce.data);
+                    console.log(responce.data[0].title + "がかえってきました");
+                    console.log(responce.data[1] + "がかえってきました");
+
                     let tempmsg;
                     let tempcategory;
                     if(task.categories_id == "1"){
@@ -234,7 +263,7 @@
                     })
                     self.$store.dispatch('register');//ユーザーパラメータの更新
                     self.firstTasks();
-                    Vue.set(task,"done",responce.data.done);//対応taskのdoneに、帰ってきた値を入れる。
+                    Vue.set(task,"done",responce.data[0].done);//対応taskのdoneに、帰ってきた値を入れる。
                     return task;
 
                 })
@@ -263,11 +292,55 @@
                 
             },
             onActive(task){//メモを見る処理
+                //メッセージ側でやる場合
+                /*
+                this.$store.commit('message/setItemDetail',{//item情報を入れる
+                    itemInfomation: { id: task.id,
+                    title:task.title,
+                    body:task.body,
+                    difficult:task.difficult
+                     }
+                })
+                */
+
+            //別パターン
+            if(this.taskDetailShow == task.id){
+                    this.taskDetailShow = null;
+                }else{
+                    //console.log("通るかtest");
+                    this.taskDetailShow = task.id;
+                }
+
+
+            //また別でやる場合
+            /*
+                this.detailShow = true;
                 if(this.activeItem === task){
+                    
+                    this.detailShow = false;
                     this.activeItem = null;
                 }else{
+                    this.detailShow = true;
                     this.activeItem = task;
                 }
+                */
+                
+            
+            },
+
+            modalResize(){ 
+                let w = $(window).width();
+                console.log("w" + w);
+                let h = $(window).height();
+                let cw = $(".task-detail").outerWidth();
+                console.log("cw" + cw);
+                let ch = $(".task-detail").outerHeight();
+    
+                //取得した値をcssに追加する
+                $(".task-detail").css({
+                        "left": ((w - cw)/2) + "px",
+                        "top": ((h - ch)/2) + "px"
+                });
             },
             forDifficult(e){//難易度表示
                 let star = "";
@@ -277,18 +350,6 @@
                 return star;
             }
         }
-        /*,
-        
-        watch:{
-            tasks:{
-                async handler (){
-                    await this.fetchtasks;
-                },
-                immediate:true
-            }
-        }
-        */
-        
         
     
     }
