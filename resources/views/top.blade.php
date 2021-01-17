@@ -62,7 +62,7 @@
                 <img class="about-image2"src="{{ asset('/img/fighter.png') }}"" alt="">
             </div>
         </div>
-        <span class="heading-primary--sub">・・などなど。自分を育て、勇者も育てよう。</span>
+        <p>・・などなど。自分を育て、勇者も育てよう。</p>
     </div>
 
 
@@ -130,7 +130,7 @@
     /*fadeoutロゴ*/
 $(function() {
 	setTimeout(function(){
-		$('.bg-top-fadein').fadeOut(2500);
+		$('.bg-top-fadein').fadeOut(1500);
     },300); //秒後にロゴ含め真っ白背景をフェードアウト！
 });
       

@@ -2684,6 +2684,10 @@ __webpack_require__.r(__webpack_exports__);
           self.$store.commit('message/setContent', {
             content: tempmsg
           });
+          setTimeout(self.$router.go({
+            path: self.$router.currentRoute.path,
+            force: true
+          }), 4000);
         });
       } else {
         alert("削除しませんでした。");

@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log; //ログ
 use Illuminate\Support\Facades\DB; // DB ファサードを use する
-use App\Library\itemCheck;
 
 use App\Task;
 use App\User;
@@ -112,7 +111,7 @@ class TaskController extends Controller
             ParameterCheck::changeParameter("down",$point,$category);
         }
         $changeTask->save();
-        itemCheck::test();
+        //itemCheck::test();
         return [$changeTask,$randam,$gold];
       
     }

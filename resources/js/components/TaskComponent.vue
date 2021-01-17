@@ -261,8 +261,6 @@
                     self.$store.commit('message/setContent',{//メッセージ
                         content: tempmsg
                     })
-
-
                     return task;
 
                 })
@@ -281,6 +279,7 @@
                         self.firstTasks();
                         self.$store.commit('message/setContent',{
                             content: tempmsg })
+                        setTimeout(self.$router.go({path: self.$router.currentRoute.path, force: true}), 4000);
                         
                     })
                     } else {

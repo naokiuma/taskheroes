@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::get('/', function () {
     return view('top');
 })->name('top');
@@ -19,11 +21,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/user', 'UserController@mypage')->name('user.mypage');//マイページ表示
+Route::get('/user', 'UserController@mypage')->name('user.mypage')->middleware('auth');;//マイページ表示
 Route::get('/user/logincheck', 'UserController@logincheck')->name('user.logincheck');
 
 
-Route::get('/tasks', 'TaskController@index')->name('tasks.index');
+//Route::get('/tasks', 'TaskController@index')->name('tasks.index')->middleware('auth');;
 Route::post('/tasks/create', 'TaskController@create')->name('tasks.create');
 Route::post('/tasks/change/{id}', 'TaskController@change')->name('tasks.change');
 Route::post('/tasks/delete/{id}', 'TaskController@delete')->name('tasks.delete');
