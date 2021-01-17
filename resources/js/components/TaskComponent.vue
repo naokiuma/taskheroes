@@ -11,11 +11,11 @@
 
         <h3 class="mypage-heading"><img class="eachPageImg" src="/img/steps/step2.png" alt=""><span>タスク一覧</span></h3>
         <div class="tasks-filter-btns">
-            <button class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'alltasks'}" @click="fetchtasks()">すべてのタスク</button>
-            <button class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'beforetasks'}" @click="beforeTasks()">未完了タスク</button>
-            <button class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'aftertasks'}" @click="afterTasks()">実施済みタスク</button>
+            <button class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'alltasks'}" @click="fetchtasks()">すべて</button>
+            <button class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'beforetasks'}" @click="beforeTasks()">未完了</button>
+            <button class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'aftertasks'}" @click="afterTasks()">実施済み</button>
             <button v-if="sortFilter == 'newtasks'" class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'newtasks'}" @click="addTask()">閉じる</button>
-            <button v-else-if="sortFilter != 'newtasks'" class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'newtasks'}" @click="addTask()">新規タスク+</button>
+            <button v-else-if="sortFilter != 'newtasks'" class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'newtasks'}" @click="addTask()">新規タスク</button>
 
             <!--<button class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'newtasks'}" @click="addTask()">新規タスク+</button>-->
         </div>
@@ -140,7 +140,7 @@
             //console.log("moutedです");
            this.fetchtasks();
            this.$store.commit('message/setContent',{
-                        content: "タスク一覧画面を開きました。タスクの登録、左側のアイコンで実施しましょう。"
+                        content: "タスクを登録し、実施しましょう！"
                     })
         },
         computed:{
@@ -156,15 +156,15 @@
                     }
                 let self = this;
                 axios.get(url).then(function(response){
-                    console.log("うまくいったfirstTasks");
-                    console.log(response.data);
+                    //console.log("うまくいったfirstTasks");
+                    //console.log(response.data);
                     self.defaultTasks = response.data
 
                  })
                  return self.defaultTasks;
             },
             fetchtasks(){//すべてのtasksを取得
-                console.log("fetchTasks");
+                //console.log("fetchTasks");
                 this.newTask = false;
                 this.sortFilter = "alltasks";
                 let url = '/api/tasklist/';
@@ -177,7 +177,7 @@
                return this.tasks;
             },
             beforeTasks(){//未実施のtasksを取得ここを改造
-                console.log("beforeTasks");
+                //console.log("beforeTasks");
                 this.newTask = false;
                 this.sortFilter = "beforetasks";//ボタンアクティブ
                 this.tasks = [];
@@ -188,11 +188,11 @@
                         }
                     }
                     this.tasks = temp;
-                    console.log(this.tasks);
+                    //console.log(this.tasks);
                     //this.sortedTasks();
             },
             afterTasks(){//実施済のtasksを取得
-                console.log("afterTasks");
+                //console.log("afterTasks");
                 this.newTask = false;
                 this.sortFilter = "aftertasks";//ボタンアクティブ
                 this.tasks = [];
@@ -201,7 +201,7 @@
                             this.tasks.push(this.defaultTasks[i]);
                         }
                     }
-                    console.log(this.tasks);
+                    //console.log(this.tasks);
             },
             addTask(){//task追加の表示
             if(this.sortFilter == "newtasks"){
@@ -216,12 +216,12 @@
                 let target = task.id;
                 let self = this;
                 let beforeUserLv = this.$store.state.user.lv;
-                console.log("ユーザーレベル前半" + beforeUserLv)
+                //console.log("ユーザーレベル前半" + beforeUserLv)
                 //console.log('/tasks/change/' + target);//コントローラー側でtaskの難しさをみて変更
                 axios.post('/tasks/change/' + target)
                 .then(function(responce){
-                    console.log(responce.data[0].title + "がかえってきました");//タスク名が帰ってくる
-                    console.log(responce.data[1] + "がかえってきました");
+                    //console.log(responce.data[0].title + "がかえってきました");//タスク名が帰ってくる
+                    //console.log(responce.data[1] + "がかえってきました");
                     //console.log("お金は" + responce.data[2] + "稼ぎました");
 
                     let tempmsg;
@@ -247,7 +247,7 @@
                     Vue.set(task,"done",responce.data[0].done);//対応taskのdoneに、帰ってきた値を入れる。
 
                     if(responce.data[1] > 0){
-                        console.log("レベルアップ");
+                        //console.log("レベルアップ");
                         tempmsg = tempmsg + "レベルアップしました！HPが"　+ responce.data[1] + "アップしました。" + responce.data[2] + "Gold手に入れました。"
                         self.levelup = true;
                         setTimeout(
@@ -274,8 +274,7 @@
                 let self = this;
                 if( confirm("削除してもよろしいでしょうか？この操作は取り消しできません。") ) {
                     let tempmsg = task.title + "を削除しました。";
-    
-                    console.log('/tasks/delete/' + target);
+                    //console.log('/tasks/delete/' + target);
                     axios.post('/tasks/delete/' + target)
                     .then(function(responce){
                         //self.fetchtasks();
@@ -285,7 +284,7 @@
                         
                     })
                     } else {
-                    alert("削除をやめました。");
+                    alert("削除しませんでした。");
                 }
             },
             fadeout:function() {
@@ -301,10 +300,10 @@
             },
             modalResize(){ 
                 let w = $(window).width();
-                console.log("w" + w);
+                //console.log("w" + w);
                 let h = $(window).height();
                 let cw = $(".task-detail").outerWidth();
-                console.log("cw" + cw);
+                //console.log("cw" + cw);
                 let ch = $(".task-detail").outerHeight();
     
                 //取得した値をcssに追加する

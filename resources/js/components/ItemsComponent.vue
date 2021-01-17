@@ -72,7 +72,7 @@
             this.fetchItems();
         },
         mounted(){//apiから一覧を取得
-            console.log("mounted");
+            //console.log("mounted");
             //this.fetchItems();
             
             this.$store.commit('message/setContent',{
@@ -106,7 +106,7 @@
                 })
             },
             haveItem(val){//hashの中に含まれているならtrueを返す関数
-                console.log("haveItemです");
+                //console.log("haveItemです");
                 //console.log(this.have[val]);
                 //console.log("-------");
                 if(this.have[val] !== undefined){
@@ -117,7 +117,7 @@
 
             },
             showItemDetail(item){
-                console.log(item.id);
+                //console.log(item.id);
                 if(this.itemShow == item.id){
                     this.itemShow = null;
                     this.itemDetail = [];
@@ -125,7 +125,7 @@
                     this.itemShow = item.id;
                     this.itemDetail = item;
                 }
-                console.log("itemShowに挿入されている数字" + this.itemShow);
+                //console.log("itemShowに挿入されている数字" + this.itemShow);
             },
             closeDetail(){
                 this.itemShow = null;
@@ -141,7 +141,7 @@
             },
             buyItem(){//購入。
                 let userMoney = this.$store.state.user.money;
-                console.log("選択中" + this.itemDetail.id);
+                //console.log("選択中" + this.itemDetail.id);
                 let choiseItemNumuber = this.itemDetail.id - 1;//選択中アイテムのid
                 //console.log("手持ちのおかね" + userMoney);
                 //console.log("アイテムの値段" + this.items[choiseItemNumuber].price);
@@ -151,11 +151,11 @@
                         content: "お金が足りないぜ。"
                         })
                 }else{
-                    console.log("お金あるよ");
+                    //console.log("お金あるよ");
                     //サーバーサイドでの処理
                     axios.post('/items/buy/' + this.itemDetail.id)
                     .then(function(responce){
-                        console.log(responce);
+                        //console.log(responce);
 
                         })
                     this.$store.commit('message/setContent',{
@@ -175,9 +175,9 @@
                 this.itemDetail = [];
             },
             check(){
-                console.log(this.items);
-                console.log(this.myitems);
-                console.log(this.have);
+                //console.log(this.items);
+                //console.log(this.myitems);
+                //console.log(this.have);
             }
             
         }
@@ -192,7 +192,5 @@
         }
         */
     }
-
-
 
 </script>

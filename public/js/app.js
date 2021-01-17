@@ -1985,8 +1985,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   mounted: function mounted() {
-    console.log("hero mounted"); //console.log(this.parameters);
-
+    //console.log("hero mounted");
+    //console.log(this.parameters);
     this.$store.dispatch('register'); //storeのactionをこちらでdispatchしログインしているかを返す
 
     this.fetchusers();
@@ -1995,8 +1995,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     });
   },
   methods: {
-    fetchusers: function fetchusers() {
-      console.log("ユーザーの能力"); //console.log(this.$store.state.user.power);
+    fetchusers: function fetchusers() {//console.log("ユーザーの能力");
+      //console.log(this.$store.state.user.power);
     }
   },
   watch: {
@@ -2114,8 +2114,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     //apiから一覧を取得
-    console.log("mounted"); //this.fetchItems();
-
+    //console.log("mounted");
+    //this.fetchItems();
     this.$store.commit('message/setContent', {
       content: "ラッシャイ！"
     });
@@ -2155,9 +2155,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     haveItem: function haveItem(val) {
       //hashの中に含まれているならtrueを返す関数
-      console.log("haveItemです"); //console.log(this.have[val]);
+      //console.log("haveItemです");
+      //console.log(this.have[val]);
       //console.log("-------");
-
       if (this.have[val] !== undefined) {
         return true;
       } else {
@@ -2165,17 +2165,15 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     showItemDetail: function showItemDetail(item) {
-      console.log(item.id);
-
+      //console.log(item.id);
       if (this.itemShow == item.id) {
         this.itemShow = null;
         this.itemDetail = [];
       } else {
         this.itemShow = item.id;
         this.itemDetail = item;
-      }
+      } //console.log("itemShowに挿入されている数字" + this.itemShow);
 
-      console.log("itemShowに挿入されている数字" + this.itemShow);
     },
     closeDetail: function closeDetail() {
       this.itemShow = null;
@@ -2190,8 +2188,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     buyItem: function buyItem() {
       //購入。
-      var userMoney = this.$store.state.user.money;
-      console.log("選択中" + this.itemDetail.id);
+      var userMoney = this.$store.state.user.money; //console.log("選択中" + this.itemDetail.id);
+
       var choiseItemNumuber = this.itemDetail.id - 1; //選択中アイテムのid
       //console.log("手持ちのおかね" + userMoney);
       //console.log("アイテムの値段" + this.items[choiseItemNumuber].price);
@@ -2202,10 +2200,9 @@ __webpack_require__.r(__webpack_exports__);
           content: "お金が足りないぜ。"
         });
       } else {
-        console.log("お金あるよ"); //サーバーサイドでの処理
-
-        axios.post('/items/buy/' + this.itemDetail.id).then(function (responce) {
-          console.log(responce);
+        //console.log("お金あるよ");
+        //サーバーサイドでの処理
+        axios.post('/items/buy/' + this.itemDetail.id).then(function (responce) {//console.log(responce);
         });
         this.$store.commit('message/setContent', {
           content: "ありがとうよ！！"
@@ -2224,10 +2221,9 @@ __webpack_require__.r(__webpack_exports__);
       this.itemShow = null;
       this.itemDetail = [];
     },
-    check: function check() {
-      console.log(this.items);
-      console.log(this.myitems);
-      console.log(this.have);
+    check: function check() {//console.log(this.items);
+      //console.log(this.myitems);
+      //console.log(this.have);
     }
   }
   /*
@@ -2269,6 +2265,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2276,15 +2278,13 @@ __webpack_require__.r(__webpack_exports__);
       messageShow: true
     };
   },
-  mounted: function mounted() {
-    //apiから一覧を取得
+  mounted: function mounted() {//apiから一覧を取得
     //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
-    console.log(this.$store.state.message.content);
-    console.log("messageのcomputeedでした");
+    //console.log(this.$store.state.message.content);
+    //console.log("messageのcomputeedでした");
   },
   methods: {
     toggleMsgwindow: function toggleMsgwindow() {
-      console.log("動いている");
       this.$store.state.message.messageShow = !this.$store.state.message.messageShow;
       this.messageShow = !this.messageShow;
     }
@@ -2353,8 +2353,8 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters.userinfo;
     }
   },
-  mounted: function mounted() {
-    console.log("myinfo.vueのmouted"); //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
+  mounted: function mounted() {//console.log("myinfo.vueのmouted");
+    //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
   },
   methods: {
     taskChoised: function taskChoised() {
@@ -2528,7 +2528,7 @@ __webpack_require__.r(__webpack_exports__);
     //console.log("moutedです");
     this.fetchtasks();
     this.$store.commit('message/setContent', {
-      content: "タスク一覧画面を開きました。タスクの登録、左側のアイコンで実施しましょう。"
+      content: "タスクを登録し、実施しましょう！"
     });
   },
   computed: {
@@ -2547,8 +2547,8 @@ __webpack_require__.r(__webpack_exports__);
 
       var self = this;
       axios.get(url).then(function (response) {
-        console.log("うまくいったfirstTasks");
-        console.log(response.data);
+        //console.log("うまくいったfirstTasks");
+        //console.log(response.data);
         self.defaultTasks = response.data;
       });
       return self.defaultTasks;
@@ -2557,7 +2557,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       //すべてのtasksを取得
-      console.log("fetchTasks");
+      //console.log("fetchTasks");
       this.newTask = false;
       this.sortFilter = "alltasks";
       var url = '/api/tasklist/';
@@ -2573,7 +2573,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     beforeTasks: function beforeTasks() {
       //未実施のtasksを取得ここを改造
-      console.log("beforeTasks");
+      //console.log("beforeTasks");
       this.newTask = false;
       this.sortFilter = "beforetasks"; //ボタンアクティブ
 
@@ -2586,12 +2586,12 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      this.tasks = temp;
-      console.log(this.tasks); //this.sortedTasks();
+      this.tasks = temp; //console.log(this.tasks);
+      //this.sortedTasks();
     },
     afterTasks: function afterTasks() {
       //実施済のtasksを取得
-      console.log("afterTasks");
+      //console.log("afterTasks");
       this.newTask = false;
       this.sortFilter = "aftertasks"; //ボタンアクティブ
 
@@ -2601,9 +2601,8 @@ __webpack_require__.r(__webpack_exports__);
         if (this.defaultTasks[i].done == 1) {
           this.tasks.push(this.defaultTasks[i]);
         }
-      }
+      } //console.log(this.tasks);
 
-      console.log(this.tasks);
     },
     addTask: function addTask() {
       //task追加の表示
@@ -2619,14 +2618,13 @@ __webpack_require__.r(__webpack_exports__);
       //コントローラー側で処理
       var target = task.id;
       var self = this;
-      var beforeUserLv = this.$store.state.user.lv;
-      console.log("ユーザーレベル前半" + beforeUserLv); //console.log('/tasks/change/' + target);//コントローラー側でtaskの難しさをみて変更
+      var beforeUserLv = this.$store.state.user.lv; //console.log("ユーザーレベル前半" + beforeUserLv)
+      //console.log('/tasks/change/' + target);//コントローラー側でtaskの難しさをみて変更
 
       axios.post('/tasks/change/' + target).then(function (responce) {
-        console.log(responce.data[0].title + "がかえってきました"); //タスク名が帰ってくる
-
-        console.log(responce.data[1] + "がかえってきました"); //console.log("お金は" + responce.data[2] + "稼ぎました");
-
+        //console.log(responce.data[0].title + "がかえってきました");//タスク名が帰ってくる
+        //console.log(responce.data[1] + "がかえってきました");
+        //console.log("お金は" + responce.data[2] + "稼ぎました");
         var tempmsg;
         var tempcategory;
 
@@ -2654,7 +2652,7 @@ __webpack_require__.r(__webpack_exports__);
         Vue.set(task, "done", responce.data[0].done); //対応taskのdoneに、帰ってきた値を入れる。
 
         if (responce.data[1] > 0) {
-          console.log("レベルアップ");
+          //console.log("レベルアップ");
           tempmsg = tempmsg + "レベルアップしました！HPが" + responce.data[1] + "アップしました。" + responce.data[2] + "Gold手に入れました。";
           self.levelup = true;
           setTimeout(function () {
@@ -2678,8 +2676,8 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
 
       if (confirm("削除してもよろしいでしょうか？この操作は取り消しできません。")) {
-        var tempmsg = task.title + "を削除しました。";
-        console.log('/tasks/delete/' + target);
+        var tempmsg = task.title + "を削除しました。"; //console.log('/tasks/delete/' + target);
+
         axios.post('/tasks/delete/' + target).then(function (responce) {
           //self.fetchtasks();
           self.firstTasks();
@@ -2688,7 +2686,7 @@ __webpack_require__.r(__webpack_exports__);
           });
         });
       } else {
-        alert("削除をやめました。");
+        alert("削除しませんでした。");
       }
     },
     fadeout: function fadeout() {
@@ -2704,11 +2702,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     modalResize: function modalResize() {
-      var w = $(window).width();
-      console.log("w" + w);
+      var w = $(window).width(); //console.log("w" + w);
+
       var h = $(window).height();
-      var cw = $(".task-detail").outerWidth();
-      console.log("cw" + cw);
+      var cw = $(".task-detail").outerWidth(); //console.log("cw" + cw);
+
       var ch = $(".task-detail").outerHeight(); //取得した値をcssに追加する
 
       $(".task-detail").css({
@@ -7309,6 +7307,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\n.left-enter-active{ -webkit-animation:Left-in .2s; animation:Left-in .2s;\n}\n.left-leave-active{ animation:Left-in .2s reverse;}\n.fade-enter-active{ -webkit-animation:fade-in .2s; animation:fade-in .2s;\n}\n.fade-leave-active{ animation:fade-in .2s reverse;}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Message.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Message.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.fade-enter-active{ -webkit-animation:fade-in .5s; animation:fade-in .5s;\n}\n.fade-leave-active{ animation:fade-in .5s reverse;}\n", ""]);
 
 // exports
 
@@ -39301,6 +39318,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Message.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Message.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Message.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Message.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TaskComponent.vue?vue&type=style&index=0&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TaskComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -40262,26 +40309,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "messages-wrapper" }, [
-    _c(
-      "section",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: this.$store.state.message.messageShow == true,
-            expression: "this.$store.state.message.messageShow == true"
+  return _c("transition", { attrs: { name: "fade" } }, [
+    _c("div", { staticClass: "messages-wrapper" }, [
+      _c(
+        "div",
+        {
+          staticClass: "messages-toggle",
+          on: {
+            click: function($event) {
+              return _vm.toggleMsgwindow()
+            }
           }
-        ],
-        staticClass: "messages"
-      },
-      [
-        _c("p", { staticClass: "anim-typewriter" }, [
-          _vm._v(_vm._s(this.$store.state.message.content))
-        ])
-      ]
-    )
+        },
+        [_vm._v("⇅")]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: this.$store.state.message.messageShow == true,
+              expression: "this.$store.state.message.messageShow == true"
+            }
+          ],
+          staticClass: "messages"
+        },
+        [
+          _c("p", { staticClass: "anim-typewriter" }, [
+            _vm._v(_vm._s(this.$store.state.message.content))
+          ])
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -40343,7 +40405,7 @@ var render = function() {
               }
             },
             [
-              _c("i", { staticClass: "fas fa-user blink fontawasome-status" }),
+              _c("i", { staticClass: "fas fa-user fontawasome-status" }),
               _vm._v("ステータス")
             ]
           ),
@@ -40467,7 +40529,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("すべてのタスク")]
+          [_vm._v("すべて")]
         ),
         _vm._v(" "),
         _c(
@@ -40481,7 +40543,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("未完了タスク")]
+          [_vm._v("未完了")]
         ),
         _vm._v(" "),
         _c(
@@ -40495,7 +40557,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("実施済みタスク")]
+          [_vm._v("実施済み")]
         ),
         _vm._v(" "),
         _vm.sortFilter == "newtasks"
@@ -40524,7 +40586,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("新規タスク+")]
+              [_vm._v("新規タスク")]
             )
           : _vm._e()
       ]),
@@ -57946,7 +58008,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Message_vue_vue_type_template_id_b91a6428___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Message.vue?vue&type=template&id=b91a6428& */ "./resources/js/components/Message.vue?vue&type=template&id=b91a6428&");
 /* harmony import */ var _Message_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Message.vue?vue&type=script&lang=js& */ "./resources/js/components/Message.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Message.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Message.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -57954,7 +58018,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _Message_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Message_vue_vue_type_template_id_b91a6428___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Message_vue_vue_type_template_id_b91a6428___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -57983,6 +58047,22 @@ component.options.__file = "resources/js/components/Message.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Message.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Message.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Message.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/Message.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Message.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Message.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

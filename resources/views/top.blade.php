@@ -6,16 +6,14 @@
 <section class="bg-top-fadein">
         <div class="fadein-wrapper">
             <div class="image-wrapper">
-                
             </div>
-            
         </div>
-        <img src="/img/title.svg"> 
+        <img src="{{ asset('/img/title.svg') }}">
 </section>
 
+
 <div class="billboard">
-    
-    <img class="billboard-img1"src="../img/heroofhero.gif" alt="">
+    <img class="billboard-img1"src="{{ asset('/img/heroofhero.gif') }}" alt="">
     <p class="billboard-text1">タスクをやって</p>
     <p class="billboard-text2">強くなる。</p>
     <i class="fas fa-arrow-up billboard-arrow1"></i>
@@ -58,9 +56,10 @@
             </div>
 
             <div class="about-images">
-                <img class="about-image1"src="../img/art.png" alt="">
+            
+                <img class="about-image1"src="{{ asset('/img/art.png') }}"" alt="">
                     <i class="fas fa-arrow-right fontawasome-margin fontawasome-arror-right"></i>
-                <img class="about-image2"src="../img/fighter.png" alt="">
+                <img class="about-image2"src="{{ asset('/img/fighter.png') }}"" alt="">
             </div>
         </div>
         <span class="heading-primary--sub">・・などなど。自分を育て、勇者も育てよう。</span>
@@ -82,7 +81,7 @@
                         毎日やることやチャレンジしたいことを登録しよう。
                     </p>
                 </div>
-                <img src="../img/steps/step1.png" alt="">
+                <img src="{{ asset('/img/steps/step1.png') }}" alt="">
             </div>
             <div class="howto-step">
                 <div class="step-textgroup">
@@ -91,7 +90,7 @@
                         Let's Do it!
                     </p>
                 </div>
-                <img src="../img/steps/step2.png" alt="">
+                <img src="{{ asset('/img/steps/step2.png') }}" alt="">
             </div>
             <div class="howto-step">
                 <div class="step-textgroup">
@@ -100,7 +99,7 @@
                         1タスクで経験値1を取得。難易度分だけパラメータもアップします。
                     </p>
                 </div>
-                <img src="../img/steps/step3.png" alt="">
+                <img src="{{ asset('/img/steps/step3.png') }}" alt="">
             </div>
             <div class="howto-step">
                 <div class="step-textgroup">
@@ -109,26 +108,30 @@
                         経験値が貯まればレベルアップ。HPや能力がランダムで上がります。
                     </p>
                 </div>
-                <img src="../img/steps/step4.png" alt="">
+                <img src="{{ asset('/img/steps/step4.png') }}" alt="">
             </div>
             <div class="howto-step">
-                <h4>Step5<br>アイテムゲット！</h4>
-                <p>
-                    一定のレベルや能力値に達しアイテムを取得。いろんな効果があります。</p>
+                <div class="step-textgroup">
+                    <h4>Step5<br>アイテムゲット！</h4>
+                    <p>
+                        一定のレベルや能力値に達しアイテムを取得。いろんな効果があります。
+                    </p>
+                </div>
+                <img src="{{ asset('/img/steps/step5.png') }}" alt="">
             </div>
         </div>
     </div>
 
 </section>
 <footer class="footer">
-            <p>フッター</p>
+            <p>Copyright © 2020 Task heroes. All Rights Reserved.</p>
         </footer>
 <script>
     /*fadeoutロゴ*/
 $(function() {
 	setTimeout(function(){
-		$('.bg-top-fadein').fadeOut(4000);
-    },600); //2.5秒後にロゴ含め真っ白背景をフェードアウト！
+		$('.bg-top-fadein').fadeOut(2500);
+    },300); //秒後にロゴ含め真っ白背景をフェードアウト！
 });
       
 </script>

@@ -8,9 +8,36 @@ $subColor: #FAD727;
 $carmBlack:#464545;
 $space:50px;
 
+.regist-wrapper{//登録、ログイン画面での情報
+    margin-top: 150px;
+}
+
+.add-card-color{
+    background-color:$color-main-light !important;
+}
+
+.home-image{
+    width: 200px;
+    display: block;
+    text-align: center;
+    margin: 50px auto;
+}
+
+.note{
+    font-size: 14px;
+    text-align: center;
+    margin: 25px;
+    letter-spacing: 1px;
+    color: #8e8a8a;
+}
+
 
 .radial-bg{
     background: radial-gradient(#ebfffd, #FFF);
+}
+
+.margin-top{
+    margin-top: 150px;
 }
 
 body{

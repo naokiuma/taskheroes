@@ -49,7 +49,7 @@
 
 
         mounted(){
-            console.log("hero mounted");
+            //console.log("hero mounted");
             //console.log(this.parameters);
             this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
             this.fetchusers();
@@ -59,7 +59,7 @@
         },
         methods:{
             fetchusers(){                
-                console.log("ユーザーの能力");
+                //console.log("ユーザーの能力");
                 //console.log(this.$store.state.user.power);
             }
         },

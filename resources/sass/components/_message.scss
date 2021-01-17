@@ -31,16 +31,17 @@
         background-color: #fafafa;
         color: black;
         transition: all .3s;
+        border-top-left-radius: 60px;
         cursor: pointer;
         &:hover{
-            background-color: black;
-            color: #fafafa;
+            background-color: #f4ebeb;
+            color: black;
             transition: all .3s;
 
         }
     }
     p{
-        font-size: 24px;
+        font-size: 18px;
     }
 }
 

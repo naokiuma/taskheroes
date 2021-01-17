@@ -1,7 +1,34 @@
 @charset "UTF-8";
 
+.regist-wrapper {
+  margin-top: 150px;
+}
+
+.add-card-color {
+  background-color: #96fff5 !important;
+}
+
+.home-image {
+  width: 200px;
+  display: block;
+  text-align: center;
+  margin: 50px auto;
+}
+
+.note {
+  font-size: 14px;
+  text-align: center;
+  margin: 25px;
+  letter-spacing: 1px;
+  color: #8e8a8a;
+}
+
 .radial-bg {
   background: radial-gradient(#ebfffd, #FFF);
+}
+
+.margin-top {
+  margin-top: 150px;
 }
 
 body {
@@ -924,17 +951,18 @@ body {
   background-color: #fafafa;
   color: black;
   transition: all 0.3s;
+  border-top-left-radius: 60px;
   cursor: pointer;
 }
 
 .messages-toggle:hover {
-  background-color: black;
-  color: #fafafa;
+  background-color: #f4ebeb;
+  color: black;
   transition: all 0.3s;
 }
 
 .messages p {
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .anim-typewriter {
@@ -1194,7 +1222,7 @@ body {
 
 .section-tasks {
   width: 80%;
-  margin: 40px auto auto auto;
+  margin: 40px auto 150px auto;
 }
 
 .task_marker {
@@ -1203,6 +1231,7 @@ body {
 
 .tasks-wrapper {
   max-width: 100vh;
+  margin-bottom: 120px;
   position: relative;
   margin: auto;
   display: flex;
@@ -1370,7 +1399,7 @@ body {
 
 .newTask {
   min-height: 500px;
-  margin: 20px auto 5px auto;
+  margin: 20px auto 120px auto;
   width: 100%;
   transition: all 0.5s;
   border-radius: 6px;
@@ -1738,13 +1767,23 @@ body {
 
 .billboard-text2 {
   position: absolute;
-  right: 15%;
+  right: 12%;
   top: 87%;
 }
 
 .footer {
-  height: 12vh;
-  background-color: #acacacc9;
+  height: 40px;
+  background-color: #0b0a0ac9;
+  color: #fafafa;
+  line-height: 40px;
+  text-align: right;
+  margin: auto;
+}
+
+.footer p {
+  margin-bottom: 0px;
+  font-size: 11px;
+  padding-right: 15px;
 }
 
 .header {

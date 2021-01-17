@@ -6,6 +6,7 @@
 
 .tasks-wrapper{
     max-width:100vh;
+    margin-bottom: 120px;
     position: relative;
     margin: auto;
     display: flex;
@@ -165,7 +166,7 @@
 
 .newTask{
     min-height: 500px;
-    margin: 20px auto 5px auto;
+    margin: 20px auto 120px auto;
     width: 100%;
     transition: all .5s;
     border-radius: 6px;
