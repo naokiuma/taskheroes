@@ -4,10 +4,15 @@
     height: 25px;
     width: 80%;
     margin-bottom: 1%;
+    border: none;
+    a{
+        color:$carmBlack;
+    }
 
     &:hover{
         background-color: $color-main-light;
         transition: .2s;
+        color: black;
     }
     &:active{
         box-shadow: 2px 4px  black;
@@ -15,12 +20,34 @@
     }
 }
 
+.newTask-submit_button{
+    height: 60px;
+    line-height: 60px;
+    width: 60%;
+    font-size: 24px;
+    background-color: orange;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    letter-spacing: 2px;
+    transition:  all .5s;
+    &:hover{
+        background-color:white;
+        color: orange;
+        transition:  all .5s;
+        border: 1px solid orange;
+
+    }
+}
+//asks-filter-btnsはtaskの方に記載
+
 .change-button{
     background-color: $color-main;
     border-radius: 5px;
     height: 50px;
     width: 15%;
     margin: auto;
+    border: none;
     &:hover{
         background-color: $color-main-light;
         //box-shadow: 3px 2px  black;
@@ -31,18 +58,13 @@
     }
 }
 
-.form-button-area{
-    width: 20%;
-    margin: auto;
-}
-
-
 
 .sub-button{
     background-color: white;
     border-radius: 5px;
     height: 25px;
     width: 80%;
+    border: 1px solid #0003;
 
     &:hover{
         background-color: #d7d5d5;

@@ -1,7 +1,8 @@
-.section-tasks{
-    width: 80%;
-    margin: 40px auto auto auto;
+
+.task_marker{
+    background-image: linear-gradient(transparent 80%, #ffa5009e 0%);
 }
+
 
 .tasks-wrapper{
     max-width:100vh;
@@ -10,21 +11,13 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    .newTask{
-        height: 120px;
-        margin: 5px auto;
-        width: 100%;
-        transition: all .5s;
-        border-radius: 5px;
-        box-shadow: 3px 2px 0.1rem #0000006b;
-    }
     .each-task{
         perspective: 150rem;
         -moz-perspective: 150rem;
         position: relative;
         height: 120px;
+        width: 100%;
         margin: 5px auto;
-        width: 80%;
         transition: all .5s;
         border-radius: 5px;
         box-shadow: 3px 2px 0.1rem #0000006b;
@@ -42,7 +35,7 @@
             
         }
         &__title_inner{
-            font-size: 16px;
+            font-size: 14px;
         }
         &__body{
             margin: auto 10px;
@@ -54,6 +47,17 @@
         &__category{
             margin: auto 10px;
             text-align: center;
+            .star-wrapper{
+                position: absolute;
+                top: 25px;
+                left: 55px;
+            }
+            .star-wrapper2{
+                position: absolute;
+                bottom: 20px;
+                left: 8px;
+            }
+        
         }
         &__time{
             font-size: 10px;
@@ -66,6 +70,7 @@
             position: absolute;
             bottom: 5px;
             left: 5px;
+            font-size: 12px;
         }
         &__detail{
             position: absolute;
@@ -73,20 +78,21 @@
             width: 80%;
             height: 100%;
             left: 0;
-            background-image: linear-gradient(to right bottom, #fffef9, #c3e4f4);
-            
+            background-image: linear-gradient(to right bottom, #fffef9, #c3f4e9);
+            box-shadow: 1px 1px 0.2px darkkhaki;
             p{
                 margin: auto 10px;
                 font-size: 14px;
             }
         }
         &-Done-icon{
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 30px;
             line-height: 40px;
-            background: #5a659d17;
+            background: #a8bfb782;
             cursor: pointer;
+            box-shadow: 1px 1px 0.5px 0px #0000004f;
             transition: 0.4s;
             &:hover{
                 background-color: #96fff5;
@@ -95,12 +101,13 @@
             }
         }
         &-Doned-icon{
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 30px;
             line-height: 40px;
-            background: #0be89582;
+            background: #ffff01ad;
             cursor: pointer;
+            box-shadow: 1px 1px 0.5px 0px #0000004f;
             transition: 0.4s;
             &:hover{
                 background-color: #5d5f6a17;
@@ -109,38 +116,11 @@
             }
         }
         img{
-            width: 35px;
-            height: 35px;
+            width: 50px;
+            height: 50px;
         }
     }
 }
-
-//詳細系
-/*
-.task-detail{
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 300px;
-    height: 500px;
-    display: block;
-    background-color: blue;
-    z-index: 10;
-}
-*/
-/*
-.task-modal-bg{  
-    width:100%;
-    height:100%;
-    background-color: rgba(0,0,0,0.5);
-    position:fixed;
-    top:0;
-    left:0;
-    z-index: 1;
-}
-*/
 
 
 
@@ -180,6 +160,18 @@
     border-radius: 50%;
     font-style: italic;
 }
+
+
+
+.newTask{
+    min-height: 500px;
+    margin: 20px auto 5px auto;
+    width: 100%;
+    transition: all .5s;
+    border-radius: 6px;
+    border: 2px solid #ffb300;
+}
+
 .task{
     &-start{
         font-weight: bold;
@@ -192,19 +184,39 @@
             cursor: pointer;
         }
     }
-    &-form{  
-        display: flex;
-        flex-wrap: nowrap;
+    //ーーーーーーーーーーフォーム系
+    &-form{
         height: 100%;
+        h2{
+            background-color: #ffb300;
+            height: 60px;
+            color: #fafafa;
+            line-height: 60px;
+            font-size: 24px;
+            letter-spacing: 2px;
+
+        }
+        span{
+            font-size: 12px;
+        }
+        input, textarea {
+            border-radius: 6px;
+            background-color: #cfecdf1a;;
+            &:focus{
+                background-color: #fff5ef;
+            }
+        }
+      
+
         input[type=text] {
-            height: 30%;
-            width: 50%;
-            margin: auto 10px;
+            height: 40px;
+            width: 60%;
+            margin: 20px 10px 0 10px;
             padding: 5px;
           }
         input[type=textarea]{
-            height: 30%;
-            width: 50%;
+            height: 80px;
+            width: 60%;
             margin: auto 10px;
             padding: 5px;
         }
@@ -212,44 +224,63 @@
             //display: none;
         }
         .label-wrapper{
-            //display: flex;
-            //justify-content: center;
-            width: 20%;
-            margin: auto;
+            display: flex;
+            justify-content: center;
+            width: 60%;
+            margin: 20px auto;
+            img{
+                width: 30px;
+            }
         }
         label{
             width: 100%;
         }
-        &__wrapper{
-        background-color: #E1F7F1;
-        height: 120px;
-        text-align: center;
-        h3{
-            margin-top: 50px;
+        .difficult-wrapper{
+            margin: 20px auto;
         }
-    }
+
+        &__wrapper{
+        background-color: #fafafa;
+        height: 100%;
+        text-align: center;
+        }
+        &__error{
+            font-size: 12px;
+            color: red;
+        }
     }
 }
 
+
+.choicedtask{
+    background-color:  #f9dd48;
+    color: black;
+}
 
 .tasks-filter-btns{//filterボタンを包んでいるもの
     height: 60px;
     width: 80%;
     margin: auto;
+    text-align: center;
 
 }
 .tasks-filter-btn{
     height: 50px;
     margin: auto;
     border-radius: 5%;
-    background-color: white;
+    border: none;
+    //background-color: #fafafa;
+    //border: 1px solid #f9dd48;
+    //color: $carmBlack;
     &:hover{
-        background-color: $color-main-light;
+        background-color: #f9dd48;
+        border: #fafafa;
+        color: black;
         //box-shadow: 3px 2px  black;
     }
     &:active{
-        box-shadow: 3px 4px  black;
-        transform:translateY(2px);
+        box-shadow: 0px 0.5px rgb(90, 87, 87);
+        transform:translateY(1px);
     }
 }
 
@@ -312,7 +343,6 @@
     width: 80%;
     height: 75vh;
     z-index: 100;
-    background: #fafafa;
     margin: auto;
 
     .fadein-wrapper{
@@ -332,7 +362,7 @@
         height: 100%;
         border-radius: 50%;
         display: block;
-        background-color: #96fff5;
+        background-color: #96fff580;
         animation-name: top-Titleanimation;
         animation-duration: 1s;
         animation-delay:0.5s;

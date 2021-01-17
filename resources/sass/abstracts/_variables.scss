@@ -5,6 +5,7 @@ $color-main-dark:#0058ff;
 $color-base:#EFEFEF;
 $subColor: #FAD727;
 
+$carmBlack:#464545;
 $space:50px;
 
 
@@ -13,12 +14,14 @@ $space:50px;
 }
 
 body{
+    
     font-family: "Helvetica Neue",
+    'Noto Sans JP', sans-serif,
     Arial,
     "Hiragino Kaku Gothic ProN",
     "Hiragino Sans",
-    Meiryo,
-    sans-serif;
+    "Meiryo"
+    
 }
 
 //------------見出し系
@@ -28,18 +31,12 @@ body{
         display: inline-block;
         font-size: 7rem;
         margin: .9rem auto;
-        /*
-        background-image: linear-gradient(120deg,transparent 0%,transparent 50%,#FAD727 50%);
-        background-size: 0%;
-        transition: all .4s;
-        background-repeat: no-repeat;
-        */
+        font-family: 'Acme', sans-serif;
     }
     &--sub{
         display: block;
         font-size: 1.5rem;
         text-align: center;
-
     }
 }
 
@@ -62,6 +59,10 @@ body{
       
 }
 
+.eachPageImg{
+    width: 100px;
+    margin-right: 20px;
+}
 
 //------------フォントawasome系
 .fontawasome-margin{
@@ -80,7 +81,7 @@ body{
     font-size: 160px;
     position: absolute;
     color: #96fff573;
-    right: 14%;
+    right: 5%;
     bottom: 20%;
 }
 
@@ -102,8 +103,8 @@ body{
     animation:animation-right 1s infinite;
 }
 
-.fontawasome-star{
-    color:$subColor;
+.fontawasome-difficult{
+    color:black;
 }
 
 .fontawasome-list{
@@ -127,6 +128,10 @@ body{
     line-height: 16px;
 }
 
+.star-icon-kirameki{
+    color: #ffb300de;
+    animation: anim-star-kyupeen 1s infinite linear;
+}
 
 
 .upmovearrow{
@@ -137,11 +142,6 @@ body{
 .arrowopacity{
     opacity: 0;
 }
-
-
-
-
-
 
 
 

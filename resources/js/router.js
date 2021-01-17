@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 // ページコンポーネントをインポートする
 import status from './components/HeroComponent.vue'//自分のステータス
-import taskform from './components/TaskFormComponent.vue'//新規タスク
+//import taskform from './components/TaskFormComponent.vue'//新規タスク
 import tasks from './components/TaskComponent.vue'//タスク一覧
 import items from './components/ItemsComponent.vue'//アイテム一覧
 
@@ -12,9 +12,9 @@ import items from './components/ItemsComponent.vue'//アイテム一覧
 Vue.use(VueRouter)
 
 const routes = [
-    { path: '',component:status},
+    { path: '',component:tasks},
     { path: '/status',component: status },
-    { path: '/taskform',component: taskform },
+//    { path: '/taskform',component: taskform },
     { path: '/items',component: items},
     { 
       path: '/tasks', 

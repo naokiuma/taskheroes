@@ -10,12 +10,13 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.js') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Acme&family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet"> 
         <!--jquary-->
         <script
 			  src="https://code.jquery.com/jquery-3.4.1.min.js"
 			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
-        
         <title>taskHeroes</title>
     </head>
     <body>
@@ -44,8 +45,6 @@
                         @csrf
                     </form>
                 </li>
-                <li class="">アイテム</li>
-                <div id="taskform"></div>
                 @endauth
 
                 
@@ -69,10 +68,6 @@
         </nav>
         </header>
         @yield('content')
-
-        <footer class="footer">
-            <p>フッター</p>
-        </footer>
     </body>
     
     <script src="{{mix('js/app.js')}}"></script>

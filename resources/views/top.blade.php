@@ -16,14 +16,17 @@
 <div class="billboard">
     
     <img class="billboard-img1"src="../img/heroofhero.gif" alt="">
+    <p class="billboard-text1">タスクをやって</p>
+    <p class="billboard-text2">強くなる。</p>
     <i class="fas fa-arrow-up billboard-arrow1"></i>
     <i class="fas fa-arrow-up billboard-arrow2"></i>
     <i class="fas fa-arrow-up billboard-arrow3"></i>
     <div class="billboard-title">
         <h1>
             <span class="heading-primary--main animate__animated animate__bounceInLeft">Task Heroes</span>
-            <span class="heading-primary--sub">日々の生活、遊び、トレーニングをちょっと楽しく。</span>
+            <span class="heading-primary--sub">日々の生活、遊びやトレーニングをちょっと楽しくするサービスです。</span>
         </h1>
+        
         
     </div>
 
@@ -113,19 +116,13 @@
                 <p>
                     一定のレベルや能力値に達しアイテムを取得。いろんな効果があります。</p>
             </div>
-
         </div>
-
     </div>
-
-    <div class="test">
-    <i class="fas fa-book-reader"></i>
-    <i class="fas fa-running"></i>
-    <i class="fas fa-shopping-cart"></i>
-    </div>
-    
 
 </section>
+<footer class="footer">
+            <p>フッター</p>
+        </footer>
 <script>
     /*fadeoutロゴ*/
 $(function() {

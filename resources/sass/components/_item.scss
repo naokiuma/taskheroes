@@ -1,26 +1,55 @@
-.section-items{
+.allItem-pages{
     width: 80%;
-    margin: 40px auto auto auto;
+    margin: auto auto 120px auto;
 }
+.item-shopman{
+    position: absolute;
+    width: 200px;
+    top: 35%;
+    opacity: 0.9;
+}
+
+.item_marker{
+    background-image: linear-gradient(transparent 80%, rgba(118, 238, 108, 0.9) 0%);
+}
+
+.have-item{
+    color: #0b9fe8;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    font-size: 30px;
+    
+}
+
+.each-item-wrapper{
+    position: relative;
+}
+
+
+
 .items-wrapper{
     display: flex;
     justify-content:flex-start;
     flex-wrap: wrap;
     margin: auto;
+    width: 70%;
 }
 
 .each-item{
-    width: 18%;
+    width: 30%;
+    min-height: 200px;
+    object-fit: cover;
     margin: 20px auto;
     padding: 10px;
-    border: 5px solid black;
+    border: 2px solid #0f0e0e;
     border-radius: 20px;
     cursor: pointer;
     &:hover{
-        background-color: #96fff5;
-        border: none;
+        //background-color: #96fff5;
+        background-color: rgba(57, 221, 33, 0.2);
         transition: .5s;
-
     }
 
     h4{
@@ -41,11 +70,95 @@
         transform: scale(1.05);
         transition: .5s;
     }
-    /*
-    .each-item__Active {
-        background-color: #96fff5;
-        border: none;
+    .beforeBuy-img{
+        background-color: #b9aeae2d;
+        border-radius: 50%;
     }
-    */
+}
+
+.each-item__detail{
+    //https://deshinon.com/2019/03/03/osyare-pricings-single-css/　参考
+    height: 300px;
+    width: 270px;
+    position: fixed;
+    top: 51px;
+    right: 0;
+    background-color: #fafafaeb;
+    border: 5px solid #736e6e;
+    text-align: center;
+    letter-spacing: 2px;
+    box-shadow: 1px 1px 1px black;
+    h4{
+        background-color: #252825;
+        margin-bottom: 0px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: #fafafa;
+    }
+    p{
+        letter-spacing: 2px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 0px;
+        //background-color: #e66406;
+        background-color: #fbfb65;
+        //background-image: linear-gradient(#f2e895 50%, yellow 50%);
+    }
+
+    .notHave{
+        background-color: #f9f9cb;
+    }
+
+    span{
+        font-size: 12px;
+        display: block;
+        margin: 30px;
+    }
+
+    .buy-button,.confirmOrder-button{
+        width: 100px;
+        height: 35px;
+        border-radius: 5px;
+        position: absolute;
+        right: 90px;
+        bottom: 20px;
+        transition: 0.3s;
+        background-color: $color-main;
+        &:hover{
+            background: #41b2ebb2;
+            transition: 0.3s;
+        }
+    }
+
+    .close-button,.cancel-button{
+        width: 50px;
+        height: 25px;
+        border-radius: 5px;
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        transition: 0.3s;
+        &:hover{
+            background-color: #252825;
+            color: #fafafa;
+            transition: 0.3s;
+        }
+    }
+
+    //最終確認後の確定ボタン
+    .confirmOrder-button{
+        background-color: #eeeb40;
+        z-index: 2;
+        &:hover{
+            background: #fdfd0d;
+        }
+    }
+
+        //最終確認後のキャンセルボタン
+        .cancel-button{
+        z-index: 2;
+    }
+
+
 
 }

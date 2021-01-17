@@ -1,3 +1,15 @@
+
+
+@keyframes typewriter{/*タイプライターライクなアニメーション*/
+  from{width: 0;}
+  to{width: 100%;}
+}
+
+@keyframes blinkTextCursor{/*点滅するカーソルのアニメーション*/
+  from{border-right-color: rgba(255,255,255,.75);}
+  to{border-right-color: transparent;}
+}
+
 @keyframes blink_effect {
   0% {
     //opacity: 0;
@@ -121,3 +133,28 @@
   }
 
 }
+
+
+
+//itemcomponentで利用。detail追加時の動き。
+@keyframes left-in{
+  0% {
+    transform: translateX(120px);
+    //opacity: 0;
+  }
+  50%{
+      //opacity: 0.3;
+  }
+  100% {
+    transform: translateX(0px);
+  }
+
+}
+
+//taskピカピカのアニメ
+@keyframes anim-star-kyupeen {
+  0%   { transform: rotate(20deg) scale(1);}
+  50%  { transform: rotate(10deg) scale(0.5);}
+  100% { transform: rotate(20deg) scale(1);}
+}
+

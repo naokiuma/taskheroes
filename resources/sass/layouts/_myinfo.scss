@@ -17,18 +17,23 @@
 }
 
 .sidebar{
-    width: 160px;
+    width: 17%;
     height: 100vh;
     position: sticky;
     top: 0;
     background-color: #1a1818c9;
+    h4{
+        color: #fefefe;
+        font-size: 16px;
+        letter-spacing: 2px;
+        text-align: center;
+        margin: 15px auto;
+    }
     p{
         color: #fefefe;
-        height: 40px;
-        line-height: 40px;
         margin-top: 10px;
-        font-size: 18px;
-        letter-spacing: 2px;
+        font-size: 12px;
+        letter-spacing: 3px;
         text-align: center;
 
     }
@@ -41,10 +46,6 @@
             text-decoration: none;
             color: #fefefe;
         }
-        &:first-child{
-            //margin-top: 40px;
-        
-        }
     }
     span{
         text-align: center;
@@ -53,6 +54,25 @@
         border-top: 4px dotted;
         margin: 10px;
         padding-top: 20px;
+        font-size: 12px;
+    }
+    .fonticon_level{
+        color:$color-main-light;
+        margin-right: 2px;
+        font-size: 16px;
+
+    }
+
+    .fonticon_hp{
+        color:#e85353;
+        margin-right: 2px;
+        font-size: 16px;
+    }
+
+    .fonticon_money{
+        color:yellow;
+        margin-right: 2px;
+        font-size: 16px;
     }
     
 }

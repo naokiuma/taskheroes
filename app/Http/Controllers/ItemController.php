@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Item;
 use App\User;
 use App\itemUser;
@@ -17,6 +18,25 @@ class ItemController extends Controller
 {
     //-----------------------アイテムのAPI
 
+    public function buy($id){
+        //item_userテーブル挿入
+        $newitem = new itemUser;
+        $user_id = Auth::user()->id;
+
+        $newitem->item_id = $id;
+        $newitem->user_id = $user_id;
+        $newitem->save();//リレーション使わずに直に登録
+
+
+        //値段を変更
+        $buyitem = Item::where('id',$id)->first();
+        Auth::user()->money -= $buyitem["price"];
+        Auth::user()->save();
+
+        return "購入しました";
+
+    }
+ 
     public function itemlist($id = null)//api
     {   //ユーザー情報
         if($id == null){
@@ -38,7 +58,7 @@ class ItemController extends Controller
             Log::debug("自分の：".$items);
             return $items;
             } 
-        }        
+    }        
         
 }
 

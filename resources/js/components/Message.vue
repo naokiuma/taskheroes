@@ -2,10 +2,10 @@
 <template>
     <!--<section class="messages" v-show="this.$store.state.message.messageShow">-->
     <div class="messages-wrapper">
-    <div class="messages-toggle" v-on:click="toggleMsgwindow()">開閉</div>
+    <!--<div class="messages-toggle" v-on:click="toggleMsgwindow()">開閉</div>-->
     <section class="messages" v-show="this.$store.state.message.messageShow == true">
-        {{ this.$store.state.message.content }}ここ
-    <div class="messages-space"></div>
+        <p class="anim-typewriter">{{ this.$store.state.message.content }}</p>
+    <!--<div class="messages-space"></div>-->
     </section>
 
     </div>

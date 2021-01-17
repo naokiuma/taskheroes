@@ -1,13 +1,12 @@
 <template>
     　<section class="section-status animate__animated animate__bounceInRight">
-        <h3 class="mypage-heading">ステータス</h3>
+        <h3 class="mypage-heading"><img class="eachPageImg" src="/img/fighter.png" alt=""><span>ステータス</span></h3>
         <h4>{{this.$store.state.user.name}}</h4>
         <div class="section-parameters">
-            
             <div class="parameters-wrapper">
                 <ul>
-                    <li class="parameters parameters-lv">レベル</li>
-                    <li class="parameters parameters-hp">ヒットポイント</li>
+                    <li class="parameters-lv">レベル</li>
+                    <li class="parameters parameters-hp">体力</li>
                     <li class="parameters parameters-power">力</li>
                     <li class="parameters parameters-magic">魔力</li>
                     <li class="parameters parameters-wisdom">知識</li>
@@ -25,9 +24,6 @@
                     </div>
                                         
                 </div>
-            </div>
-            <div class="parameters-hero">
-                <img src="/img/fighter.png" alt="">
             </div>
         </div>
         <Taskform />

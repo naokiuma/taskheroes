@@ -11,6 +11,8 @@ use App\Library\itemCheck;
 use App\Task;
 use App\User;
 use App\Library\ParameterCheck;
+use App\Library\GoldCheck;
+
 
 
 class TaskController extends Controller
@@ -23,10 +25,10 @@ class TaskController extends Controller
 //-----------------------新規作成post
 
     public function create(Request $request){
-
+        Log::debug("新規タスクのリクエスト：" . $request ."がリクエストされました");
             $request->validate([
                 'title' => 'required|string',
-                'body' => 'string|max:255',
+                'body' => 'max:255',
                 'categories_id' => 'required'
             ]);
         $task = new Task;//モデルを使ってmDBに登録する値をセット
@@ -34,6 +36,8 @@ class TaskController extends Controller
         $task->title = $request->title;
         $task->body = $request->body; 
         $task->categories_id = $request->categories_id;
+        $task->difficult = $request->difficult;
+
         Auth::user()->tasks()->save($task);//リレーション
         return "登録しました";
 
@@ -48,36 +52,54 @@ class TaskController extends Controller
 
     }
 
-
 //-----------------------実施未実施切り替えpost
 
     public function change($id){
         //$changeTask = Task::where('id',$id)->get();//getだとcollectionがかえる
-        $changeTask = Task::where('id',$id)->first();//1オブジェクトが変える
+        $changeTask = Task::where('id',$id)->first();//該当のタスク。1オブジェクトが返る
         Log::debug("taskコントローラー：change");
         //Log::debug($changeTask);//　→"categories_id":1,"user_id":1,;
         $point = $changeTask->difficult;
-        $category = $changeTask->categories_id;
+        $category = $changeTask->categories_id;//カテゴリー。1なら力、2なら魔力、3なら知識
         Log::debug("変更point：" . $point);
         Log::debug("対象category：" . $category);//1は力2は魔力3は知恵
         $now = "";
+        $randam = 0;
+        $gold = 0;
+        
+        //経験値、gold、計算
+        if($changeTask->given == 0){//一度だけ経験値、おかねアップの処理。0であればまだ取得してない。
+            $changeTask->given = 1;//取得するので1にする。
 
-        if($changeTask->given == 0){//一度だけ経験値アップの処理。戻すことはない
-            $changeTask->given = 1;
+            if($category == 1){//力
+                $nowUserPoint =  Auth::user()->power;//現在のユーザーの力
+            }elseif($category == 2){//魔力
+                $nowUserPoint = Auth::user()->magic;//現在のユーザーの魔力。
+            }else{
+                $nowUserPoint = Auth::user()->wisdom;
+            }
+            Log::debug("taskコントローラー84：現在の能力値".$nowUserPoint);
+
+            //gold計算。
+            $gold = GoldCheck::culcMoney($nowUserPoint);//ゲットするおかね。
+            Log::debug("タスクコントローラー88：goldのなかみ".$gold);
+
+            //経験値計算
             $nowXp = Auth::user()->xp;
             $nowXp++;
             if($nowXp == 10){
+                $randam = rand(1, 10);
                 Auth::user()->lv++;
                 Auth::user()->xp = 0;
                 Log::debug("レベルアップしました");
-
+                Auth::user()->hp += $randam;
+                Auth::user()->money += $gold;
             }else{
                 Auth::user()->xp++;
-
+                Auth::user()->money += $gold;
             }
             Auth::user()->save();
         }
-
 
         //反転させる。デフォルトは0。実施済みは1
         if($changeTask->done == 0){
@@ -90,45 +112,10 @@ class TaskController extends Controller
             ParameterCheck::changeParameter("down",$point,$category);
         }
         $changeTask->save();
-
-        /*ここでアイテムげっとの判定を行う場合、getitemに設定する*/
-        //$Auth::user()->lv//レベル取得
-
         itemCheck::test();
-
-        return [$changeTask,"getitem"];
-
-        //return array("result" => $changeTask,"gotItem" => "剣");
+        return [$changeTask,$randam,$gold];
       
     }
-
-
-    
-    //上がるかどうか?とポイント、カテゴリーを受け処理する
-    /*
-    public function parameter($which,$point,$category){//whichは上がるか下がるか
-        if($which == "up"){
-            if($category === 1){
-                Auth::user()->power += $point;
-            }else if ($category === 2){
-                Auth::user()->magic += $point;
-            }else if($category === 3){
-                Auth::user()->wisdom += $point;
-            }
-            Auth::user()->save();
-
-        }elseif($which = "down"){
-            if($category === 1){
-                Auth::user()->power -= $point;
-            }else if ($category === 2){
-                Auth::user()->magic -= $point;
-            }else if($category === 3){
-                Auth::user()->wisdom -= $point;
-            }
-            Auth::user()->save();
-        }
-    }
-    */
 
 
 

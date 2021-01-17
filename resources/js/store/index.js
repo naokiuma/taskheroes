@@ -17,7 +17,10 @@ const store = new Vuex.Store({
         }
     },
     getters:{
-        username:state => state.user ? state.user.name : ''
+        username:state => state.user ? state.user.name : '',
+        userinfo(state){
+            return state.user;
+        }
 
     },
     actions:{
