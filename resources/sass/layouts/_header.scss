@@ -35,6 +35,10 @@
         li{
             margin: 0 .5rem;
             transition: all .2s;
+            @media screen and (max-width: $res-max-width){
+                font-size: 14px;
+              }
+            
             a{
                 text-decoration: none;
                 color: black;

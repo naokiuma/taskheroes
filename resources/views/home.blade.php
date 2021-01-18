@@ -14,7 +14,7 @@
                     @endif
 
                     <img class="home-image" src="{{ asset('/img/steps/step4.png') }}" alt="">
-                    新規登録しました！<br>「マイページ」からタスクを開始しましょう！
+                    ログインしました！<br>「マイページ」からタスクを開始しましょう！
                 </div>
             </div>
         </div>

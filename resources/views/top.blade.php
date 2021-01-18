@@ -34,23 +34,23 @@
     <div class="about-description">
         <h2 class="section-heading">About</h2>
         <p><span class="hovermoveLeft underLine">「TaskHeroes」とは</span></p>
-        <p>やりたいこと、やるべきこと、、<br>
+        <p class="sp-center">やりたいこと、やるべきこと、、<br>
         あなたの日常の「task」を実行とともに勇者が育ち、タスク管理を促進するサービスです。<br><br>
         </p>
 
         <div class="about-examples radial-bg">
             <div class="about-example example1"><i class="fas fontawasome fa-walking fontawasome-margin"></i>
-                たくさん散歩すると
+                たくさん散歩すると<br class="sp-br">
                 <span class="">体力<i class="fas fa-arrow-up fontawasome-arrow "></i></span>
                 Up!
             </div> 
             <div class="about-example example2"><i class="fas fontawasome fa-book-reader fontawasome-margin"></i>
-                興味のあることを学ぶと
+                興味のあることを学ぶと<br class="sp-br">
                 <span class="">知識<i class="fas fa-arrow-up fontawasome-arrow "></i></span>
                 Up!
             </div>
             <div class="about-example example3"><i class="fas fontawasome fa-gamepad v"></i>
-                好きなゲームに熱中すると
+                好きなゲームに熱中すると<br class="sp-br">
                 <span class="">魔力<i class="fas fa-arrow-up fontawasome-arrow "></i></span>
                 Up!
             </div>

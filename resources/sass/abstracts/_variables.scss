@@ -7,6 +7,24 @@ $subColor: #FAD727;
 
 $carmBlack:#464545;
 $space:50px;
+$res-max-width:415px;//レスポンシブサイト
+
+body{  
+    font-family: "Helvetica Neue",
+    'Noto Sans JP', sans-serif,
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    "Meiryo"
+    
+}
+p{//スマホサイズは12px
+    @media screen and (max-width: $res-max-width){
+    font-size: 12px;
+    line-height: 21px;
+    }
+}
+
 
 .regist-wrapper{//登録、ログイン画面での情報
     margin-top: 150px;
@@ -40,15 +58,19 @@ $space:50px;
     margin-top: 150px;
 }
 
-body{
-    
-    font-family: "Helvetica Neue",
-    'Noto Sans JP', sans-serif,
-    Arial,
-    "Hiragino Kaku Gothic ProN",
-    "Hiragino Sans",
-    "Meiryo"
-    
+
+
+.sp-center{
+    width: 80%;
+    margin: auto;
+}
+
+.sp-br{
+    display: none;
+    @media screen and (max-width: $res-max-width){
+        display: block;
+    }
+
 }
 
 //------------見出し系
@@ -59,11 +81,19 @@ body{
         font-size: 7rem;
         margin: .9rem auto;
         font-family: 'Acme', sans-serif;
+        @media screen and (max-width: $res-max-width){
+            font-size: 30px;
+            line-height: 45px;
+          }
     }
     &--sub{
         display: block;
         font-size: 1.5rem;
         text-align: center;
+        @media screen and (max-width: $res-max-width){
+            font-size: 14px;
+            line-height: 21px;
+          }
     }
 }
 
@@ -102,6 +132,10 @@ body{
     color: #0000ff4a;
     right: 40%;
     top: 20%;
+    @media screen and (max-width: $res-max-width){
+        left: 0;
+        top: 3%;
+    }
 }
 
 .billboard-arrow2{
@@ -110,6 +144,10 @@ body{
     color: #96fff573;
     right: 5%;
     bottom: 20%;
+    @media screen and (max-width: $res-max-width){
+        font-size: 95px;
+        bottom: -13%;
+      }
 }
 
 .billboard-arrow3{
@@ -118,6 +156,10 @@ body{
     color: #FAD72782;
     right: 61%;
     bottom: 48%;
+    @media screen and (max-width: $res-max-width){
+        font-size: 100px;
+        right: 66%;
+      }
 }
 
 .fontawasome-arrow{

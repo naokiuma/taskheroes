@@ -1,5 +1,16 @@
 @charset "UTF-8";
 
+body {
+  font-family: "Helvetica Neue", "Noto Sans JP", sans-serif, Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo";
+}
+
+@media screen and (max-width: 415px) {
+  p {
+    font-size: 12px;
+    line-height: 21px;
+  }
+}
+
 .regist-wrapper {
   margin-top: 150px;
 }
@@ -31,8 +42,19 @@
   margin-top: 150px;
 }
 
-body {
-  font-family: "Helvetica Neue", "Noto Sans JP", sans-serif, Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo";
+.sp-center {
+  width: 80%;
+  margin: auto;
+}
+
+.sp-br {
+  display: none;
+}
+
+@media screen and (max-width: 415px) {
+  .sp-br {
+    display: block;
+  }
 }
 
 .heading-primary--main {
@@ -42,10 +64,24 @@ body {
   font-family: "Acme", sans-serif;
 }
 
+@media screen and (max-width: 415px) {
+  .heading-primary--main {
+    font-size: 30px;
+    line-height: 45px;
+  }
+}
+
 .heading-primary--sub {
   display: block;
   font-size: 1.5rem;
   text-align: center;
+}
+
+@media screen and (max-width: 415px) {
+  .heading-primary--sub {
+    font-size: 14px;
+    line-height: 21px;
+  }
 }
 
 .hovermoveLeft {
@@ -84,6 +120,13 @@ body {
   top: 20%;
 }
 
+@media screen and (max-width: 415px) {
+  .billboard-arrow1 {
+    left: 0;
+    top: 3%;
+  }
+}
+
 .billboard-arrow2 {
   font-size: 160px;
   position: absolute;
@@ -92,12 +135,26 @@ body {
   bottom: 20%;
 }
 
+@media screen and (max-width: 415px) {
+  .billboard-arrow2 {
+    font-size: 95px;
+    bottom: -13%;
+  }
+}
+
 .billboard-arrow3 {
   font-size: 240px;
   position: absolute;
   color: #FAD72782;
   right: 61%;
   bottom: 48%;
+}
+
+@media screen and (max-width: 415px) {
+  .billboard-arrow3 {
+    font-size: 100px;
+    right: 66%;
+  }
 }
 
 .fontawasome-arrow {
@@ -482,6 +539,12 @@ body {
   letter-spacing: 2px;
 }
 
+@media screen and (max-width: 415px) {
+  .about-description span {
+    font-size: 16px;
+  }
+}
+
 .about-description:after {
   content: "";
   position: absolute;
@@ -494,11 +557,12 @@ body {
   z-index: -1;
 }
 
-.about-example {
-  font-size: 16px;
-  width: 80%;
-  margin: 10px auto;
-  text-align: center;
+@media screen and (max-width: 415px) {
+  .about-description:after {
+    top: -43px;
+    width: 100px;
+    height: 100px;
+  }
 }
 
 .about-examples {
@@ -509,6 +573,14 @@ body {
   padding: 2em 2em;
   border-top: solid 4px #d26c11;
   border-bottom: solid 4px #d26c11;
+}
+
+@media screen and (max-width: 415px) {
+  .about-examples {
+    width: 80%;
+    margin: 1em auto;
+    padding: 1em 1em;
+  }
 }
 
 .about-examples:before {
@@ -529,6 +601,20 @@ body {
   height: calc(100% + 20px);
   background-color: #d26c11;
   right: 10px;
+}
+
+.about-example {
+  font-size: 16px;
+  width: 80%;
+  margin: 10px auto;
+  text-align: center;
+}
+
+@media screen and (max-width: 415px) {
+  .about-example {
+    font-size: 12px;
+    width: 80%;
+  }
 }
 
 .about-images {
@@ -1181,6 +1267,12 @@ body {
   font-family: "Acme", sans-serif;
 }
 
+@media screen and (max-width: 415px) {
+  .section-heading {
+    font-size: 40px;
+  }
+}
+
 .section-heading:hover {
   color: black;
 }
@@ -1193,6 +1285,14 @@ body {
   background-image: url(/images/heading-sword.png?162c7a33dbee401fd74a69ecec929c55);
   background-size: contain;
   transition: all 0.5s;
+}
+
+@media screen and (max-width: 415px) {
+  .section-heading:before,
+  .section-heading:after {
+    width: 27px;
+    height: 10px;
+  }
 }
 
 .section-heading:after {
@@ -1746,6 +1846,13 @@ body {
   background-color: #96fff5;
 }
 
+@media screen and (max-width: 415px) {
+  .billboard-title:before {
+    width: 100px;
+    height: 100px;
+  }
+}
+
 .billboard-title h1 {
   background-color: #96fff554;
   border-radius: 20px;
@@ -1754,9 +1861,16 @@ body {
 
 .billboard-img1 {
   position: absolute;
+  width: 500px;
   right: 9%;
   top: 16%;
-  width: 500px;
+}
+
+@media screen and (max-width: 415px) {
+  .billboard-img1 {
+    width: 150px;
+    top: 39px;
+  }
 }
 
 .billboard-text1 {
@@ -1765,10 +1879,24 @@ body {
   top: 30%;
 }
 
+@media screen and (max-width: 415px) {
+  .billboard-text1 {
+    top: 10%;
+    z-index: 2;
+  }
+}
+
 .billboard-text2 {
   position: absolute;
   right: 12%;
   top: 87%;
+}
+
+@media screen and (max-width: 415px) {
+  .billboard-text2 {
+    top: 46%;
+    z-index: 2;
+  }
 }
 
 .footer {
@@ -1831,6 +1959,12 @@ body {
 .header__nav li {
   margin: 0 0.5rem;
   transition: all 0.2s;
+}
+
+@media screen and (max-width: 415px) {
+  .header__nav li {
+    font-size: 14px;
+  }
 }
 
 .header__nav li a {

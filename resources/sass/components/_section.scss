@@ -11,6 +11,10 @@
     justify-content: center;
     transition: all 0.5s;
     font-family: 'Acme', sans-serif;
+    @media screen and (max-width: $res-max-width){
+        font-size: 40px;
+    }
+
     &:hover{
         color: black;
     }
@@ -23,6 +27,11 @@
         background-image: url(./img/heading-sword.png);
         background-size: contain;
         transition: all 0.5s;
+        @media screen and (max-width: $res-max-width){
+            width: 27px;
+            height: 10px;
+        }
+
     }
     &:after{
         transform: scale(-1, 1);
