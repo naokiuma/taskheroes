@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/user', 'UserController@mypage')->name('user.mypage')->middleware('auth');;//マイページ表示
+Route::get('/user', 'UserController@mypage')->name('user.mypage')->middleware('auth');//マイページ表示
 Route::get('/user/logincheck', 'UserController@logincheck')->name('user.logincheck');
 
 

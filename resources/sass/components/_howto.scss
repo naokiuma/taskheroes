@@ -35,6 +35,11 @@
         justify-content: center;
         margin: auto;
         text-align: center;
+        @media screen and (max-width: $res-max-width){
+            display: block;
+
+        }
+
     }
     &-step{
         width: 30%;
@@ -42,6 +47,10 @@
         border: 5px solid $color-main-light;
         border-radius: 25px;
         margin: 10px;
+        @media screen and (max-width: $res-max-width){
+            width: 80%;
+            margin: 15px auto;
+        }
         h4{
             font-size: 18px;
         }

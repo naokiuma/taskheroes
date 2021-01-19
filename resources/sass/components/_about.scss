@@ -88,6 +88,8 @@
         display: flex;
         flex-wrap: nowrap;
         justify-content: center;
+        height: auto;
+        align-items: flex-start;
     }
     &-image1{
         width: 20%;

@@ -1,7 +1,9 @@
 .myinfo{
+    position: relative;
     display: flex;
     flex-wrap: wrap;
 }
+
 
 .blink{
     animation: blink_effect 3s infinite;
@@ -16,12 +18,23 @@
 
 }
 
+.sidebar-toggle{
+    position: absolute;
+    font-size: 27px;
+    color: #fafafa;
+    top: 1px;
+    left: 0;
+    background-color: black;
+    border: 2px solid #fafafa;
+    z-index: 2;
+    }
 .sidebar{
     width: 17%;
     height: 100vh;
     position: sticky;
     top: 0;
     background-color: #1a1818c9;
+   
     h4{
         color: #fefefe;
         font-size: 16px;

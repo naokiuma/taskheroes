@@ -621,6 +621,8 @@ body {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
+  height: auto;
+  align-items: flex-start;
 }
 
 .about-image1 {
@@ -806,11 +808,24 @@ body {
   text-align: center;
 }
 
+@media screen and (max-width: 415px) {
+  .howto-steps {
+    display: block;
+  }
+}
+
 .howto-step {
   width: 30%;
   border: 5px solid #96fff5;
   border-radius: 25px;
   margin: 10px;
+}
+
+@media screen and (max-width: 415px) {
+  .howto-step {
+    width: 80%;
+    margin: 15px auto;
+  }
 }
 
 .howto-step h4 {
@@ -1016,7 +1031,7 @@ body {
   height: 120px;
   position: fixed;
   bottom: 0;
-  right: 0;
+  right: 15px;
   display: block;
   margin: auto;
   padding: 10px 0 0 10px;
@@ -1028,7 +1043,7 @@ body {
 .messages-toggle {
   position: fixed;
   bottom: 5px;
-  right: 5px;
+  right: 23px;
   width: 100px;
   z-index: 2;
   text-align: center;
@@ -1311,7 +1326,7 @@ body {
 
 .section-status {
   width: 80%;
-  margin: 40px auto auto auto;
+  margin: 40px auto 150px auto;
   text-align: center;
 }
 
@@ -1868,7 +1883,7 @@ body {
 
 @media screen and (max-width: 415px) {
   .billboard-img1 {
-    width: 150px;
+    width: 200px;
     top: 39px;
   }
 }
@@ -1980,6 +1995,7 @@ body {
 }
 
 .myinfo {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
 }
@@ -1993,6 +2009,17 @@ body {
   background-color: #fefefe;
   color: #1a1818c9 !important;
   transition: 0.6s;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  font-size: 27px;
+  color: #fafafa;
+  top: 1px;
+  left: 0;
+  background-color: black;
+  border: 2px solid #fafafa;
+  z-index: 2;
 }
 
 .sidebar {

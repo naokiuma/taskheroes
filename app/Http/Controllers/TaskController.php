@@ -12,7 +12,7 @@ use App\User;
 use App\Library\ParameterCheck;
 use App\Library\GoldCheck;
 
-
+ 
 
 class TaskController extends Controller
 {
@@ -123,15 +123,17 @@ class TaskController extends Controller
     public function tasklist($id = null)//api
     {   //ユーザー情報
         if($id == null){
-            //Log::debug("tasklist.未ログインルート");
-            $tasks = Task::orderByDesc('created_at')->get();
+            Log::debug("tasklist.未ログインルート");
+            $tasks = Task::where('user_id', 2)//何か変な場合、サンプルの投稿のみ表示する
+            ->orderBy('created_at','desc')
+            ->get();
         }else{
             //Log::debug("tasklist.ログインルート");
             $tasks = Task::where('user_id', $id)
             ->orderBy('created_at','desc')
             ->get();
         }
-        //Log::debug($tasks);
+        Log::debug($tasks);
         return $tasks;
     }
 

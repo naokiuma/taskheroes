@@ -1,7 +1,8 @@
 
 <template>
     <div class="myinfo">
-        <section class="sidebar">
+        <div class="sidebar-toggle" v-on:click="toggleSidebar()">⇄</div>
+        <section v-show="sidebarShow == true" class="sidebar">
             <h4>メニュー</h4>
             <router-link to="/tasks" @click.native="taskChoised()"><i class="fas fa-th-list fontawasome-list"></i>タスク</router-link>
             <router-link to="/status" @click.native="statusChoised()"><i class="fas fa-user fontawasome-status"></i>ステータス</router-link>
@@ -30,6 +31,11 @@
     </div>
 </template>
 
+<style>
+.fade-enter-active{ animation:fadeLeft-in .5s; }
+.fade-leave-active{ animation:fadeLeft-in .5s reverse;}
+</style>
+
 <script>
 //import func from '../../../vue-temp/vue-editor-bridge';
     import Message from './Message.vue';//ok
@@ -37,7 +43,8 @@
         data(){
             return {
                 isActive:null,
-                description:"タスク一覧画面を開きました。タスクの登録、左側のアイコンで実施しましょう。"
+                description:"タスク一覧画面を開きました。タスクの登録、左側のアイコンで実施しましょう。",
+                sidebarShow:true
             }
         },
         components:{
@@ -64,6 +71,10 @@
             },
             itemChoised:function(){
                 this.description = `取得済みアイテム一覧を確認できます。`;
+            },
+            toggleSidebar:function(){
+                this.sidebarShow = !this.sidebarShow;
+
             }
         }
 
