@@ -22,6 +22,10 @@
         transition: all .5s;
         border-radius: 5px;
         box-shadow: 3px 2px 0.1rem #0000006b;
+            @media screen and (max-width: $res-max-width){
+                height: 100px;
+            }
+
         &__state{
             margin: auto;
             font-size: 12px;
@@ -166,7 +170,7 @@
 
 .newTask{
     min-height: 500px;
-    margin: 20px auto 120px auto;
+    margin: 20px auto 20px auto;
     width: 100%;
     transition: all .5s;
     border-radius: 6px;
@@ -263,6 +267,12 @@
     width: 80%;
     margin: auto;
     text-align: center;
+    @media screen and (max-width: $res-max-width){
+        height: 50px;
+        width: 100%;
+        font-size: 12px;
+    }
+
 
 }
 .tasks-filter-btn{

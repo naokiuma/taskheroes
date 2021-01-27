@@ -1,4 +1,8 @@
 .space{
     height: $space;
     display: block;
+    @media screen and (max-width: $res-max-width){
+        height: 40px;
+    }
+
 }

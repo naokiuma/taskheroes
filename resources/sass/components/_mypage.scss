@@ -9,6 +9,10 @@
     align-items: center;
     justify-content: center;
     transition: all 0.5s;
+    @media screen and (max-width: $res-max-width){
+        font-size: 16px;
+    }
+
     &:hover{
         color: black;
     }

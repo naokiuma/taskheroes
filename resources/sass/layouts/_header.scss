@@ -7,6 +7,11 @@
     display: flex;
     justify-content: space-between;
     z-index: 10;
+        @media screen and (max-width: $res-max-width){
+            height: 40px;
+        }
+
+
     &__logo-area{
         width: 20%;
         font-size: 20px;
@@ -32,11 +37,16 @@
         line-height: $space;
         display: flex;
         justify-content: right;
+            @media screen and (max-width: $res-max-width){
+                line-height: 40px;
+            }
+
         li{
+            font-size: 12px;
             margin: 0 .5rem;
             transition: all .2s;
             @media screen and (max-width: $res-max-width){
-                font-size: 14px;
+                font-size: 11px;
               }
             
             a{

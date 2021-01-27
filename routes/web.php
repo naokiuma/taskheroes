@@ -13,9 +13,9 @@
 
 
 
-Route::get('/', function () {
-    return view('top');
-})->name('top');
+Route::get('/', function () { return view('top'); })->name('top');
+Route::get('/alltasks', function () { return view('alltasks'); })->name('alltasks');
+
 
 
 

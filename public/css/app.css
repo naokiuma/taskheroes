@@ -1,5 +1,25 @@
 @charset "UTF-8";
 
+.is-sp {
+  display: none;
+}
+
+@media screen and (max-width: 415px) {
+  .is-sp {
+    display: block;
+  }
+}
+
+.is-pc {
+  display: block;
+}
+
+@media screen and (max-width: 415px) {
+  .is-pc {
+    display: none;
+  }
+}
+
 body {
   font-family: "Helvetica Neue", "Noto Sans JP", sans-serif, Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo";
 }
@@ -108,6 +128,12 @@ body {
   margin-right: 20px;
 }
 
+@media screen and (max-width: 415px) {
+  .eachPageImg {
+    width: 80px;
+  }
+}
+
 .fontawasome-margin {
   margin: auto 8px;
 }
@@ -214,6 +240,12 @@ body {
 .space {
   height: 50px;
   display: block;
+}
+
+@media screen and (max-width: 415px) {
+  .space {
+    height: 40px;
+  }
 }
 
 @-webkit-keyframes typewriter {
@@ -752,6 +784,12 @@ body {
   border-bottom-right-radius: 25px;
 }
 
+@media screen and (max-width: 415px) {
+  .gauges-xp {
+    width: 150px;
+  }
+}
+
 .gauges-xp-bar {
   height: 100%;
   position: absolute;
@@ -1036,8 +1074,15 @@ body {
   margin: auto;
   padding: 10px 0 0 10px;
   background-color: black;
-  color: #fafafa;
+  color: #eae3e3;
   border: double 8px #fafafa;
+}
+
+@media screen and (max-width: 415px) {
+  .messages {
+    width: 90%;
+    height: 100px;
+  }
 }
 
 .messages-toggle {
@@ -1066,12 +1111,24 @@ body {
   font-size: 18px;
 }
 
+@media screen and (max-width: 415px) {
+  .messages p {
+    font-size: 14px;
+  }
+}
+
 .anim-typewriter {
   /*アニメーションセッティング*/
   -webkit-animation: typewriter 3s steps(44) 1s 1 normal both, blinkTextCursor 500ms steps(44) infinite normal;
           animation: typewriter 3s steps(44) 1s 1 normal both, blinkTextCursor 500ms steps(44) infinite normal;
   overflow: hidden;
   white-space: nowrap;
+}
+
+@media screen and (max-width: 415px) {
+  .anim-typewriter {
+    font-size: 14px;
+  }
 }
 
 .messages-space {
@@ -1088,6 +1145,12 @@ body {
   align-items: center;
   justify-content: center;
   transition: all 0.5s;
+}
+
+@media screen and (max-width: 415px) {
+  .mypage-heading {
+    font-size: 16px;
+  }
 }
 
 .mypage-heading:hover {
@@ -1118,6 +1181,13 @@ body {
   background-color: #0000000a;
 }
 
+@media screen and (max-width: 415px) {
+  .section-parameters {
+    margin-top: 0px;
+    padding: 25px 0 0 0;
+  }
+}
+
 .section-parameters h3 {
   width: 60%;
   font-weight: 500;
@@ -1133,6 +1203,12 @@ body {
   margin-left: 10px;
 }
 
+@media screen and (max-width: 415px) {
+  .section-parameters ul {
+    padding-left: 0;
+  }
+}
+
 .parameters {
   background-image: linear-gradient(to right, #96fff5, #c7eaec);
   margin-bottom: 20px;
@@ -1143,15 +1219,12 @@ body {
   font-size: 12px;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
-  /*
-  &-lv{
-      position: relative;
-      &::before{
-          content:"Level";
+}
 
-      }
+@media screen and (max-width: 415px) {
+  .parameters {
+    width: 80px;
   }
-  */
 }
 
 .parameters::before {
@@ -1197,6 +1270,12 @@ body {
   border-bottom-left-radius: 25px;
 }
 
+@media screen and (max-width: 415px) {
+  .parameters-lv {
+    font-size: 10px;
+  }
+}
+
 .parameters-lv::before {
   content: "lv";
   position: absolute;
@@ -1209,12 +1288,24 @@ body {
   color: #000000bd;
 }
 
+@media screen and (max-width: 415px) {
+  .parameters-lv::before {
+    font-size: 10px;
+  }
+}
+
 .parameters-hp {
   position: relative;
 }
 
 .parameters-hp::before {
   content: "HP";
+}
+
+@media screen and (max-width: 415px) {
+  .parameters-hp::before {
+    font-size: 10px;
+  }
 }
 
 .parameters-power {
@@ -1225,6 +1316,12 @@ body {
   content: "power";
 }
 
+@media screen and (max-width: 415px) {
+  .parameters-power::before {
+    font-size: 10px;
+  }
+}
+
 .parameters-magic {
   position: relative;
 }
@@ -1233,12 +1330,24 @@ body {
   content: "magic";
 }
 
+@media screen and (max-width: 415px) {
+  .parameters-magic::before {
+    font-size: 10px;
+  }
+}
+
 .parameters-wisdom {
   position: relative;
 }
 
 .parameters-wisdom::before {
   content: "wisdom";
+}
+
+@media screen and (max-width: 415px) {
+  .parameters-wisdom::before {
+    font-size: 10px;
+  }
 }
 
 .parameters-xp {
@@ -1263,6 +1372,12 @@ body {
   font-size: 16px;
   font-style: oblique;
   color: #000000bd;
+}
+
+@media screen and (max-width: 415px) {
+  .parameters-xp::before {
+    font-size: 10px;
+  }
 }
 
 .parameters-experience {
@@ -1340,6 +1455,12 @@ body {
   margin: 40px auto 150px auto;
 }
 
+@media screen and (max-width: 415px) {
+  .section-tasks {
+    width: 90%;
+  }
+}
+
 .task_marker {
   background-image: linear-gradient(transparent 80%, #ffa5009e 0%);
 }
@@ -1364,6 +1485,12 @@ body {
   transition: all 0.5s;
   border-radius: 5px;
   box-shadow: 3px 2px 0.1rem #0000006b;
+}
+
+@media screen and (max-width: 415px) {
+  .tasks-wrapper .each-task {
+    height: 100px;
+  }
 }
 
 .tasks-wrapper .each-task__state {
@@ -1514,7 +1641,7 @@ body {
 
 .newTask {
   min-height: 500px;
-  margin: 20px auto 120px auto;
+  margin: 20px auto 20px auto;
   width: 100%;
   transition: all 0.5s;
   border-radius: 6px;
@@ -1616,6 +1743,14 @@ body {
   width: 80%;
   margin: auto;
   text-align: center;
+}
+
+@media screen and (max-width: 415px) {
+  .tasks-filter-btns {
+    height: 50px;
+    width: 100%;
+    font-size: 12px;
+  }
 }
 
 .tasks-filter-btn {
@@ -1892,6 +2027,7 @@ body {
   position: absolute;
   right: 34%;
   top: 30%;
+  border-bottom: 1px solid #7ce1e1;
 }
 
 @media screen and (max-width: 415px) {
@@ -1905,6 +2041,7 @@ body {
   position: absolute;
   right: 12%;
   top: 87%;
+  border-bottom: 1px solid #7ce1e1;
 }
 
 @media screen and (max-width: 415px) {
@@ -1940,6 +2077,12 @@ body {
   z-index: 10;
 }
 
+@media screen and (max-width: 415px) {
+  .header {
+    height: 40px;
+  }
+}
+
 .header__logo-area {
   width: 20%;
   font-size: 20px;
@@ -1971,14 +2114,21 @@ body {
   justify-content: right;
 }
 
+@media screen and (max-width: 415px) {
+  .header__nav {
+    line-height: 40px;
+  }
+}
+
 .header__nav li {
+  font-size: 12px;
   margin: 0 0.5rem;
   transition: all 0.2s;
 }
 
 @media screen and (max-width: 415px) {
   .header__nav li {
-    font-size: 14px;
+    font-size: 11px;
   }
 }
 
@@ -2013,22 +2163,81 @@ body {
 
 .sidebar-toggle {
   position: absolute;
-  font-size: 27px;
+  width: 17%;
+  height: 30px;
+  font-size: 16px;
+  text-align: center;
   color: #fafafa;
-  top: 1px;
   left: 0;
-  background-color: black;
-  border: 2px solid #fafafa;
+  background-color: #3e3a3a;
   z-index: 2;
+  border-bottom-right-radius: 60px;
+}
+
+@media screen and (max-width: 415px) {
+  .sidebar-toggle {
+    font-size: 14px;
+    padding: 2px;
+  }
+}
+
+.sidebar-toggle:hover {
+  cursor: pointer;
+  background-color: #afafaf;
+}
+
+.sp-Info-menu {
+  display: none;
+}
+
+@media screen and (max-width: 415px) {
+  .sp-Info-menu {
+    display: block;
+    background-color: #ccf0f761;
+    width: 100%;
+    padding-left: 10px;
+    border-bottom: 2px solid #73e1d2;
+  }
+}
+
+.sp-menu-wrap {
+  width: 100%;
+  height: 28px;
+  line-height: 28px;
+  display: flex;
+  justify-content: left;
+  margin: 5px;
+}
+
+.sp-menu-wrap p {
+  margin: 0 20px;
+  line-height: 28px;
+}
+
+@media screen and (max-width: 415px) {
+  .sp-menu-wrap p {
+    margin: 0 5px;
+  }
+
+  .sp-menu-wrap p:first-child {
+    margin-left: 3px;
+  }
 }
 
 .sidebar {
   width: 17%;
   height: 100vh;
+  padding-top: 10px;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  background-color: #1a1818c9;
+  background-color: #3e3a3a;
+}
+
+@media screen and (max-width: 415px) {
+  .sidebar {
+    display: none;
+  }
 }
 
 .sidebar h4 {
@@ -2048,6 +2257,7 @@ body {
 }
 
 .sidebar a {
+  font-size: 12px;
   color: #fefefe;
   display: block;
   text-align: center;
@@ -2069,27 +2279,27 @@ body {
   font-size: 12px;
 }
 
-.sidebar .fonticon_level {
+.sideIsClicked {
+  background: #fafafa;
+  color: black;
+}
+
+.fonticon_level {
   color: #96fff5;
   margin-right: 2px;
   font-size: 16px;
 }
 
-.sidebar .fonticon_hp {
+.fonticon_hp {
   color: #e85353;
   margin-right: 2px;
   font-size: 16px;
 }
 
-.sidebar .fonticon_money {
+.fonticon_money {
   color: yellow;
   margin-right: 2px;
   font-size: 16px;
-}
-
-.sideIsClicked {
-  background: #fafafa;
-  color: black;
 }
 
 .wrapper {

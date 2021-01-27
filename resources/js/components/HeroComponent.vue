@@ -11,10 +11,10 @@
                     <li class="parameters parameters-magic">魔力</li>
                     <li class="parameters parameters-wisdom">知識</li>
                     <li class="parameters-xp">経験値</li>
-                    
                 </ul>
-                <div class="gauges-group">
-                    <div class="gauges" v-bind:style="{ width:num.value * 7 + 'px' }"
+                <!--pc-->
+                <div class="gauges-group is-pc">
+                    <div class="gauges" v-bind:style="{ width:num.value * 6 + 'px' }"
                         v-for="(num, index) in parameters" :key="index">
                         <div class="gauges-bar">{{num.value}}</div>
                     </div>
@@ -22,7 +22,17 @@
                         <div class="gauges-xp-bar" v-bind:style="{ width:myxp * 20 + 'px' }"> </div>
                         <span>{{myxp}}/10</span>
                     </div>
-                                        
+                </div>
+                <!--sp-->
+                <div class="gauges-group is-sp">
+                    <div class="gauges" v-bind:style="{ width: '150px'}"
+                        v-for="(num, index) in parameters" :key="index">
+                        <div class="gauges-bar">{{num.value}}</div>
+                    </div>
+                    <div class="gauges-xp">
+                        <div class="gauges-xp-bar" v-bind:style="{ width:myxp * 2 + 'px' }"> </div>
+                        <span>{{myxp}}/10</span>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1911,6 +1911,37 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AllTasks.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AllTasks.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      tasks: [] //実際に表示するtasks。これをソートする
+
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HeroComponent.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HeroComponent.vue?vue&type=script&lang=js& ***!
@@ -1928,6 +1959,16 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2341,6 +2382,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //import func from '../../../vue-temp/vue-editor-bridge';
  //ok
 
@@ -2349,7 +2418,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       isActive: null,
       description: "タスク一覧画面を開きました。タスクの登録、左側のアイコンで実施しましょう。",
-      sidebarShow: true
+      sidebarShow: true,
+      choised: "タスク"
     };
   },
   components: {
@@ -2366,12 +2436,16 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     taskChoised: function taskChoised() {
       this.description = "\u30BF\u30B9\u30AF\u306E\u8FFD\u52A0\u3084\u5B9F\u65BD\u3092\u884C\u3044\u307E\u3059\u3002\n                \u30BF\u30B9\u30AF\u3092\u5B9F\u884C\u3059\u308B\u3068\u3001\u80FD\u529B\u5024\u304C\u96E3\u6613\u5EA6\u306B\u6CBF\u3063\u3066\u4E0A\u304C\u308A\u307E\u3059\uFF01\u7D4C\u9A13\u5024\u3068\u304A\u91D1\u306F\u521D\u3081\u3066\u5B9F\u65BD\u3059\u308B\u3068\u304D\u3060\u3051\u30E9\u30F3\u30C0\u30E0\u306B\u624B\u306B\u5165\u308A\u307E\u3059\u3002\u3069\u3093\u3069\u3093\u5F37\u304F\u306A\u308A\u307E\u3057\u3087\u3046\u3002"; //console.log(this.description);
+
+      this.choised = "タスク";
     },
     statusChoised: function statusChoised() {
       this.description = "\u5404\u7A2E\u30B9\u30C6\u30FC\u30BF\u30B9\u3001\n                \u30EC\u30D9\u30EB\u306A\u3069\u3092\u78BA\u8A8D\u3067\u304D\u307E\u3059\u3002";
+      this.choised = "ステータス";
     },
     itemChoised: function itemChoised() {
       this.description = "\u53D6\u5F97\u6E08\u307F\u30A2\u30A4\u30C6\u30E0\u4E00\u89A7\u3092\u78BA\u8A8D\u3067\u304D\u307E\u3059\u3002";
+      this.choised = "アイテム";
     },
     toggleSidebar: function toggleSidebar() {
       this.sidebarShow = !this.sidebarShow;
@@ -40055,6 +40129,39 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AllTasks.vue?vue&type=template&id=673c0558&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AllTasks.vue?vue&type=template&id=673c0558& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "alltasks-page-wrap" }, [
+      _c("div", { staticClass: "alltasks-wrap" })
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/HeroComponent.vue?vue&type=template&id=3c6e1848&":
 /*!****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/HeroComponent.vue?vue&type=template&id=3c6e1848& ***!
@@ -40084,7 +40191,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "gauges-group" },
+            { staticClass: "gauges-group is-pc" },
             [
               _vm._l(_vm.parameters, function(num, index) {
                 return _c(
@@ -40092,7 +40199,7 @@ var render = function() {
                   {
                     key: index,
                     staticClass: "gauges",
-                    style: { width: num.value * 7 + "px" }
+                    style: { width: num.value * 6 + "px" }
                   },
                   [
                     _c("div", { staticClass: "gauges-bar" }, [
@@ -40106,6 +40213,38 @@ var render = function() {
                 _c("div", {
                   staticClass: "gauges-xp-bar",
                   style: { width: _vm.myxp * 20 + "px" }
+                }),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(_vm.myxp) + "/10")])
+              ])
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "gauges-group is-sp" },
+            [
+              _vm._l(_vm.parameters, function(num, index) {
+                return _c(
+                  "div",
+                  {
+                    key: index,
+                    staticClass: "gauges",
+                    style: { width: "150px" }
+                  },
+                  [
+                    _c("div", { staticClass: "gauges-bar" }, [
+                      _vm._v(_vm._s(num.value))
+                    ])
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "gauges-xp" }, [
+                _c("div", {
+                  staticClass: "gauges-xp-bar",
+                  style: { width: _vm.myxp * 2 + "px" }
                 }),
                 _vm._v(" "),
                 _c("span", [_vm._v(_vm._s(_vm.myxp) + "/10")])
@@ -40435,18 +40574,107 @@ var render = function() {
     "div",
     { staticClass: "myinfo" },
     [
-      _c(
-        "div",
-        {
-          staticClass: "sidebar-toggle",
-          on: {
-            click: function($event) {
-              return _vm.toggleSidebar()
-            }
-          }
-        },
-        [_vm._v("⇄")]
-      ),
+      _c("transition", { attrs: { name: "fade" } }, [
+        _c(
+          "section",
+          { staticClass: "sidebar" },
+          [
+            _c("p", [_vm._v("MENU")]),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                attrs: { to: "/tasks" },
+                nativeOn: {
+                  click: function($event) {
+                    return _vm.taskChoised()
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fas fa-th-list fontawasome-list" }),
+                _vm._v("タスク")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                attrs: { to: "/status" },
+                nativeOn: {
+                  click: function($event) {
+                    return _vm.statusChoised()
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fas fa-user fontawasome-status" }),
+                _vm._v("ステータス")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                attrs: { to: "/items" },
+                nativeOn: {
+                  click: function($event) {
+                    return _vm.itemChoised()
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fas fa-gift fontawasome-item" }),
+                _vm._v("アイテム")
+              ]
+            ),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.getUserInfo.name) +
+                  "\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("i", { staticClass: "fas fa-child fonticon_level" }),
+              _vm._v("LEVEL"),
+              _c("br"),
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.getUserInfo.lv) +
+                  "\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("i", { staticClass: "far fa-heart fonticon_hp" }),
+              _vm._v("HP"),
+              _c("br"),
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.getUserInfo.hp) +
+                  "\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("i", { staticClass: "fas fa-coins fonticon_money" }),
+              _vm._v("GOLD"),
+              _c("br"),
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.getUserInfo.money) +
+                  "\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(_vm.description))])
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
       _c(
         "section",
@@ -40459,93 +40687,98 @@ var render = function() {
               expression: "sidebarShow == true"
             }
           ],
-          staticClass: "sidebar"
+          staticClass: "sp-Info-menu"
         },
         [
-          _c("h4", [_vm._v("メニュー")]),
-          _vm._v(" "),
           _c(
-            "router-link",
-            {
-              attrs: { to: "/tasks" },
-              nativeOn: {
-                click: function($event) {
-                  return _vm.taskChoised()
-                }
-              }
-            },
+            "div",
+            { staticClass: "sp-menu-wrap" },
             [
-              _c("i", { staticClass: "fas fa-th-list fontawasome-list" }),
-              _vm._v("タスク")
-            ]
+              _c(
+                "router-link",
+                {
+                  attrs: { to: "/tasks" },
+                  nativeOn: {
+                    click: function($event) {
+                      return _vm.taskChoised()
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-th-list fontawasome-list" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  attrs: { to: "/status" },
+                  nativeOn: {
+                    click: function($event) {
+                      return _vm.statusChoised()
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-user fontawasome-status" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  attrs: { to: "/items" },
+                  nativeOn: {
+                    click: function($event) {
+                      return _vm.itemChoised()
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-gift fontawasome-item" })]
+              ),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "\n                " + _vm._s(_vm.choised) + "\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "\n                Name：" +
+                    _vm._s(_vm.getUserInfo.name) +
+                    "\n            "
+                )
+              ])
+            ],
+            1
           ),
           _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              attrs: { to: "/status" },
-              nativeOn: {
-                click: function($event) {
-                  return _vm.statusChoised()
-                }
-              }
-            },
-            [
-              _c("i", { staticClass: "fas fa-user fontawasome-status" }),
-              _vm._v("ステータス")
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              attrs: { to: "/items" },
-              nativeOn: {
-                click: function($event) {
-                  return _vm.itemChoised()
-                }
-              }
-            },
-            [
-              _c("i", { staticClass: "fas fa-gift fontawasome-item" }),
-              _vm._v("アイテム")
-            ]
-          ),
-          _vm._v(" "),
-          _c("span"),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "\n            " + _vm._s(_vm.getUserInfo.name) + "\n        "
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _c("i", { staticClass: "fas fa-child fonticon_level" }),
-            _vm._v("LEVEL"),
-            _c("br"),
-            _vm._v("\n            " + _vm._s(_vm.getUserInfo.lv) + "\n        ")
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _c("i", { staticClass: "far fa-heart fonticon_hp" }),
-            _vm._v("HP"),
-            _c("br"),
-            _vm._v("\n            " + _vm._s(_vm.getUserInfo.hp) + "\n        ")
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _c("i", { staticClass: "fas fa-coins fonticon_money" }),
-            _vm._v("GOLD"),
-            _c("br"),
-            _vm._v(
-              "\n            " + _vm._s(_vm.getUserInfo.money) + "\n        "
-            )
-          ]),
-          _vm._v(" "),
-          _c("span", [_vm._v(_vm._s(_vm.description))])
-        ],
-        1
+          _c("div", { staticClass: "sp-menu-wrap" }, [
+            _c("p", [
+              _c("i", { staticClass: "fas fa-child fonticon_level" }),
+              _vm._v(
+                "\n                LEVEL：" +
+                  _vm._s(_vm.getUserInfo.lv) +
+                  "\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("i", { staticClass: "far fa-heart fonticon_hp" }),
+              _vm._v(
+                "\n                HP：" +
+                  _vm._s(_vm.getUserInfo.hp) +
+                  "\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("i", { staticClass: "fas fa-coins fonticon_money" }),
+              _vm._v(
+                "\n                GOLD：" +
+                  _vm._s(_vm.getUserInfo.money) +
+                  "\n            "
+              )
+            ])
+          ])
+        ]
       ),
       _vm._v(" "),
       _c("RouterView"),
@@ -57830,18 +58063,21 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('hero-component', __webpack_require__(/*! ./components/HeroComponent.vue */ "./resources/js/components/HeroComponent.vue")["default"]);
-Vue.component('myinfo-component', __webpack_require__(/*! ./components/MyinfoComponent.vue */ "./resources/js/components/MyinfoComponent.vue")["default"]); //Vue.component('taskform-component', require('./components/TaskFormComponent.vue').default);
-
+Vue.component('myinfo-component', __webpack_require__(/*! ./components/MyinfoComponent.vue */ "./resources/js/components/MyinfoComponent.vue")["default"]);
+Vue.component('alltasks-component', __webpack_require__(/*! ./components/AllTasks.vue */ "./resources/js/components/AllTasks.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+new Vue({
+  el: '#alltasks',
+  template: '<alltasks-component/>'
+});
 
 var createApp = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -57924,6 +58160,75 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/AllTasks.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/AllTasks.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AllTasks_vue_vue_type_template_id_673c0558___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AllTasks.vue?vue&type=template&id=673c0558& */ "./resources/js/components/AllTasks.vue?vue&type=template&id=673c0558&");
+/* harmony import */ var _AllTasks_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AllTasks.vue?vue&type=script&lang=js& */ "./resources/js/components/AllTasks.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AllTasks_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AllTasks_vue_vue_type_template_id_673c0558___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AllTasks_vue_vue_type_template_id_673c0558___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AllTasks.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AllTasks.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/AllTasks.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AllTasks_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AllTasks.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AllTasks.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AllTasks_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AllTasks.vue?vue&type=template&id=673c0558&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/AllTasks.vue?vue&type=template&id=673c0558& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AllTasks_vue_vue_type_template_id_673c0558___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AllTasks.vue?vue&type=template&id=673c0558& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AllTasks.vue?vue&type=template&id=673c0558&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AllTasks_vue_vue_type_template_id_673c0558___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AllTasks_vue_vue_type_template_id_673c0558___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -58450,7 +58755,6 @@ __webpack_require__.r(__webpack_exports__);
  // ページコンポーネントをインポートする
 
  //自分のステータス
-//import taskform from './components/TaskFormComponent.vue'//新規タスク
 
  //タスク一覧
 

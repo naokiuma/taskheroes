@@ -10,7 +10,10 @@
     margin-top: 50px;
     padding: 30px;
     background-color: #0000000a;
-
+    @media screen and (max-width: $res-max-width){
+        margin-top: 0px;
+        padding: 25px 0 0 0;
+    }
     h3{
         width: 60%;
         font-weight: 500;
@@ -24,6 +27,10 @@
         font-size: 2rem;
         line-height: 2rem;
         margin-left: 10px;
+        @media screen and (max-width: $res-max-width){
+            padding-left: 0;
+        }
+
     }
 }
 
@@ -39,6 +46,11 @@
     font-size: 12px;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
+    @media screen and (max-width: $res-max-width){
+        width: 80px;
+
+    }
+    
 
     &::before{
         position: absolute;
@@ -58,6 +70,7 @@
 
         ul{
             width: 150px;
+
         }
     }
     &-hero{
@@ -79,6 +92,10 @@
         text-transform: uppercase;
         border-top-left-radius: 25px;
         border-bottom-left-radius: 25px;
+        @media screen and (max-width: $res-max-width){
+            font-size: 10px;
+        }
+
         &::before{
             content:"lv";
             position: absolute;
@@ -89,23 +106,20 @@
             font-size: 16px;
             font-style: oblique;
             color: #000000bd;
+            @media screen and (max-width: $res-max-width){
+                font-size: 10px;
+            }
         }
 
     }
-    /*
-    &-lv{
-        position: relative;
-        &::before{
-            content:"Level";
-
-        }
-    }
-    */
 
     &-hp{
         position: relative;
         &::before{
             content:"HP";
+            @media screen and (max-width: $res-max-width){
+                font-size: 10px;
+            }
 
         }
     }
@@ -113,6 +127,9 @@
         position: relative;
         &::before{
             content:"power";
+            @media screen and (max-width: $res-max-width){
+                font-size: 10px;
+            }
 
         }
     }
@@ -120,6 +137,9 @@
         position: relative;
         &::before{
             content:"magic";
+            @media screen and (max-width: $res-max-width){
+                font-size: 10px;
+            }
 
         }
     }
@@ -127,6 +147,9 @@
         position: relative;
         &::before{
             content:"wisdom";
+            @media screen and (max-width: $res-max-width){
+                font-size: 10px;
+            }
 
         }
     }
@@ -135,7 +158,6 @@
         position: relative;
         font-size: 13px;
         background-color: $subColor;
-        //background-image: linear-gradient(to right, #f1f47e, #f2e362);
         margin-bottom: 20px;
         height: 2rem;
         line-height: 2rem;
@@ -152,6 +174,9 @@
             font-size: 16px;
             font-style: oblique;
             color: #000000bd;
+            @media screen and (max-width: $res-max-width){
+                font-size: 10px;
+            }
 
         }
     }

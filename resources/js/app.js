@@ -24,16 +24,11 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('hero-component', require('./components/HeroComponent.vue').default);
 Vue.component('myinfo-component', require('./components/MyinfoComponent.vue').default);
-
-//Vue.component('taskform-component', require('./components/TaskFormComponent.vue').default);
-
-
+Vue.component('alltasks-component', require('./components/AllTasks.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -41,6 +36,11 @@ Vue.component('myinfo-component', require('./components/MyinfoComponent.vue').de
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+new Vue({
+  el: '#alltasks',
+  template:'<alltasks-component/>'
+})
 
 const createApp = async () => {
   await store.dispatch('register')
@@ -53,8 +53,6 @@ const createApp = async () => {
     component:{ Myinfo },
     template:'<myinfo-component/>'
   })
-
-
 }
 
 createApp();

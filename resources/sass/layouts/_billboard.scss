@@ -49,6 +49,7 @@
         position: absolute;
         right: 34%;
         top: 30%;
+        border-bottom: 1px solid #7ce1e1;
         @media screen and (max-width: $res-max-width){
             top:10%;
             z-index: 2;
@@ -59,6 +60,7 @@
         position: absolute;
         right: 12%;
         top: 87%;
+        border-bottom: 1px solid #7ce1e1;
         @media screen and (max-width: $res-max-width){
             top:46%;
             z-index:2;

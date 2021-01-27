@@ -9,6 +9,21 @@ $carmBlack:#464545;
 $space:50px;
 $res-max-width:415px;//レスポンシブサイト
 
+.is-sp{
+    display: none;
+    @media screen and (max-width: $res-max-width){
+        display: block;
+    }
+}
+
+.is-pc{
+    display: block;
+    @media screen and (max-width: $res-max-width){
+        display: none;
+    }
+}
+
+
 body{  
     font-family: "Helvetica Neue",
     'Noto Sans JP', sans-serif,
@@ -119,6 +134,10 @@ p{//スマホサイズは12px
 .eachPageImg{
     width: 100px;
     margin-right: 20px;
+    @media screen and (max-width: $res-max-width){
+        width: 80px;
+    }
+
 }
 
 //------------フォントawasome系

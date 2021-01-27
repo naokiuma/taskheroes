@@ -64,4 +64,9 @@
 .section-tasks{
     width: 80%;
     margin: 40px auto 150px auto;
+    @media screen and (max-width: $res-max-width){
+        width: 90%;
+    }
+
+    
 }

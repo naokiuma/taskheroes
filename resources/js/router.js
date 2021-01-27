@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 // ページコンポーネントをインポートする
 import status from './components/HeroComponent.vue'//自分のステータス
-//import taskform from './components/TaskFormComponent.vue'//新規タスク
 import tasks from './components/TaskComponent.vue'//タスク一覧
 import items from './components/ItemsComponent.vue'//アイテム一覧
 

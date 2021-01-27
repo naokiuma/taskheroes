@@ -34,6 +34,10 @@
     overflow: hidden;
     border-top-right-radius : 25px;
     border-bottom-right-radius: 25px;
+    @media screen and (max-width: $res-max-width){
+        width: 150px;
+    }
+
     &-bar{
         //animation:2s ease-in 1s forwards alternate expansion;
         height: 100%;
