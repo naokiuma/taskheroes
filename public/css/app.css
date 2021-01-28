@@ -893,6 +893,12 @@ body {
   margin: auto auto 120px auto;
 }
 
+@media screen and (max-width: 415px) {
+  .allItem-pages {
+    width: 95%;
+  }
+}
+
 .item-shopman {
   position: absolute;
   width: 200px;
@@ -925,6 +931,12 @@ body {
   width: 70%;
 }
 
+@media screen and (max-width: 415px) {
+  .items-wrapper {
+    width: 90%;
+  }
+}
+
 .each-item {
   width: 30%;
   min-height: 200px;
@@ -935,6 +947,14 @@ body {
   border: 2px solid #0f0e0e;
   border-radius: 20px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 415px) {
+  .each-item {
+    width: 45%;
+    height: 150px;
+    min-height: auto;
+  }
 }
 
 .each-item:hover {
@@ -983,11 +1003,11 @@ body {
 }
 
 .each-item__detail h4 {
-  background-color: #252825;
+  background-color: #fafafa;
   margin-bottom: 0px;
   padding-top: 15px;
   padding-bottom: 15px;
-  color: #fafafa;
+  color: #252825;
 }
 
 .each-item__detail p {
@@ -995,7 +1015,8 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 0px;
-  background-color: #fbfb65;
+  background-color: #ffff00cf;
+  transform: skew(0deg, 10deg);
 }
 
 .each-item__detail .notHave {
@@ -1206,6 +1227,7 @@ body {
 @media screen and (max-width: 415px) {
   .section-parameters ul {
     padding-left: 0;
+    margin-left: 20px;
   }
 }
 

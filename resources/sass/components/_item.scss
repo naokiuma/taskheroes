@@ -1,6 +1,10 @@
 .allItem-pages{
     width: 80%;
     margin: auto auto 120px auto;
+    @media screen and (max-width: $res-max-width){
+        width: 95%;
+    }
+
 }
 .item-shopman{
     position: absolute;
@@ -35,6 +39,10 @@
     flex-wrap: wrap;
     margin: auto;
     width: 70%;
+    @media screen and (max-width: $res-max-width){
+        width: 90%;
+
+    }
 }
 
 .each-item{
@@ -46,6 +54,12 @@
     border: 2px solid #0f0e0e;
     border-radius: 20px;
     cursor: pointer;
+    @media screen and (max-width: $res-max-width){
+        width: 45%;
+        height: 150px;
+        min-height:auto;
+    }
+
     &:hover{
         //background-color: #96fff5;
         background-color: rgba(57, 221, 33, 0.2);
@@ -80,6 +94,7 @@
     //https://deshinon.com/2019/03/03/osyare-pricings-single-css/　参考
     height: 300px;
     width: 270px;
+    //transform:skew(0deg, -10deg);
     position: fixed;
     top: 51px;
     right: 0;
@@ -89,20 +104,20 @@
     letter-spacing: 2px;
     box-shadow: 1px 1px 1px black;
     h4{
-        background-color: #252825;
+        background-color: #fafafa;
         margin-bottom: 0px;
         padding-top: 15px;
         padding-bottom: 15px;
-        color: #fafafa;
+        color: #252825;
     }
     p{
         letter-spacing: 2px;
         padding-top: 10px;
         padding-bottom: 10px;
         margin-bottom: 0px;
-        //background-color: #e66406;
-        background-color: #fbfb65;
-        //background-image: linear-gradient(#f2e895 50%, yellow 50%);
+        background-color: #ffff00cf;
+        transform:skew(0deg, 10deg);
+
     }
 
     .notHave{
