@@ -5,6 +5,8 @@
       <Loader></Loader>
     </div>
   -->
+  <!--<form class="task-form">-->
+
   <form class="task-form" @submit.prevent="submit">
     <h2>New Task</h2>
     <input class="task-form-title" maxlength="50" name="title" type="text" v-model="title" placeholder="Task Name" required><br>
@@ -93,7 +95,12 @@ export default{
           content: tempmsg
           })
         self.$emit("formClose");
-        setTimeout(self.$router.go({path: self.$router.currentRoute.path, force: true}), 3000);
+        //vm.$forceUpdate();
+        //self.pageReload();
+        //self.$router.go({path: self.$router.currentRoute.path, force: true});
+
+        
+        //setTimeout(self.$router.go({path: self.$router.currentRoute.path, force: true}), 3000);
         //self.loading = false;
       })
       .catch(function(error){
@@ -104,6 +111,10 @@ export default{
           content: tempmsg
           })
         })
+    },
+    pageReload(){
+      console.log("ys流よ");
+      window.location.reload();
     },
     ChoiceDifficult(){//難易度選択
       let star = "";

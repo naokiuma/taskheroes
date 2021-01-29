@@ -279,7 +279,8 @@
                         self.firstTasks();
                         self.$store.commit('message/setContent',{
                             content: tempmsg })
-                        setTimeout(self.$router.go({path: self.$router.currentRoute.path, force: true}), 4000);
+                        location.reload();
+                        //setTimeout(self.$router.go({path: self.$router.currentRoute.path, force: true}), 4000);
                         
                     })
                     } else {
