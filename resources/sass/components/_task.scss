@@ -99,6 +99,7 @@
             cursor: pointer;
             box-shadow: 1px 1px 0.5px 0px #0000004f;
             transition: 0.4s;
+            margin-bottom: 6px;
             &:hover{
                 background-color: #96fff5;
                 transition: 0.4s;
@@ -169,7 +170,7 @@
 
 
 .newTask{
-    min-height: 500px;
+    min-height: 475px;
     margin: 20px auto 20px auto;
     width: 100%;
     transition: all .5s;
@@ -225,20 +226,36 @@
             margin: auto 10px;
             padding: 5px;
         }
-        input[type=radio] {
-            //display: none;
+        .radiobutton:checked + label{
+            background-color: #ffb300;
+            color: #fafafa;
         }
-        .label-wrapper{
+        input[type=radio] {
+            display: none;
+        }
+
+        .radiobuttons-wrapper{
             display: flex;
             justify-content: center;
-            width: 60%;
+            width: 70%;
             margin: 20px auto;
+            input[type=radio] {
+                display: none;
+            }
             img{
                 width: 30px;
             }
         }
-        label{
+        .radiobutton{
+            cursor: pointer;
             width: 100%;
+            margin: auto 5px;
+            border: 2px solid #ffb300;
+        }
+        label{
+            cursor: pointer;
+            margin: auto 5px;
+            border: 2px solid #ffb300; 
         }
         .difficult-wrapper{
             margin: 20px auto;

@@ -13,11 +13,28 @@
     <span>例：筋トレ、勉強、ゲームetc</span><br>
     <input class="task-form-body" maxlength="50"  name="body" type="textarea" v-model="body" placeholder="Task Detail"><br>
     <span>例：腕立て50回、参考書1時間、スマブラ30分etc</span><br>
-    <div class="label-wrapper">
-      <label><input type="radio" v-model="categories_id" value="1" checked="checked"><img src="/../img/ken.png" alt="">力</label>
-      <label><input type="radio" v-model="categories_id" value="2"><img src="/../img/mahou.png" alt="">魔力</label>
-      <label><input type="radio" v-model="categories_id" value="3"><img src="/../img/know.png" alt="">知識</label>
+
+    <div class="radiobuttons-wrapper">
+      <div>
+        <input class="radiobutton" id="radio1" type="radio" v-model="categories_id" value="1" checked="checked">
+        <label for="radio1">
+        <img src="/../img/ken.png" alt="">
+        </label>
+      </div>
+      <div>
+        <input class="radiobutton" id="radio2" type="radio" v-model="categories_id" value="2">
+        <label for="radio2">
+        <img src="/../img/mahou.png" alt="">
+        </label>
+      </div>
+      <div>
+        <input class="radiobutton" id="radio3" type="radio" v-model="categories_id" value="3">
+        <label for="radio3">
+        <img src="/../img/know.png" alt="">
+        </label>
+      </div>
     </div>
+
     <div class="difficult-wrapper">
       <span>難易度</span>
       <select name="difficult" size="1" v-model="difficult" required>

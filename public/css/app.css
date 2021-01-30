@@ -477,11 +477,6 @@ body {
 @-webkit-keyframes fade-in {
   0% {
     transform: translateY(-120px);
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 0.3;
   }
 
   100% {
@@ -492,11 +487,6 @@ body {
 @keyframes fade-in {
   0% {
     transform: translateY(-120px);
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 0.3;
   }
 
   100% {
@@ -1596,6 +1586,7 @@ body {
   cursor: pointer;
   box-shadow: 1px 1px 0.5px 0px #0000004f;
   transition: 0.4s;
+  margin-bottom: 6px;
 }
 
 .tasks-wrapper .each-task-Done-icon:hover {
@@ -1662,7 +1653,7 @@ body {
 }
 
 .newTask {
-  min-height: 500px;
+  min-height: 475px;
   margin: 20px auto 20px auto;
   width: 100%;
   transition: all 0.5s;
@@ -1725,19 +1716,41 @@ body {
   padding: 5px;
 }
 
-.task-form .label-wrapper {
+.task-form .radiobutton:checked + label {
+  background-color: #ffb300;
+  color: #fafafa;
+}
+
+.task-form input[type=radio] {
+  display: none;
+}
+
+.task-form .radiobuttons-wrapper {
   display: flex;
   justify-content: center;
-  width: 60%;
+  width: 70%;
   margin: 20px auto;
 }
 
-.task-form .label-wrapper img {
+.task-form .radiobuttons-wrapper input[type=radio] {
+  display: none;
+}
+
+.task-form .radiobuttons-wrapper img {
   width: 30px;
 }
 
-.task-form label {
+.task-form .radiobutton {
+  cursor: pointer;
   width: 100%;
+  margin: auto 5px;
+  border: 2px solid #ffb300;
+}
+
+.task-form label {
+  cursor: pointer;
+  margin: auto 5px;
+  border: 2px solid #ffb300;
 }
 
 .task-form .difficult-wrapper {

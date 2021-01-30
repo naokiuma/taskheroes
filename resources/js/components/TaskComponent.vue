@@ -20,7 +20,7 @@
             <!--<button class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'newtasks'}" @click="addTask()">新規タスク+</button>-->
         </div>
         <div class="tasks-wrapper">
-            <transition name="fade">
+            <transition name="bounce">
                 <div class="newTask" v-show="newTask"><Taskform @formClose="addTask()" @formSubmit="reNewTasks()"></Taskform></div>
             </transition> 
             
@@ -52,7 +52,7 @@
                     <div class="each-task__difficult" v-html="forDifficult(task.difficult)"></div>
                     <span class="each-task__time">投稿日時：{{task.created_at}}</span>
                     
-                    <transition name="fade">
+                    <transition name="bounce">
                     <aside class="each-task__detail" v-show="taskDetailShow == task.id">
                         <p>詳細メモ：{{task.body}}</p>
                     </aside>
@@ -91,7 +91,7 @@
                     <div class="each-task__difficult" v-html="forDifficult(task.difficult)"></div>
                     <span class="each-task__time">投稿日時：{{task.created_at}}</span>
 
-                    <transition name="fade">
+                    <transition name="bounce">
                     <aside class="each-task__detail" v-show="taskDetailShow == task.id">
                         <p>詳細メモ：{{task.body}}</p>
                     </aside>
@@ -103,7 +103,7 @@
 
 </section>
 </template>
-
+ 
 
 <style>
 .fade-enter-active{ animation:fade-in .5s; }

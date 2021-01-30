@@ -123,10 +123,6 @@
 @keyframes fade-in{
   0% {
     transform: translateY(-120px);
-    opacity: 0;
-  }
-  50%{
-      opacity: 0.3;
   }
   100% {
     transform: translateY(0px);
