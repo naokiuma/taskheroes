@@ -79,7 +79,7 @@ export default{
         this.errors.push("カテゴリーIDを選択してください。")
       }
       if(!this.difficult){
-        this.errors.push("カテゴリーIDを選択してください。")
+        this.errors.push("難易度を選択してください。")
       }
       if (!this.errors.length) {
         this.errors = [];
@@ -88,15 +88,16 @@ export default{
       self = this;
       axios.post('/tasks/create',formdata)
       .then(function(responce){
-        //console.log("ok");
+        //console.log("ok");　
         //console.log(responce);
         let tempmsg =  "新しいタスクを投稿しました。"
         self.$store.commit('message/setContent',{//メッセージを入れ
           content: tempmsg
           })
         self.$emit("formClose");
+        console.log("投稿。子コンポーネント");
+        self.$emit("formSubmit");
         //vm.$forceUpdate();
-        //self.pageReload();
         //self.$router.go({path: self.$router.currentRoute.path, force: true});
 
         
@@ -112,10 +113,6 @@ export default{
           })
         })
     },
-    pageReload(){
-      console.log("ys流よ");
-      window.location.reload();
-    },
     ChoiceDifficult(){//難易度選択
       let star = "";
       for(let i = 1; i <= e; i++){
@@ -123,9 +120,7 @@ export default{
         }
         return star;
     }
-
   }
-
 }
 
 </script>

@@ -21,7 +21,7 @@
         </div>
         <div class="tasks-wrapper">
             <transition name="fade">
-                <div class="newTask" v-show="newTask"><Taskform @formClose="addTask()"></Taskform></div>
+                <div class="newTask" v-show="newTask"><Taskform @formClose="addTask()" @formSubmit="reNewTasks()"></Taskform></div>
             </transition> 
             
             <transition name="bounce">
@@ -140,8 +140,8 @@
             //console.log("moutedです");
            this.fetchtasks();
            this.$store.commit('message/setContent',{
-                        content: "タスクを登録し、実施しましょう！"
-                    })
+                content: "タスクを登録し、実施しましょう！"
+            })
         },
         computed:{
             sortedTasks:function(){
@@ -151,15 +151,12 @@
         methods:{
             firstTasks(){//すべてのtasksを取得
                 let url = '/api/tasklist/';
-                if(this.$store.state.user.id){
-                    url = url + this.$store.state.user.id;//ユーザー情報ある場合は数字が末尾に入る
-                    }
+                if(this.$store.state.user.id){url = url + this.$store.state.user.id;}//ユーザー情報ある場合は数字が末尾に入る}
                 let self = this;
                 axios.get(url).then(function(response){
                     //console.log("うまくいったfirstTasks");
                     //console.log(response.data);
                     self.defaultTasks = response.data
-
                  })
                  return self.defaultTasks;
             },
@@ -187,9 +184,9 @@
                             temp.push(this.defaultTasks[i]);
                         }
                     }
-                    this.tasks = temp;
-                    //console.log(this.tasks);
-                    //this.sortedTasks();
+                this.tasks = temp;
+                //console.log(this.tasks);
+                //this.sortedTasks();
             },
             afterTasks(){//実施済のtasksを取得
                 //console.log("afterTasks");
@@ -211,6 +208,10 @@
             }
                 this.newTask = !this.newTask;
             },
+            reNewTasks(){//子供で投稿があったら、または親で削除されたら検知
+                this.firstTasks();
+                this.fetchtasks();
+            },
             clicked(task){
                 //コントローラー側で処理
                 let target = task.id;
@@ -223,7 +224,6 @@
                     //console.log(responce.data[0].title + "がかえってきました");//タスク名が帰ってくる
                     //console.log(responce.data[1] + "がかえってきました");
                     //console.log("お金は" + responce.data[2] + "稼ぎました");
-
                     let tempmsg;
                     let tempcategory;
                     if(task.categories_id == "1"){
@@ -245,7 +245,6 @@
                     self.$store.dispatch('register');//ユーザーパラメータの更新
                     self.firstTasks();
                     Vue.set(task,"done",responce.data[0].done);//対応taskのdoneに、帰ってきた値を入れる。
-
                     if(responce.data[1] > 0){
                         //console.log("レベルアップ");
                         tempmsg = tempmsg + "レベルアップしました！HPが"　+ responce.data[1] + "アップしました。" + responce.data[2] + "Gold手に入れました。"
@@ -257,14 +256,11 @@
                     }else if(responce.data[1] < 0 && responce.data[2] > 0){//data[1]はrandom、レベルアップ時のhp上昇数。responce.data[2]はお金。
                         tempmsg = tempmsg + responce.data[2] + "Gold手に入れました。";                        
                     }
-
                     self.$store.commit('message/setContent',{//メッセージ
                         content: tempmsg
                     })
                     return task;
-
-                })
-               
+                })   
             },
             deletetask(task){
                 //コントローラー側で処理
@@ -275,13 +271,10 @@
                     //console.log('/tasks/delete/' + target);
                     axios.post('/tasks/delete/' + target)
                     .then(function(responce){
-                        //self.fetchtasks();
-                        self.firstTasks();
                         self.$store.commit('message/setContent',{
                             content: tempmsg })
-                        location.reload();
-                        //setTimeout(self.$router.go({path: self.$router.currentRoute.path, force: true}), 4000);
-                        
+                        self.reNewTasks();
+                         
                     })
                     } else {
                     alert("削除しませんでした。");
@@ -312,7 +305,7 @@
                         "top": ((h - ch)/2) + "px"
                 });
             },
-            forDifficult(e){//難易度表示
+            forDifficult(e){//難易度star表示
                 let star = "難易度：";
                 for(let i = 1; i <= e; i++){
                     star = star + "<i class='fas fa-running fontawasome-difficult'></i>";
