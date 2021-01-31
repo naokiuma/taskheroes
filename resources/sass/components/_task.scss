@@ -313,7 +313,8 @@
 }
 
 .taskupParameters{//能力アップ時の動き
-    background-color: white;
+    background-color: #39aee8;
+    color:#fafafa;
     position: fixed;
     left: 10px;
     top: 100px;
@@ -325,6 +326,11 @@
     border-radius: 5px;
     translate: all .4s;
     text-align: center;
+    @media screen and (max-width: $res-max-width){
+        width: 200px;
+        height: 50px;
+        line-height: 50px;
+    }
 }
 
 

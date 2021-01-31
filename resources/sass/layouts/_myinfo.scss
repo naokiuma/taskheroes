@@ -58,11 +58,18 @@
     display: flex;
     justify-content: left;
     margin: 5px;
+    @media screen and (max-width: $res-max-width){
+        height: 50px;
+    }
+
+
     p{
         margin: 0 20px;
         line-height: 28px;
         @media screen and (max-width: $res-max-width){
             margin: 0 5px;
+            line-height: 50px;
+            font-size: 12px;
             &:first-child{
                 margin-left: 3px;
             }

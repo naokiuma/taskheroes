@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+input {
+  font-size: 16px;
+}
+
 .is-sp {
   display: none;
 }
@@ -75,6 +79,10 @@ body {
   .sp-br {
     display: block;
   }
+}
+
+.is-margin-right {
+  margin-right: 10px;
 }
 
 .heading-primary--main {
@@ -206,6 +214,13 @@ body {
   line-height: 16px;
 }
 
+@media screen and (max-width: 415px) {
+  .fontawasome-list {
+    font-size: 30px;
+    line-height: 50px;
+  }
+}
+
 .fontawasome-status {
   margin: auto 5px;
   color: skyblue;
@@ -213,11 +228,25 @@ body {
   line-height: 16px;
 }
 
+@media screen and (max-width: 415px) {
+  .fontawasome-status {
+    font-size: 30px;
+    line-height: 50px;
+  }
+}
+
 .fontawasome-item {
   margin: auto 5px;
   color: rgba(118, 238, 108, 0.9);
   font-size: 16px;
   line-height: 16px;
+}
+
+@media screen and (max-width: 415px) {
+  .fontawasome-item {
+    font-size: 30px;
+    line-height: 50px;
+  }
 }
 
 .star-icon-kirameki {
@@ -1807,7 +1836,8 @@ body {
 }
 
 .taskupParameters {
-  background-color: white;
+  background-color: #39aee8;
+  color: #fafafa;
   position: fixed;
   left: 10px;
   top: 100px;
@@ -1819,6 +1849,14 @@ body {
   border-radius: 5px;
   translate: all 0.4s;
   text-align: center;
+}
+
+@media screen and (max-width: 415px) {
+  .taskupParameters {
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+  }
 }
 
 .loading span {
@@ -2244,6 +2282,12 @@ body {
   margin: 5px;
 }
 
+@media screen and (max-width: 415px) {
+  .sp-menu-wrap {
+    height: 50px;
+  }
+}
+
 .sp-menu-wrap p {
   margin: 0 20px;
   line-height: 28px;
@@ -2252,6 +2296,8 @@ body {
 @media screen and (max-width: 415px) {
   .sp-menu-wrap p {
     margin: 0 5px;
+    line-height: 50px;
+    font-size: 12px;
   }
 
   .sp-menu-wrap p:first-child {

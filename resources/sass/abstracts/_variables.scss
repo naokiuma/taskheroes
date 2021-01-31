@@ -8,6 +8,9 @@ $subColor: #FAD727;
 $carmBlack:#464545;
 $space:50px;
 $res-max-width:415px;//レスポンシブサイト
+input{
+    font-size:16px;
+}
 
 .is-sp{
     display: none;
@@ -85,6 +88,10 @@ p{//スマホサイズは12px
     @media screen and (max-width: $res-max-width){
         display: block;
     }
+}
+
+.is-margin-right{
+margin-right: 10px;
 
 }
 
@@ -195,25 +202,36 @@ p{//スマホサイズは12px
     color:black;
 }
 
+
 .fontawasome-list{
     margin: auto 5px;
     color: orange;
     font-size: 16px;
     line-height: 16px;
+    @media screen and (max-width: $res-max-width){
+        font-size: 30px;
+        line-height:50px;
+    }
 }
-
 .fontawasome-status{
     margin: auto 5px;
     color: skyblue;
     font-size: 16px;
     line-height: 16px;
+    @media screen and (max-width: $res-max-width){
+        font-size: 30px;
+        line-height:50px;
+    }
 }
-
 .fontawasome-item{
     margin: auto 5px;
     color: rgba(118, 238, 108, 0.9);
     font-size: 16px;
     line-height: 16px;
+    @media screen and (max-width: $res-max-width){
+        font-size: 30px;
+        line-height:50px;
+    }
 }
 
 .star-icon-kirameki{

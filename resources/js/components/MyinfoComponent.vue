@@ -10,7 +10,6 @@
                 <router-link to="/status" @click.native="statusChoised()"><i class="fas fa-user fontawasome-status"></i>ステータス</router-link>
                 <router-link to="/items" @click.native="itemChoised()"><i class="fas fa-gift fontawasome-item"></i>アイテム</router-link>
                 <!--<router-link to="/taskform">タスクを登録する</router-link>-->
-                
                 <p>
                     {{getUserInfo.name}}
                 </p>
@@ -33,12 +32,9 @@
             <div class="sp-menu-wrap">
                 <router-link to="/tasks" @click.native="taskChoised()"><i class="fas fa-th-list fontawasome-list"></i></router-link>
                 <router-link to="/status" @click.native="statusChoised()"><i class="fas fa-user fontawasome-status"></i></router-link>
-                <router-link to="/items" @click.native="itemChoised()"><i class="fas fa-gift fontawasome-item"></i></router-link>
+                <router-link to="/items" @click.native="itemChoised()"><i class="fas fa-gift fontawasome-item is-margin-right"></i></router-link>
                 <p>
-                    {{ choised }}
-                </p>
-                <p>
-                    Name：{{getUserInfo.name}}
+                    Name : {{getUserInfo.name}}
                 </p>
             </div>
 
@@ -83,10 +79,6 @@
             getUserInfo() {
             return this.$store.getters.userinfo;
             }
-        },
-        mounted(){
-            //console.log("myinfo.vueのmouted");
-            //this.$store.dispatch('register');//storeのactionをこちらでdispatchしログインしているかを返す
         },
         methods:{
             taskChoised:function(){
