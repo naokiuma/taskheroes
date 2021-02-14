@@ -897,14 +897,9 @@ body {
 }
 
 .howto-step img {
-  width: 220px;
-  height: 160px;
+  width: 50%;
   -o-object-fit: cover;
      object-fit: cover;
-}
-
-.step-textgroup {
-  height: 40%;
 }
 
 .allItem-pages {

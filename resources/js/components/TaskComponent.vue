@@ -17,7 +17,6 @@
             <button v-if="sortFilter == 'newtasks'" class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'newtasks'}" @click="addTask()">閉じる</button>
             <button v-else-if="sortFilter != 'newtasks'" class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'newtasks'}" @click="addTask()">新規タスク</button>
 
-            <!--<button class="tasks-filter-btn" v-bind:class="{choicedtask:sortFilter == 'newtasks'}" @click="addTask()">新規タスク+</button>-->
         </div>
         <div class="tasks-wrapper">
             <transition name="bounce">
@@ -151,6 +150,7 @@
         methods:{
             firstTasks(){//すべてのtasksを取得
                 let url = '/api/tasklist/';
+                
                 if(this.$store.state.user.id){url = url + this.$store.state.user.id;}//ユーザー情報ある場合は数字が末尾に入る}
                 let self = this;
                 axios.get(url).then(function(response){

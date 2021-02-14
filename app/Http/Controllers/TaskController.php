@@ -125,16 +125,34 @@ class TaskController extends Controller
         if($id == null){
             Log::debug("tasklist.未ログインルート");
             $tasks = Task::orderByDesc('created_at')->get();//全取得
-            //何か変な場合、サンプルの投稿のみ表示する
+            //何か変な場合、すべての投稿を表示する
             //$tasks = Task::where('user_id', 2)->orderBy('created_at','desc')->get();
         }else{
-            //Log::debug("tasklist.ログインルート");
+            Log::debug("tasklist.ログインルート");
             $tasks = Task::where('user_id', $id)
             ->orderBy('created_at','desc')
             ->get();
         }
         Log::debug($tasks);
         return $tasks;
+    }
+
+    public function taskeachCategory(){
+        Log::debug("taskeachCategory");
+        //$tasks = Task::orderByDesc('created_at')->get();
+        $power = Task::where('categories_id', '1')->get();
+        $magic = Task::where('categories_id', '2')->get();
+        $wisdom = Task::where('categories_id', '3')->get();
+        Log::debug("powerは");
+        Log::debug($power);
+        Log::debug("magic");
+        Log::debug($magic);
+        Log::debug("wisdom");
+        Log::debug($wisdom);
+        Log::debug("以上");
+        
+
+
     }
 
 
