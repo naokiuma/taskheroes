@@ -1,4 +1,6 @@
 
+//タスクページ
+
 .task_marker{
     background-image: linear-gradient(transparent 80%, #ffa5009e 0%);
 }
@@ -414,6 +416,40 @@
         -webkit-transform: translate(-50%,-50%);
         transform: translate(-50%,-50%);
         width: 50%;
+    }
+}
+
+
+
+//みんなのタスクのページ
+
+.alltasks-page-wrap{
+    padding:0 24px;
+}
+.alltasks-wrap{
+    padding-top: 20px;
+}
+.everybody-tasks-wrapper{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    .everybody-task{
+        width: calc(25% - 10px);
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
+        box-shadow: 2px 2px 0.2px #8080805c;
+        &:nth-child(4n){
+            margin-right: 0;
+        }
+        
+
+    }
+    .everybody-task__category{
+        width: 30px;
+        img{
+            width: 100%;
+        }
     }
 }
 

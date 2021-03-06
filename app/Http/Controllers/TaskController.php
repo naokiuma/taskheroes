@@ -143,6 +143,7 @@ class TaskController extends Controller
         $power = Task::where('categories_id', '1')->get();
         $magic = Task::where('categories_id', '2')->get();
         $wisdom = Task::where('categories_id', '3')->get();
+        /*
         Log::debug("powerは");
         Log::debug($power);
         Log::debug("magic");
@@ -150,6 +151,7 @@ class TaskController extends Controller
         Log::debug("wisdom");
         Log::debug($wisdom);
         Log::debug("以上");
+        */
         
 
 

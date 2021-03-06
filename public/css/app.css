@@ -1424,7 +1424,7 @@ body {
   font-size: 80px;
   margin-bottom: 40px;
   text-align: center;
-  color: #808080a8;
+  color: #212529;
   letter-spacing: 5px;
   display: flex;
   align-items: center;
@@ -1956,6 +1956,40 @@ body {
   width: 50%;
 }
 
+.alltasks-page-wrap {
+  padding: 0 24px;
+}
+
+.alltasks-wrap {
+  padding-top: 20px;
+}
+
+.everybody-tasks-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.everybody-tasks-wrapper .everybody-task {
+  width: calc(25% - 10px);
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  box-shadow: 2px 2px 0.2px #8080805c;
+}
+
+.everybody-tasks-wrapper .everybody-task:nth-child(4n) {
+  margin-right: 0;
+}
+
+.everybody-tasks-wrapper .everybody-task__category {
+  width: 30px;
+}
+
+.everybody-tasks-wrapper .everybody-task__category img {
+  width: 100%;
+}
+
 .rolateings {
   perspective: 150rem;
   -moz-perspective: 150rem;
@@ -2095,7 +2129,10 @@ body {
   position: absolute;
   right: 34%;
   top: 30%;
-  border-bottom: 1px solid #7ce1e1;
+  border-radius: 5px;
+  background-color: #212529;
+  color: #fff;
+  padding: 0.4rem;
 }
 
 @media screen and (max-width: 415px) {
@@ -2109,7 +2146,10 @@ body {
   position: absolute;
   right: 12%;
   top: 87%;
-  border-bottom: 1px solid #7ce1e1;
+  border-radius: 5px;
+  background-color: #212529;
+  color: #fff;
+  padding: 0.4rem;
 }
 
 @media screen and (max-width: 415px) {
@@ -2322,6 +2362,10 @@ body {
   letter-spacing: 2px;
   text-align: center;
   margin: 15px auto;
+}
+
+.sidebar .fas {
+  padding-right: 5px;
 }
 
 .sidebar p {

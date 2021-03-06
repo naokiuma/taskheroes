@@ -21,7 +21,7 @@
     <i class="fas fa-arrow-up billboard-arrow3"></i>
     <div class="billboard-title">
         <h1>
-            <span class="heading-primary--main animate__animated animate__bounceInLeft">Task Heroes</span>
+            <span class="heading-primary--main animate__animated animate__bounce">Task Heroes</span>
             <span class="heading-primary--sub">日々の生活、遊びやトレーニングをちょっと楽しくするサービスです。</span>
         </h1>
         

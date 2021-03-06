@@ -3,58 +3,30 @@
         <div class="alltasks-wrap">
             <h2 class="all-tasks">みんなのタスク</h2>
 
-            <div class="tabs">
-                <input id="all" type="radio" name="tab_item" checked>
-                <label class="tab_item" for="all">総合</label>
-
-                <input id="programming" type="radio" name="tab_item">
-                <label class="tab_item" for="programming">プログラミング</label>
-
-                <input id="design" type="radio" name="tab_item">
-                <label class="tab_item" for="design">デザイン</label>
-                
-                <div class="tab_content" id="all_content">
-                    <div class="tab_content_description">
-                    <p class="c-txtsp">総合の内容がここに入ります</p>
-                    </div>
-                </div>
-                <div class="tab_content" id="programming_content">
-                    <div class="tab_content_description">
-                    <p class="c-txtsp">プログラミングの内容がここに入ります</p>
-                    </div>
-                </div>
-                <div class="tab_content" id="design_content">
-                    <div class="tab_content_description">
-                    <p class="c-txtsp">デザインの内容がここに入ります</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="each-task card" v-for="task in tasks" :key="task.id">
-                <div class="each-task__category">
-                        <div class="each-task-Done-icon" v-if="task.categories_id == '1'">
+            <div class="everybody-tasks-wrapper">
+                <div class="everybody-task card" v-for="task in tasks" :key="task.id">
+                    <div class="everybody-task__category">
+                        <div class="everybody-task-Done-icon" v-if="task.categories_id == '1'">
                             <img src="/../img/ken.png" alt="">
                         </div>
-                        <div class="each-task-Done-icon" v-else-if="task.categories_id == '2'">
+                        <div class="everybody-task-Done-icon" v-else-if="task.categories_id == '2'">
                             <img src="/../img/mahou.png" alt="">
                         </div>
-                        <div class="each-task-Done-icon" v-else-if="task.categories_id == '3'">
+                        <div class="everybody-task-Done-icon" v-else-if="task.categories_id == '3'">
                             <img src="/../img/know.png" alt="">
                         </div>
                     </div>
-                    <div class="each-task__title_outer">
-                        <div class="each-task__title_inner">{{task.title}}</div> 
+                    
+                    <div class="eaeverybody-task__title_outer">
+                        <div class="everybody-task__title_inner">{{task.title}}</div> 
                     </div>
-                    
-                    <div class="each-task__difficult" v-html="forDifficult(task.difficult)"></div>
-                    <span class="each-task__time">投稿日時：{{task.created_at}}</span>
-                    
-                    
+                        
+                    <div class="everybody-task__difficult" v-html="forDifficult(task.difficult)"></div>
+                    <span class="everybody-task__time">投稿日時：{{task.created_at}}</span>    
+                </div>
             </div>
             
-
         </div>
-
     </div>
 
 </template>
