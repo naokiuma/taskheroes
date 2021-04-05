@@ -22,11 +22,7 @@
             <transition name="bounce">
                 <div class="newTask" v-show="newTask"><Taskform @formClose="addTask()" @formSubmit="reNewTasks()"></Taskform></div>
             </transition> 
-            <!--
-            <transition name="bounce">
-                <div v-show="up" class="taskupParameters">{{ upcategory }} がアップ！<i class="fas fa-arrow-up fontawasome-arrow" style="color:#fafafa"></i></div>
-            </transition> 
-            -->
+            
             <div class="each-task card" v-for="task in tasks" :key="task.id">
                 <!--表-->
                 <div class="card__side card__side--front" v-bind:class="{ rotate: task.done }">

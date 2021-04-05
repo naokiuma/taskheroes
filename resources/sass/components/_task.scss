@@ -431,25 +431,37 @@
 }
 .everybody-tasks-wrapper{
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
     .everybody-task{
-        width: calc(25% - 10px);
+        width: calc(33% - 10px);
         margin-right: 10px;
         margin-bottom: 10px;
         padding: 5px;
         box-shadow: 2px 2px 0.2px #8080805c;
-        &:nth-child(4n){
+        position: relative;
+        &:nth-child(3n){
             margin-right: 0;
         }
         
 
     }
     .everybody-task__category{
-        width: 30px;
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        width: 40px;
+        background: #96fff5;
+        border-radius: 20px;
         img{
             width: 100%;
         }
     }
+
+    .everybody-task__title_inner{
+        width: 80%;
+    }
+
+    
 }
 

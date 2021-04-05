@@ -29,12 +29,12 @@
             <ul class="header__nav">
                 
                 @guest
-                <!--<li class=""><a href="{{ route('alltasks') }}">みんなのタスク</a></li>-->
+                <li class=""><a href="{{ route('alltasks') }}">みんなのタスク</a></li>
                 <li class=""><a href="{{ route('login') }}">ログイン</a></li>
                 <li class=""><a href="{{ route('register') }}">新規登録</a></li>
                 @endguest
                 @auth
-                <!--<li class=""><a href="{{ route('alltasks') }}">みんなのタスク</a></li>-->
+                <li class=""><a href="{{ route('alltasks') }}">みんなのタスク</a></li>
                 <li class=""><a href="{{ route('user.mypage') }}">マイページ</a></li>
                 
                 <li class="">
