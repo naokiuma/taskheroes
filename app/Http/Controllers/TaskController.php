@@ -124,7 +124,19 @@ class TaskController extends Controller
     {   //ユーザー情報
         if($id == null){
             Log::debug("tasklist.未ログインルート");
-            $tasks = Task::orderByDesc('created_at')->get();//全取得
+            //$tasks = Task::orderByDesc('created_at')->get();//全取得。元々の。
+
+            //'name', 'email as user_email'
+            $tasks = DB::table('tasks')
+            ->join('users','users.id','=','tasks.user_id')
+            ->select('tasks.title', 'tasks.categories_id','tasks.difficult','tasks.created_at','users.name')->get();
+
+
+            //$tasks = Task::select(task.title,task.category_id,task.created_at)
+            
+                    //->join('users','users.id','=','tasks.user_id')
+                    //->get();
+            
             //何か変な場合、すべての投稿を表示する
             //$tasks = Task::where('user_id', 2)->orderBy('created_at','desc')->get();
         }else{

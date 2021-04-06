@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Model;
 
-//class ItemUser extends Model
 class ItemUser extends Pivot
 {
     protected $table = 'item_user';

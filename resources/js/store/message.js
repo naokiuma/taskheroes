@@ -1,5 +1,5 @@
 const state = {
-    content:'message.jsのcontentですよよ！。',
+    content:'message.jsのcontentです！。',
     messageShow:true
 
 }

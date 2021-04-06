@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Item;
 use App\User;
-use App\itemUser;
+use App\itemUser; 
 use Illuminate\Support\Facades\Log; //ログ
 use Illuminate\Database\Eloquent\Relations\Pivot;
 

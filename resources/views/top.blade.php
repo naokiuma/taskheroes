@@ -57,9 +57,9 @@
 
             <div class="about-images">
             
-                <img class="about-image1"src="{{ asset('/img/art.png') }}"" alt="">
+                <img class="about-image1"src="{{ asset('/img/art.png') }}" alt="">
                     <i class="fas fa-arrow-right fontawasome-margin fontawasome-arror-right"></i>
-                <img class="about-image2"src="{{ asset('/img/fighter.png') }}"" alt="">
+                <img class="about-image2"src="{{ asset('/img/fighter.png') }}" alt="">
             </div>
         </div>
         <p>・・などなど。自分を育て、勇者も育てよう。</p>

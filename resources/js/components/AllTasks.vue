@@ -1,7 +1,13 @@
 <template>
     <div class="alltasks-page-wrap">
-        <div class="alltasks-wrap">
-            <h2 class="all-tasks">みんなのタスク</h2>
+        <div class="alltasks-area">
+            <h2 class="all-tasks-lead">みんなのタスク</h2>
+            <div class="all-tasks-commentary-area">
+                <div class="img-wrap">
+                    <img src="/../img/art.png" alt="">
+                </div>
+                <p class="text-wrap">みんなも頑張ってるな。。！負けずにおらもやろう！</p>
+            </div>
 
             <div class="everybody-tasks-wrapper">
                 <div class="everybody-task card" v-for="task in tasks" :key="task.id">
@@ -18,11 +24,15 @@
                     </div>
                     
                     <div class="eaeverybody-task__title_outer">
-                        <div class="everybody-task__title_inner">{{task.title}}</div> 
+                        <h3 class="everybody-task__title">{{task.title}}</h3> 
                     </div>
+                    <div>
+                        <span class="">投稿者：{{task.name}}</span>
+                        <div class="everybody-task__difficult" v-html="forDifficult(task.difficult)"></div>
+                        <span class="everybody-task__time">data：{{task.created_at}}</span>
                         
-                    <div class="everybody-task__difficult" v-html="forDifficult(task.difficult)"></div>
-                    <span class="everybody-task__time">投稿日時：{{task.created_at}}</span>    
+                    </div>
+                     
                 </div>
             </div>
             
@@ -44,7 +54,7 @@ export default {
         let url = '/api/tasklist/';
                 let self = this;
                 axios.get(url).then(function(response){
-                    //console.log(response)//すべてのtaskを取得する
+                    console.log(response)//すべてのtaskを取得する
                     self.tasks = response.data
                  })
     },
