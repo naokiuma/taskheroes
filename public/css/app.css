@@ -1981,7 +1981,10 @@ body {
 }
 
 .all-tasks-commentary-area .text-wrap {
-  font: 16px;
+  font-size: 16px;
+  height: 55px;
+  line-height: 55px;
+  margin-left: 15px;
 }
 
 .everybody-tasks-wrapper {
@@ -2013,8 +2016,9 @@ body {
   right: -10px;
   top: -10px;
   width: 40px;
-  background: #96fff5;
+  background: #fafafa;
   border-radius: 20px;
+  border: 3px solid #96fff5;
 }
 
 .everybody-tasks-wrapper .everybody-task__category img {
@@ -2023,6 +2027,7 @@ body {
 
 .everybody-tasks-wrapper .everybody-task__title {
   width: 80%;
+  font-size: 1.2rem;
 }
 
 .rolateings {
@@ -2148,9 +2153,9 @@ body {
 
 .billboard-img1 {
   position: absolute;
-  width: 500px;
+  width: 300px;
   right: 9%;
-  top: 16%;
+  top: 0%;
 }
 
 @media screen and (max-width: 415px) {
@@ -2162,8 +2167,8 @@ body {
 
 .billboard-text1 {
   position: absolute;
-  right: 34%;
-  top: 30%;
+  right: 3%;
+  top: 43%;
   border-radius: 5px;
   background-color: #212529;
   color: #fff;

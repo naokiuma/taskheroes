@@ -6,7 +6,7 @@
                 <div class="img-wrap">
                     <img src="/../img/art.png" alt="">
                 </div>
-                <p class="text-wrap">みんなも頑張ってるな。。！負けずにおらもやろう！</p>
+                <p class="text-wrap">みんなも頑張ってるな。。！おらもがんばろう！</p>
             </div>
 
             <div class="everybody-tasks-wrapper">

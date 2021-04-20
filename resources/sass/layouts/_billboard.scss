@@ -35,9 +35,9 @@
     }
     &-img1{
         position: absolute;
-        width: 500px;
+        width: 300px;
         right: 9%;
-        top: 16%;
+        top: 0%;
         @media screen and (max-width: $res-max-width){
             width: 200px;
             top: 39px;
@@ -47,8 +47,8 @@
     }
     &-text1{
         position: absolute;
-        right: 34%;
-        top: 30%;
+        right: 3%;
+        top: 43%;
         border-radius: 5px;
         background-color: #212529;
         color: #fff;

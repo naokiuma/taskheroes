@@ -14,8 +14,8 @@
 
 <div class="billboard">
     <img class="billboard-img1"src="{{ asset('/img/heroofhero.gif') }}" alt="">
-    <p class="billboard-text1">タスクをやって</p>
-    <p class="billboard-text2">強くなる。</p>
+    <p class="billboard-text1">タスクをやって強くなる。</p>
+    <!--<p class="billboard-text2"></p>-->
     <i class="fas fa-arrow-up billboard-arrow1"></i>
     <i class="fas fa-arrow-up billboard-arrow2"></i>
     <i class="fas fa-arrow-up billboard-arrow3"></i>
