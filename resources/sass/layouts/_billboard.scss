@@ -8,9 +8,9 @@
         position: absolute;
         bottom: 0%;
         left: 5%;
-        //transform: translate(-50%, -50%);
         padding: 20px;
         border-radius: 50px;
+        
 
         &:before{
             content: "";
@@ -31,6 +31,9 @@
             background-color: #96fff554;
             border-radius: 20px;
             padding: 10px;
+            @media screen and (max-width: $res-max-width){
+                width: 80vw;;
+            }
         }
     }
     &-img1{

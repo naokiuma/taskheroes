@@ -1,0 +1,37 @@
+.news-area{
+    
+    width: 95%;
+    margin: auto;
+    background-color: #81ecd81f;
+}
+
+.news-inner{
+    
+}
+
+.news{
+    text-align: center;
+    display: flex;
+    flex-wrap: nowrap;
+    min-height: 30px;
+    .data{
+        font-size: 12px;
+    }
+
+    .title{
+        width: 30%;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 30px;
+        padding:5px;
+        margin: 0 auto;
+    }
+    .text{
+        width: 70%;
+        font-size: 12px;
+        line-height: 30px;
+        padding: 5px;
+        margin: 0 auto;
+
+    }
+}

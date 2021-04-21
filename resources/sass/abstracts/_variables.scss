@@ -155,9 +155,14 @@ margin-right: 10px;
 .billboard-arrow1{
     font-size: 80px;
     position: absolute;
-    color: #0000ff4a;
+    color: #96fff573;
     right: 40%;
     top: 20%;
+    animation-name: bottomUpArrow;
+    animation-delay: 2s;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+    transform:translateY(100px);
     @media screen and (max-width: $res-max-width){
         left: 0;
         top: 3%;
@@ -167,9 +172,15 @@ margin-right: 10px;
 .billboard-arrow2{
     font-size: 160px;
     position: absolute;
-    color: #96fff573;
+    color: #0000ff4a;
     right: 5%;
     bottom: 20%;
+    animation-name: bottomUpArrow;
+    animation-delay: 3s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    transform:translateY(100px);
+
     @media screen and (max-width: $res-max-width){
         font-size: 95px;
         bottom: -13%;
@@ -182,6 +193,11 @@ margin-right: 10px;
     color: #FAD72782;
     right: 61%;
     bottom: 48%;
+    animation-name: bottomUpArrow;
+    animation-delay: 2s;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    transform:translateY(100px);
     @media screen and (max-width: $res-max-width){
         font-size: 100px;
         right: 66%;

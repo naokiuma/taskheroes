@@ -6,7 +6,7 @@
                 <div class="img-wrap">
                     <img src="/../img/art.png" alt="">
                 </div>
-                <p class="text-wrap">みんなも頑張ってるな。。！おらもがんばろう！</p>
+                <p class="text-wrap">みんなも頑張ってるな。。！</p>
             </div>
 
             <div class="everybody-tasks-wrapper">
@@ -27,7 +27,7 @@
                         <h3 class="everybody-task__title">{{task.title}}</h3> 
                     </div>
                     <div>
-                        <span class="">投稿者：{{task.name}}</span>
+                        <span class="">hero：{{task.name}}</span>
                         <div class="everybody-task__difficult" v-html="forDifficult(task.difficult)"></div>
                         <span class="everybody-task__time">data：{{task.created_at}}</span>
                         

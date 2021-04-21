@@ -149,9 +149,18 @@ body {
 .billboard-arrow1 {
   font-size: 80px;
   position: absolute;
-  color: #0000ff4a;
+  color: #96fff573;
   right: 40%;
   top: 20%;
+  -webkit-animation-name: bottomUpArrow;
+          animation-name: bottomUpArrow;
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+  -webkit-animation-duration: 0.4s;
+          animation-duration: 0.4s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  transform: translateY(100px);
 }
 
 @media screen and (max-width: 415px) {
@@ -164,9 +173,18 @@ body {
 .billboard-arrow2 {
   font-size: 160px;
   position: absolute;
-  color: #96fff573;
+  color: #0000ff4a;
   right: 5%;
   bottom: 20%;
+  -webkit-animation-name: bottomUpArrow;
+          animation-name: bottomUpArrow;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  transform: translateY(100px);
 }
 
 @media screen and (max-width: 415px) {
@@ -182,6 +200,15 @@ body {
   color: #FAD72782;
   right: 61%;
   bottom: 48%;
+  -webkit-animation-name: bottomUpArrow;
+          animation-name: bottomUpArrow;
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  transform: translateY(100px);
 }
 
 @media screen and (max-width: 415px) {
@@ -318,6 +345,26 @@ body {
 
   to {
     border-right-color: transparent;
+  }
+}
+
+@-webkit-keyframes bottomUpArrow {
+  0% {
+    transform: translateY(100px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes bottomUpArrow {
+  0% {
+    transform: translateY(100px);
+  }
+
+  100% {
+    transform: translateY(0);
   }
 }
 
@@ -684,6 +731,47 @@ body {
 .about-image2 {
   width: 25%;
   margin: 0 30px;
+}
+
+.top--another-link {
+  width: 100%;
+  margin-bottom: 200px;
+}
+
+@media screen and (max-width: 415px) {
+  .top--another-link {
+    margin-bottom: 50px;
+  }
+}
+
+.top--another-link-inner {
+  width: 300px;
+  height: 80px;
+  margin: auto;
+  background-color: #96fff5;
+  border-radius: 5px;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 1.5rem;
+}
+
+.top--another-link-inner:hover {
+  background-color: #FAD727;
+  transition: 0.3s;
+}
+
+.top--another-link-inner a {
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: black;
+  display: block;
+  line-height: 80px;
+}
+
+.top--another-link-inner a:hover {
+  color: black;
+  text-decoration: none;
 }
 
 .main-button {
@@ -1202,6 +1290,40 @@ body {
   transition: all 0.5s;
 }
 
+.news-area {
+  width: 95%;
+  margin: auto;
+  background-color: #81ecd81f;
+}
+
+.news {
+  text-align: center;
+  display: flex;
+  flex-wrap: nowrap;
+  min-height: 30px;
+}
+
+.news .data {
+  font-size: 12px;
+}
+
+.news .title {
+  width: 30%;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 30px;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+.news .text {
+  width: 70%;
+  font-size: 12px;
+  line-height: 30px;
+  padding: 5px;
+  margin: 0 auto;
+}
+
 .status_marker {
   background-image: linear-gradient(transparent 80%, yellow 0%);
 }
@@ -1535,6 +1657,25 @@ body {
   text-align: center;
 }
 
+@media screen and (max-width: 415px) {
+  .tasks-wrapper .each-task__state {
+    padding-right: 5px;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  .tasks-wrapper .each-task__state .main-button {
+    margin-bottom: 2px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  .tasks-wrapper .each-task__state .sub-button {
+    width: 100%;
+  }
+}
+
 .tasks-wrapper .each-task__title_outer {
   margin: auto 10px auto 10px;
   width: 75%;
@@ -1663,7 +1804,7 @@ body {
 .donetext {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 48%;
   transform: translateY(-50%);
   font-size: 14px;
   width: 80px;
@@ -1674,6 +1815,16 @@ body {
   text-align: center;
   border-radius: 50%;
   font-style: italic;
+}
+
+@media screen and (max-width: 415px) {
+  .donetext {
+    top: 47%;
+    left: 43%;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+  }
 }
 
 .newTask {
@@ -2149,6 +2300,12 @@ body {
   background-color: #96fff554;
   border-radius: 20px;
   padding: 10px;
+}
+
+@media screen and (max-width: 415px) {
+  .billboard-title h1 {
+    width: 80vw;
+  }
 }
 
 .billboard-img1 {

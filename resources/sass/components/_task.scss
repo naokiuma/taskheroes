@@ -32,6 +32,20 @@
             margin: auto;
             font-size: 12px;
             text-align: center;
+            @media screen and (max-width: $res-max-width){
+                padding-right: 5px;
+            }
+            .main-button{
+                @media screen and (max-width: $res-max-width){
+                    margin-bottom: 2px;
+                    width: 100%;
+                }
+            }
+            .sub-button{
+                @media screen and (max-width: $res-max-width){
+                    width: 100%;
+                }
+            }
         }
         &__title_outer{
             margin: auto 10px auto 10px;
@@ -156,7 +170,7 @@
 .donetext{
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 48%;
     transform: translateY(-50%);
     font-size: 14px;
     width: 80px;
@@ -167,6 +181,14 @@
     text-align: center;
     border-radius: 50%;
     font-style: italic;
+    @media screen and (max-width: $res-max-width){
+        top: 47%;
+        left:43%;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+    }
+
 }
 
 

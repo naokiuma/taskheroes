@@ -12,30 +12,41 @@
 </section>
 
 
-<div class="billboard">
+<section class="billboard">
     <img class="billboard-img1"src="{{ asset('/img/heroofhero.gif') }}" alt="">
-    <p class="billboard-text1">タスクをやって強くなる。</p>
+    <!--<p class="billboard-text1">タスクをやって強くなる。</p>-->
     <!--<p class="billboard-text2"></p>-->
-    <i class="fas fa-arrow-up billboard-arrow1"></i>
+    <i class="fas fa-arrow-up billboard-arrow1 "></i>
     <i class="fas fa-arrow-up billboard-arrow2"></i>
     <i class="fas fa-arrow-up billboard-arrow3"></i>
     <div class="billboard-title">
         <h1>
             <span class="heading-primary--main animate__animated animate__bounce">Task Heroes</span>
-            <span class="heading-primary--sub">日々の生活、遊びやトレーニングをちょっと楽しくするサービスです。</span>
+            <span class="heading-primary--sub">タスクをやって強くなる。</span>
         </h1>
-        
-        
     </div>
+</section>
+<!--
+<section class="news-area">
+    <div class="news-inner">
+        <div class="news">
+            <span><time>2021/04/21</time></span>
+            <h3 class="title">みんなのタスクを追加しました。</h3>
+            <span class=text>全ユーザーが登録しているタスクを見れるようになりました。自身のモチベーションにつなげましょう！</span>
 
-</div>
+        </div>
+    </div>
+</section>
+-->
 
 <section class="about-wrapper">
     <div class="about-description">
         <h2 class="section-heading">About</h2>
         <p><span class="hovermoveLeft underLine">「TaskHeroes」とは</span></p>
         <p class="sp-center">やりたいこと、やるべきこと、、<br>
-        あなたの日常の「task」を実行とともに勇者が育ち、タスク管理を促進するサービスです。<br><br>
+        あなたの日常の「task」を実施するとともに勇者が育つ。<br>
+        日々の生活、遊びやトレーニングをちょっと楽しみながら、タスク管理を促進するサービスです。<br>
+        <br>
         </p>
 
         <div class="about-examples radial-bg">
@@ -62,7 +73,7 @@
                 <img class="about-image2"src="{{ asset('/img/fighter.png') }}" alt="">
             </div>
         </div>
-        <p>・・などなど。自分を育て、勇者も育てよう。</p>
+        <p>自分を育て、勇者も育てよう。</p>
     </div>
 
 
@@ -121,8 +132,18 @@
             </div>
         </div>
     </div>
-
 </section>
+@guest
+<div class="top--another-link">
+    <div class="top--another-link-inner">
+    <a href="{{ route('register') }}">早速登録する</a>
+
+    </div>
+</div>
+@endguest
+
+
+
 <footer class="footer">
             <p>Copyright © 2020 Task heroes. All Rights Reserved.</p>
         </footer>
