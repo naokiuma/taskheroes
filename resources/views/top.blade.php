@@ -2,14 +2,7 @@
 @section('content')
 
 <div class="space"></div>
-<!--svgでの起動時の演出。wrapper.scss内-->
-<section class="bg-top-fadein">
-        <div class="fadein-wrapper">
-            <div class="image-wrapper">
-            </div>
-        </div>
-        <img src="{{ asset('/img/title.svg') }}">
-</section>
+
 
 
 <section class="billboard">
@@ -142,22 +135,9 @@
 </div>
 @endguest
 
-
-
 <footer class="footer">
-            <p>Copyright © 2020 Task heroes. All Rights Reserved.</p>
-        </footer>
-<script>
-    /*fadeoutロゴ*/
-$(function() {
-	setTimeout(function(){
-		$('.bg-top-fadein').fadeOut(1500);
-    },300); //秒後にロゴ含め真っ白背景をフェードアウト！
-});
-      
-</script>
-
-
+    <p>Copyright © 2020 Task heroes. All Rights Reserved.</p>
+</footer>
 
 @endsection
 

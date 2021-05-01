@@ -9,6 +9,10 @@
         margin-bottom: 0px;
         font-size: 11px;
         padding-right: 15px;
+        @media screen and (max-width: $res-max-width){
+            line-height: 40px;
+        }
+
 
     }
     

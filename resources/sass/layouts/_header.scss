@@ -64,3 +64,72 @@
         }
     }
 }
+
+
+.header-pc{
+    @media screen and (max-width: $res-max-width){
+        display: none;
+    }
+}
+
+//spメニュー
+.header-sp{
+    line-height: 40px;
+    &:hover{
+        cursor: pointer;
+
+    }
+    .menu-trigger{
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
+.sp-menu-area{
+    display: none;
+    @media screen and (max-width: $res-max-width){
+        display: block;
+        width: 80%;
+        height: 100vh;
+        background-color: green;
+        position: fixed;
+        z-index: 20;
+    }
+    li a{
+        color:black;
+        text-decoration: none;
+        &:hover{
+            color: black;
+            text-decoration: none;
+        }
+    }
+    li{
+        font-size: 20px;
+        padding-bottom: 20px;
+    }
+    .sp-menu-area-inner{
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .logo-wrap{
+        padding: 30px 0 30px 20px;
+        color: black;
+        text-decoration: none;
+        &:hover{
+            color: black;
+            text-decoration: none;
+        }
+
+    }
+    .close-btn-area{
+        position: absolute;
+        bottom: 10%;
+        right: 5%;
+        .far{
+            font-size: 30px;
+        }
+
+    }
+}

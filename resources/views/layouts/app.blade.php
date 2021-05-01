@@ -20,62 +20,88 @@
         <title>taskHeroes</title>
     </head>
     <body>
+        
         <header class="header">
             <div class="header__logo-area animate__animated animate__bounceInLeft">
             <a href="{{ route('top') }}">TaskHeroes</a>
             </div>
 
             <nav class="header__manu-area">
-            <ul class="header__nav">
-                
-                @guest
-                <!--
-                <li class=""><a href="{{ route('alltasks') }}">みんなのタスク</a></li>
-                -->
-                <li class=""><a href="{{ route('login') }}">ログイン</a></li>
-                <li class=""><a href="{{ route('register') }}">新規登録</a></li>
-                @endguest
-                @auth
-                <!--
-                <li class=""><a href="{{ route('alltasks') }}">みんなのタスク</a></li>
-                -->
-                <li class=""><a href="{{ route('user.mypage') }}">マイページ</a></li>
-                
-                <li class="">
-                    <a class="" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();"
-                     >ログアウト
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </li>
-                @endauth
-
-                
-            </ul>
-            <!--
-            @if (Route::has('login'))
-                <div class="top-right links">
-
+                <ul class="header__nav header-pc">
+                    
+                    @guest
+                    
+                    <li class=""><a href="{{ route('alltasks') }}">みんなのtodo</a></li>
+                    <li class=""><a href="{{ route('login') }}">ログイン</a></li>
+                    <li class=""><a href="{{ route('register') }}">新規登録</a></li>
+                    @endguest
                     @auth
-                        <a href="{{ url('/') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
+                    
+                    <li class=""><a href="{{ route('alltasks') }}">みんなのtodo</a></li>
+                    <li class=""><a href="{{ route('user.mypage') }}">マイページ</a></li>
+                    
+                    <li class="">
+                        <a class="" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"
+                        >ログアウト
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
                     @endauth
+                    
+                </ul>
+                <div class="header-sp">
+                    <div class="menu-trigger" id="js-sp-menu">
+                        menu
+                    </div>
                 </div>
-            @endif
-            -->
+            
         </nav>
         </header>
+        <div class="sp-menu-area">
+            <div class="sp-menu-area-inner">
+                <div class="logo-wrap">
+                    <a href="{{ route('top') }}">TaskHeroes</a>
+                </div>
+                
+                <ul>
+                    @guest    
+                        <li class=""><a href="{{ route('alltasks') }}">みんなのtodo</a></li>
+                        <li class=""><a href="{{ route('login') }}">ログイン</a></li>
+                        <li class=""><a href="{{ route('register') }}">新規登録</a></li>
+                    @endguest
+                    @auth
+                        
+                        <li class=""><a href="{{ route('alltasks') }}">みんなのtodo</a></li>
+                        <li class=""><a href="{{ route('user.mypage') }}">マイページ</a></li>
+                        
+                        <li class="">
+                            <a class="" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"
+                            >ログアウト
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    @endauth
+                </ul>
+                <div class="close-btn-area">
+                    <i class="far fa-times-circle" id="js-sp-menu-close"></i>
+                </div>
+
+            </div>
+        </div>
+
+        
         @yield('content')
     </body>
     
     <script src="{{mix('js/app.js')}}"></script>
+
 
 </html>

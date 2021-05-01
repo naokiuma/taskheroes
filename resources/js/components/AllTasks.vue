@@ -1,7 +1,7 @@
 <template>
     <div class="alltasks-page-wrap">
         <div class="alltasks-area">
-            <h2 class="all-tasks-lead">みんなのタスク</h2>
+            <h2 class="all-tasks-lead">みんなのtoDo</h2>
             <div class="all-tasks-commentary-area">
                 <div class="img-wrap">
                     <img src="/../img/art.png" alt="">
@@ -54,7 +54,7 @@ export default {
         let url = '/api/tasklist/';
                 let self = this;
                 axios.get(url).then(function(response){
-                    console.log(response)//すべてのtaskを取得する
+                    //console.log(response)//すべてのtaskを取得する
                     self.tasks = response.data
                  })
     },
