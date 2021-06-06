@@ -5,6 +5,7 @@
 
 
 
+
 <section class="billboard">
     <img class="billboard-img1"src="{{ asset('/img/heroofhero.gif') }}" alt="">
     <!--<p class="billboard-text1">タスクをやって強くなる。</p>-->

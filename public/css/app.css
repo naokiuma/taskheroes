@@ -2482,7 +2482,7 @@ body {
     display: block;
     width: 80%;
     height: 100vh;
-    background-color: green;
+    background-color: #96fff5;
     position: fixed;
     z-index: 20;
   }
@@ -2510,7 +2510,7 @@ body {
 }
 
 .sp-menu-area .logo-wrap {
-  padding: 30px 0 30px 20px;
+  padding: 30px 0 30px 30px;
   color: black;
   text-decoration: none;
 }

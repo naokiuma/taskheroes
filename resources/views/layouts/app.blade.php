@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="referrer" content="origin">
+
         <link href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" rel="stylesheet">
         <link href="{{ asset('css/normalize.css') }}" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -53,11 +55,16 @@
                     @endauth
                     
                 </ul>
+                <!--
                 <div class="header-sp">
                     <div class="menu-trigger" id="js-sp-menu">
                         menu
+                        <a href="{{ route('alltasks') }}">リンク</a>
+                        <a href="{{ route('top') }}">topへのリンク</a>
+                        
                     </div>
                 </div>
+                -->
             
         </nav>
         </header>
